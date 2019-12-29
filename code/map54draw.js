@@ -8,7 +8,7 @@ let createelements = z => {
 	elements["stage"] = { el: document.createElement("div") };
 	elements["stage"].el.setAttribute("id", "stage");
 	elements["stage"].el.setAttribute("class", "frame");
-	elements["stage"].el.setAttribute("style", "background-color: #191918");
+	// elements["stage"].el.setAttribute("style", "background-color: #191918");
 	elements["body"].el.appendChild(elements["stage"].el);
 	elements["text"] = { el: document.createElement("div") };
 	elements["text"].el.setAttribute("id", "text");

@@ -6,7 +6,7 @@ module.exports = {
 		basecss: [],
 		basejavascript: [],
 		sourcepath: './source',
-		outputpath: './output',
+		outputpath: './web',
 		csspath: './css',
 		javascriptpath: './javascript',
 		datapath: './data',
@@ -68,7 +68,7 @@ module.exports = {
 					url: "http://northern.lights.mn/platform/artist-on-the-verge-10/"
 				}, 
 			],
-			content: "press for the swarm exhibit"
+			content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'
 		},
 		{ 
 			id: "1577046922497",
@@ -86,8 +86,16 @@ module.exports = {
 					title: "award announcement",
 					url: "http://northern.lights.mn/platform/artist-on-the-verge-10/"
 				}, 
+				{
+					actuate: "onload", //onload, onrequest, searchembed
+					type: "internal", //internal, external
+					format: "html", //pdf,ejs,html,mp3,vimeo
+					keywords: ["component"], //ex: reference, next, navigation?
+					title: "swarm",
+					url: "1576959636186"
+				}
 			],
-			content: "press for the swarm exhibit"
+			content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum'
 		}
 		
 	],

@@ -4,7 +4,6 @@
 	"description": "generative jamstack site",
 	"main": "build",
 	"scripts": {
-		"start": "start",
 		"build": "build"
 	},
 	"keywords": [],
