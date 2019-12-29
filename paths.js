@@ -5,11 +5,11 @@ module.exports = {
 		baseurl: "http://mctavish.io",
 		basecss: [],
 		basejavascript: [],
-		sourcepath: './source',
-		outputpath: './web',
-		csspath: './css',
-		javascriptpath: './javascript',
-		datapath: './data',
+		sourcepath: 'source',
+		outputpath: 'web',
+		csspath: 'css',
+		javascriptpath: 'javascript',
+		datapath: 'data',
 		startpathpoint: "1576970236172"
 	},
 	pathpoints: [
