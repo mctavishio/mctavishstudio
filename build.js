@@ -64,8 +64,8 @@ const build = (options = {}) => {
 	if (fse.existsSync(`${paths.site.sourcepath}/css`)) {
 		fse.copySync(`${paths.site.sourcepath}/css`, paths.site.outputpath);
 	}
-	if (fse.existsSync(`${paths.site.sourcepath}/javascript`)) {
-		fse.copySync(`${paths.site.sourcepath}/javascript`, paths.site.outputpath);
+	if (fse.existsSync(`${paths.site.sourcepath}/code`)) {
+		fse.copySync(`${paths.site.sourcepath}/code`, paths.site.outputpath);
 	}
 
 	paths.pathpoints.forEach( pathpoint => {
