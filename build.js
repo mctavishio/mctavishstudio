@@ -61,12 +61,10 @@ const build = (options = {}) => {
 	fse.emptyDirSync(paths.site.outputpath);
 
 	// copy assets folder ::: later ?
-	if (fse.existsSync(`${paths.site.sourcepath}/css`)) {
-		fse.copySync(`${paths.site.sourcepath}/css`, paths.site.outputpath);
+	if (fse.existsSync(`${paths.site.sourcepath}/assets`)) {
+		fse.copySync(`${paths.site.sourcepath}/assets`, paths.site.outputpath);
 	}
-	if (fse.existsSync(`${paths.site.sourcepath}/code`)) {
-		fse.copySync(`${paths.site.sourcepath}/code`, paths.site.outputpath);
-	}
+	
 
 	paths.pathpoints.forEach( pathpoint => {
 		tools.logmsg("*** pathpoint ***");
