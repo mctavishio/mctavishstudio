@@ -1,57 +1,3 @@
-// ***** ############## dom elements ############## ---------
-let createelements = z => {
-	let elements = {};
-	elements["body"] = { el: document.querySelector("body") };
-	elements["body"].el.setAttribute("id", "body");
-	elements["clock"] = { el: document.querySelector("#clock") };
-	elements["telegraph"] = { el: document.querySelector("#telegraph") };
-	elements["stage"] = { el: document.createElement("div") };
-	elements["stage"].el.setAttribute("id", "stage");
-	elements["stage"].el.setAttribute("class", "frame");
-	// elements["stage"].el.setAttribute("style", "background-color: #191918");
-	elements["body"].el.appendChild(elements["stage"].el);
-	elements["text"] = { el: document.createElement("div") };
-	elements["text"].el.setAttribute("id", "text");
-	elements["text"].el.setAttribute("class", "absolute large");
-	elements["stage"].el.appendChild(elements["text"].el);
-	elements["svg"] = { el: document.createElementNS("http://www.w3.org/2000/svg", "svg") };
-	elements["svg"].el.setAttributeNS(null, "id", "svg");
-	elements["svg"].el.setAttributeNS(null, "class", "frame");
-	elements["svg"].el.setAttributeNS(null, "width", window.innerWidth);
-	elements["svg"].el.setAttributeNS(null, "height", window.innerHeight);
-	elements["circles0"] = []; 
-	elements["circles1"] = []; 
-	elements["squares"] = []; 
-	Array.from(Array(z.nrows).keys()).forEach(  r => {
-		elements["circles0"][r] = []; 
-		elements["circles1"][r] = []; 
-		elements["squares"][r] = []; 
-		Array.from(Array(z.ncols).keys()).forEach(  c => {
-			elements["squares"][r].push({ el: document.createElementNS("http://www.w3.org/2000/svg", "rect") });
-			elements["squares"][r][c].el.setAttributeNS(null, "id", "squares_r"+r+"c"+c);
-			elements["squares"][r][c].el.setAttributeNS(null, "class", "shape square");
-			elements["svg"].el.appendChild(elements["squares"][r][c].el);
-
-			elements["circles1"][r][c] = { el: document.createElementNS("http://www.w3.org/2000/svg", "circle") };
-			elements["circles1"][r][c].el.setAttributeNS(null, "id", "circles1_r"+r+"c"+c);
-			elements["circles1"][r][c].el.setAttributeNS(null, "class", "shape circle");
-			elements["svg"].el.appendChild(elements["circles1"][r][c].el);
-		
-			elements["circles0"][r][c] = { el: document.createElementNS("http://www.w3.org/2000/svg", "circle") };
-			elements["circles0"][r][c].el.setAttributeNS(null, "id", "circles0_r"+r+"c"+c);
-			elements["circles0"][r][c].el.setAttributeNS(null, "class", "shape circle");
-			elements["svg"].el.appendChild(elements["circles0"][r][c].el);
-
-		})
-	});
-	elements["box"] = { el: document.createElementNS("http://www.w3.org/2000/svg", "rect") };
-	elements["box"].el.setAttributeNS(null, "id", "box");
-	elements["box"].el.setAttributeNS(null, "class", "shape square");
-	elements["svg"].el.appendChild(elements["box"].el);
-	elements["stage"].el.appendChild(elements["svg"].el);
-
-	return elements;
-}
 // ***** ############## streams ############## ---------
 let createstreams = z => {
 	z.streams = {};
@@ -217,7 +163,7 @@ let createstreams = z => {
 			count: 0,
 			dt:dt, tostring: tostring, name:name 
 		};
-		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 )], [z.streams["palette"], z.streams["canvas"]], (tick, palette, canvas) => { return {tick:tick, palette:palette, canvas:canvas } })
+		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 && e.changed )], [z.streams["palette"], z.streams["canvas"]], (tick, palette, canvas) => { return {tick:tick, palette:palette, canvas:canvas } })
 			.scan( (state, e) => { 
 				state.tick = e.tick;
 				state.palette = e.palette;
@@ -238,15 +184,15 @@ let createstreams = z => {
 						// console.log("c="+e.palette.colors.length + " color="+color);
 						Velocity({	
 							elements: e.elements[r][c].el,
-							properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: 12, fill: color, x: x, y: y, width: dx*ratios[z.tools.randominteger(0,ratios.length)]/10, height: dy*ratios[z.tools.randominteger(0,ratios.length)] },
-							options: { duration: z.tools.randominteger(e.dt*200,e.dt*400),  delay: z.tools.randominteger(0,e.dt*600), easing: "easeInOutQuad" },
+							properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: e.palette.colors[z.tools.randominteger(0,e.palette.colors.length)], strokeWidth: 12, fill: color, x: x, y: y, width: dx*ratios[z.tools.randominteger(0,ratios.length)]/10, height: dy*ratios[z.tools.randominteger(0,ratios.length)] },
+							options: { duration: z.tools.randominteger(e.dt*140,e.dt*600),  delay: z.tools.randominteger(e.dt*100,e.dt*400), easing: "easeInOutQuad" },
 						});
 					})
 
 				})
 				
 			} catch(err) {}
-			// // z.tools.logmsg(JSON.stringify(e));
+			// z.tools.logmsg(JSON.stringify(e));
 		});
 	})();
 
@@ -262,7 +208,7 @@ let createstreams = z => {
 			count: 0,
 			dt:dt, tostring: tostring, name:name 
 		};
-		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 )], [z.streams["palette"], z.streams["canvas"]], (tick, palette, canvas) => { return {tick:tick, palette:palette, canvas:canvas } })
+		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 && e.changed )], [z.streams["palette"], z.streams["canvas"]], (tick, palette, canvas) => { return {tick:tick, palette:palette, canvas:canvas } })
 			.scan( (state, e) => { 
 				state.tick = e.tick;
 				state.palette = e.palette;
@@ -284,15 +230,15 @@ let createstreams = z => {
 
 						Velocity({	
 							elements: e.elements[r][c].el,
-							properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: e.canvas.grid.sw, fill: color, cx: cx, cy: cy, r: radius },
-							options: { duration: z.tools.randominteger(e.dt*200,e.dt*400),  delay: z.tools.randominteger(0,e.dt*600), easing: "easeInOutQuad" },
+							properties: { fillOpacity: 0.0, strokeOpacity: 1.0, stroke: color, strokeWidth: e.canvas.grid.sw, fill: color, cx: cx, cy: cy, r: radius },
+							options: { duration: z.tools.randominteger(e.dt*140,e.dt*600),  delay: z.tools.randominteger(e.dt*100,e.dt*400), easing: "easeInOutQuad" },
 						});
 					})
 
 				})
 				
 			} catch(err) {}
-			// // z.tools.logmsg(JSON.stringify(e));
+			// z.tools.logmsg(JSON.stringify(e));
 		});
 	})();
 
@@ -307,7 +253,7 @@ let createstreams = z => {
 			count: 0,
 			dt:dt, tostring: tostring, name:name 
 		};
-		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 )], [z.streams["palette"], z.streams["canvas"]], (tick, palette, canvas) => { return {tick:tick, palette:palette, canvas:canvas } })
+		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 && e.changed )], [z.streams["palette"], z.streams["canvas"]], (tick, palette, canvas) => { return {tick:tick, palette:palette, canvas:canvas } })
 			.scan( (state, e) => { 
 				state.tick = e.tick;
 				state.palette = e.palette;
@@ -330,14 +276,14 @@ let createstreams = z => {
 						Velocity({	
 							elements: e.elements[r][c].el,
 							properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: 12, fill: color, cx: cx, cy: cy, r: radius },
-							options: { duration: z.tools.randominteger(e.dt*200,e.dt*400),  delay: z.tools.randominteger(0,e.dt*600), easing: "easeInOutQuad" },
+							options: { duration: z.tools.randominteger(e.dt*140,e.dt*600),  delay: z.tools.randominteger(e.dt*100,e.dt*400), easing: "easeInOutQuad" },
 						});
 					})
 
 				})
 				
 			} catch(err) {}
-			// // z.tools.logmsg(JSON.stringify(e));
+			// z.tools.logmsg(JSON.stringify(e));
 		});
 	})();
 
@@ -375,7 +321,7 @@ let createstreams = z => {
 		let tostring = function(e) {return "sound"};
 		let sound0 = {
 			count: 0,
-			dt:dt, tostring: tostring, name:name, sounds: z.score.orchestration[0] 
+			dt:dt, tostring: tostring, name:name 
 		};
 		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 && z.soundplaying && z.tools.randominteger(0,10)<8 )], [z.streams["sounds"]], (tick, sounds) => { return {tick:tick, sounds:sounds } })
 			.scan( (state, e) => { 
@@ -386,11 +332,10 @@ let createstreams = z => {
 			}, sound0  )
 		z.streams[name].onValue( e => { 
 			try {
-				// z.tools.logmsg(" e.sounds ::: " + JSON.stringify(e.sounds));
 				let sound = e.sounds[z.tools.randominteger(0,e.sounds.length)];
-				
+				// z.tools.logmsg(" play instrument ::: " + sound);
 				let instrumentname = sound;
-				let instrument = z.data.sounds.instruments[sound];
+				let instrument = z.resources.sounds.instruments[sound];
 				let vol = z.tools.randominteger(instrument.minvolume*10, instrument.maxvolume*10)/10;
 				z.radio.playbuffer( { instrument: sound, volume: vol, delay: z.tools.randominteger(0,4)/10 } );
 				if(z.tools.randominteger(0,10) < 2) {
@@ -399,8 +344,9 @@ let createstreams = z => {
 					});
 				}
 
-			} catch(err) { z.tools.logerror("521 ::: " + err) }
+			} catch(err) {}
 			// z.tools.logmsg(JSON.stringify(e));
 		});
 	})();
+
 }

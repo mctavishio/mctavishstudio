@@ -1,57 +1,3 @@
-// ***** ############## dom elements ############## ---------
-let createelements = z => {
-	let elements = {};
-	elements["body"] = { el: document.querySelector("body") };
-	elements["body"].el.setAttribute("id", "body");
-	elements["clock"] = { el: document.querySelector("#clock") };
-	elements["telegraph"] = { el: document.querySelector("#telegraph") };
-	elements["stage"] = { el: document.createElement("div") };
-	elements["stage"].el.setAttribute("id", "stage");
-	elements["stage"].el.setAttribute("class", "frame");
-	// elements["stage"].el.setAttribute("style", "background-color: #191918");
-	elements["body"].el.appendChild(elements["stage"].el);
-	elements["text"] = { el: document.createElement("div") };
-	elements["text"].el.setAttribute("id", "text");
-	elements["text"].el.setAttribute("class", "absolute large");
-	elements["stage"].el.appendChild(elements["text"].el);
-	elements["svg"] = { el: document.createElementNS("http://www.w3.org/2000/svg", "svg") };
-	elements["svg"].el.setAttributeNS(null, "id", "svg");
-	elements["svg"].el.setAttributeNS(null, "class", "frame");
-	elements["svg"].el.setAttributeNS(null, "width", window.innerWidth);
-	elements["svg"].el.setAttributeNS(null, "height", window.innerHeight);
-	elements["circles0"] = []; 
-	elements["circles1"] = []; 
-	elements["squares"] = []; 
-	Array.from(Array(z.nrows).keys()).forEach(  r => {
-		elements["circles0"][r] = []; 
-		elements["circles1"][r] = []; 
-		elements["squares"][r] = []; 
-		Array.from(Array(z.ncols).keys()).forEach(  c => {
-			elements["squares"][r].push({ el: document.createElementNS("http://www.w3.org/2000/svg", "rect") });
-			elements["squares"][r][c].el.setAttributeNS(null, "id", "squares_r"+r+"c"+c);
-			elements["squares"][r][c].el.setAttributeNS(null, "class", "shape square");
-			elements["svg"].el.appendChild(elements["squares"][r][c].el);
-
-			elements["circles1"][r][c] = { el: document.createElementNS("http://www.w3.org/2000/svg", "circle") };
-			elements["circles1"][r][c].el.setAttributeNS(null, "id", "circles1_r"+r+"c"+c);
-			elements["circles1"][r][c].el.setAttributeNS(null, "class", "shape circle");
-			elements["svg"].el.appendChild(elements["circles1"][r][c].el);
-		
-			elements["circles0"][r][c] = { el: document.createElementNS("http://www.w3.org/2000/svg", "circle") };
-			elements["circles0"][r][c].el.setAttributeNS(null, "id", "circles0_r"+r+"c"+c);
-			elements["circles0"][r][c].el.setAttributeNS(null, "class", "shape circle");
-			elements["svg"].el.appendChild(elements["circles0"][r][c].el);
-
-		})
-	});
-	elements["box"] = { el: document.createElementNS("http://www.w3.org/2000/svg", "rect") };
-	elements["box"].el.setAttributeNS(null, "id", "box");
-	elements["box"].el.setAttributeNS(null, "class", "shape square");
-	elements["svg"].el.appendChild(elements["box"].el);
-	elements["stage"].el.appendChild(elements["svg"].el);
-
-	return elements;
-}
 // ***** ############## streams ############## ---------
 let createstreams = z => {
 	z.streams = {};
@@ -150,6 +96,41 @@ let createstreams = z => {
 		});
 	})();
 
+	// ***** box pick stream ---------
+	(function() {
+		let name = "boxpick";
+		let dt = 9; //in seconds
+		let ratios = [5,10,15,20,30,40];
+		
+		let tostring = function(e) {return "box pick"};
+		let pick0 = {
+			row: 0, col: 0,
+			count: 0, nrows: z.nrows, ncols: z.ncols,
+			past: [0,0],
+			dt:dt, tostring: tostring, name:name,
+			past: [],
+		};
+		//build memory
+		Array.from(Array(z.m).keys()).forEach(  r => {
+			pick0.past.unshift([0,0]);
+		});
+		z.streams[name] = z.streams["tick"].filter( e => e.t%dt===0 )
+			.scan( (state, e) => { 
+				state.past.shift();
+				state.past.push([z.tools.randominteger(0, state.nrows), z.tools.randominteger(0, state.ncols)]);
+				state.row = z.tools.randominteger(0, state.nrows);
+				// state.col = z.tools.randominteger(0, state.ncols);
+				state.count = state.count + 1;
+				return state;
+			}, pick0  );
+		z.streams[name].onValue( e => { 
+			// z.tools.logmsg("boxpick stream " + JSON.stringify(e));
+		});
+	})();
+
+	// ***** drawp stream ---------
+	createdrawp(z);
+
 	// ***** box stream ---------
 	(function() {
 		let name = "box";
@@ -217,127 +198,181 @@ let createstreams = z => {
 			count: 0,
 			dt:dt, tostring: tostring, name:name 
 		};
-		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 )], [z.streams["palette"], z.streams["canvas"]], (tick, palette, canvas) => { return {tick:tick, palette:palette, canvas:canvas } })
+		z.streams[name] = z.streams["drawp"].filter( e => e.tick.t%dt===0 )
 			.scan( (state, e) => { 
 				state.tick = e.tick;
 				state.palette = e.palette;
 				state.canvas = e.canvas;
+				state.boxpick = e.boxpick;
 				state.count = state.count + 1;
 				return state;
 			}, squares0  )
 		z.streams[name].onValue( e => { 
 			try {
+				// z.tools.logmsg("** e.canvas = " + JSON.stringify(e.canvas));
 				let dx = e.canvas.grid.dx, dy = e.canvas.grid.dy;
 				let color = e.palette.colors[z.tools.randominteger(0,e.palette.colors.length)];
-				e.elements.forEach( (row, r) => {
+				let ratio = ratios[z.tools.randominteger(0,ratios.length)]/10;
+				e.elements.filter( (row, r) => r!==e.boxpick.past[0][0] ).forEach( (row, r) => {
 					if(Math.floor(e.tick.t/dt)%4!==0) { color = e.palette.colors[z.tools.randominteger(0,e.palette.colors.length)];}
 					let y = r*dy;
 					e.elements[r].forEach( (col,c) => {
 						if(Math.floor(e.tick.t/dt)%5!==0) { color = e.palette.colors[z.tools.randominteger(0,e.palette.colors.length)];}
 						let x = c*dx;
+						let n = (c === e.boxpick.past[0][1]) ? 20 : z.tools.randominteger(1,14);
 						// console.log("c="+e.palette.colors.length + " color="+color);
 						Velocity({	
 							elements: e.elements[r][c].el,
-							properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: 12, fill: color, x: x, y: y, width: dx*ratios[z.tools.randominteger(0,ratios.length)]/10, height: dy*ratios[z.tools.randominteger(0,ratios.length)] },
+							properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: 12, fill: color, x: x, y: y, width: dx*ratio*n, height: dy*ratio*n },
 							options: { duration: z.tools.randominteger(e.dt*200,e.dt*400),  delay: z.tools.randominteger(0,e.dt*600), easing: "easeInOutQuad" },
 						});
 					})
 
 				})
-				
-			} catch(err) {}
-			// // z.tools.logmsg(JSON.stringify(e));
+			} catch(err) { 
+				// z.tools.logerror("squares " + err)
+			}
+			
 		});
 	})();
 
-
-	// ***** circles0 stream ---------
+	// ***** circles stream ---------
 	(function() {
-		let name = "circles0";
+		let name = "circles";
 		let dt = 3; //in seconds
 		let ratios = [5,10,15,20,30,40];
-		let tostring = function(e) {return "circles0"};
+		let rhythms = [
+			[960, 20], [680, 300], [940, 40], [480, 480], [880,100], [680, 300], [800,180]
+		];
+		let tostring = function(e) {return "circles"};
 		let circles0 = {
-			elements: z.elements["circles0"],
+			elements: z.elements["circles"],
 			count: 0,
 			dt:dt, tostring: tostring, name:name 
 		};
-		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 )], [z.streams["palette"], z.streams["canvas"]], (tick, palette, canvas) => { return {tick:tick, palette:palette, canvas:canvas } })
+		z.streams[name] = z.streams["drawp"].filter( e => e.tick.t%dt===0 )
 			.scan( (state, e) => { 
 				state.tick = e.tick;
 				state.palette = e.palette;
 				state.canvas = e.canvas;
+				state.boxpick = e.boxpick;
 				state.count = state.count + 1;
 				return state;
 			}, circles0  )
 		z.streams[name].onValue( e => { 
 			try {
-				let min = Math.min(e.canvas.grid.dx, e.canvas.grid.dy);
-				// let pick = z.tools.randominteger(0,e.canvas.grid.ncols*e.canvas.grid.nrows);
-				e.elements.forEach( (row, r) => {
-					let cy = r*e.canvas.grid.dy + e.canvas.grid.dy/2;
-					e.elements[r].forEach( (col,c) => {
-						let cx = c*e.canvas.grid.dx + e.canvas.grid.dx/2, color = e.palette.colors[z.tools.randominteger(0,e.palette.colors.length)];
-						// let radius = ( ((e.boxpick.row ===r && e.boxpick.col===c) || (e.boxpick.row ===c && e.boxpick.col===r)) && e.count%2===0) ? min*ratios[z.tools.randominteger(0,ratios.length)]/10 : min*z.tools.randominteger(1,3)/10;
-						let radius = min*z.tools.randominteger(1,3)/10;
-						// console.log("c="+e.palette.colors.length + " color="+color);
-
-						Velocity({	
-							elements: e.elements[r][c].el,
-							properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: e.canvas.grid.sw, fill: color, cx: cx, cy: cy, r: radius },
-							options: { duration: z.tools.randominteger(e.dt*200,e.dt*400),  delay: z.tools.randominteger(0,e.dt*600), easing: "easeInOutQuad" },
-						});
-					})
-
-				})
-				
+				// let past = e.boxpick.past.sort( (a, b) => b[1] - b[0] );
+				let past = e.boxpick.past;
+				let min = Math.floor(e.canvas.min/14);
+				let n = z.tools.randominteger(0, rhythms.length);
+				let r,cx,cy,radius,color,duration,delay;
+				let dx = e.canvas.grid.dx, dy = e.canvas.grid.dy;
+				let colors = e.palette.colors;
+				//build memory
+				Array.from(Array(z.m).keys()).forEach(  m => {
+					r = past[m][0], c = past[m][1];
+					cx = c*dx + dx/2, cy = r*dy + dy/2;
+					color = colors[z.tools.randominteger(0,colors.length)];
+					radius = min*ratios[(e.count+m)%ratios.length]/10;
+					duration = z.tools.randominteger(e.dt*rhythms[(n+m)%rhythms.length][0]*.8, e.dt*rhythms[(n+m)%rhythms.length][0]);
+					delay = z.tools.randominteger(e.dt*rhythms[(n+m)%rhythms.length][1]*.8, e.dt*rhythms[(n+m)%rhythms.length][1]);
+					Velocity({	
+						elements: e.elements[m][0].el,
+						properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: e.canvas.grid.sw*2, fill: color, cx: cx, cy: cy, r: radius },
+						options: { duration: duration,  delay: delay, easing: "easeInOutQuad" },
+					});
+					color = colors[z.tools.randominteger(0,colors.length)];
+					radius = radius*(z.tools.randominteger(10,38)/40);
+					duration = z.tools.randominteger(e.dt*rhythms[(n+m)%rhythms.length][0]*.8, e.dt*rhythms[(n+m)%rhythms.length][0]);
+					delay = z.tools.randominteger(e.dt*rhythms[(n+m+1)%rhythms.length][1]*.8, e.dt*rhythms[(n+m)%rhythms.length][1]);
+					
+					Velocity({	
+						elements: e.elements[m][1].el,
+						properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: e.canvas.grid.sw*2, fill: color, cx: cx, cy: cy, r: radius },
+						options: { duration: duration,  delay: delay, easing: "easeInOutQuad" },
+					});
+				});
 			} catch(err) {}
-			// // z.tools.logmsg(JSON.stringify(e));
+			// z.tools.logmsg(JSON.stringify(e));
 		});
 	})();
 
-	// ***** circles1 stream ---------
+	// ***** lines stream ---------
 	(function() {
-		let name = "circles1";
-		let dt = 3; //in seconds
-		let ratios = [5,10,15,20];
-		let tostring = function(e) {return "circles1"};
-		let circles1 = {
-			elements: z.elements["circles1"],
+		let name = "lines";
+		let dt = 2; //in seconds
+		let ratios = [5,10,15,20,30,40];
+		let rhythms = [
+			[960, 20], [680, 300], [940, 40], [480, 480], [880,100], [680, 300], [800,180]
+		];
+		let tostring = function(e) {return "lines"};
+		let lines0 = {
+			elements: z.elements["lines"],
 			count: 0,
 			dt:dt, tostring: tostring, name:name 
 		};
-		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 )], [z.streams["palette"], z.streams["canvas"]], (tick, palette, canvas) => { return {tick:tick, palette:palette, canvas:canvas } })
+		z.streams[name] = z.streams["drawp"].filter( e => e.tick.t%dt===0 )
 			.scan( (state, e) => { 
 				state.tick = e.tick;
 				state.palette = e.palette;
 				state.canvas = e.canvas;
+				state.boxpick = e.boxpick;
 				state.count = state.count + 1;
 				return state;
-			}, circles1  )
+			}, lines0  )
 		z.streams[name].onValue( e => { 
 			try {
+				// let past = e.boxpick.past.sort( (a, b) => b[1] - b[0] );
+				let past = e.boxpick.past;
 				let min = Math.min(e.canvas.grid.dx, e.canvas.grid.dy);
-				// let pick = z.tools.randominteger(0,e.canvas.grid.ncols*e.canvas.grid.nrows);
-				e.elements.forEach( (row, r) => {
-					let cy = r*e.canvas.grid.dy + e.canvas.grid.dy/2;
-					e.elements[r].forEach( (col,c) => {
-						// console.log("c="+c + " e.boxpick.col="+e.boxpick.col + "r="+r + " e.boxpick.row="+e.boxpick.row);
-						// let radius = ( ((e.boxpick.row ===r && e.boxpick.col===c) || (e.boxpick.row ===c && e.boxpick.col===r)) && e.count%5===0)  ? min*ratios[z.tools.randominteger(0,ratios.length)]/10 : min*z.tools.randominteger(1,3)/10;
-						let radius = min*z.tools.randominteger(3,5)/10;
-						let cx = c*e.canvas.grid.dx + e.canvas.grid.dx/2, color = e.palette.colors[z.tools.randominteger(0,e.palette.colors.length)];
-						// console.log("c="+e.palette.colors.length + " color="+color);
-						Velocity({	
-							elements: e.elements[r][c].el,
-							properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: 12, fill: color, cx: cx, cy: cy, r: radius },
-							options: { duration: z.tools.randominteger(e.dt*200,e.dt*400),  delay: z.tools.randominteger(0,e.dt*600), easing: "easeInOutQuad" },
-						});
-					})
+				let n = z.tools.randominteger(0, rhythms.length);
+				let r,cx,cy,sw,dash,color,duration,delay;
+				let dx = e.canvas.grid.dx, dy = e.canvas.grid.dy;
+				let colors = e.palette.colors;
+				let sw0 = e.canvas.grid.sw;
+				//build memory
+				Array.from(Array(z.m).keys()).forEach(  m => {
+					r = past[m][0], c = past[m][1];
+					cx = c*dx + dx/2, cy = r*dy + dy/2;
+					color = colors[z.tools.randominteger(0,colors.length)];
+					sw = sw0*z.tools.randominteger(2,14);
+					dash = z.tools.randominteger(10, e.canvas.max);					duration = z.tools.randominteger(e.dt*rhythms[(n+m)%rhythms.length][0]*.8, e.dt*rhythms[(n+m)%rhythms.length][0]);
+					delay = z.tools.randominteger(e.dt*rhythms[(n+m)%rhythms.length][1]*.8, e.dt*rhythms[(n+m)%rhythms.length][1]);
+					Velocity({	
+						elements: e.elements[m][0].el,
+						properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: sw, strokeDasharray: dash, x1: cx, x2: cx, y1: 0, y2: e.canvas.height },						options: { duration: duration,  delay: delay, easing: "easeInOutQuad" },
+					});
+					color = colors[z.tools.randominteger(0,colors.length)];
+					sw = sw0*z.tools.randominteger(2,14);
+					dash = z.tools.randominteger(10, e.canvas.max);	
+					duration = z.tools.randominteger(e.dt*rhythms[(n+m+1)%rhythms.length][0]*.8, e.dt*rhythms[(n+m+1)%rhythms.length][0]);
+					delay = z.tools.randominteger(e.dt*rhythms[(n+m+1)%rhythms.length][1]*.8, e.dt*rhythms[(n+m+1)%rhythms.length][1]);
+					Velocity({	
+						elements: e.elements[m][1].el,
+						properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: sw, strokeDasharray: dash, x1: 0, x2: e.canvas.width, y1: cy, y2: cy },
+						options: { duration: duration,  delay: delay, easing: "easeInOutQuad" },
+					});
+					// r0 = past[(m+1)%past.length][0], c0 = past[(m+1)%past.length][1];
+					// cx0 = c0*dx + dx/2, cy0 = r0*dy + dy/2;
+					// color = "#fcfbe3";
+					// sw = sw0*z.tools.randominteger(8,20);
+					// dash = z.tools.randominteger(10, e.canvas.max);	
+					// duration = e.dt*800;
+					// delay = e.dt*180;
+					// Velocity({	
+					// 	elements: e.elements[m][2].el,
+					// 	properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: sw, strokeDasharray: dash, x1: cx0, x2: cx0, y1: 0, y2: e.canvas.height },
+					// 	options: { duration: duration,  delay: delay, easing: "easeInOutQuad" },
+					// });
+					// Velocity({	
+					// 	elements: e.elements[m][3].el,
+					// 	properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: sw, strokeDasharray: dash, x1: 0, x2: e.canvas.width, y1: cy0, y2: cy0 },
+					// 	options: { duration: duration,  delay: delay, easing: "easeInOutQuad" },
+					// });
+				});
 
-				})
-				
-			} catch(err) {}
-			// // z.tools.logmsg(JSON.stringify(e));
+			} catch(err) { z.tools.logerror("lines" + err)}
+			// z.tools.logmsg(JSON.stringify(e));
 		});
 	})();
 
@@ -375,7 +410,7 @@ let createstreams = z => {
 		let tostring = function(e) {return "sound"};
 		let sound0 = {
 			count: 0,
-			dt:dt, tostring: tostring, name:name, sounds: z.score.orchestration[0] 
+			dt:dt, tostring: tostring, name:name 
 		};
 		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 && z.soundplaying && z.tools.randominteger(0,10)<8 )], [z.streams["sounds"]], (tick, sounds) => { return {tick:tick, sounds:sounds } })
 			.scan( (state, e) => { 
@@ -386,11 +421,10 @@ let createstreams = z => {
 			}, sound0  )
 		z.streams[name].onValue( e => { 
 			try {
-				// z.tools.logmsg(" e.sounds ::: " + JSON.stringify(e.sounds));
 				let sound = e.sounds[z.tools.randominteger(0,e.sounds.length)];
-				
+				// z.tools.logmsg(" play instrument ::: " + sound);
 				let instrumentname = sound;
-				let instrument = z.data.sounds.instruments[sound];
+				let instrument = z.resources.sounds.instruments[sound];
 				let vol = z.tools.randominteger(instrument.minvolume*10, instrument.maxvolume*10)/10;
 				z.radio.playbuffer( { instrument: sound, volume: vol, delay: z.tools.randominteger(0,4)/10 } );
 				if(z.tools.randominteger(0,10) < 2) {
@@ -399,8 +433,9 @@ let createstreams = z => {
 					});
 				}
 
-			} catch(err) { z.tools.logerror("521 ::: " + err) }
+			} catch(err) {}
 			// z.tools.logmsg(JSON.stringify(e));
 		});
 	})();
+
 }

@@ -18,21 +18,49 @@ const defaultlink = {
 	format: "ejs", type: "external"
 }
 
-const buildlink = linkid => {
+const buildlink = linkuri => {
 	let builtlink = {};
-	paths.pathpoints.filter( ppoint => ppoint.id === linkid ).forEach( compositelink =>
+	let builtnav = {};
+	let compositelink = paths.pathpoints.filter( ppoint => ppoint.uri === linkuri )[0];
+	let homelinks = compositelink.links.filter( link => link.actuate === "onrequest" && link.keywords.includes("home") );
+	let nextlinks = compositelink.links.filter( link => link.actuate === "onrequest" && link.keywords.includes("next") );
+	let home = homelinks.length > 0 ? homelinks[tools.randominteger(0, homelinks.length)] : paths.site.home;
+	let next = nextlinks.length > 0 ? nextlinks[tools.randominteger(0, nextlinks.length)] : paths.site.next;
+	builtnav.home = {
+		url: (home.actuate === "onrequest" && home.type === "internal") ? home.url + '.html' : home.url, 
+		actuate: home.actuate ? home.actuate : "onrequest",
+		title: home.title ? home.title : "-*-*-",
+		keywords: home.keywords ? home.keywords : ["reference"],
+		format: home.format ? home.format : "html",
+		type: home.type ? home.type : "external",
+		action: home.action ? home.action : ""
+	};
+	builtnav.next = {
+		url: (next.actuate === "onrequest" && next.type === "internal") ? next.url + '.html' : next.url, 
+		actuate: next.actuate ? next.actuate : "onrequest",
+		title: next.title ? next.title : "-*-*-",
+		keywords: next.keywords ? next.keywords : ["reference"],
+		format: next.format ? next.format : "html",
+		type: next.type ? next.type : "external",
+		action: next.action ? next.action : ""
+	};
+	
+	paths.pathpoints.filter( ppoint => ppoint.uri === linkuri ).forEach( compositelink =>
 	{
 		builtlink = {
 			id: compositelink.id,
 			uri: compositelink.uri ? compositelink.uri : compositelink.id, 
-			title: compositelink.title ? compositelink.title : "-*-*-",
+			title: compositelink.title ? compositelink.title : "-*-*- :::",
 			subtitle: compositelink.subtitle ? compositelink.subtitle : "",
 			keywords: compositelink.keywords ? compositelink.keywords : [],
 			description: compositelink.description ? compositelink.description : "",
 			links: [], content: compositelink.content ? compositelink.content : "",
 			css: compositelink.css ? compositelink.css : [],
 			code: compositelink.code ? compositelink.code : [],
+			score: compositelink.score ? compositelink.score : {},
+			nav: builtnav, raw: compositelink
 		}
+		tools.logmsg("builtlink = " + JSON.stringify(builtlink));
 		compositelink.links.forEach( link => {
 			let componentlink = {
 				url: link.url ? link.url : "#", 
@@ -43,6 +71,7 @@ const buildlink = linkid => {
 				type: link.type ? link.type : "external",
 				action: link.action ? link.action : ""
 			};
+			if(componentlink.actuate === "onrequest" && componentlink.type === "internal") { componentlink.url = componentlink.url + '.html' }
 			if(componentlink.actuate === "onload") componentlink.pathpoint = buildlink(componentlink.url);
 			builtlink.links.push(componentlink);
 		});
@@ -68,7 +97,7 @@ const build = (options = {}) => {
 
 	paths.pathpoints.forEach( pathpoint => {
 		tools.logmsg("*** pathpoint ***");
-		let p = buildlink(pathpoint.id);
+		let p = buildlink(pathpoint.uri);
 		tools.logmsg(JSON.stringify(p));
 		//build pages
 		// ejs.renderFile(path.join(__dirname, 'animatepath.ejs'), p, (err, result) => {
