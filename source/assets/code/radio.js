@@ -89,11 +89,11 @@ let createradio = z => {
 							++z.radio.n.buffersplaying;
 							let now = z.radio.player.context.currentTime;
 							source.start(now + e.delay);
-							// z.tools.logmsg("playing = " + clip.url);
+							z.tools.logmsg("playing = " + clip.url);
 						} catch(e) { z.tools.logerror("error applying params to audio buffer e::: " + e) }
 					}
 					else {	
-						// z.tools.logmsg("NOT playing = " + clip.url);
+						z.tools.logmsg("NOT playing = " + clip.url);
 					}
 				}
 			}

@@ -63,7 +63,7 @@ const buildlink = linkuri => {
 			score: compositelink.score ? compositelink.score : {},
 			nav: builtnav, raw: compositelink
 		}
-		tools.logmsg("builtlink = " + JSON.stringify(builtlink));
+		// tools.logmsg("builtlink = " + JSON.stringify(builtlink));
 		compositelink.links.forEach( link => {
 			let componentlink = {
 				url: link.url ? link.url : "#", 
@@ -97,9 +97,9 @@ const build = (options = {}) => {
 		fse.copySync(`${paths.site.sourcepath}/assets`, paths.site.outputpath);
 	}
 	paths.pathpoints.forEach( pathpoint => {
-		tools.logmsg("*** pathpoint ***");
+		// tools.logmsg("*** pathpoint ***");
 		let p = buildlink(pathpoint.uri);
-		tools.logmsg(JSON.stringify(p, null, "  "));
+		// tools.logmsg(JSON.stringify(p, null, "  "));
 		//build pages
 		// ejs.renderFile(path.join(__dirname, 'animatepath.ejs'), p, (err, result) => {
 		ejs.renderFile(paths.site.sourcepath + '/layouts/' +  'layout.ejs', p, (err, result) => {
