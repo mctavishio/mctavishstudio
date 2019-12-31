@@ -5,96 +5,8 @@ let createstreams = z => {
 	// ***** clock stream ---------
 	createclock(z);
 
-	// ***** box pick stream ---------
-	(function() {
-		let name = "boxpick";
-		let dt = 9; //in seconds
-		let ratios = [5,10,15,20,30,40];
-		
-		let tostring = function(e) {return "box pick"};
-		let pick0 = {
-			row: 0, col: 0,
-			count: 0, nrow: z.nrows, ncols: z.ncols,
-			past: [0,0],
-			dt:dt, tostring: tostring, name:name 
-		};
-		z.streams[name] = z.streams["tick"].filter( e => e.t%dt===0 )
-			.scan( (state, e) => { 
-				state.past = [state.row,state.col];
-				state.row = z.tools.randominteger(0, state.nrows);
-				state.col = z.tools.randominteger(0, state.ncols);
-				state.count = state.count + 1;
-				return state;
-			}, pick0  )
-		z.streams[name].onValue( e => { 
-			// z.elements["stage"].el.setAttribute("style", "background-color: " + e.colors[z.tools.randominteger(0, e.colors.length)]);
-			// z.tools.logmsg(JSON.stringify(e));
-		});
-	})();
-
-	// ***** color palette stream ---------
-	(function() {
-		let name = "palette";
-		let dt = 48; //in seconds
-		let date0 = new Date();
-		let t0 = Math.floor(date0.getTime()/1000);
-		let palette = z.score.palette;
-		let tostring = function(e) {return "color palette"};
-		let palette0 = {
-			palette: palette,
-			colors: palette[ Math.floor(t0/dt)%palette.length ],
-			count: 0,
-			past: ["#fcfbe3", "#191918"],
-			dt:dt, tostring: tostring, name:name 
-		};
-		z.streams[name] = z.streams["tick"].filter( e => e.t%dt===0 )
-			.scan( (state, e) => { 
-				state.past = state.colors;
-				state.colors = state.palette[ Math.floor(e.t/dt)%state.palette.length ];
-				state.count = state.count + 1;
-				return state;
-			}, palette0  )
-		z.streams[name].onValue( e => { 
-			// z.elements["stage"].el.setAttribute("style", "background-color: " + e.colors[z.tools.randominteger(0, e.colors.length)]);
-			// z.tools.logmsg(JSON.stringify(e.colors));
-		});
-	})();
-
-	// ***** canvas stream ---------
-	(function() {
-		let name = "canvas";
-		let dt = 400; //in milliseconds
-		let tostring = e => { return "canvas stream" };
-		let width = window.innerWidth, height = window.innerHeight;
-		// let nrows = 8, ncols = 8;
-		let dx = Math.floor(width/z.nrows), dy = Math.floor(height/z.ncols);
-		let sw = Math.floor(Math.max(dx*.03, dy*.03, 4));
-		// z.tools.logmsg("strokewidth = " + sw);
-		let canvas0 = { 
-			grid: { nrows: z.nrows, ncols: z.ncols, dx: dx, dy: dy, sw: sw },
-			width: width, height: height, 
-			max: Math.max(window.innerWidth, window.innerHeight), min: Math.min(window.innerWidth, window.innerHeight), 
-			dt:dt, tostring: tostring, name:name 
-		};
-		z.streams[name] = Kefir.fromEvents(window, "resize").throttle(dt)
-			.scan( (state,e) => {
-				state.width = window.innerWidth;
-				state.height = window.innerHeight;
-				state.max = Math.max(state.width, state.height);
-				state.min = Math.min(state.width, state.height);
-				state.grid.dx = Math.floor(state.width/state.grid.nrows);
-				state.grid.dy = Math.floor(state.height/state.grid.ncols);
-				state.grid.sw = Math.floor(Math.max(state.grid.dx*.03, state.grid.dy*.03, 4));
-				// z.tools.logmsg("strokewidth = " + state.grid.sw);
-				// z.tools.logmsg("size ::: " + state.width + " x " + state.height);
-				// z.tools.logmsg("canvas = " + JSON.stringify(state));
-				return state
-			}, canvas0)
-
-		z.streams[name].onValue( e => { 
-			// z.tools.logmsg(JSON.stringify(e));
-		});
-	})();
+	// ***** drawp stream ---------
+	createdrawp(z);
 
 	// ***** box stream ---------
 	(function() {
@@ -107,7 +19,7 @@ let createstreams = z => {
 			count: 0,
 			dt:dt, tostring: tostring, name:name 
 		};
-		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 )], [z.streams["palette"], z.streams["canvas"]], (tick, palette, canvas) => { return {tick:tick, palette:palette, canvas:canvas } })
+		z.streams[name] = z.streams["drawp"].filter( e => e.tick.t%dt===0 )
 			.scan( (state, e) => { 
 				state.tick = e.tick;
 				state.palette = e.palette;
@@ -163,7 +75,7 @@ let createstreams = z => {
 			count: 0,
 			dt:dt, tostring: tostring, name:name 
 		};
-		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 )], [z.streams["palette"], z.streams["canvas"]], (tick, palette, canvas) => { return {tick:tick, palette:palette, canvas:canvas } })
+		z.streams[name] = z.streams["drawp"].filter( e => e.tick.t%dt===0 )
 			.scan( (state, e) => { 
 				state.tick = e.tick;
 				state.palette = e.palette;
@@ -208,7 +120,7 @@ let createstreams = z => {
 			count: 0,
 			dt:dt, tostring: tostring, name:name 
 		};
-		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 )], [z.streams["palette"], z.streams["canvas"]], (tick, palette, canvas) => { return {tick:tick, palette:palette, canvas:canvas } })
+		z.streams[name] = z.streams["drawp"].filter( e => e.tick.t%dt===0 )
 			.scan( (state, e) => { 
 				state.tick = e.tick;
 				state.palette = e.palette;
@@ -224,10 +136,8 @@ let createstreams = z => {
 					let cy = r*e.canvas.grid.dy + e.canvas.grid.dy/2;
 					e.elements[r].forEach( (col,c) => {
 						let cx = c*e.canvas.grid.dx + e.canvas.grid.dx/2, color = e.palette.colors[z.tools.randominteger(0,e.palette.colors.length)];
-						// let radius = ( ((e.boxpick.row ===r && e.boxpick.col===c) || (e.boxpick.row ===c && e.boxpick.col===r)) && e.count%2===0) ? min*ratios[z.tools.randominteger(0,ratios.length)]/10 : min*z.tools.randominteger(1,3)/10;
 						let radius = min*z.tools.randominteger(1,3)/10;
-						// console.log("c="+e.palette.colors.length + " color="+color);
-
+						
 						Velocity({	
 							elements: e.elements[r][c].el,
 							properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: e.canvas.grid.sw, fill: color, cx: cx, cy: cy, r: radius },
@@ -253,7 +163,7 @@ let createstreams = z => {
 			count: 0,
 			dt:dt, tostring: tostring, name:name 
 		};
-		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 )], [z.streams["palette"], z.streams["canvas"]], (tick, palette, canvas) => { return {tick:tick, palette:palette, canvas:canvas } })
+		z.streams[name] = z.streams["drawp"].filter( e => e.tick.t%dt===0 )
 			.scan( (state, e) => { 
 				state.tick = e.tick;
 				state.palette = e.palette;
@@ -264,15 +174,11 @@ let createstreams = z => {
 		z.streams[name].onValue( e => { 
 			try {
 				let min = Math.min(e.canvas.grid.dx, e.canvas.grid.dy);
-				// let pick = z.tools.randominteger(0,e.canvas.grid.ncols*e.canvas.grid.nrows);
 				e.elements.forEach( (row, r) => {
 					let cy = r*e.canvas.grid.dy + e.canvas.grid.dy/2;
 					e.elements[r].forEach( (col,c) => {
-						// console.log("c="+c + " e.boxpick.col="+e.boxpick.col + "r="+r + " e.boxpick.row="+e.boxpick.row);
-						// let radius = ( ((e.boxpick.row ===r && e.boxpick.col===c) || (e.boxpick.row ===c && e.boxpick.col===r)) && e.count%5===0)  ? min*ratios[z.tools.randominteger(0,ratios.length)]/10 : min*z.tools.randominteger(1,3)/10;
 						let radius = min*z.tools.randominteger(3,5)/10;
 						let cx = c*e.canvas.grid.dx + e.canvas.grid.dx/2, color = e.palette.colors[z.tools.randominteger(0,e.palette.colors.length)];
-						// console.log("c="+e.palette.colors.length + " color="+color);
 						Velocity({	
 							elements: e.elements[r][c].el,
 							properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: 12, fill: color, cx: cx, cy: cy, r: radius },

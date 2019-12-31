@@ -5,129 +5,6 @@ let createstreams = z => {
 	// ***** clock stream ---------
 	createclock(z);
 
-	// ***** box pick stream ---------
-	(function() {
-		let name = "boxpick";
-		let dt = 9; //in seconds
-		let ratios = [5,10,15,20,30,40];
-		
-		let tostring = function(e) {return "box pick"};
-		let pick0 = {
-			row: 0, col: 0,
-			count: 0, nrow: z.nrows, ncols: z.ncols,
-			past: [0,0],
-			dt:dt, tostring: tostring, name:name 
-		};
-		z.streams[name] = z.streams["tick"].filter( e => e.t%dt===0 )
-			.scan( (state, e) => { 
-				state.past = [state.row,state.col];
-				state.row = z.tools.randominteger(0, state.nrows);
-				state.col = z.tools.randominteger(0, state.ncols);
-				state.count = state.count + 1;
-				return state;
-			}, pick0  )
-		z.streams[name].onValue( e => { 
-			// z.elements["stage"].el.setAttribute("style", "background-color: " + e.colors[z.tools.randominteger(0, e.colors.length)]);
-			// z.tools.logmsg(JSON.stringify(e));
-		});
-	})();
-
-	// ***** color palette stream ---------
-	(function() {
-		let name = "palette";
-		let dt = 48; //in seconds
-		let date0 = new Date();
-		let t0 = Math.floor(date0.getTime()/1000);
-		let palette = z.score.palette;
-		let tostring = function(e) {return "color palette"};
-		let palette0 = {
-			palette: palette,
-			colors: palette[ Math.floor(t0/dt)%palette.length ],
-			count: 0,
-			past: ["#fcfbe3", "#191918"],
-			dt:dt, tostring: tostring, name:name 
-		};
-		z.streams[name] = z.streams["tick"].filter( e => e.t%dt===0 )
-			.scan( (state, e) => { 
-				state.past = state.colors;
-				state.colors = state.palette[ Math.floor(e.t/dt)%state.palette.length ];
-				state.count = state.count + 1;
-				return state;
-			}, palette0  )
-		z.streams[name].onValue( e => { 
-			// z.elements["stage"].el.setAttribute("style", "background-color: " + e.colors[z.tools.randominteger(0, e.colors.length)]);
-			// z.tools.logmsg(JSON.stringify(e.colors));
-		});
-	})();
-
-	// ***** canvas stream ---------
-	(function() {
-		let name = "canvas";
-		let dt = 400; //in milliseconds
-		let tostring = e => { return "canvas stream" };
-		let width = window.innerWidth, height = window.innerHeight;
-		// let nrows = 8, ncols = 8;
-		let dx = Math.floor(width/z.nrows), dy = Math.floor(height/z.ncols);
-		let sw = Math.floor(Math.max(dx*.03, dy*.03, 4));
-		// z.tools.logmsg("strokewidth = " + sw);
-		let canvas0 = { 
-			grid: { nrows: z.nrows, ncols: z.ncols, dx: dx, dy: dy, sw: sw },
-			width: width, height: height, 
-			max: Math.max(window.innerWidth, window.innerHeight), min: Math.min(window.innerWidth, window.innerHeight), 
-			dt:dt, tostring: tostring, name:name 
-		};
-		z.streams[name] = Kefir.fromEvents(window, "resize").throttle(dt)
-			.scan( (state,e) => {
-				state.width = window.innerWidth;
-				state.height = window.innerHeight;
-				state.max = Math.max(state.width, state.height);
-				state.min = Math.min(state.width, state.height);
-				state.grid.dx = Math.floor(state.width/state.grid.nrows);
-				state.grid.dy = Math.floor(state.height/state.grid.ncols);
-				state.grid.sw = Math.floor(Math.max(state.grid.dx*.03, state.grid.dy*.03, 4));
-				// z.tools.logmsg("strokewidth = " + state.grid.sw);
-				// z.tools.logmsg("size ::: " + state.width + " x " + state.height);
-				// z.tools.logmsg("canvas = " + JSON.stringify(state));
-				return state
-			}, canvas0)
-
-		z.streams[name].onValue( e => { 
-			// z.tools.logmsg(JSON.stringify(e));
-		});
-	})();
-
-	// ***** box pick stream ---------
-	(function() {
-		let name = "boxpick";
-		let dt = 9; //in seconds
-		let ratios = [5,10,15,20,30,40];
-		
-		let tostring = function(e) {return "box pick"};
-		let pick0 = {
-			row: 0, col: 0,
-			count: 0, nrows: z.nrows, ncols: z.ncols,
-			past: [0,0],
-			dt:dt, tostring: tostring, name:name,
-			past: [],
-		};
-		//build memory
-		Array.from(Array(z.m).keys()).forEach(  r => {
-			pick0.past.unshift([0,0]);
-		});
-		z.streams[name] = z.streams["tick"].filter( e => e.t%dt===0 )
-			.scan( (state, e) => { 
-				state.past.shift();
-				state.past.push([z.tools.randominteger(0, state.nrows), z.tools.randominteger(0, state.ncols)]);
-				state.row = z.tools.randominteger(0, state.nrows);
-				// state.col = z.tools.randominteger(0, state.ncols);
-				state.count = state.count + 1;
-				return state;
-			}, pick0  );
-		z.streams[name].onValue( e => { 
-			// z.tools.logmsg("boxpick stream " + JSON.stringify(e));
-		});
-	})();
-
 	// ***** drawp stream ---------
 	createdrawp(z);
 
@@ -142,7 +19,7 @@ let createstreams = z => {
 			count: 0,
 			dt:dt, tostring: tostring, name:name 
 		};
-		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 )], [z.streams["palette"], z.streams["canvas"]], (tick, palette, canvas) => { return {tick:tick, palette:palette, canvas:canvas } })
+		z.streams[name] = z.streams["drawp"].filter( e => e.tick.t%dt===0 )
 			.scan( (state, e) => { 
 				state.tick = e.tick;
 				state.palette = e.palette;
@@ -230,7 +107,7 @@ let createstreams = z => {
 
 				})
 			} catch(err) { 
-				// z.tools.logerror("squares " + err)
+				z.tools.logerror("squares ::: " + err);
 			}
 			
 		});
@@ -292,7 +169,7 @@ let createstreams = z => {
 						options: { duration: duration,  delay: delay, easing: "easeInOutQuad" },
 					});
 				});
-			} catch(err) {}
+			} catch(err) { z.tools.logerror("circles: " + JSON.stringify(err)); }
 			// z.tools.logmsg(JSON.stringify(e));
 		});
 	})();
@@ -352,26 +229,9 @@ let createstreams = z => {
 						properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: sw, strokeDasharray: dash, x1: 0, x2: e.canvas.width, y1: cy, y2: cy },
 						options: { duration: duration,  delay: delay, easing: "easeInOutQuad" },
 					});
-					// r0 = past[(m+1)%past.length][0], c0 = past[(m+1)%past.length][1];
-					// cx0 = c0*dx + dx/2, cy0 = r0*dy + dy/2;
-					// color = "#fcfbe3";
-					// sw = sw0*z.tools.randominteger(8,20);
-					// dash = z.tools.randominteger(10, e.canvas.max);	
-					// duration = e.dt*800;
-					// delay = e.dt*180;
-					// Velocity({	
-					// 	elements: e.elements[m][2].el,
-					// 	properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: sw, strokeDasharray: dash, x1: cx0, x2: cx0, y1: 0, y2: e.canvas.height },
-					// 	options: { duration: duration,  delay: delay, easing: "easeInOutQuad" },
-					// });
-					// Velocity({	
-					// 	elements: e.elements[m][3].el,
-					// 	properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: sw, strokeDasharray: dash, x1: 0, x2: e.canvas.width, y1: cy0, y2: cy0 },
-					// 	options: { duration: duration,  delay: delay, easing: "easeInOutQuad" },
-					// });
 				});
 
-			} catch(err) { z.tools.logerror("lines" + err)}
+			} catch(err) { z.tools.logerror("lines ::: " + err)}
 			// z.tools.logmsg(JSON.stringify(e));
 		});
 	})();

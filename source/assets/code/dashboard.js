@@ -85,6 +85,32 @@ let createdashboard = z => {
 				document.querySelector('#menu').style.display='none';
 			} catch(e) {}
 		},
+		next: (z) => {
+			// try {
+				z.tools.logmsg("next ::: z.currentnext = " + z.currentnext + " ::: " + JSON.stringify(z.nav.next[z.currentnext], null, "  "));
+				
+				if( z.nav.next[z.currentnext].actuate === "onrequest" ) {
+					// z.tools.logmsg("next url = " + z.nav.next[z.currentnext].url);
+					window.location = z.nav.next[z.currentnext].url;
+				}
+				else {
+					z.nav.next.filter(link => link.type === "internal" && link.actuate === "onload").forEach( link => {
+						z.tools.logmsg("link = " + JSON.stringify(link, null, 2) );
+						if( z.nav.next[z.currentnext].url === link.url ) {
+							document.querySelector("#"+link.url).style.display = 'block';
+						}
+						else {
+							document.querySelector("#"+link.url).style.display = 'none';
+						}
+					});
+				}
+				z.currentnext = (z.currentnext + 1) % z.nav.next.length;
+				z.tools.logmsg("next ::: z.currentnext = " + z.currentnext + " ::: " + JSON.stringify(z.nav.next[z.currentnext], null, "  "));
+
+				document.querySelector('#next').classList.add("active");
+
+			// } catch(e) {}
+		},
 		listen: (z) => {
 			// One-liner to resume playback when user interacted with the page.
 			document.querySelector('#volume-on').addEventListener('click', function() {
@@ -110,7 +136,12 @@ let createdashboard = z => {
 					document.querySelector('#aboutproject').classList.remove("active");
 				}
 			});
+			document.querySelector('#next').addEventListener('click', function() {
+				z.dashboard.next(z);
+			});
 			document.querySelector('#hide').addEventListener('click', function() {
+				z.dashboard.hidecontent(z);
+				document.querySelector('#aboutproject').classList.remove("active");
 				z.dashboard.hidecontrols(z);
 			});
 			document.querySelector('#menu').addEventListener('click', function() {
@@ -120,6 +151,7 @@ let createdashboard = z => {
 			// document.querySelector('#volume-on').classList.add("active");
 			// document.querySelector('#volume-off').style.display='none';
 			z.elements["telegraph"].el.innerHTML = "hell0 worlD";
+
 		}
 	}
 };

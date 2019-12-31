@@ -7,22 +7,22 @@
 	<meta name="description" content="<%= description %>" />
 	<meta name="author" content="kathy mctavish">
 	<!-- from ::: http://www.favicon-generator.org/ -->
-	<link rel="apple-touch-icon" sizes="57x57" href="../apple-icon-57x57.png">
-	<link rel="apple-touch-icon" sizes="60x60" href="../apple-icon-60x60.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="../apple-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="76x76" href="../apple-icon-76x76.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="../apple-icon-114x114.png">
-	<link rel="apple-touch-icon" sizes="120x120" href="../apple-icon-120x120.png">
-	<link rel="apple-touch-icon" sizes="144x144" href="../apple-icon-144x144.png">
-	<link rel="apple-touch-icon" sizes="152x152" href="../apple-icon-152x152.png">
-	<link rel="apple-touch-icon" sizes="180x180" href="../apple-icon-180x180.png">
-	<link rel="icon" type="image/png" sizes="192x192"  href="../android-icon-192x192.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-	<link rel="manifest" href="../manifest.json">
+	<link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+	<link rel="manifest" href="manifest.json">
 	<meta name="msapplication-TileColor" content="#ffffff">
-	<meta name="msapplication-TileImage" content="../ms-icon-144x144.png">
+	<meta name="msapplication-TileImage" content="ms-icon-144x144.png">
 	<meta name="theme-color" content="#ffffff">
 
 	<!-- JSON-LD : Google -->
@@ -48,6 +48,7 @@
 		let z = {};
 		z.score0 = <%- JSON.stringify(score) %>;
 		z.pathpoint = <%- JSON.stringify(raw) %>;
+		z.nav = <%- JSON.stringify(nav) %>;
 	</script>
 </head>
 <body id="body">
@@ -63,9 +64,10 @@
 				<!-- <li title="home" id="home"><a href="http://datapoets.com/index.html" ><svg class="icon" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 510 510" ><polygon points="204,471.75 204,318.75 306,318.75 306,471.75 433.5,471.75 433.5,267.75 510,267.75 255,38.25 0,267.75 76.5,267.75 76.5,471.75"/></svg></a></li> -->
 				<li title="<%= nav.home.title %>" id="home"><a href="<%= nav.home.url %>" ><svg class="icon" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 510 510" ><polygon points="204,471.75 204,318.75 306,318.75 306,471.75 433.5,471.75 433.5,267.75 510,267.75 255,38.25 0,267.75 76.5,267.75 76.5,471.75"/></svg></a></li>
 				
-				<!-- <li title="about mctavish" id="aboutmctavish"><a href="http://datapoets.com/index.html" ><svg class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 555.9 555.9"><path d="M316.2,91.8c25.5,0,45.9-20.4,45.9-45.9S341.7,0,316.2,0s-45.9,20.4-45.9,45.9S290.7,91.8,316.2,91.8z M318.75,249.9 H443.7V204h-91.8l-51-84.15c-7.65-12.75-22.95-22.95-38.25-22.95c-5.1,0-7.65,0-12.75,2.55L112.2,142.8v132.6h45.9v-94.35 l53.55-17.85L112.2,555.9h45.9l73.95-206.551L290.7,428.4v127.5h45.9V392.699l-63.75-114.75L290.7,204L318.75,249.9z"/></svg></a></li> -->
-				<li title="about project" id="aboutproject" class="active"><a href="#" ><svg class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 510 510"><path d="M255,0C114.75,0,0,114.75,0,255s114.75,255,255,255s255-114.75,255-255S395.25,0,255,0z M280.5,433.5h-51v-51h51V433.5z M334.05,237.15L311.1,260.1c-20.399,17.851-30.6,33.15-30.6,71.4h-51v-12.75c0-28.05,10.2-53.55,30.6-71.4L290.7,214.2 c10.2-7.65,15.3-20.4,15.3-35.7c0-28.05-22.95-51-51-51s-51,22.95-51,51h-51c0-56.1,45.9-102,102-102c56.1,0,102,45.9,102,102 C357,201.45,346.8,221.85,334.05,237.15z"/></svg></a></li>
-				<!-- <li style="display:none" title="play" id="play"><a href="http://datapoets.com/index.html" ><svg class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 510 510" ><path d="M204,369.75L357,255L204,140.25V369.75z M255,0C114.75,0,0,114.75,0,255s114.75,255,255,255s255-114.75,255-255 S395.25,0,255,0z M255,459c-112.2,0-204-91.8-204-204S142.8,51,255,51s204,91.8,204,204S367.2,459,255,459z"/></svg></a></li>
+				<li title="about mctavish" id="aboutmctavish"><a href="http://datapoets.com/index.html" ><svg class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 555.9 555.9"><path d="M316.2,91.8c25.5,0,45.9-20.4,45.9-45.9S341.7,0,316.2,0s-45.9,20.4-45.9,45.9S290.7,91.8,316.2,91.8z M318.75,249.9 H443.7V204h-91.8l-51-84.15c-7.65-12.75-22.95-22.95-38.25-22.95c-5.1,0-7.65,0-12.75,2.55L112.2,142.8v132.6h45.9v-94.35 l53.55-17.85L112.2,555.9h45.9l73.95-206.551L290.7,428.4v127.5h45.9V392.699l-63.75-114.75L290.7,204L318.75,249.9z"/></svg></a></li>
+				<li title="text" id="aboutproject"><a href="#" ><svg class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 510 510"><path d="M255,0C114.75,0,0,114.75,0,255s114.75,255,255,255s255-114.75,255-255S395.25,0,255,0z M280.5,433.5h-51v-51h51V433.5z M334.05,237.15L311.1,260.1c-20.399,17.851-30.6,33.15-30.6,71.4h-51v-12.75c0-28.05,10.2-53.55,30.6-71.4L290.7,214.2 c10.2-7.65,15.3-20.4,15.3-35.7c0-28.05-22.95-51-51-51s-51,22.95-51,51h-51c0-56.1,45.9-102,102-102c56.1,0,102,45.9,102,102 C357,201.45,346.8,221.85,334.05,237.15z"/></svg></a></li>
+				<li title="next" id="next"><a href="#" ><svg class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 510 510" ><path d="M204,369.75L357,255L204,140.25V369.75z M255,0C114.75,0,0,114.75,0,255s114.75,255,255,255s255-114.75,255-255 S395.25,0,255,0z M255,459c-112.2,0-204-91.8-204-204S142.8,51,255,51s204,91.8,204,204S367.2,459,255,459z"/></svg></a></li>
+				<!-- 
 				<li title="document" id="document"><a href="http://datapoets.com/index.html" ><svg class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 459 459"><path d="M211.65,142.8L211.65,142.8C214.2,142.8,214.2,142.8,211.65,142.8c2.55-10.2,5.1-15.3,5.1-22.95v-5.1 c2.55-12.75,2.55-22.95,0-25.5c0,0,0,0,0-2.55l-2.55-2.55l0,0l0,0c0,0,0,2.55-2.55,2.55C206.55,102,206.55,119.85,211.65,142.8 L211.65,142.8z M135.15,318.75c-5.1,2.55-10.2,5.1-12.75,7.65c-17.85,15.3-30.6,33.149-33.15,40.8l0,0l0,0l0,0 C104.55,364.65,119.85,349.35,135.15,318.75C137.7,318.75,137.7,318.75,135.15,318.75C137.7,318.75,135.15,318.75,135.15,318.75z  M369.75,280.5c-2.55-2.55-12.75-10.2-48.45-10.2c-2.55,0-2.55,0-5.1,0l0,0c0,0,0,0,0,2.55c17.85,7.65,35.7,12.75,48.45,12.75 c2.55,0,2.55,0,5.1,0l0,0h2.55c0,0,0,0,0-2.55l0,0C372.3,283.05,369.75,283.05,369.75,280.5z M408,0H51C22.95,0,0,22.95,0,51v357 c0,28.05,22.95,51,51,51h357c28.05,0,51-22.95,51-51V51C459,22.95,436.05,0,408,0z M379.95,300.9c-5.101,2.55-12.75,5.1-22.95,5.1 c-20.4,0-51-5.1-76.5-17.85c-43.35,5.1-76.5,10.199-102,20.399c-2.55,0-2.55,0-5.1,2.55c-30.6,53.551-56.1,79.051-76.5,79.051 c-5.1,0-7.65,0-10.2-2.551l-12.75-7.649v-2.55c-2.55-5.101-2.55-7.65-2.55-12.75c2.55-12.75,17.85-35.7,48.45-53.551 c5.1-2.55,12.75-7.649,22.95-12.75c7.65-12.75,15.3-28.05,25.5-45.899c12.75-25.5,20.4-51,28.05-73.95l0,0 c-10.2-30.6-15.3-48.45-5.1-84.15c2.55-10.2,10.2-20.4,20.4-20.4h5.1c5.1,0,10.2,2.55,15.3,5.1c17.851,17.85,10.2,58.65,0,91.8 c0,2.55,0,2.55,0,2.55c10.2,28.05,25.5,51,40.8,66.3c7.65,5.1,12.75,10.2,22.95,15.3c12.75,0,22.95-2.55,33.15-2.55 c30.6,0,51,5.1,58.649,17.85c2.551,5.101,2.551,10.2,2.551,15.3C387.6,288.15,385.05,295.8,379.95,300.9z M214.2,201.45 c-5.1,17.85-15.3,38.25-25.5,61.2c-5.1,10.199-10.2,17.85-15.3,28.05h2.55h2.55l0,0c33.15-12.75,63.75-20.4,84.15-22.95 c-5.101-2.55-7.65-5.1-10.2-7.65C239.7,244.8,224.4,224.4,214.2,201.45z"/></svg></a></li>
 				<li title="map" id="map"><a href="http://datapoets.com/index.html" ><svg class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 459 459"><path d="M446.25,0c-2.55,0-2.55,0-5.1,0L306,53.55L153,0L10.2,48.45C5.1,51,0,53.55,0,61.2v385.05C0,453.9,5.1,459,12.75,459 c2.55,0,2.55,0,5.1,0L153,405.45L306,459l142.8-48.45C453.9,408,459,402.9,459,397.8V12.75C459,5.1,453.9,0,446.25,0z M306,408 l-153-53.55V51l153,53.55V408z"/></svg></a></li>
 				<li title="photos" id="photos"><a href="http://datapoets.com/index.html" ><svg class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 510 510"><circle cx="255" cy="280.5" r="81.6"/><path d="M178.5,25.5l-45.9,51H51c-28.05,0-51,22.95-51,51v306c0,28.05,22.95,51,51,51h408c28.05,0,51-22.95,51-51v-306 c0-28.05-22.95-51-51-51h-81.6l-45.9-51H178.5z M255,408c-71.4,0-127.5-56.1-127.5-127.5c0-71.4,56.1-127.5,127.5-127.5 c71.4,0,127.5,56.1,127.5,127.5C382.5,351.9,326.4,408,255,408z"/></svg></a></li>
@@ -97,8 +99,8 @@
 					<% }) %>
 				</div>
 			</article>
-			<% links.filter(link => link.actuate==="onload" ).forEach( link => { %>
-			<article id="pathpoint" >
+			<% links.filter(link => link.actuate==="onload").forEach( link => { %>
+			<article id="<%= link.pathpoint.uri %>" <% if(link.keywords.includes("next")){%>class="nextnode"<%}%> >
 				<header>
 					<h1><%= link.pathpoint.title %></h1>
 				</header>
@@ -110,30 +112,20 @@
 				</div>
 			</article>
 			<% }) %>
-			<!-- <article id="pathpoint" >
+			<!-- <article id="pathpoint">
 				<header>
 					<h1>pathpoint json</h1>
 				</header>
 				<div class="textContent">
-					<p><%= JSON.stringify(links) %></p>
+					<p class="code"><%- JSON.stringify(raw, null, 4) %></p>
 				</div>
 			</article> -->
 		</main>
 	</div>
 </body>
-<script src="code/velocity.min.js"></script>
-	<script src="code/kefir201911.min.js"></script>
-	<script src="code/tools.js"></script>
-	<script src="code/data.js"></script>
-	<script src="code/radio.js"></script>
-	<script src="code/clock.js"></script>
-	<script src="code/drawp.js"></script>
-	<script src="code/dashboard.js"></script>
-	<% code.forEach( file => { %>
-	<script src="<%= file %>"></script>
-	<% }) %>
-<script>
-	
-</script>
+
+<% code.forEach( file => { %>
+<script src="<%= file %>"></script>
+<% }) %>
 
 </html>
