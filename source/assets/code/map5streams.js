@@ -296,7 +296,7 @@ let createstreams = z => {
 				let sound = e.sounds[z.tools.randominteger(0,e.sounds.length)];
 				z.tools.logmsg(" play instrument ::: " + sound);
 				let instrumentname = sound;
-				let instrument = z.resources.sounds.instruments[sound];
+				let instrument = z.data.sounds.instruments[sound];
 				let vol = z.tools.randominteger(instrument.minvolume*10, instrument.maxvolume*10)/10;
 				z.radio.playbuffer( { instrument: sound, volume: vol, delay: z.tools.randominteger(0,4)/10 } );
 				if(z.tools.randominteger(0,10) < 2) {
