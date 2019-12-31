@@ -15,8 +15,9 @@ let createdashboard = z => {
 							let request = new XMLHttpRequest();
 							// request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/" +clip.url, true);
 							// request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + clip.url, true);
-							request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/" + clip.url, true);
-							z.tools.logmsg("url" + window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/"  + clip.url);
+							// request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/" + clip.url, true);
+							request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
+							z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + "/"  + clip.url);
 							// z.tools.logmsg("trying to load" + clip.url);
 							request.responseType = "arraybuffer";
 							request.onload = () =>  {
