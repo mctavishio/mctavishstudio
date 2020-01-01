@@ -90,7 +90,7 @@
 			<article id="<%= id %>" >
 				<div class="textContent">
 					<% if(content) {%><p><%- content %></p><%}%>
-					<% links.filter(link => link.actuate==="onrequest" && !link.keywords.includes("next")).forEach( link => { %>
+					<% links.filter(link => link.actuate==="onrequest" && !link.keywords.includes("path") && !link.keywords.includes("next") && !link.keywords.includes("reference")).forEach( link => { %>
 						<p>&rarr;<a href="<%= link.url %>"><%= link.title %></a></p>
 					<% }) %>
 				</div>
@@ -121,14 +121,14 @@
 				</div>
 			</article>
 			<% } %>
-			<% if( links.filter(link => link.actuate==="onrequest" && link.keywords.includes("next") ).length > 0 ) { %>
+			<% if( links.filter(link => link.actuate==="onrequest" && link.keywords.includes("path") ).length > 0 ) { %>
 			<article id="nextlinks" >
 				<header>
-					<h1>next</h1>
+					<h1>path links</h1>
 				</header>
 				<div class="textContent">
-					<% links.filter(link => link.actuate==="onrequest" && link.keywords.includes("next") ).forEach( link => { %>
-					<p>&rarr; <a href="<%= link.url %>">next ::: <%= link.title %></a></p> 
+					<% links.filter(link => link.actuate==="onrequest" && link.keywords.includes("path") ).forEach( link => { %>
+					<p>&rarr; <a href="<%= link.url %>"><%= link.title %> <% if(link.url.includes(uri)) {%><span class="lightgray"><i> (you are here)</i></span><%}%> </a></p> 
 					<% }) %>
 				</div>
 			</article>

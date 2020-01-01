@@ -1,12 +1,12 @@
 module.exports = () => {
 	const mapscode = ["code/velocity.min.js", "code/kefir201911.min.js", "code/tools.js", "code/data.js", "code/radio.js", "code/clock.js", "code/mapcoreelements.js", "code/drawp.js", "code/dashboard.js", "code/mapstart.js"];
 	const mapspath = ["map3a","map3b", "map3c", "map54", "map58", "map88"];
-	let paths = [
+	let path = 
 	{
 		site: {
-			title: 'mctavish.io',
-			description: 'website for kathy mctavish',
-			baseurl: "http://mctavish.io",
+			title: 'count map pulse breathe',
+			description: 'count map pulse breathe with sound from map3 ::: used at JNG 2019',
+			baseurl: "http://mctavish.studio",
 			basecss: [],
 			basejavascript: [],
 			sourcepath: 'source',
@@ -14,14 +14,14 @@ module.exports = () => {
 			csspath: 'css',
 			javascriptpath: 'code',
 			datapath: 'data',
-			startpathpoint: "swarm",
+			startpathpoint: "map3a",
 			home: {
 						actuate: "onrequest", //onload, onrequest, searchembed
 						type: "internal", //internal, external
 						format: "html", //pdf,ejs,html,mp3,vimeo
 						keywords: ["navigation", "home"], //ex: reference, next, navigation?
 						title: "home",
-						url: "swarm"
+						url: "map3a"
 			},
 			next: {
 						actuate: "onrequest", //onload, onrequest, searchembed
@@ -29,87 +29,10 @@ module.exports = () => {
 						format: "html", //pdf,ejs,html,mp3,vimeo
 						keywords: ["navigation", "next"], //ex: reference, next, navigation?
 						title: "next",
-						url: "swarm"
+						url: "map3a"
 			},
 		},
 		pathpoints: [
-			{ 
-				id: "1576970236172",
-				uri: "swarm",
-				title: "test example ::: swarm",
-				keywords: ["about", "mctavish", "exhibit", "webpage"],
-				description: "exhibit swarm",
-				code:  [...mapscode, "code/map3elements.js", "code/map3astreams.js"],
-				score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] },
-				links: [
-					{ url: "swarmpress3", actuate: "onload", type: "internal", title: "swarm press 3", keywords: ["next"], format: "html" },
-					{ url: "swarmpress", actuate: "onload", type: "internal", title: "swarm press", keywords: ["component"], format: "html" },
-					{ url: "swarmpress2", actuate: "onload", type: "internal", title: "swarm press 2", keywords: ["next"], format: "html" },
-					{ url: "map58", actuate: "onrequest", type: "internal", title: "map 58", keywords: ["next", "reference"], format: "html" },
-					{ url: "map88", actuate: "onrequest", type: "internal", title: "map 88", keywords: ["next", "reference"], format: "html" }
-				],
-				content: 
-				`
-				<p>about the swarm exhibit</p>
-				<p><i>"There is no such thing as repetition. Only insistance."
-					― Gertrude Stein</i></p>
-				<p><a><href="http://mctavish.io">mctavish.io</a></p>
-				`
-			},
-			{ 
-				id: "1576959636186",
-				uri: "swarmpress",
-				title: "swarm press",
-				keywords: ["press", "mctavish", "exhibit", "links"],
-				description: "press links for the exhibit swarm",
-				links: [
-					{
-						title: "Sun Yung Shin catalogue essay",
-						url: "http://blueboatfilms.com/text/swarm/FINALAOV10ShinEssay.pdf"
-					},
-					{
-						title: "award announcement",
-						url: "http://northern.lights.mn/platform/artist-on-the-verge-10/"
-					}, 
-				],
-				content: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>'
-			},
-			{ 
-				id: "1577751180938",
-				uri: "swarmpress2",
-				title: "swarm press 2",
-				keywords: ["press", "mctavish", "exhibit", "links"],
-				description: "press links for the exhibit swarm",
-				links: [
-					{
-						title: "Sun Yung Shin catalogue essay",
-						url: "http://blueboatfilms.com/text/swarm/FINALAOV10ShinEssay.pdf"
-					},
-					{
-						title: "award announcement",
-						url: "http://northern.lights.mn/platform/artist-on-the-verge-10/"
-					}, 
-				],
-				content: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>'
-			},
-			{ 
-				id: "1577767576515",
-				uri: "swarmpress3",
-				title: "swarm press 3",
-				keywords: ["press", "mctavish", "exhibit", "links"],
-				description: "press links for the exhibit swarm",
-				links: [
-					{
-						title: "Sun Yung Shin catalogue essay",
-						url: "http://blueboatfilms.com/text/swarm/FINALAOV10ShinEssay.pdf"
-					},
-					{
-						title: "award announcement",
-						url: "http://northern.lights.mn/platform/artist-on-the-verge-10/"
-					}, 
-				],
-				content: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>'
-			},
 			{ 
 				id: "1577816344977",
 				uri: "countmappulsebreathe",
@@ -141,8 +64,7 @@ module.exports = () => {
 				`
 			},
 		]
-	},
-	];
+	};
 
 	const texts = [
 		{
@@ -209,7 +131,7 @@ module.exports = () => {
 		})
 		// console.log(JSON.stringify(links,null,2));
 
-		paths[0].pathpoints.push( {
+		path.pathpoints.push( {
 			id: Date.now(), uri: p.uri, title: text.title, subtitle: p.uri, 
 			content: text.content, 
 			keywords: ["countmappulsebreathe", "exhibit", "webpage"],
@@ -217,6 +139,6 @@ module.exports = () => {
 			links: links
 		});
 	});
-	// console.log(JSON.stringify(paths[0].pathpoints.map(p => p.uri),null,2));
-	return paths[0];
+	console.log(JSON.stringify(path.pathpoints.map(p => p.uri),null,2));
+	return path;
 };

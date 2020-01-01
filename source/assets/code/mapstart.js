@@ -12,7 +12,9 @@ z.start = () => {
 		}
 	}
 	z.elements["aboutlink"].el.classList.add("active");
-	setTimeout( () => { z.dashboard.hidecontent(z); z.elements["aboutlink"].el.classList.remove("active"); }, 4000);
+	setTimeout( () => { z.dashboard.hidecontent(z); }, 8000);
+	setTimeout( () => { document.querySelector('#contentframe').scrollIntoView(); }, 12000);
+	setTimeout( () => { z.elements["aboutlink"].el.classList.remove("active") }, 14000);
 	
 	// document.querySelector('#aboutproject').classList.remove("active");
 	z.dashboard.listen(z);

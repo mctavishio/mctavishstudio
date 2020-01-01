@@ -1,0 +1,185 @@
+{
+  "id": "1577816344977",
+  "uri": "countmappulsebreathe",
+  "title": "count map pulse breathe",
+  "subtitle": "",
+  "keywords": [
+    "about",
+    "mctavish",
+    "exhibit",
+    "webpage"
+  ],
+  "description": "exhibit count map pulse breathe",
+  "links": [
+    {
+      "url": "map58.html",
+      "actuate": "onrequest",
+      "title": "map 58",
+      "keywords": [
+        "next",
+        "reference"
+      ],
+      "format": "html",
+      "type": "internal",
+      "action": ""
+    },
+    {
+      "url": "map88.html",
+      "actuate": "onrequest",
+      "title": "map 88",
+      "keywords": [
+        "next",
+        "reference"
+      ],
+      "format": "html",
+      "type": "internal",
+      "action": ""
+    }
+  ],
+  "content": "\n\t\t\t\t<p>links for count map pulse breathe</p>\n\t\t\t\t<p><i>\"There is no such thing as repetition. Only insistance.\"\n\t\t\t\t\t― Gertrude Stein</i></p>\n\t\t\t\t<p><a><href=\"http://mctavish.io\">mctavish.io</a></p>\n\t\t\t\t",
+  "css": [],
+  "code": [
+    "code/velocity.min.js",
+    "code/kefir201911.min.js",
+    "code/tools.js",
+    "code/data.js",
+    "code/radio.js",
+    "code/clock.js",
+    "code/mapcoreelements.js",
+    "code/drawp.js",
+    "code/dashboard.js",
+    "code/mapstart.js",
+    "code/map3elements.js",
+    "code/map3astreams.js"
+  ],
+  "score": {
+    "soundplaylist": "map3",
+    "colorplaylist": "map3",
+    "nrows": [
+      4,
+      8
+    ],
+    "ncols": [
+      4,
+      8
+    ],
+    "m": [
+      4,
+      8
+    ]
+  },
+  "controls": [
+    "home",
+    "sound",
+    "next",
+    "aboutproject",
+    "hide"
+  ],
+  "nav": {
+    "home": {
+      "url": "map3a.html",
+      "actuate": "onrequest",
+      "title": "home",
+      "keywords": [
+        "navigation",
+        "home"
+      ],
+      "format": "html",
+      "type": "internal",
+      "action": ""
+    },
+    "next": [
+      {
+        "url": "map58.html",
+        "actuate": "onrequest",
+        "title": "map 58",
+        "keywords": [
+          "next",
+          "reference"
+        ],
+        "format": "html",
+        "type": "internal",
+        "action": ""
+      },
+      {
+        "url": "map88.html",
+        "actuate": "onrequest",
+        "title": "map 88",
+        "keywords": [
+          "next",
+          "reference"
+        ],
+        "format": "html",
+        "type": "internal",
+        "action": ""
+      }
+    ]
+  },
+  "raw": {
+    "id": "1577816344977",
+    "uri": "countmappulsebreathe",
+    "title": "count map pulse breathe",
+    "keywords": [
+      "about",
+      "mctavish",
+      "exhibit",
+      "webpage"
+    ],
+    "description": "exhibit count map pulse breathe",
+    "code": [
+      "code/velocity.min.js",
+      "code/kefir201911.min.js",
+      "code/tools.js",
+      "code/data.js",
+      "code/radio.js",
+      "code/clock.js",
+      "code/mapcoreelements.js",
+      "code/drawp.js",
+      "code/dashboard.js",
+      "code/mapstart.js",
+      "code/map3elements.js",
+      "code/map3astreams.js"
+    ],
+    "score": {
+      "soundplaylist": "map3",
+      "colorplaylist": "map3",
+      "nrows": [
+        4,
+        8
+      ],
+      "ncols": [
+        4,
+        8
+      ],
+      "m": [
+        4,
+        8
+      ]
+    },
+    "links": [
+      {
+        "actuate": "onrequest",
+        "type": "internal",
+        "format": "html",
+        "keywords": [
+          "next",
+          "reference"
+        ],
+        "title": "map 58",
+        "url": "map58"
+      },
+      {
+        "actuate": "onrequest",
+        "type": "internal",
+        "format": "html",
+        "keywords": [
+          "next",
+          "reference"
+        ],
+        "title": "map 88",
+        "url": "map88"
+      }
+    ],
+    "content": "\n\t\t\t\t<p>links for count map pulse breathe</p>\n\t\t\t\t<p><i>\"There is no such thing as repetition. Only insistance.\"\n\t\t\t\t\t― Gertrude Stein</i></p>\n\t\t\t\t<p><a><href=\"http://mctavish.io\">mctavish.io</a></p>\n\t\t\t\t"
+  }
+}

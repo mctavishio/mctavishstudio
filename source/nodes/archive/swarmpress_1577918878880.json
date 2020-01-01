@@ -1,0 +1,99 @@
+{
+  "id": "1576959636186",
+  "uri": "swarmpress",
+  "title": "swarm press",
+  "subtitle": "",
+  "keywords": [
+    "press",
+    "mctavish",
+    "exhibit",
+    "links"
+  ],
+  "description": "press links for the exhibit swarm",
+  "links": [
+    {
+      "url": "http://blueboatfilms.com/text/swarm/FINALAOV10ShinEssay.pdf",
+      "actuate": "onrequest",
+      "title": "Sun Yung Shin catalogue essay",
+      "keywords": [
+        "reference"
+      ],
+      "format": "html",
+      "type": "external",
+      "action": ""
+    },
+    {
+      "url": "http://northern.lights.mn/platform/artist-on-the-verge-10/",
+      "actuate": "onrequest",
+      "title": "award announcement",
+      "keywords": [
+        "reference"
+      ],
+      "format": "html",
+      "type": "external",
+      "action": ""
+    }
+  ],
+  "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>",
+  "css": [],
+  "code": [],
+  "score": {},
+  "controls": [
+    "home",
+    "sound",
+    "next",
+    "aboutproject",
+    "hide"
+  ],
+  "nav": {
+    "home": {
+      "url": "swarm.html",
+      "actuate": "onrequest",
+      "title": "home",
+      "keywords": [
+        "navigation",
+        "home"
+      ],
+      "format": "html",
+      "type": "internal",
+      "action": ""
+    },
+    "next": [
+      {
+        "url": "swarm.html",
+        "actuate": "onrequest",
+        "title": "next",
+        "keywords": [
+          "navigation",
+          "next"
+        ],
+        "format": "html",
+        "type": "internal",
+        "action": ""
+      }
+    ]
+  },
+  "raw": {
+    "id": "1576959636186",
+    "uri": "swarmpress",
+    "title": "swarm press",
+    "keywords": [
+      "press",
+      "mctavish",
+      "exhibit",
+      "links"
+    ],
+    "description": "press links for the exhibit swarm",
+    "links": [
+      {
+        "title": "Sun Yung Shin catalogue essay",
+        "url": "http://blueboatfilms.com/text/swarm/FINALAOV10ShinEssay.pdf"
+      },
+      {
+        "title": "award announcement",
+        "url": "http://northern.lights.mn/platform/artist-on-the-verge-10/"
+      }
+    ],
+    "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>"
+  }
+}

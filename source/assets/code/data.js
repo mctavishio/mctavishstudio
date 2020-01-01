@@ -174,6 +174,14 @@ createdata = z => {
 				mags3: {url: "data/sound/magsSessionClips_3b.mp3", loaded: false, duration:0, minvolume: 0.4, maxvolume: 1.0, buffer:{} },
 				mags4: {url: "data/sound/magsSessionClips_4b.mp3", loaded: false, duration:0, minvolume: 0.4, maxvolume: 1.0, buffer:{} },
 				mags5: {url: "data/sound/magsSessionClips_5b.mp3", loaded: false, duration:0, minvolume: 0.4, maxvolume: 1.0, buffer:{} },
+				tone64_c: {url: "data/sound/64_c.mp3", loaded: false, duration:0, minvolume: 0.4, maxvolume: 0.8, buffer:{} },
+				tone64_c2: {url: "data/sound/tone64hz_clip.mp3", loaded: false, duration:0, minvolume: 0.4, maxvolume: 0.8, buffer:{} },
+				tone128_c: {url: "data/sound/128_c.mp3", loaded: false, duration:0, minvolume: 0.4, maxvolume: 0.8, buffer:{} },
+				tone144_d: {url: "data/sound/144_d.mp3", loaded: false, duration:0, minvolume: 0.4, maxvolume: 0.8, buffer:{} },
+				tone192_g: {url: "data/sound/192_g.mp3", loaded: false, duration:0, minvolume: 0.4, maxvolume: 0.8, buffer:{} },
+				tone288_d: {url: "data/sound/288_d.mp3", loaded: false, duration:0, minvolume: 0.4, maxvolume: 0.8, buffer:{} },
+				tone384_g: {url: "data/sound/384_g.mp3", loaded: false, duration:0, minvolume: 0.4, maxvolume: 0.8, buffer:{} },
+				tone432_a: {url: "data/sound/432_a.mp3", loaded: false, duration:0, minvolume: 0.4, maxvolume: 0.8, buffer:{} },
 				submarineecho: {url: "data/sound/submarineecho.mp3", loaded: false, duration:0, minvolume: 0.2, maxvolume: 0.8, buffer:{} },
 				clarinet1: {url:"data/sound/clarinet1.mp3",loaded:false, duration:0, minvolume:0.5,maxvolume:0.9,buffer:{}},
 			},
@@ -186,6 +194,12 @@ createdata = z => {
 				cello_pitch3: {clip: "cello_pitch3", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 				cello_pitch4: {clip: "cello_pitch4", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 				cello_pitch5: {clip: "cello_pitch5", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+				cello_pitch1: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+				cello_pitch1I: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.data.sounds.intervals.I(100) / 100 } },
+				cello_pitch1random: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(6,14)/10 } },
+				cello_pitch1harmonic: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+				cello_pitch1IV: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.data.sounds.intervals.IV(100) / 100 } },
+				cello_pitch1V: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.data.sounds.intervals.V(100) / 100 } },
 				sheila1: {clip: "sheila1", minvolume: 0.8, maxvolume: 1.1 },
 				sheila1harmonic: {clip: "sheila1", minvolume: 0.8, maxvolume: 1.1, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 				cisterncello: {clip: "cisterncello", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randominteger(8,38)/10 } },
@@ -196,12 +210,14 @@ createdata = z => {
 				piano1low: {clip: "piano1", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
 				kantelarandom: {clip: "kantela1", minvolume: 0.5, maxvolume: 0.9, playbackRate: () => { return z.tools.randominteger(2,28)/10 } },
 				piano1random: {clip: "piano1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(2,48)/10 } },
-				cello_pitch1: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-				cello_pitch1I: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.data.sounds.intervals.I(100) / 100 } },
-				cello_pitch1random: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(6,14)/10 } },
-				cello_pitch1harmonic: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-				cello_pitch1IV: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.data.sounds.intervals.IV(100) / 100 } },
-				cello_pitch1V: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.data.sounds.intervals.V(100) / 100 } },
+				tone64_c: {clip: "tone64_c", minvolume: 0.5, maxvolume: 0.9, },
+				tone64_c2: {clip: "tone64_c2", minvolume: 0.3, maxvolume: 0.8, },
+				tone128_c: {clip: "tone128_c", minvolume: 0.3, maxvolume: 0.8, },
+				tone144_d: {clip: "tone144_d", minvolume: 0.3, maxvolume: 0.8, },
+				tone192_g: {clip: "tone192_g", minvolume: 0.3, maxvolume: 0.8, },
+				tone288_d: {clip: "tone288_d", minvolume: 0.3, maxvolume: 0.8, },
+				tone384_g: {clip: "tone384_g", minvolume: 0.3, maxvolume: 0.8, },
+				tone432_a: {clip: "tone432_a", minvolume: 0.3, maxvolume: 0.8, },
 				clarinet1: {clip: "clarinet1",minvolume: 0.5, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 				clarinethighbuzz: {clip: "clarinet1",minvolume: 0.1, maxvolume: 0.4, playbackRate: () => { return z.tools.randominteger(38,40)/10 } },
 				clarinetI: {clip: "clarinet1",minvolume: 0.4, maxvolume: 0.8, playbackRate: () => { return z.data.sounds.intervals.I(100) / 100 } },
@@ -315,7 +331,8 @@ createdata = z => {
 				knocking0: ["knocking1"],
 				knocking1: ["knocking2"],
 				kantela: ["kantela1", "kantela2"],
-				cellobells: ["cello_pitch4", "cello_pitch5"]
+				cellobells: ["cello_pitch4", "cello_pitch5"],
+				sinewavetones: ["tone64_c", "tone64_c2", "tone144_d", "tone192_g", "tone288_d", "tone384_g", "tone432_a"]
 			},
 			playlists: {
 				fieldtrials: [ 
@@ -398,6 +415,7 @@ createdata = z => {
 					["cello_pitch1I"], ["cello_pitch3", "cello_pitch2"], ["cello_pitch2"], ["cello_pitch1harmonic"], 
 					["mags1harmonic"], ["mags2harmonic"], ["mags1","cello_pitch1harmonic"], ["bird1harmonic"], ["piano1"] 
 				],
+				sinewavetones: ["tone64_c", "tone64_c2", "tone144_d", "tone192_g", "tone288_d", "tone384_g", "tone432_a"]
 			}
 		},
 	}

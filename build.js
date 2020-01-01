@@ -1,11 +1,14 @@
 //project ::: lattice
 const fse = require('fs-extra');
-const path = require('path');
+// const path = require('path');
 const ejs = require('ejs');
 const marked = require('marked');
 const frontMatter = require('front-matter');
 const glob = require('glob');
-const paths = require('./paths')();
+const paths = [
+	require('./source/nodes/countmappulsebreathepath')(),
+	require('./source/nodes/examplepath')()
+];
 const tools = require('./tools')
 const defaultpathpoint = {
 	id: Date.now(), uri: "default", title: "default title", keywords: ["mctavish"],
@@ -18,14 +21,16 @@ const defaultlink = {
 	format: "ejs", type: "external"
 }
 
-const buildlink = linkuri => {
+const buildlink = (path, linkuri) => {
 	let builtlink = {};
 	let builtnav = {};
-	let compositelink = paths.pathpoints.filter( ppoint => ppoint.uri === linkuri )[0];
+	tools.logmsg("in buildlink linkuri = " + linkuri);
+	// tools.logmsg("in buildlink ::: path.site.title =  " + path.site.title + " num pathpoints = " + path.pathpoints.length);
+	let compositelink = path.pathpoints.filter( ppoint => ppoint.uri === linkuri )[0];
 	let homelinks = compositelink.links.filter( link => link.actuate === "onrequest" && link.keywords.includes("home") );
 	let nextlinks = compositelink.links.filter( link => link.keywords && link.keywords.includes("next") );
-	let home = homelinks.length > 0 ? homelinks[tools.randominteger(0, homelinks.length)] : paths.site.home;
-	if(nextlinks.length === 0) nextlinks.push(paths.site.next);
+	let home = homelinks.length > 0 ? homelinks[tools.randominteger(0, homelinks.length)] : path.site.home;
+	if(nextlinks.length === 0) nextlinks.push(path.site.next);
 	builtnav.home = {
 		url: (home.actuate === "onrequest" && home.type === "internal") ? home.url + '.html' : home.url, 
 		actuate: home.actuate ? home.actuate : "onrequest",
@@ -48,7 +53,7 @@ const buildlink = linkuri => {
 		});
 	});
 	// tools.logmsg("builtnav.next = " + JSON.stringify(builtnav.next, null, "  "));
-	paths.pathpoints.filter( ppoint => ppoint.uri === linkuri ).forEach( compositelink =>
+	path.pathpoints.filter( ppoint => ppoint.uri === linkuri ).forEach( compositelink =>
 	{
 		builtlink = {
 			id: compositelink.id,
@@ -64,7 +69,7 @@ const buildlink = linkuri => {
 			controls: compositelink.controls ? compositelink.controls : ["home","sound","next","aboutproject","hide"],
 			nav: builtnav, raw: compositelink
 		}
-		// tools.logmsg("builtlink = " + JSON.stringify(builtlink));
+		
 		compositelink.links.forEach( link => {
 			let componentlink = {
 				url: link.url ? link.url : "#", 
@@ -75,8 +80,10 @@ const buildlink = linkuri => {
 				type: link.type ? link.type : "external",
 				action: link.action ? link.action : ""
 			};
+			// tools.logmsg("*****");
+			// tools.logmsg("builtcomponentlink = " + JSON.stringify(componentlink, null, 2));
 			if(componentlink.actuate === "onrequest" && componentlink.type === "internal") { componentlink.url = componentlink.url + '.html' }
-			if(componentlink.actuate === "onload") componentlink.pathpoint = buildlink(componentlink.url);
+			if(componentlink.actuate === "onload") componentlink.pathpoint = buildlink(path, componentlink.url);
 			builtlink.links.push(componentlink);
 		});
 	})
@@ -86,130 +93,45 @@ const buildlink = linkuri => {
 // /**
 // * Build the site
 // */
-const build = (options = {}) => {
+const buildpath = (path) => {
 	tools.logmsg('Building site...');
 	const startTime = process.hrtime();
 
-	// clear destination folder
-	fse.emptyDirSync(paths.site.outputpath);
-
 	// copy assets folder ::: later ?
-	if (fse.existsSync(`${paths.site.sourcepath}/assets`)) {
-		fse.copySync(`${paths.site.sourcepath}/assets`, paths.site.outputpath);
+	if (fse.existsSync(`${path.site.sourcepath}/assets`)) {
+		fse.copySync(`${path.site.sourcepath}/assets`, path.site.outputpath);
 	}
-	paths.pathpoints.forEach( pathpoint => {
+	path.pathpoints.forEach( pathpoint => {
 		tools.logmsg("*** pathpoint *** " + pathpoint.uri);
-		let p = buildlink(pathpoint.uri);
+		let p = buildlink(path, pathpoint.uri);
+		//save archive file ::: 
+		try {
+		        fse.writeFileSync(path.site.sourcepath + '/nodes/archive/' + p.uri + "_" + Date.now()+'.json', JSON.stringify(p, null, "  "), 'utf8');
+	        } catch(err) { tools.logmsg("problem writing file " + err); }
 		// tools.logmsg(JSON.stringify(p, null, "  "));
 		//build pages
 		// ejs.renderFile(path.join(__dirname, 'animatepath.ejs'), p, (err, result) => {
-		ejs.renderFile(paths.site.sourcepath + '/layouts/' +  'layout.ejs', p, (err, result) => {
+		ejs.renderFile(path.site.sourcepath + '/layouts/' +  'layout.ejs', p, (err, result) => {
 		    if (err) {
-		        console.log('info', 'error encountered: ' + err);
-		        // throw err;
+		        tools.logmsg("problem rendering file " + pathpoint.uri + " ::: " + err);
 		    }
 		    else {
 		        try {
-		            fse.writeFileSync(paths.site.outputpath + '/' + p.uri + '.html', result, 'utf8');
-		        } catch(err) {
-		            if (err) {
-		                throw err;
-		            }
-		        }
-
+				fse.writeFileSync(path.site.outputpath + '/' + p.uri + '.html', result, 'utf8');
+		        } catch(err) { tools.logmsg("problem writing file " + pathpoint.uri + " ::: " + err); }
 		    }
 		});
-});
+	});
 }
 
-build();
+const build = (() => {
+	// clear destination folder
+	fse.emptyDirSync("web");
 
-
-// // read pages
-// const files = glob.sync('**/*.@(md|ejs|html)', { cwd: `${paths.sourcepath}/pages` });
-
-// files.forEach(file =>
-// _buildPage(file, { srcPath, outputPath, cleanUrls, site })
-// );
-
-// // display build time
-// const timeDiff = process.hrtime(startTime);
-// const duration = timeDiff[0] * 1000 + timeDiff[1] / 1e6;
-// log.success(`Site built succesfully in ${duration}ms`);
-// };
-
-// /**
-// * Loads a layout file
-// */
-// const _loadLayout = (layout, { srcPath }) => {
-// const file = `${srcPath}/layouts/${layout}.ejs`;
-// const data = fse.readFileSync(file, 'utf-8');
-
-// return { file, data };
-// };
-
-// /**
-// * Build a single page
-// */
-// const _buildPage = (file, { srcPath, outputPath, cleanUrls, site }) => {
-// const fileData = path.parse(file);
-// let destPath = path.join(outputPath, fileData.dir);
-
-// // create extra dir if generating clean URLs and filename is not index
-// if (cleanUrls && fileData.name !== 'index') {
-// destPath = path.join(destPath, fileData.name);
-// }
-
-// // create destination directory
-// fse.mkdirsSync(destPath);
-
-// // read page file
-// const data = fse.readFileSync(`${srcPath}/pages/${file}`, 'utf-8');
-
-// // render page
-// const pageData = frontMatter(data);
-// const templateConfig = {
-// site,
-// page: pageData.attributes
-// };
-
-// let pageContent;
-// const pageSlug = file.split(path.sep).join('-');
-
-// // generate page content according to file type
-// switch (fileData.ext) {
-// case '.md':
-// pageContent = marked(pageData.body);
-// break;
-// case '.ejs':
-// pageContent = ejs.render(pageData.body, templateConfig, {
-// filename: `${srcPath}/page-${pageSlug}`
-// });
-// break;
-// default:
-// pageContent = pageData.body;
-// }
-
-// // render layout with page contents
-// const layoutName = pageData.attributes.layout || 'default';
-// const layout = _loadLayout(layoutName, {
-// srcPath
-// });
-
-// const completePage = ejs.render(
-// layout.data,
-// Object.assign({}, templateConfig, {
-// body: pageContent,
-// filename: `${srcPath}/layout-${layoutName}`
-// })
-// );
-
-// // save the html file
-// if (cleanUrls) {
-// fse.writeFileSync(`${destPath}/index.html`, completePage);
-// } else {
-// fse.writeFileSync(`${destPath}/${fileData.name}.html`, completePage);
-// }
-// };
-
-module.exports = build;
+	console.log("*** in build = " + paths.length);
+	paths.forEach( path => {
+		console.log("*** in build loop ::: path.site.title = " + path.site.title);
+		buildpath(path);
+	});
+})();
+// module.exports = build;

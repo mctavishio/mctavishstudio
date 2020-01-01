@@ -416,6 +416,9 @@ pre {
 	white-space: -o-pre-wrap;
 	word-wrap: break-word;
 }
+i {
+	font-style: italic;
+}
 div.terminalentry {
 	font-family: Courier, monospace;
 	white-space: pre;
