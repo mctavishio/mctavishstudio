@@ -61,6 +61,7 @@ const buildlink = linkuri => {
 			css: compositelink.css ? compositelink.css : [],
 			code: compositelink.code ? compositelink.code : [],
 			score: compositelink.score ? compositelink.score : {},
+			controls: compositelink.controls ? compositelink.controls : ["home","sound","next","aboutproject","hide"],
 			nav: builtnav, raw: compositelink
 		}
 		// tools.logmsg("builtlink = " + JSON.stringify(builtlink));
@@ -97,7 +98,7 @@ const build = (options = {}) => {
 		fse.copySync(`${paths.site.sourcepath}/assets`, paths.site.outputpath);
 	}
 	paths.pathpoints.forEach( pathpoint => {
-		// tools.logmsg("*** pathpoint ***");
+		tools.logmsg("*** pathpoint *** " + pathpoint.uri);
 		let p = buildlink(pathpoint.uri);
 		// tools.logmsg(JSON.stringify(p, null, "  "));
 		//build pages

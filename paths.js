@@ -1,8 +1,8 @@
 module.exports = () => {
+	const mapscodecode = ["code/velocity.min.js", "code/kefir201911.min.js", "code/tools.js", "code/data.js", "code/radio.js", "code/clock.js", "code/mapcoreelements.js", "code/drawp.js", "code/dashboard.js", "code/mapstart.js"];
 
-	const mapscodecode = ["code/velocity.min.js", "code/kefir201911.min.js", "code/tools.js", "code/data.js", "code/radio.js", "code/clock.js", "code/drawp.js", "code/dashboard.js", "code/startmaps.js"];
-
-	return {
+	let paths = [
+	{
 		site: {
 			title: 'mctavish.io',
 			description: 'website for kathy mctavish',
@@ -36,50 +36,17 @@ module.exports = () => {
 			{ 
 				id: "1576970236172",
 				uri: "swarm",
-				title: "swarm",
+				title: "test example ::: swarm",
 				keywords: ["about", "mctavish", "exhibit", "webpage"],
-				description: "about the exhibit swarm",
+				description: "exhibit swarm",
 				code:  [...mapscodecode, "code/map3elements.js", "code/map3astreams.js"],
 				score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] },
 				links: [
-					{
-						actuate: "onload", //onload, onrequest, searchembed
-						type: "internal", //internal, external
-						format: "html", //pdf,ejs,html,mp3,vimeo
-						keywords: ["component"], //ex: reference, next, navigation?
-						title: "swarm press",
-						url: "swarmpress"
-					},
-					{
-						actuate: "onload", //onload, onrequest, searchembed
-						type: "internal", //internal, external
-						format: "html", //pdf,ejs,html,mp3,vimeo
-						keywords: ["next"], //ex: reference, next, navigation?
-						title: "swarm press 2",
-						url: "swarmpress2"
-					},
-					{
-						actuate: "onload", //onload, onrequest, searchembed
-						type: "internal", //internal, external
-						format: "html", //pdf,ejs,html,mp3,vimeo
-						keywords: ["next"], //ex: reference, next, navigation?
-						title: "swarm press 3",
-						url: "swarmpress3"
-					},
-					{
-						actuate: "onrequest", //onload, onrequest, searchembed
-						type: "internal", //internal, external
-						format: "html", //pdf,ejs,html,mp3,vimeo
-						keywords: ["next", "reference"], //ex: reference, next, navigation?
-						title: "map 58",
-						url: "map58"
-					},
-					{
-						actuate: "onrequest", type: "internal", format: "html",
-						keywords: ["next", "reference"],
-						title: "map 88",
-						url: "map88"
-					}
+					{ url: "swarmpress3", actuate: "onload", type: "internal", title: "swarm press 3", keywords: ["next"], format: "html" },
+					{ url: "swarmpress", actuate: "onload", type: "internal", title: "swarm press", keywords: ["component"], format: "html" },
+					{ url: "swarmpress2", actuate: "onload", type: "internal", title: "swarm press 2", keywords: ["next"], format: "html" },
+					{ url: "map58", actuate: "onrequest", type: "internal", title: "map 58", keywords: ["next", "reference"], format: "html" },
+					{ url: "map88", actuate: "onrequest", type: "internal", title: "map 88", keywords: ["next", "reference"], format: "html" }
 				],
 				content: 
 				`
@@ -144,224 +111,68 @@ module.exports = () => {
 				content: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>'
 			},
 			{ 
-				id: "1577680423993",
-				uri: "map3a",
-				title: "map3a",
+				id: "1577816344977",
+				uri: "countmappulsebreathe",
+				title: "count map pulse breathe",
 				keywords: ["about", "mctavish", "exhibit", "webpage"],
-				description: "about the exhibit swarm",
-				code: [...mapscodecode, "code/map3elements.js",  "code/map3astreams.js"],
+				description: "exhibit count map pulse breathe",
+				code:  [...mapscodecode, "code/map3elements.js", "code/map3astreams.js"],
 				score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] },
 				links: [
 					{
-						actuate: "onrequest", //onload, onrequest, searchembed
-						type: "internal", //internal, external
-						format: "html", //pdf,ejs,html,mp3,vimeo
-						keywords: ["next"], //ex: reference, next, navigation?
-						title: "map 3b",
-						url: "map3b"
-					},
-					{
-						actuate: "onrequest", //onload, onrequest, searchembed
-						type: "external", //internal, external
-						format: "html", //pdf,ejs,html,mp3,vimeo
-						keywords: ["next"], //ex: reference, next, navigation?
-						title: "map 3c",
-						url: "http://datapoets.com/maps/map88.html"
-					}
-				],
-				content: 
-				`
-				<p>count map pulse breathe</p>
-				<p><i>map 3a</i></p>
-				<p><a><href="http://mctavish.io">mctavish.io</a></p>
-				`
-			},
-			{ 
-				id: "1577682264068",
-				uri: "map3b",
-				title: "map3b",
-				keywords: ["about", "mctavish", "exhibit", "webpage"],
-				description: "count map pulse breathe ::: map 3b",
-				code: [...mapscodecode, "code/map3elements.js", "code/map3bstreams.js"],
-				score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] },
-				links: [
-					{
-						actuate: "onrequest", //onload, onrequest, searchembed
-						type: "internal", //internal, external
-						format: "html", //pdf,ejs,html,mp3,vimeo
-						keywords: ["next"], //ex: reference, next, navigation?
-						title: "map 3c",
-						url: "map3b"
-					},
-					{
-						actuate: "onrequest", //onload, onrequest, searchembed
-						type: "internal", //internal, external
-						format: "html", //pdf,ejs,html,mp3,vimeo
-						keywords: ["next"], //ex: reference, next, navigation?
-						title: "map 52",
-						url: "map52"
-					}
-				],
-				content: 
-				`
-				<p>count map pulse breathe</p>
-				<p><i>map 3b</i></p>
-				<p><a><href="http://mctavish.io">mctavish.io</a></p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-				`
-			},
-			{ 
-				id: "1577683506832",
-				uri: "map3c",
-				title: "map3c",
-				keywords: ["about", "mctavish", "exhibit", "webpage"],
-				description: "count map pulse breathe ::: map 3c",
-				code: [...mapscodecode, "code/map3elements.js",  "code/map3cstreams.js"],
-				score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] },
-				links: [
-					{
-						actuate: "onrequest", //onload, onrequest, searchembed
-						type: "internal", //internal, external
-						format: "html", //pdf,ejs,html,mp3,vimeo
-						keywords: ["next"], //ex: reference, next, navigation?
-						title: "map 3c",
-						url: "map3b"
-					},
-					{
-						actuate: "onrequest", //onload, onrequest, searchembed
-						type: "internal", //internal, external
-						format: "html", //pdf,ejs,html,mp3,vimeo
-						keywords: ["next"], //ex: reference, next, navigation?
-						title: "map 52",
-						url: "map52"
-					}
-				],
-				content: 
-				`
-				<p>count map pulse breathe</p>
-				<p><i>map 3c</i></p>
-				<p><a><href="http://mctavish.io">mctavish.io</a></p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-				`
-			},
-			{ 
-				id: "1577683506832",
-				uri: "map52",
-				title: "map 52",
-				keywords: ["about", "mctavish", "exhibit", "webpage"],
-				description: "count map pulse breathe ::: map 52",
-				code: [...mapscodecode, "code/map5elements.js",  "code/map5streams.js"],
-				score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [2,2] },
-				links: [
-					{
-						actuate: "onrequest", //onload, onrequest, searchembed
-						type: "internal", //internal, external
-						format: "html", //pdf,ejs,html,mp3,vimeo
-						keywords: ["next"], //ex: reference, next, navigation?
-						title: "map 54",
-						url: "map54"
-					},
-					{
-						actuate: "onrequest", //onload, onrequest, searchembed
-						type: "internal", //internal, external
-						format: "html", //pdf,ejs,html,mp3,vimeo
-						keywords: ["next"], //ex: reference, next, navigation?
+						actuate: "onrequest", type: "internal", format: "html",
+						keywords: ["next", "reference"],
 						title: "map 58",
 						url: "map58"
-					}
-				],
-				content: 
-				`
-				<p>count map pulse breathe</p>
-				<p><i>map 3c</i></p>
-				<p><a><href="http://mctavish.io">mctavish.io</a></p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-				`
-			},
-			{ 
-				id: "1577684079210",
-				uri: "map54",
-				title: "map 54",
-				keywords: ["about", "mctavish", "exhibit", "webpage"],
-				description: "count map pulse breathe ::: map 54",
-				code: [...mapscodecode, "code/map5elements.js",  "code/map5streams.js"],
-				score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [2,4] },
-				links: [
-					{
-						actuate: "onrequest", type: "internal", format: "html",
-						keywords: ["next"],
-						title: "map 58",
-						url: "map52"
 					},
 					{
 						actuate: "onrequest", type: "internal", format: "html",
-						keywords: ["next"],
-						title: "map 52",
-						url: "map52"
-					}
-				],
-				content: 
-				`
-				<p>count map pulse breathe</p>
-				<p><i>map 54</i></p>
-				<p><a><href="http://mctavish.io">mctavish.io</a></p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-				`
-			},
-			{ 
-				id: "1577684300788",
-				uri: "map58",
-				title: "map 58",
-				keywords: ["about", "mctavish", "exhibit", "webpage"],
-				description: "count map pulse breathe ::: map 58",
-				code: [...mapscodecode, "code/map5elements.js",  "code/map5streams.js"],
-				score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] },
-				links: [
-					{
-						actuate: "onrequest", type: "internal", format: "html",
-						keywords: ["next"],
-						title: "map 52",
-						url: "map52"
-					},
-					{
-						actuate: "onrequest", type: "internal", format: "html",
-						keywords: ["next"],
+						keywords: ["next", "reference"],
 						title: "map 88",
 						url: "map88"
 					}
 				],
 				content: 
 				`
-				<p>count map pulse breathe</p>
-				<p><i>map 58</i></p>
+				<p>links for count map pulse breathe</p>
+				<p><i>"There is no such thing as repetition. Only insistance."
+					― Gertrude Stein</i></p>
 				<p><a><href="http://mctavish.io">mctavish.io</a></p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
 				`
 			},
-			{ 
-				id: "1577684820876",
-				uri: "map88",
-				title: "map 88",
-				keywords: ["about", "mctavish", "exhibit", "webpage"],
-				description: "count map pulse breathe ::: map 88",
-				code: [...mapscodecode, "code/map8elements.js",  "code/map8streams.js"],
-				score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] },
-				links: [
-					{
-						actuate: "onrequest", type: "internal", format: "html",
-						keywords: ["next"],
-						title: "map 54",
-						url: "map54"
-					},
-					{
-						actuate: "onrequest", type: "internal", format: "html",
-						keywords: ["next"],
-						title: "map 3a",
-						url: "map3a"
-					}
-				],
-				content: 
-				`
+		]
+	},
+	];
+
+	const texts = [
+		{
+			title: "zip drive vial",
+			subtitle: "traces",
+			content: `<p><br/>data ::: zip drive from jules ::: tiny vial ::: traces ...<br/><br/>heart beat coordinates<br/>velocities<br/>heat<br/>the body's dimensions<br/>measures ::: movement<br/>change<br/>what it means to be human<br/>these numbers<br/>blood :::<br/>remembering AIDS<br/>epidemic performance<br/>(s)<br/>blood coursing spilled flung drawn tested<br/>the virus tentacular reaching filling expanding ...<br/>the body's battle :::<br/>::: still alive ::: still here ...<br/>cellular resistance street stage ::: performance / words / noise /<br/>life force :::<br/>the physics of life<br/>the contours of loss<br/><br/>time between heart beats (seconds)<br/><br/>flex pulse<br/>breathe`
+		},
+		{
+			title: "the sky ::: the cloud",
+			subtitle: "pours",
+			content: `<p>chance-infused, open systems ::: a pool ::: generative, networked, multichannel arterial flow :::</p>
+			<p>cross-sensory, polyphonic landscapes || the digital web || the sky ::: the cloud<br/>
+			pours through glassy screens into this room </p>`
+		},
+		{
+			title: "the infinite bendable between", subtitle: "",
+			content: `<p>multi-threaded, dynamical systems ::: chance-infused, emergent patterns</p>
+			<p>queer construct ::: personal story || myth &amp; the infinite, bendable between</p>`
+		},
+		{
+			title: "&amp; &amp; &amp;",
+			content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>`
+		},
+		{
+			title: "humans &amp; machines", subtitle: "carbon cycle",
+			content: `<p>the porous, intimate boundaries between humans and machines ::: the erotic dynamics of tapping glass :::  the carbon cycle ::: the cyborg body ::: the fragile electric body ::: the resistance cyborg ::: the networked, digital hive mind ::: the swarm.</p>`
+		},
+		{
+			title: "the opacity continuum", subtitle: "film",
+			content: `
 				<p>the opacity continuum ::: old school films ::: light through celluloid ::: electrified pixels ::: glass .... textile drawings ::: 
 				animations piling up on an opaque material ... light casting shadow ... illuminating texture ... physical dimensionality
 				::: becoming object
@@ -371,7 +182,35 @@ module.exports = () => {
 				<p><a><href="http://mctavish.io">mctavish.io</a></p>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
 				`
-			},
-		]
-	}
+		}
+	];
+	const points = [
+		{uri: "map3a", code: [...mapscodecode, "code/map3elements.js",  "code/map3astreams.js"], score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] }, next: ["map3b", "map3c", "map54", "map58", "map88"]},
+		{uri: "map3b", code: [...mapscodecode, "code/map3elements.js",  "code/map3bstreams.js"], score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] }, next: ["map3c", "map3a", "map54", "map58", "map88"]},
+		{uri: "map3c", code: [...mapscodecode, "code/map3elements.js",  "code/map3cstreams.js"], score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] }, next: ["map54", "map58", "map88", "map3a", "map3b"]},
+		{uri: "map54", code: [...mapscodecode, "code/map5elements.js",  "code/map5streams.js"], score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [2,4] }, next: ["map58", "map88", "map3a", "map3b", "map3c"]},
+		{uri: "map58", code: [...mapscodecode, "code/map5elements.js",  "code/map5streams.js"], score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] }, next: ["map88", "map3a", "map3b", "map3c", "map54"]},
+		{uri: "map88", code: [...mapscodecode, "code/map8elements.js",  "code/map8streams.js"], score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] }, next: ["map3a", "map3b", "map3c", "map54", "map58"]},
+	]
+	points.forEach( ( p, j ) => {
+		let text = texts[j%texts.length];
+		let links = p.next.map( next => {
+			return {
+				actuate: "onrequest", type: "internal", //internal, external
+				format: "html", keywords: ["next"],
+				title: next, url: next
+			}
+		});
+		// console.log(JSON.stringify(links,null,2));
+
+		paths[0].pathpoints.push( {
+			id: Date.now(), uri: p.uri, title: text.title, subtitle: p.uri, 
+			content: text.content, 
+			keywords: ["countmappulsebreathe", "exhibit", "webpage"],
+			description: "text for map ::: " + p.uri, code: p.code, score: p.score,
+			links: links
+		});
+	});
+	// console.log(JSON.stringify(paths[0].pathpoints.map(p => p.uri),null,2));
+	return paths[0];
 };

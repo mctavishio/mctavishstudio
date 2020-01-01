@@ -27,6 +27,21 @@ let createdrawp = z => {
 		// });
 	})();
 
+	// (function() {
+	// 	let name = "showcontrols";
+	// 	let dt = 8; //in seconds
+	// 	let date0 = new Date();
+	// 	let t0 = Math.floor(date0.getTime()/1000);
+	// 	let palette = z.score.palette;
+	// 	let tostring = function(e) {return "scroll controls back nto view"};
+	// 	z.streams[name] = z.streams["tick"].filter( e => e.t%dt===0 );
+	// 	z.streams[name].onValue( e => { 
+	// 		setTimeout( () => { document.querySelector('#contentframe').scrollIntoView() }, 8);
+	// 	});
+	// })();
+
+	
+
 	// ***** canvas stream ---------
 	(function() {
 		let name = "canvas";

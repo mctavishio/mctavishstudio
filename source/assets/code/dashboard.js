@@ -40,7 +40,7 @@ let createdashboard = z => {
 					z.soundloaded = true;
 				}
 				z.radio.player.context.resume().then(() => {
-					// document.querySelector('#volume-on').style.display='none';
+					// document.querySelector('#sound').style.display='none';
 					// document.querySelector('#volume-off').style.display='block';
 					z.tools.logmsg("Playback resumed successfully");
 					z.elements["telegraph"].el.innerHTML =  "sound on";
@@ -51,9 +51,6 @@ let createdashboard = z => {
 		suspendaudio: (z) => {
 			try {
 				z.radio.player.context.suspend().then(() => {
-					// z.tools.logmsg("Playback suspended successfully");
-					// document.querySelector('#volume-off').style.display='none';
-					// document.querySelector('#volume-on').style.display='block';
 					z.elements["telegraph"].el.innerHTML =  "sound off";
 					z.soundplaying = false;
 				});
@@ -76,15 +73,15 @@ let createdashboard = z => {
 		hidecontrols: (z) => {
 			try {
 				z.tools.logmsg("hidden");
-				document.querySelector('#controls').style.display='none';
-				document.querySelector('#menu').style.display='block';
+				z.elements["controls"].el.style.display='none';
+				z.elements["menulink"].el.style.display='block';
 			} catch(e) {}
 		},
 		showcontrols: (z) => {
 			try {
 				z.tools.logmsg("show");
-				document.querySelector('#controls').style.display='block';
-				document.querySelector('#menu').style.display='none';
+				z.elements["controls"].el.style.display='block';
+				z.elements["menulink"].el.style.display='none';
 			} catch(e) {}
 		},
 		next: (z) => {
@@ -92,7 +89,6 @@ let createdashboard = z => {
 				z.tools.logmsg("next ::: z.currentnext = " + z.currentnext + " ::: " + JSON.stringify(z.nav.next[z.currentnext], null, "  "));
 				
 				if( z.nav.next[z.currentnext].actuate === "onrequest" ) {
-					// z.tools.logmsg("next url = " + z.nav.next[z.currentnext].url);
 					window.location = z.nav.next[z.currentnext].url;
 				}
 				else {
@@ -109,51 +105,49 @@ let createdashboard = z => {
 				z.currentnext = (z.currentnext + 1) % z.nav.next.length;
 				z.tools.logmsg("next ::: z.currentnext = " + z.currentnext + " ::: " + JSON.stringify(z.nav.next[z.currentnext], null, "  "));
 
-				document.querySelector('#next').classList.add("active");
+				z.elements["nextlink"].el.classList.add("active");
 
 			// } catch(e) {}
 		},
 		listen: (z) => {
 			// One-liner to resume playback when user interacted with the page.
-			document.querySelector('#volume-on').addEventListener('click', function() {
+			z.elements["soundlink"].el.addEventListener('click', function() {
 				if(!z.soundplaying) {
 					z.dashboard.resumeaudio(z);
-					document.querySelector('#volume-on').classList.add("active");
+					z.elements["soundlink"].el.classList.add("active");
 				}
 				else {
 					z.dashboard.suspendaudio(z);
-					document.querySelector('#volume-on').classList.remove("active");
+					z.elements["soundlink"].el.classList.remove("active");
 				}
 			});
 			// document.querySelector('#volume-off').addEventListener('click', function() {
 			// 	z.dashboard.suspendaudio(z);
 			// });
-			document.querySelector('#aboutproject').addEventListener('click', function() {
+			z.elements["aboutlink"].el.addEventListener('click', function() {
 				if(!z.contentvisible) {
 					z.dashboard.showcontent(z);
-					document.querySelector('#aboutproject').classList.add("active");
+					z.elements["aboutlink"].el.classList.add("active");
 				}
 				else {
 					z.dashboard.hidecontent(z);
-					document.querySelector('#aboutproject').classList.remove("active");
+					z.elements["aboutlink"].el.classList.remove("active");
 				}
 			});
-			document.querySelector('#next').addEventListener('click', function() {
+			z.elements["nextlink"].el.addEventListener('click', function() {
 				z.dashboard.next(z);
 			});
-			document.querySelector('#hide').addEventListener('click', function() {
+			z.elements["hidelink"].el.addEventListener('click', function() {
 				z.dashboard.hidecontent(z);
-				document.querySelector('#aboutproject').classList.remove("active");
+				z.elements["aboutlink"].el.classList.remove("active");
 				z.dashboard.hidecontrols(z);
 			});
-			document.querySelector('#menu').addEventListener('click', function() {
+			z.elements["menulink"].el.addEventListener('click', function() {
 				z.dashboard.showcontrols(z);
 			});
-			document.querySelector('#volume-on').style.display='block';
-			// document.querySelector('#volume-on').classList.add("active");
-			// document.querySelector('#volume-off').style.display='none';
-			z.elements["telegraph"].el.innerHTML = "hell0 worlD";
-
+			// z.elements["soundlink"].el.style.display='block';
+			// document.querySelector('#sound').classList.add("active");
+			z.elements["telegraph"].el.innerHTML = z.pathpoint.title + " ::: " + z.pathpoint.subtitle;
 		}
 	}
 };

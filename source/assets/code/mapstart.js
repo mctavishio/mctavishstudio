@@ -11,7 +11,9 @@ z.start = () => {
 	  		nextnodes[j].style.display = "none";
 		}
 	}
-	z.dashboard.hidecontent(z);
+	z.elements["aboutlink"].el.classList.add("active");
+	setTimeout( () => { z.dashboard.hidecontent(z); z.elements["aboutlink"].el.classList.remove("active"); }, 4000);
+	
 	// document.querySelector('#aboutproject').classList.remove("active");
 	z.dashboard.listen(z);
 	createstreams(z);
@@ -19,7 +21,10 @@ z.start = () => {
 
 
 window.onload = function() { 
-	document.querySelector('#controls').scrollIntoView();
+	// document.querySelector('#contentframe').scrollIntoView();
+	// document.querySelector('#contentframe').style.top = 0;
+	// document.querySelector('#contentframe').style.left = 0;
+	setTimeout( () => { document.querySelector('#contentframe').scrollIntoView() }, 8);
 	z.winmin = Math.min(window.innerWidth, window.innerHeight);
 	z.winmax = Math.max(window.innerWidth, window.innerHeight);
 	z.currentnext = 0;
@@ -37,6 +42,8 @@ window.onload = function() {
 		orchestration: z.data.sounds.playlists[z.score0.soundplaylist],
 		palette: z.data.colors.playlists[z.score0.colorplaylist],
 	};
-	z.elements = createelements(z);
+	z.elements = {};
+	addcoreelements(z);
+	addelements(z);
 	z.start(); 
 }

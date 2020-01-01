@@ -58,8 +58,8 @@ let createradio = z => {
 				// let instrument = z.data.sounds.instruments[e.instrument];
 				let instrument = z.radio.instruments[e.instrument];
 				let clip = z.radio.clips[instrument.clip];
-				z.tools.logmsg("e = " + JSON.stringify(clip));
-				z.tools.logmsg("buffer playing = " + JSON.stringify(clip));
+				// z.tools.logmsg("e = " + JSON.stringify(clip));
+				// z.tools.logmsg("buffer playing = " + JSON.stringify(clip));
 
 				if(clip.loaded) {
 					let rate = 1.0;
@@ -73,7 +73,7 @@ let createradio = z => {
 						return isplayed || (clip.duration*rate < d[0] && prob <= d[1]) }, false);
 					if(isplayed) {
 						try {
-							z.tools.logmsg("rate = " + rate + " ::: duration = " + clip.duration*rate);
+							// z.tools.logmsg("rate = " + rate + " ::: duration = " + clip.duration*rate);
 							let vca = z.radio.player.context.createGain(); 
 							vca.gain.value = e.volume;
 							let source = z.radio.player.context.createBufferSource();
@@ -89,11 +89,11 @@ let createradio = z => {
 							++z.radio.n.buffersplaying;
 							let now = z.radio.player.context.currentTime;
 							source.start(now + e.delay);
-							z.tools.logmsg("playing = " + clip.url);
+							// z.tools.logmsg("playing = " + clip.url);
 						} catch(e) { z.tools.logerror("error applying params to audio buffer e::: " + e) }
 					}
 					else {	
-						z.tools.logmsg("NOT playing = " + clip.url);
+						// z.tools.logmsg("NOT playing = " + clip.url);
 					}
 				}
 			}

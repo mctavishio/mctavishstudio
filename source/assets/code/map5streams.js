@@ -294,7 +294,7 @@ let createstreams = z => {
 		z.streams[name].onValue( e => { 
 			try {
 				let sound = e.sounds[z.tools.randominteger(0,e.sounds.length)];
-				z.tools.logmsg(" play instrument ::: " + sound);
+				// z.tools.logmsg(" play instrument ::: " + sound);
 				let instrumentname = sound;
 				let instrument = z.data.sounds.instruments[sound];
 				let vol = z.tools.randominteger(instrument.minvolume*10, instrument.maxvolume*10)/10;
