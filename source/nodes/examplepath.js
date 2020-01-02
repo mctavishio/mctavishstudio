@@ -62,6 +62,8 @@ module.exports = () => {
 				title: "swarm press",
 				keywords: ["press", "mctavish", "exhibit", "links"],
 				description: "press links for the exhibit swarm",
+				code:  [...mapscode, "code/map3elements.js", "code/map3astreams.js"],
+				score: {soundplaylist: "sinewavetones", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] },
 				links: [
 					{
 						title: "Sun Yung Shin catalogue essay",
@@ -80,6 +82,8 @@ module.exports = () => {
 				title: "swarm press 2",
 				keywords: ["press", "mctavish", "exhibit", "links"],
 				description: "press links for the exhibit swarm",
+				code:  [...mapscode, "code/map3elements.js", "code/map3astreams.js"],
+				score: {soundplaylist: "sinewavetones", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] },
 				links: [
 					{
 						title: "Sun Yung Shin catalogue essay",
@@ -98,6 +102,8 @@ module.exports = () => {
 				title: "swarm press 3",
 				keywords: ["press", "mctavish", "exhibit", "links"],
 				description: "press links for the exhibit swarm",
+				code:  [...mapscode, "code/map3elements.js", "code/map3astreams.js"],
+				score: {soundplaylist: "sinewavetones", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] },
 				links: [
 					{
 						title: "Sun Yung Shin catalogue essay",

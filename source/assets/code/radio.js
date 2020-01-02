@@ -5,7 +5,9 @@ let createradio = z => {
 		max: { buffersplaying: z.version === "small" ? 6 : 12, grainsplaying: z.version === "small" ? 6 : 12 },
 		player: {}, loading: [], clips: {}, instruments: {},
 		durationthrottle: z.version === "small" ? [[6,0.9],[8,0.6],[14,0.4],[18,0.2],[40,0.1]] : [[6,1.0],[8,0.8],[14,0.6],[18,0.4],[40,0.3]],
+		
 		start: z => {
+			// z.tools.logmsg("z.score = " + JSON.stringify(z.score,null,2));
 			z.score.orchestration.forEach( (instruments, j) => {
 				instruments.forEach( instrument => 
 				{ 

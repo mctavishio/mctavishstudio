@@ -415,7 +415,7 @@ createdata = z => {
 					["cello_pitch1I"], ["cello_pitch3", "cello_pitch2"], ["cello_pitch2"], ["cello_pitch1harmonic"], 
 					["mags1harmonic"], ["mags2harmonic"], ["mags1","cello_pitch1harmonic"], ["bird1harmonic"], ["piano1"] 
 				],
-				sinewavetones: ["tone64_c", "tone64_c2", "tone144_d", "tone192_g", "tone288_d", "tone384_g", "tone432_a"]
+				sinewavetones: [["tone144_d", "tone288_d","tone432_a"], ["tone144_d", "tone192_g", "tone288_d", "tone384_g"], ["tone64_c", "tone64_c2", "tone192_g", "tone384_g"]]
 			}
 		},
 	}
