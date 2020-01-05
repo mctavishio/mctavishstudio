@@ -2,9 +2,6 @@
 let createstreams = z => {
 	z.streams = {};
 
-	// ***** clock stream ---------
-	createclock(z);
-
 	// ***** drawp stream ---------
 	createdrawp(z);
 
@@ -64,6 +61,60 @@ let createstreams = z => {
 		});
 	})();
 
+	// ***** text stream ---------
+	(function() {
+		let name = "text";
+		let dt = 18; //in seconds
+		let ratios = [5,10,15,20,30,40];
+		let rhythms = [
+			[980, 0], [680, 300], [940, 40], [480, 480], [880,100], [680, 300], [800,180]
+		];
+		let tostring = function(e) {return "text"};
+		let text0 = {
+			elements: z.elements["texts"],
+			count: 0, data: z.data.language.playlists["maps1"],
+			dt:dt, tostring: tostring, name:name 
+		};
+		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 )], [z.streams["palette"], z.streams["canvas"]], (tick, palette, canvas) => { return {tick:tick, palette:palette, canvas:canvas } })
+			.scan( (state, e) => { 
+				state.tick = e.tick;
+				state.palette = e.palette;
+				state.canvas = e.canvas;
+				state.count = state.count + 1;
+				return state;
+			}, text0  )
+		z.streams[name].onValue( e => { 
+			try {
+				e.elements.forEach( (textel, r) => {
+					if( z.tools.randominteger(0,10) < 4 ) {
+						let texts = e.data[z.tools.randominteger(0,e.data.length)];
+						let text = z.data.language.texts[texts];
+						let n = (e.count+r)%text.length;
+						// z.tools.logmsg("e.tick.dt = " + e.tick.dt + " e.dt = " + e.dt)
+						let pulsedt = 100;
+						let color = e.palette.colors[z.tools.randominteger(0,e.palette.colors.length)];
+						let fontsize = z.tools.randominteger(e.canvas.min*.4, e.canvas.max);
+						let top = z.tools.randominteger(0, e.canvas.height  - fontsize*1.5);
+						let left = z.tools.randominteger(0,  e.canvas.width - fontsize);
+						let staticCSS = {
+							color: color,
+							opacity: function(j,n){ return z.tools.randominteger(0,10)/10 },
+							top: function(j,n){ return top.toString() + "px" }, 
+							left: function(j,n){ return left.toString() + "px" }, 
+							"font-size": fontsize + "px"
+						};
+						z.tools.applyCSS(e.elements[r].el, staticCSS);
+						Kefir.sequentially(pulsedt, text[n]+" ").onValue( l => {
+							e.elements[r].el.innerHTML = l;
+						})
+					}
+				});
+
+			} catch(err) {z.tools.logerror("text " + err)}
+			// z.tools.logmsg(JSON.stringify(e));
+		});
+	})();
+
 	// ***** square stream ---------
 	(function() {
 		let name = "squares";
@@ -107,7 +158,7 @@ let createstreams = z => {
 
 				})
 			} catch(err) { 
-				// z.tools.logerror("squares " + err)
+				z.tools.logerror("squares ::: " + err);
 			}
 			
 		});
@@ -140,7 +191,7 @@ let createstreams = z => {
 			try {
 				// let past = e.boxpick.past.sort( (a, b) => b[1] - b[0] );
 				let past = e.boxpick.past;
-				let min = Math.floor(e.canvas.min/8);
+				let min = Math.floor(e.canvas.min/14);
 				let n = z.tools.randominteger(0, rhythms.length);
 				let r,cx,cy,radius,color,duration,delay;
 				let dx = e.canvas.grid.dx, dy = e.canvas.grid.dy;
@@ -169,7 +220,7 @@ let createstreams = z => {
 						options: { duration: duration,  delay: delay, easing: "easeInOutQuad" },
 					});
 				});
-			} catch(err) {}
+			} catch(err) { z.tools.logerror("circles: " + err ); }
 			// z.tools.logmsg(JSON.stringify(e));
 		});
 	})();
@@ -212,7 +263,7 @@ let createstreams = z => {
 					r = past[m][0], c = past[m][1];
 					cx = c*dx + dx/2, cy = r*dy + dy/2;
 					color = colors[z.tools.randominteger(0,colors.length)];
-					sw = sw0*z.tools.randominteger(2,10);
+					sw = sw0*z.tools.randominteger(2,14);
 					dash = z.tools.randominteger(10, e.canvas.max);					duration = z.tools.randominteger(e.dt*rhythms[(n+m)%rhythms.length][0]*.8, e.dt*rhythms[(n+m)%rhythms.length][0]);
 					delay = z.tools.randominteger(e.dt*rhythms[(n+m)%rhythms.length][1]*.8, e.dt*rhythms[(n+m)%rhythms.length][1]);
 					Velocity({	
@@ -220,7 +271,7 @@ let createstreams = z => {
 						properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: sw, strokeDasharray: dash, x1: cx, x2: cx, y1: 0, y2: e.canvas.height },						options: { duration: duration,  delay: delay, easing: "easeInOutQuad" },
 					});
 					color = colors[z.tools.randominteger(0,colors.length)];
-					sw = sw0*z.tools.randominteger(2,10);
+					sw = sw0*z.tools.randominteger(2,14);
 					dash = z.tools.randominteger(10, e.canvas.max);	
 					duration = z.tools.randominteger(e.dt*rhythms[(n+m+1)%rhythms.length][0]*.8, e.dt*rhythms[(n+m+1)%rhythms.length][0]);
 					delay = z.tools.randominteger(e.dt*rhythms[(n+m+1)%rhythms.length][1]*.8, e.dt*rhythms[(n+m+1)%rhythms.length][1]);
@@ -229,21 +280,9 @@ let createstreams = z => {
 						properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: sw, strokeDasharray: dash, x1: 0, x2: e.canvas.width, y1: cy, y2: cy },
 						options: { duration: duration,  delay: delay, easing: "easeInOutQuad" },
 					});
-					r0 = past[(m+1)%past.length][0], c0 = past[(m+1)%past.length][1];
-					cx0 = c0*dx + dx/2, cy0 = r0*dy + dy/2;
-					color = "#fcfbe3";
-					sw = sw0*1.4;
-					// dash = z.tools.randominteger(10, e.canvas.max);	
-					duration = e.dt*800;
-					delay = e.dt*180;
-					Velocity({	
-						elements: e.elements[m][2].el,
-						properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: sw, x1: cx0, x2: cx, y1: cy0, y2: cy },
-						options: { duration: duration,  delay: delay, easing: "easeInOutQuad" },
-					});
 				});
 
-			} catch(err) { z.tools.logerror("lines" + err)}
+			} catch(err) { z.tools.logerror("lines ::: " + err)}
 			// z.tools.logmsg(JSON.stringify(e));
 		});
 	})();
@@ -273,7 +312,6 @@ let createstreams = z => {
 			// z.tools.logmsg(JSON.stringify(e));
 		});
 	})();
-
 
 	// ***** sound stream ---------
 	(function() {
@@ -309,5 +347,4 @@ let createstreams = z => {
 			// z.tools.logmsg(JSON.stringify(e));
 		});
 	})();
-
 }

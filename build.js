@@ -5,9 +5,12 @@ const ejs = require('ejs');
 const marked = require('marked');
 const frontMatter = require('front-matter');
 const glob = require('glob');
+const config = require('./source/nodes/config')();
 const paths = [
 	require('./source/nodes/countmappulsebreathepath')(),
-	require('./source/nodes/examplepath')()
+	// require('./source/nodes/examplepath')(),
+	require('./source/nodes/indexpath')(),
+	require('./source/nodes/julespath')(),
 ];
 const tools = require('./tools')
 const defaultpathpoint = {
@@ -97,27 +100,23 @@ const buildpath = (path) => {
 	tools.logmsg('Building site...');
 	const startTime = process.hrtime();
 
-	// copy assets folder ::: later ?
-	if (fse.existsSync(`${path.site.sourcepath}/assets`)) {
-		fse.copySync(`${path.site.sourcepath}/assets`, path.site.outputpath);
+	// copy resource folder
+	if (fse.existsSync(config.resourcepath)) {
+		fse.copySync(config.resourcepath, config.outputpath);
 	}
 	path.pathpoints.forEach( pathpoint => {
 		tools.logmsg("*** pathpoint *** " + pathpoint.uri);
 		let p = buildlink(path, pathpoint.uri);
 		//save archive file ::: 
-		try {
-		        fse.writeFileSync(path.site.sourcepath + '/nodes/archive/' + p.uri + "_" + Date.now()+'.json', JSON.stringify(p, null, "  "), 'utf8');
+		try { fse.writeFileSync(config.archivepath + '/' + p.uri + "_" + Date.now()+'.json', JSON.stringify(p, null, "  "), 'utf8');
 	        } catch(err) { tools.logmsg("problem writing file " + err); }
-		// tools.logmsg(JSON.stringify(p, null, "  "));
 		//build pages
-		// ejs.renderFile(path.join(__dirname, 'animatepath.ejs'), p, (err, result) => {
-		ejs.renderFile(path.site.sourcepath + '/layouts/' +  'layout.ejs', p, (err, result) => {
-		    if (err) {
-		        tools.logmsg("problem rendering file " + pathpoint.uri + " ::: " + err);
+		ejs.renderFile(config.sourcepath + '/layouts/' +  'layout.ejs', p, (err, result) => {
+		    if (err) { tools.logmsg("problem rendering file " + pathpoint.uri + " ::: " + err);
 		    }
 		    else {
 		        try {
-				fse.writeFileSync(path.site.outputpath + '/' + p.uri + '.html', result, 'utf8');
+				fse.writeFileSync(config.outputpath + '/' + p.uri + '.html', result, 'utf8');
 		        } catch(err) { tools.logmsg("problem writing file " + pathpoint.uri + " ::: " + err); }
 		    }
 		});

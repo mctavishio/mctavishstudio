@@ -2,9 +2,6 @@
 let createstreams = z => {
 	z.streams = {};
 
-	// ***** clock stream ---------
-	createclock(z);
-
 	// ***** drawp stream ---------
 	createdrawp(z);
 

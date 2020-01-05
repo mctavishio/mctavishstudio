@@ -325,7 +325,7 @@ h1 {
 	font-family: "Courier New", Courier, monospace; /* typewriter ! */
 }
 body > div > main > header > h1 {
-	font-size: 3em;
+	font-size: 2em;
 	line-height: 1em;
 	margin-top: 0em;
 	color: #000000;
@@ -492,8 +492,8 @@ nav ul li a {
 	text-decoration: none;
 	color: #fcfbe3;
 	fill: #fcfbe3;
-	color: var(--warmlightgray);
-	fill: var(--warmlightgray);
+	color: var(--warmwhite);
+	fill: var(--warmwhite);
 	border-right: none;
 	border-bottom: solid 8px #191918;
 }
@@ -501,8 +501,8 @@ nav ul li a:hover {
 	z-index: 8888;
 	z-index: var(--zhighest);
 	text-decoration: none;
-	color: var(--yellow);
-	fill: var(--yellow);
+	color: var(--warmblack);
+	fill: var(--warmblack);
 	border-bottom: solid 8px #fcfbe3;
 }
 nav ul li.active a {
@@ -514,15 +514,15 @@ nav ul li.active a {
 	color: var(--warmwhite);
 	fill: var(--warmwhite);
 	border-right: none;
-	border-bottom: solid 8px #191918;
+	border-bottom: solid 8px #9a0000;
 }
 nav ul li.active a:hover {
 	z-index: 8888;
 	z-index: var(--zhighest);
 	text-decoration: none;
-	color: var(--yellow);
-	fill: var(--yellow);
-	border-bottom: solid 8px #fcfbe3;
+	color: var(--warmblack);
+	fill: var(--warmblack);
+	border-bottom: solid 8px #191918;
 }
 @keyframes dash {
   to {

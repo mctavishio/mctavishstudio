@@ -16,7 +16,9 @@ let createtools = z => {
 				}
 			},
 			logmsg: function(msg) {
-				try { console.log("### ::: " + msg); }
+				try { 
+					console.log("### ::: " + msg); 
+				}
 				catch(err) { z.tools.logerror(err) }
 			},
 			logerror: function(error) {

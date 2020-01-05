@@ -1,33 +1,38 @@
 module.exports = () => {
-	const mapscode = ["code/velocity.min.js", "code/kefir201911.min.js", "code/tools.js", "code/data.js", "code/radio.js", "code/clock.js", "code/mapcoreelements.js", "code/drawp.js", "code/dashboard.js", "code/mapstart.js"];
-	const mapspath = ["map3a","map3b", "map3c", "map54", "map58", "map88"];
+	const mapcode = ["code/velocity.min.js", "code/kefir201911.min.js", "code/tools.js", "code/mapdata.js", "code/radio.js", "code/mapcoreelements.js", "code/mapdrawp.js", "code/mapdashboard.js", "code/mapstart.js"];
+	const mappath = ["map3a","map3b", "map3c", "map54", "map58", "map88"];
+	const mapscore = {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [2,4] };
+	const mapcontrols = ["home", "next", "about", "sound", "aboutmctavish"];
+
 	let path = 
 	{
 		site: {
 			title: 'count map pulse breathe',
 			description: 'count map pulse breathe with sound from map3 ::: used at JNG 2019',
 			baseurl: "http://mctavish.studio",
-			basecss: [],
-			basejavascript: [],
+			basecss: ["css/draw.css"],
+			basecode: mapcode,
+			basescore: mapscore,
+			basecontrols: mapcontrols,
 			sourcepath: 'source',
+			archivepath: 'source/nodes/archive',
+			resourcepath: 'source/resources',
 			outputpath: 'web',
 			csspath: 'css',
-			javascriptpath: 'code',
+			codepath: 'code',
 			datapath: 'data',
-			startpathpoint: "map3a",
+			path: mappath,
 			home: {
 						actuate: "onrequest", //onload, onrequest, searchembed
 						type: "internal", //internal, external
 						format: "html", //pdf,ejs,html,mp3,vimeo
 						keywords: ["navigation", "home"], //ex: reference, next, navigation?
 						title: "home",
-						url: "map3a"
+						url: "index"
 			},
 			next: {
-						actuate: "onrequest", //onload, onrequest, searchembed
-						type: "internal", //internal, external
-						format: "html", //pdf,ejs,html,mp3,vimeo
-						keywords: ["navigation", "next"], //ex: reference, next, navigation?
+						actuate: "onrequest", type: "internal", format: "html", 
+						keywords: ["navigation", "next"], 
 						title: "next",
 						url: "map3a"
 			},
@@ -39,18 +44,42 @@ module.exports = () => {
 				title: "count map pulse breathe",
 				keywords: ["about", "mctavish", "exhibit", "webpage"],
 				description: "exhibit count map pulse breathe",
-				code:  [...mapscode, "code/map3elements.js", "code/map3astreams.js"],
-				score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] },
+				code:  [...mapcode, "code/map5elements.js", "code/map5streams.js"],
+				score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [2,4] },
 				links: [
 					{
 						actuate: "onrequest", type: "internal", format: "html",
-						keywords: ["next", "reference"],
+						keywords: ["path"],
+						title: "map 3a",
+						url: "map3a"
+					},
+					{
+						actuate: "onrequest", type: "internal", format: "html",
+						keywords: ["path"],
+						title: "map 3b",
+						url: "map3b"
+					},
+					{
+						actuate: "onrequest", type: "internal", format: "html",
+						keywords: ["path"],
+						title: "map 3c",
+						url: "map3c"
+					},
+					{
+						actuate: "onrequest", type: "internal", format: "html",
+						keywords: ["path"],
+						title: "map 54",
+						url: "map54"
+					},
+					{
+						actuate: "onrequest", type: "internal", format: "html",
+						keywords: ["path"],
 						title: "map 58",
 						url: "map58"
 					},
 					{
 						actuate: "onrequest", type: "internal", format: "html",
-						keywords: ["next", "reference"],
+						keywords: ["path"],
 						title: "map 88",
 						url: "map88"
 					}
@@ -107,12 +136,12 @@ module.exports = () => {
 		}
 	];
 	const points = [
-		{uri: "map3a", code: [...mapscode, "code/map3elements.js",  "code/map3astreams.js"], score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] }, path: mapspath },
-		{uri: "map3b", code: [...mapscode, "code/map3elements.js",  "code/map3bstreams.js"], score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] }, path: mapspath },
-		{uri: "map3c", code: [...mapscode, "code/map3elements.js",  "code/map3cstreams.js"], score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] }, path: mapspath },
-		{uri: "map54", code: [...mapscode, "code/map5elements.js",  "code/map5streams.js"], score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [2,4] }, path: mapspath },
-		{uri: "map58", code: [...mapscode, "code/map5elements.js",  "code/map5streams.js"], score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] }, path: mapspath },
-		{uri: "map88", code: [...mapscode, "code/map8elements.js",  "code/map8streams.js"], score: {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] }, path: mapspath },
+		{uri: "map3a", code: [...mapcode, "code/map3elements.js",  "code/map3astreams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }, path: mappath },
+		{uri: "map3b", code: [...mapcode, "code/map3elements.js",  "code/map3bstreams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }, path: mappath },
+		{uri: "map3c", code: [...mapcode, "code/map3elements.js",  "code/map3cstreams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }, path: mappath },
+		{uri: "map54", code: [...mapcode, "code/map5elements.js",  "code/map5streams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [2,4] }, path: mappath },
+		{uri: "map58", code: [...mapcode, "code/map5elements.js",  "code/map5streams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }, path: mappath },
+		{uri: "map88", code: [...mapcode, "code/map8elements.js",  "code/map8streams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }, path: mappath },
 	]
 	points.forEach( ( p, j ) => {
 		let text = texts[j%texts.length];

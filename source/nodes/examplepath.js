@@ -1,5 +1,5 @@
 module.exports = () => {
-	const mapscode = ["code/velocity.min.js", "code/kefir201911.min.js", "code/tools.js", "code/data.js", "code/radio.js", "code/clock.js", "code/mapcoreelements.js", "code/drawp.js", "code/dashboard.js", "code/mapstart.js"];
+	const mapcode = ["code/velocity.min.js", "code/kefir201911.min.js", "code/tools.js", "code/mapdata.js", "code/radio.js", "code/mapcoreelements.js", "code/mapdrawp.js", "code/mapdashboard.js", "code/mapstart.js"];
 	
 	let path = 
 	{
@@ -7,14 +7,17 @@ module.exports = () => {
 			title: 'example path',
 			description: 'example path with sine wave tones',
 			baseurl: "http://mctavish.studio",
-			basecss: [],
-			basejavascript: [],
+			basecss: ["css/draw.css"],
+			basecode: mapcode,
+			basescore: {soundplaylist: "sinewavetones", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] },
 			sourcepath: 'source',
+			archivepath: 'source/nodes/archive',
+			resourcepath: 'source/resources',
 			outputpath: 'web',
 			csspath: 'css',
-			javascriptpath: 'code',
+			codepath: 'code',
 			datapath: 'data',
-			startpathpoint: "swarm",
+			path: ["swarm"],
 			home: {
 						actuate: "onrequest", //onload, onrequest, searchembed
 						type: "internal", //internal, external
@@ -39,7 +42,7 @@ module.exports = () => {
 				title: "test example ::: swarm",
 				keywords: ["about", "mctavish", "exhibit", "webpage"],
 				description: "exhibit swarm",
-				code:  [...mapscode, "code/map3elements.js", "code/map3astreams.js"],
+				code:  [...mapcode, "code/map3elements.js", "code/map3astreams.js"],
 				score: {soundplaylist: "sinewavetones", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] },
 				links: [
 					{ url: "swarmpress3", actuate: "onload", type: "internal", title: "swarm press 3", keywords: ["next"], format: "html" },
@@ -62,7 +65,7 @@ module.exports = () => {
 				title: "swarm press",
 				keywords: ["press", "mctavish", "exhibit", "links"],
 				description: "press links for the exhibit swarm",
-				code:  [...mapscode, "code/map3elements.js", "code/map3astreams.js"],
+				code:  [...mapcode, "code/map3elements.js", "code/map3astreams.js"],
 				score: {soundplaylist: "sinewavetones", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] },
 				links: [
 					{
@@ -82,7 +85,7 @@ module.exports = () => {
 				title: "swarm press 2",
 				keywords: ["press", "mctavish", "exhibit", "links"],
 				description: "press links for the exhibit swarm",
-				code:  [...mapscode, "code/map3elements.js", "code/map3astreams.js"],
+				code:  [...mapcode, "code/map3elements.js", "code/map3astreams.js"],
 				score: {soundplaylist: "sinewavetones", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] },
 				links: [
 					{
@@ -102,7 +105,7 @@ module.exports = () => {
 				title: "swarm press 3",
 				keywords: ["press", "mctavish", "exhibit", "links"],
 				description: "press links for the exhibit swarm",
-				code:  [...mapscode, "code/map3elements.js", "code/map3astreams.js"],
+				code:  [...mapcode, "code/map3elements.js", "code/map3astreams.js"],
 				score: {soundplaylist: "sinewavetones", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] },
 				links: [
 					{
