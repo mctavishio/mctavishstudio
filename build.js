@@ -108,8 +108,8 @@ const buildpath = (path) => {
 		tools.logmsg("*** pathpoint *** " + pathpoint.uri);
 		let p = buildlink(path, pathpoint.uri);
 		//save archive file ::: 
-		try { fse.writeFileSync(config.archivepath + '/' + p.uri + "_" + Date.now()+'.json', JSON.stringify(p, null, "  "), 'utf8');
-	        } catch(err) { tools.logmsg("problem writing file " + err); }
+		// try { fse.writeFileSync(config.archivepath + '/' + p.uri + "_" + Date.now()+'.json', JSON.stringify(p, null, "  "), 'utf8');
+	 //        } catch(err) { tools.logmsg("problem writing file " + err); }
 		//build pages
 		ejs.renderFile(config.sourcepath + '/layouts/' +  'layout.ejs', p, (err, result) => {
 		    if (err) { tools.logmsg("problem rendering file " + pathpoint.uri + " ::: " + err);
