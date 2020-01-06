@@ -7,33 +7,33 @@ let createradio = z => {
 		durationthrottle: z.score.version === "small" ? [[6,0.9],[8,0.6],[14,0.4],[18,0.2],[40,0.1]] : [[6,1.0],[8,0.8],[14,0.6],[18,0.4],[40,0.3]],
 		loadclips: z => {
 			Object.keys(z.radio.clips).forEach( key => {
-						let clip = z.radio.clips[key];
-						if(!z.radio.loading.includes(clip.url)) {
-							z.radio.loading.push(clip.url);
-							let request = new XMLHttpRequest();
-							// request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/" + clip.url, true);
-							request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
-							z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + "/"  + clip.url);
-							request.responseType = "arraybuffer";
-							request.onload = () =>  {
-								// z.tools.logmsg("loaded" + clip.url);
-								z.radio.player.context.decodeAudioData(request.response, buffer => {
-									clip.loaded = true;
-									clip.buffer = buffer;
-									clip.duration = clip.buffer.duration;
-									if( clip.duration > z.radio.clipduration.max) {z.radio.clipduration.max = clip.duration}
-									else if( clip.duration < z.radio.clipduration.min) {z.radio.clipduration.min  = clip.duration}
-									// z.tools.logmsg("decoded" + clip.url);
-								}, e => {
-									z.tools.logerror("audio error! clip = " + clip.url + ", err = " + e);
-								});
-								
-							};
-							request.send();
-						}
-					});
-					z.score.soundloaded = true;
-				},
+				let clip = z.radio.clips[key];
+				if(!z.radio.loading.includes(clip.url)) {
+					z.radio.loading.push(clip.url);
+					let request = new XMLHttpRequest();
+					// request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/" + clip.url, true);
+					request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
+					z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + "/"  + clip.url);
+					request.responseType = "arraybuffer";
+					request.onload = () =>  {
+						// z.tools.logmsg("loaded" + clip.url);
+						z.radio.player.context.decodeAudioData(request.response, buffer => {
+							clip.loaded = true;
+							clip.buffer = buffer;
+							clip.duration = clip.buffer.duration;
+							if( clip.duration > z.radio.clipduration.max) {z.radio.clipduration.max = clip.duration}
+							else if( clip.duration < z.radio.clipduration.min) {z.radio.clipduration.min  = clip.duration}
+							// z.tools.logmsg("decoded" + clip.url);
+						}, e => {
+							z.tools.logerror("audio error! clip = " + clip.url + ", err = " + e);
+						});
+						
+					};
+					request.send();
+				}
+			});
+			z.score.soundloaded = true;
+		},
 		start: z => {
 			// z.tools.logmsg("z.score = " + JSON.stringify(z.score,null,2));
 			z.score.orchestration.forEach( (instruments, j) => {

@@ -3,7 +3,34 @@ let createdashboard = z => {
 		resumeaudio: (z) => {
 			try {
 				if(!z.score.soundloaded){
-					z.radio.loadclips(z);
+					// z.radio.loadclips(z);
+					Object.keys(z.radio.clips).forEach( key => {
+						let clip = z.radio.clips[key];
+						if(!z.radio.loading.includes(clip.url)) {
+							z.radio.loading.push(clip.url);
+							let request = new XMLHttpRequest();
+							// request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/" + clip.url, true);
+							request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
+							z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + "/"  + clip.url);
+							request.responseType = "arraybuffer";
+							request.onload = () =>  {
+								// z.tools.logmsg("loaded" + clip.url);
+								z.radio.player.context.decodeAudioData(request.response, buffer => {
+									clip.loaded = true;
+									clip.buffer = buffer;
+									clip.duration = clip.buffer.duration;
+									if( clip.duration > z.radio.clipduration.max) {z.radio.clipduration.max = clip.duration}
+									else if( clip.duration < z.radio.clipduration.min) {z.radio.clipduration.min  = clip.duration}
+									// z.tools.logmsg("decoded" + clip.url);
+								}, e => {
+									z.tools.logerror("audio error! clip = " + clip.url + ", err = " + e);
+								});
+								
+							};
+							request.send();
+						}
+					});
+					z.score.soundloaded = true;
 				}
 				z.radio.player.context.resume().then(() => {
 					z.tools.logmsg("Playback resumed successfully");
