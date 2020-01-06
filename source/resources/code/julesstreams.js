@@ -138,10 +138,9 @@ let createstreams = z => {
 					let j = e.count%nshapes;
 					let k = e.count;
 					let data = e.data[k%e.n], color = "#006699";
-					let sw = data*e.canvas.height, dash = z.tools.randominteger(10,e.canvas.width);
+					let sw = data*e.canvas.height*.6, dash = z.tools.randominteger(10,e.canvas.width*.6*[1.0,0.4][j]);
 					color = e.palette.colors[z.tools.randominteger(0,e.palette.colors.length)]
 					if(e.clock.t >= e.start && e.clock.t <= e.end ) {
-
 						Velocity({	
 							elements: z.elements["temp"][j].el,
 							properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: sw, strokeDasharray: dash, x1: 0, x2: e.canvas.width, y1: e.canvas.height/2, y2: e.canvas.height/2 },
@@ -151,7 +150,7 @@ let createstreams = z => {
 					else {
 						Velocity({	
 							elements: z.elements["temp"][j].el,
-							properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: 10, strokeDasharray: z.tools.randominteger(10,e.canvas.width), x1: 0, x2: e.canvas.width, y1: e.canvas.height/2, y2: e.canvas.height/2 },
+							properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: 10, strokeDasharray: dash, x1: 0, x2: e.canvas.width, y1: e.canvas.height/2, y2: e.canvas.height/2 },
 							options: { duration: e.dt*e.tick.dt*480*nshapes,  delay: 0, easing: "easeInOutSine" },
 						});
 						Velocity({	
