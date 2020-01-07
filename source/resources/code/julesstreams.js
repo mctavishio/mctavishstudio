@@ -465,7 +465,9 @@ let createstreams = z => {
 			count: 0,
 			dt:dt, tostring: tostring, name:name 
 		};
-		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 && z.score.soundplaying && z.tools.randominteger(0,10)<8 )], [z.streams["sounds"]], (tick, sounds) => { return {tick:tick, sounds:sounds } })
+		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => {
+			// console.log("e.t%dt===0 && z.score.soundplaying = " + e.t%dt===0 && z.score.soundplaying); 
+			return (e.t%dt===0 && z.score.soundplaying && z.tools.randominteger(0,10)<8 )})], [z.streams["sounds"]], (tick, sounds) => { return {tick:tick, sounds:sounds } })
 			.scan( (state, e) => { 
 				state.tick = e.tick;
 				state.sounds = e.sounds.sounds;

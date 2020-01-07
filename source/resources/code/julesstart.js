@@ -58,8 +58,8 @@ window.onload = function() {
 	z.score.ratemax = 0;
 	z.tools.logmsg("tstartmin = " + z.score.tstartmin); 
 	Object.keys(z.score.data).forEach( key => {
-		z.tools.logmsg("z.score.data has ::: " + key);
-		z.tools.logmsg("z.score.data[key].t0 = " + z.score.data[key].t0); 
+		// z.tools.logmsg("z.score.data has ::: " + key);
+		// z.tools.logmsg("z.score.data[key].t0 = " + z.score.data[key].t0); 
 		if(z.score.data[key].t0 < z.score.tstartmin) {z.score.tstartmin=z.score.data[key].t0}
 		else if(z.score.data[key].t0 > z.score.tstartmax) {z.score.tstartmax=z.score.data[key].t0}
 		z.score.data[key].tend = z.score.data[key].t0 + Math.floor(z.score.data[key].n/z.score.data[key].rate);

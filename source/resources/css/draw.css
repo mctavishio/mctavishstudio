@@ -475,6 +475,7 @@ a {
 	font-weight:bolder;
 	text-decoration: none;
 	color: #fcfbe3;
+	color: var(--warmlightgray);
 }
 a:hover {
 	z-index: 8888;

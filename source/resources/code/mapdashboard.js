@@ -75,14 +75,36 @@ let createdashboard = z => {
 				z.tools.logmsg("show");
 				z.elements["controls"].el.style.display='block';
 				z.elements["menulink"].el.style.display='none';
-			} catch(e) { z.tools.logerror("mapdashboard ::: showcontrols " + e) }
+			} catch(err) { z.tools.logerror("mapdashboard ::: showcontrols " + err) }
 		},
 		next: (z) => {
+			let nextlinks = z.links.filter( link => link.keywords.includes("next"));
+			let next = nextlinks[0];
+			z.tools.logmsg("next ::: " + JSON.stringify(nextlinks));
 			try {
-				z.tools.logmsg("next ::: z.score.currentnext = " + z.score.currentnext + " ::: " + JSON.stringify(z.nav.next[z.score.currentnext], null, "  "));
-				
+				if( next.actuate === "onrequest" ) {
+					window.location = next.url;
+				}
+				else if ( next.type === "internal" && next.actuate === "onload" ) {
+					let nextnodes = document.querySelectorAll(".nextnode");
+					for(n=0; n<nextnodes.length; ++n) {
+						nextnodes[n].style.display = 'none';
+					}
+					document.querySelector("#"+next.url).style.display = 'block';
+				}
+				// z.score.currentnext = (z.score.currentnext + 1) % z.nav.next.length;
+				// z.tools.logmsg("next ::: z.score.currentnext = " + z.score.currentnext + " ::: " + JSON.stringify(z.nav.next[z.score.currentnext], null, "  "));
+				z.elements["nextlink"].el.classList.add("active");
+
+			} catch(err) { z.tools.logerror("mapdashboard ::: next " + err) }
+		},
+		oldnext: (z) => {
+			let next = z.links.filter( link => link.keywords.includes("next"));
+
+			try {
 				if( z.nav.next[z.score.currentnext].actuate === "onrequest" ) {
 					window.location = z.nav.next[z.score.currentnext].url;
+					// z.tools.logmsg("next ::: " + z.nav.next[z.score.currentnext].url);
 				}
 				else {
 					z.nav.next.filter(link => link.type === "internal" && link.actuate === "onload").forEach( link => {
@@ -100,7 +122,7 @@ let createdashboard = z => {
 
 				z.elements["nextlink"].el.classList.add("active");
 
-			} catch(e) { z.tools.logerror("mapdashboard ::: next " + e) }
+			} catch(err) { z.tools.logerror("mapdashboard ::: next " + err) }
 		},
 		listen: (z) => {
 			z.elements["soundlink"].el.addEventListener('click', function() {
@@ -118,7 +140,7 @@ let createdashboard = z => {
 				z.dashboard.showcontent(z);
 				z.dashboard.showcontrols(z);
 			});
-			z.elements["telegraph"].el.innerHTML = z.pathpoint.title + " ::: " + z.pathpoint.subtitle;
+			z.elements["telegraph"].el.innerHTML = z.score0.title + " ::: " + z.score0.subtitle;
 		}
 	}
 };

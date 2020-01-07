@@ -1,100 +1,28 @@
 module.exports = () => {
 	const mapcode = ["code/velocity.min.js", "code/kefir201911.min.js", "code/tools.js", "code/mapdata.js", "code/radio.js", "code/mapcoreelements.js", "code/mapdrawp.js", "code/mapdashboard.js", "code/mapstart.js"];
-	const mappath = ["map3a","map3b", "map3c", "map54", "map58", "map88"];
 	const mapscore = {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [2,4] };
-	const mapcontrols = ["home", "next", "about", "sound", "aboutmctavish"];
+	const name = "cmpbindex";
 
 	let path = 
 	{
 		site: {
-			title: 'count map pulse breathe',
-			description: 'count map pulse breathe with sound from map3 ::: used at JNG 2019',
-			baseurl: "http://mctavish.studio",
-			basecss: ["css/draw.css"],
-			basecode: mapcode,
-			basescore: mapscore,
-			basecontrols: mapcontrols,
-			sourcepath: 'source',
-			archivepath: 'source/nodes/archive',
-			resourcepath: 'source/resources',
-			outputpath: 'web',
-			csspath: 'css',
-			codepath: 'code',
-			datapath: 'data',
-			path: mappath,
-			home: {
-						actuate: "onrequest", //onload, onrequest, searchembed
-						type: "internal", //internal, external
-						format: "html", //pdf,ejs,html,mp3,vimeo
-						keywords: ["navigation", "home"], //ex: reference, next, navigation?
-						title: "home",
-						url: "index"
-			},
-			next: {
-						actuate: "onrequest", type: "internal", format: "html", 
-						keywords: ["navigation", "next"], 
-						title: "next",
-						url: "map3a"
-			},
+			id:  "id_"+ Date.now() + "_cmpb",
+			uri: name,
+			title: "count map pulse breathe",
+			subtitle: `for the <a href="http://josephneasegallery.com">JNG</a> exhibit`, 
+			keywords: ["count map pulse breathe", "index", "project", "webpage"],
+			description: "index of count map pulse breathe ::: map3 sound", 
+			code:  [...mapcode, "code/map5elements.js", "code/map5streams.js"],
+			score: mapscore,
+			content: `<p>count map pulse breathe with sound from map3 ::: used at the <a href="http://josephneasegallery.com">Joseph Nease Gallery</a> 12/2019 - 2/2020</p>`,
+			links: [],
+			css: [],
+			home: { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", url: name },
+			access: "all"
 		},
-		pathpoints: [
-			{ 
-				id: "1577816344977",
-				uri: "countmappulsebreathe",
-				title: "count map pulse breathe",
-				keywords: ["about", "mctavish", "exhibit", "webpage"],
-				description: "exhibit count map pulse breathe",
-				code:  [...mapcode, "code/map5elements.js", "code/map5streams.js"],
-				score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [2,4] },
-				links: [
-					{
-						actuate: "onrequest", type: "internal", format: "html",
-						keywords: ["path"],
-						title: "map 3a",
-						url: "map3a"
-					},
-					{
-						actuate: "onrequest", type: "internal", format: "html",
-						keywords: ["path"],
-						title: "map 3b",
-						url: "map3b"
-					},
-					{
-						actuate: "onrequest", type: "internal", format: "html",
-						keywords: ["path"],
-						title: "map 3c",
-						url: "map3c"
-					},
-					{
-						actuate: "onrequest", type: "internal", format: "html",
-						keywords: ["path"],
-						title: "map 54",
-						url: "map54"
-					},
-					{
-						actuate: "onrequest", type: "internal", format: "html",
-						keywords: ["path"],
-						title: "map 58",
-						url: "map58"
-					},
-					{
-						actuate: "onrequest", type: "internal", format: "html",
-						keywords: ["path"],
-						title: "map 88",
-						url: "map88"
-					}
-				],
-				content: 
-				`
-				<p>links for count map pulse breathe</p>
-				<p><i>"There is no such thing as repetition. Only insistance."
-					― Gertrude Stein</i></p>
-				<p><a><href="http://mctavish.io">mctavish.io</a></p>
-				`
-			},
-		]
+		pathpoints: []
+		
 	};
-
 	const texts = [
 		{
 			title: "zip drive vial",
@@ -136,38 +64,40 @@ module.exports = () => {
 		}
 	];
 	const points = [
-		{uri: "map3a", code: [...mapcode, "code/map3elements.js",  "code/map3astreams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }, path: mappath },
-		{uri: "map3b", code: [...mapcode, "code/map3elements.js",  "code/map3bstreams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }, path: mappath },
-		{uri: "map3c", code: [...mapcode, "code/map3elements.js",  "code/map3cstreams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }, path: mappath },
-		{uri: "map54", code: [...mapcode, "code/map5elements.js",  "code/map5streams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [2,4] }, path: mappath },
-		{uri: "map58", code: [...mapcode, "code/map5elements.js",  "code/map5streams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }, path: mappath },
-		{uri: "map88", code: [...mapcode, "code/map8elements.js",  "code/map8streams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }, path: mappath },
-	]
-	points.forEach( ( p, j ) => {
+		{title: "map 3a", uri: "map3a", code: [...mapcode, "code/map3elements.js",  "code/map3astreams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }},
+		{title: "map 3b", uri: "map3b", code: [...mapcode, "code/map3elements.js",  "code/map3bstreams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }},
+		{title: "map 3c", uri: "map3c", code: [...mapcode, "code/map3elements.js",  "code/map3cstreams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }},
+		{title: "map 54", uri: "map54", code: [...mapcode, "code/map5elements.js",  "code/map5streams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [2,4] }},
+		{title: "map 58", uri: "map58", code: [...mapcode, "code/map5elements.js",  "code/map5streams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }},
+		{title: "map 88", uri: "map88", code: [...mapcode, "code/map8elements.js",  "code/map8streams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }},
+	];
+
+	points.forEach( ( point, j ) => {
 		let text = texts[j%texts.length];
-		let links = p.path.map( next => {
+		let herej = points.map( l => l.uri ).indexOf(point.uri);
+		let nextj = (herej+1)%points.length;
+
+		let pathlinks = points.map( ( p, k ) => {
 			return {
 				actuate: "onrequest", type: "internal", //internal, external
-				format: "html", keywords: ["path"],
-				title: next, url: next
+				format: "html", keywords: nextj===k ? ["path", "next"] : ["path"],
+				title: p.title, url: p.uri
 			}
 		});
-		let herej = p.path.indexOf(p.uri), nextj = (herej+1)%p.path.length;
-		links.push({
-			actuate: "onrequest", type: "internal", //internal, external
-			format: "html", keywords: ["next"],
-			title: p.path[nextj], url: p.path[nextj]
-		})
-		// console.log(JSON.stringify(links,null,2));
+		// console.log("******" + JSON.stringify(pathlinks,null,2));
 
 		path.pathpoints.push( {
-			id: Date.now(), uri: p.uri, title: text.title, subtitle: p.uri, 
+			id:  "id_"+ Date.now() + "_" + j, 
+			uri: point.uri,
+			title: text.title, subtitle: point.uri, 
 			content: text.content, 
 			keywords: ["countmappulsebreathe", "exhibit", "webpage"],
-			description: "text for map ::: " + p.uri, code: p.code, score: p.score,
-			links: links
+			description: "text for map ::: " + point.uri, 
+			code: point.code, score: point.score,
+			links: pathlinks
 		});
+		// console.log("******###" + JSON.stringify(path.pathpoints[j].links,null,2));
 	});
-	console.log(JSON.stringify(path.pathpoints.map(p => p.uri),null,2));
+	
 	return path;
 };
