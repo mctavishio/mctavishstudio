@@ -45,12 +45,12 @@ let addcoreelements = z => {
 	z.elements["box"].el.setAttributeNS(null, "class", "shape square");
 	z.elements["svg"].el.appendChild(z.elements["box"].el);
 	z.elements["stage"].el.appendChild(z.elements["svg"].el);
-	z.elements["texts"] = [];
-	let l = Math.max(1, Math.floor(z.score.m/2));
-	Array.from(Array(z.score.m).keys()).forEach(  (r,j) => {
-		z.elements["texts"][r] = { el: document.createElement("div") };
-		z.elements["texts"][r].el.setAttribute("id", "text"+j);
-		z.elements["texts"][r].el.setAttribute("class", "absolute large zhigh");
-		z.elements["stage"].el.appendChild(z.elements["texts"][r].el);
-	});
+	// z.elements["texts"] = [];
+	// let l = Math.max(1, Math.floor(z.score.m/2));
+	// Array.from(Array(z.score.m).keys()).forEach(  (r,j) => {
+	// 	z.elements["texts"][r] = { el: document.createElement("div") };
+	// 	z.elements["texts"][r].el.setAttribute("id", "text"+j);
+	// 	z.elements["texts"][r].el.setAttribute("class", "absolute large zhigh");
+	// 	z.elements["stage"].el.appendChild(z.elements["texts"][r].el);
+	// });
 }

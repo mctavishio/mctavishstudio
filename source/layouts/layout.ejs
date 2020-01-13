@@ -130,7 +130,7 @@
 				</header>
 				<div class="textContent">
 					<% links.filter(link => link.actuate==="onrequest" && link.keywords.includes("path") ).forEach( link => { %>
-					<p>&rarr; <a href="<%= link.url %>"><%= link.title %> <% if(link.url.includes(uri)) {%><span class="lightgray"><i> (you are here)</i></span><%}%> </a></p> 
+					<p>&rarr; <a href="<%= link.url %>"><%= link.title %> <% if( link.url === uri ||  link.url === uri +".html") {%><span class="lightgray"><i> (you are here)</i></span><%}%> </a></p> 
 					<% }) %>
 				</div>
 			</article>

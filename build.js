@@ -28,14 +28,12 @@ const defaultlink = {
 
 const buildlink = (path, linkuri) => {
 	let builtlink = {};
-	// let builtnav = {};
+	
 	tools.logmsg("in buildlink linkuri = " + linkuri);
 	// tools.logmsg("in buildlink ::: path.site.title =  " + path.site.title + " num pathpoints = " + path.pathpoints.length);
 	let compositelink = path.pathpoints.filter( ppoint => ppoint.uri === linkuri )[0];
 	let homelinks = compositelink.links.filter( link => link.actuate === "onrequest" && link.keywords.includes("home") );
-	// let nextlinks = compositelink.links.filter( link => link.keywords && link.keywords.includes("next") );
 	let home = homelinks.length > 0 ? homelinks[tools.randominteger(0, homelinks.length)] : path.site.home;
-	// if(nextlinks.length === 0) nextlinks.push(path.site.nav.next[0]);
 	let homelink = {
 		url: (home.actuate === "onrequest" && home.type === "internal") ? home.url + '.html' : home.url, 
 		actuate: home.actuate ? home.actuate : "onrequest",
@@ -45,19 +43,6 @@ const buildlink = (path, linkuri) => {
 		type: home.type ? home.type : "external",
 		action: home.action ? home.action : ""
 	};
-	// builtnav.next = [];
-	// nextlinks.forEach( next => {
-	// 	builtnav.next.push({
-	// 		url: (next.actuate === "onrequest" && next.type === "internal") ? next.url + '.html' : next.url, 
-	// 		actuate: next.actuate ? next.actuate : "onrequest",
-	// 		title: next.title ? next.title : "-*-*-",
-	// 		keywords: next.keywords ? next.keywords : ["next"],
-	// 		format: next.format ? next.format : "html",
-	// 		type: next.type ? next.type : "external",
-	// 		action: next.action ? next.action : ""
-	// 	});
-	// });
-	// tools.logmsg("builtnav.next = " + JSON.stringify(builtnav.next, null, "  "));
 	path.pathpoints.filter( ppoint => ppoint.uri === linkuri ).forEach( compositelink =>
 	{
 		builtlink = {
@@ -72,8 +57,6 @@ const buildlink = (path, linkuri) => {
 			code: compositelink.code ? compositelink.code : [],
 			score: compositelink.score ? compositelink.score : {},
 			home: homelink
-			// nav: builtnav, 
-			// raw: compositelink
 		}
 		
 		compositelink.links.forEach( link => {
@@ -107,44 +90,84 @@ const build = ( () => {
 	const mapcode = ["code/velocity.min.js", "code/kefir201911.min.js", "code/tools.js", "code/mapdata.js", "code/radio.js", "code/mapcoreelements.js", "code/mapdrawp.js", "code/mapdashboard.js", "code/mapstart.js"];
 	const mapscore = {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [2,4] };
 	const mapcontrols = ["home", "next", "sound", "aboutmctavish"];
+	let indexes = {
+		index: {
+			id:  "id_"+ Date.now() + "_public",
+			uri: "index", title: "mctavish studio projects",
+			subtitle: "comprehensive public index", 
+			content: `<h3><i>"There is no such thing as repetition. Only insistance." ― Gertrude Stein</i></h3>`, 
+			keywords: ["mctavish studio", "index", "all", "webpage"],
+			description: "index of public mctavish studio projects in process", 
+			code:  [...mapcode, "code/map5elements.js", "code/map5streams.js"],
+			score: mapscore,
+			links: [],
+			css: [],
+			home: { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", url: "index.html" },
+		},
+		hive: {
+			id:  "id_"+ Date.now() + "_hive",
+			uri: "hive", title: "mctavish studio projects",
+			subtitle: "hive index", 
+			content: `<h3><i>"There is no such thing as repetition. Only insistance." ― Gertrude Stein</i></h3>`, 
+			keywords: ["mctavish studio", "index", "all", "webpage"],
+			description: "index of subscriber (hive) mctavish studio projects in process", 
+			code:  [...mapcode, "code/map8elements.js", "code/map8streams.js"],
+			score: mapscore,
+			links: [],
+			css: [],
+			home: { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", url: "hive.html" },
+		},
+		studio: {
+			id:  "id_"+ Date.now() + "_studio",
+			uri: "studio", title: "mctavish studio projects",
+			subtitle: "collaboration index", 
+			content: `<h3><i>"There is no such thing as repetition. Only insistance." ― Gertrude Stein</i></h3>`, 
+			keywords: ["mctavish studio", "index", "studio", "webpage"],
+			description: "index of collaborator mctavish studio projects in process", 
+			code:  [...mapcode, "code/map5elements.js", "code/map5streams.js"],
+			score: mapscore,
+			links: [],
+			css: [],
+			home: { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", url: "studio.html" },
+		},
 
-	let indexallpathpoint = {
-		id:  "id_"+ Date.now() + "_all",
-		uri: "index", title: "mctavish studio projects",
-		subtitle: "comprehensive index", 
-		content: `<h3><i>"There is no such thing as repetition. Only insistance." ― Gertrude Stein</i></h3>`, 
-		keywords: ["mctavish studio", "index", "all", "webpage"],
-		description: "comprehensive index of all mctavish studio projects in process", 
-		code:  [...mapcode, "code/map5elements.js", "code/map5streams.js"],
-		score: mapscore,
-		links: [],
-		css: [],
-		home: { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", url: "index.html" },
 	}
-	// console.log("*** in build = " + paths.length);
+	
 
 	paths.forEach( (path,pj) => {
 		console.log("*** in build loop ::: path.site.title = " + path.site.title);
-		let indexpathpoint = path.site;
+		let indexsite = path.site;
 		path.pathpoints.forEach( (pathpoint, pk) => {
 			tools.logmsg("*** pathpoint *** " + pathpoint.uri);
 			let p = buildlink(path, pathpoint.uri);
 			
-			indexpathpoint.links.push({
+			indexsite.links.push({
 				actuate: "onrequest", type: "internal",
 				format: "html", keywords: ["path"],
-				title: p.uri, url: p.uri + ".html"
+				title: p.title ? p.title : p.uri, url: p.uri + ".html"
 			})
-			if(pj===0 && pk===0) {
-				indexallpathpoint.links.push({
-					actuate: "onrequest", type: "internal",
-					format: "html", keywords: ["next"],
-					title: p.uri, url: p.uri + ".html"
-				})
-			}
+
+			// if(pj===0 && pk===0) {
+			// 	indexes["studio"].links.push({
+			// 		actuate: "onrequest", type: "internal",
+			// 		format: "html", keywords: ["next"],
+			// 		title: p.title ? p.title : p.uri, url: p.uri + ".html"
+			// 	})
+			// 	if(indexsite.hasOwnProperty("indexes")) {
+			// 		indexsite.indexes.forEach( index => {
+			// 			if( indexes.hasOwnProperty(index) ) {
+			// 				indexes[index].links.push({
+			// 					actuate: "onrequest", type: "internal",
+			// 					format: "html", keywords: ["next"],
+			// 					title: p.title ? p.title : p.uri, url: p.uri + ".html"
+			// 				})
+			// 			}
+			// 		})
+			// 	}
+			// }
 			//save archive file ::: 
 			// try { fse.writeFileSync(config.archivepath + '/' + p.uri + "_" + Date.now()+'.json', JSON.stringify(p, null, "  "), 'utf8');
-		 // 	} catch(err) { tools.logmsg("problem writing file " + err); }
+			// 	} catch(err) { tools.logmsg("problem writing file " + err); }
 			
 			// render page
 			ejs.renderFile(config.sourcepath + '/layouts/' +  'layout.ejs', p, (err, result) => {
@@ -156,16 +179,16 @@ const build = ( () => {
 			    }
 			});
 		});
-		indexpathpoint.links[0].keywords.push("next");
+		indexsite.links[0].keywords.push("next");
 		
-		let p = indexpathpoint;
-		p.home = { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", url: (path.site.access || !path.site.home) ? "index.html" : path.site.home.url + ".html"  };
+		let p = indexsite;
+		p.home = { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", url: (indexsite.hasOwnProperty("index") && indexes.hasOwnProperty(indexsite.index)) ? indexsite.index + ".html" : path.site.home.url + ".html"  };
 		
-		//archive indexpathpoint
+		//archive indexsite
 		// try { fse.writeFileSync(config.archivepath + '/' + p.uri + "_" + Date.now()+'.json', JSON.stringify(p, null, "  "), 'utf8');
 		// } catch(err) { tools.logmsg("problem writing file " + err); }
 		
-		//render indexpathpoint
+		//render indexsite
 		ejs.renderFile(config.sourcepath + '/layouts/' +  'layout.ejs', p, (err, result) => {
 		    if (err) { tools.logmsg("problem rendering file " + p.uri + " ::: " + err); }
 		    else {
@@ -174,26 +197,40 @@ const build = ( () => {
 		        } catch(err) { tools.logmsg("problem writing file " + p.uri + " ::: " + err); }
 		    }
 		});
-		indexallpathpoint.links.push( {
+		indexes["studio"].links.push({
 			actuate: "onload", type: "internal",
 			format: "html", keywords: ["component"],
 			title: path.site.title, url: path.site.uri,
-			pathpoint: indexpathpoint
+			pathpoint: indexsite
+		})
+		if(indexsite.hasOwnProperty("index")) {
+			if( indexes.hasOwnProperty(indexsite.index) && indexsite.index!=="studio") {
+				indexes[indexsite.index].links.push({
+					actuate: "onload", type: "internal",
+					format: "html", keywords: ["component"],
+					title: path.site.title, url: path.site.uri,
+					pathpoint: indexsite
+				})
+			}
+		}
+	});
+
+
+	Object.entries(indexes).forEach( entry => {
+		let p = entry[1];
+		//archive indexall
+		// try { fse.writeFileSync(config.archivepath + '/' + p.uri + "_" + Date.now()+'.json', JSON.stringify(p, null, "  "), 'utf8');
+		// } catch(err) { tools.logmsg("problem writing file " + err); }
+		
+		//render indexall
+		ejs.renderFile(config.sourcepath + '/layouts/' +  'layout.ejs', p, (err, result) => {
+		    if (err) { tools.logmsg("problem rendering file " + p.uri + " ::: " + err); }
+		    else {
+		        try {
+				fse.writeFileSync(config.outputpath + '/' + p.uri + '.html', result, 'utf8');
+		        } catch(err) { tools.logmsg("problem writing file " + p.uri + " ::: " + err); }
+		    }
 		});
-	});
-	let p = indexallpathpoint;
-	//archive indexallpathpoint
-	// try { fse.writeFileSync(config.archivepath + '/' + p.uri + "_" + Date.now()+'.json', JSON.stringify(p, null, "  "), 'utf8');
-	// } catch(err) { tools.logmsg("problem writing file " + err); }
-	
-	//render indexallpathpoint
-	ejs.renderFile(config.sourcepath + '/layouts/' +  'layout.ejs', p, (err, result) => {
-	    if (err) { tools.logmsg("problem rendering file " + p.uri + " ::: " + err); }
-	    else {
-	        try {
-			fse.writeFileSync(config.outputpath + '/' + p.uri + '.html', result, 'utf8');
-	        } catch(err) { tools.logmsg("problem writing file " + p.uri + " ::: " + err); }
-	    }
-	});
+	})
 })();
 // module.exports = build;

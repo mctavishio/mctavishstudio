@@ -61,60 +61,6 @@ let createstreams = z => {
 		});
 	})();
 
-	// ***** text stream ---------
-	(function() {
-		let name = "text";
-		let dt = 8; //in seconds
-		let ratios = [5,10,15,20,30,40];
-		let rhythms = [
-			[980, 0], [680, 300], [940, 40], [480, 480], [880,100], [680, 300], [800,180]
-		];
-		let tostring = function(e) {return "text"};
-		let text0 = {
-			elements: z.elements["texts"],
-			count: 0, data: z.data.language.playlists["maps1"],
-			dt:dt, tostring: tostring, name:name 
-		};
-		z.streams[name] = z.streams["drawp"].filter( e => e.tick.t%dt===0 )
-			.scan( (state, e) => { 
-				state.tick = e.tick;
-				state.palette = e.palette;
-				state.canvas = e.canvas;
-				state.count = state.count + 1;
-				return state;
-			}, text0  )
-		z.streams[name].onValue( e => { 
-			try {
-				e.elements.forEach( (textel, r) => {
-					if( z.tools.randominteger(0,10) < 4 ) {
-						let texts = e.data[z.tools.randominteger(0,e.data.length)];
-						let text = z.data.language.texts[texts];
-						let n = (e.count+r)%text.length;
-						// z.tools.logmsg("e.tick.dt = " + e.tick.dt + " e.dt = " + e.dt)
-						let pulsedt = 100;
-						let color = e.palette.colors[z.tools.randominteger(0,e.palette.colors.length)];
-						let fontsize = z.tools.randominteger(e.canvas.min*.4, e.canvas.max);
-						let top = z.tools.randominteger(0, e.canvas.height  - fontsize*1.5);
-						let left = z.tools.randominteger(0,  e.canvas.width - fontsize);
-						let staticCSS = {
-							color: color,
-							opacity: function(j,n){ return z.tools.randominteger(0,10)/10 },
-							top: function(j,n){ return top.toString() + "px" }, 
-							left: function(j,n){ return left.toString() + "px" }, 
-							"font-size": fontsize + "px"
-						};
-						z.tools.applyCSS(e.elements[r].el, staticCSS);
-						Kefir.sequentially(pulsedt, text[n]+" ").onValue( l => {
-							e.elements[r].el.innerHTML = l;
-						})
-					}
-				});
-
-			} catch(err) {z.tools.logerror("text " + err)}
-			// z.tools.logmsg(JSON.stringify(e));
-		});
-	})();
-
 	// ***** circles stream ---------
 	(function() {
 		let name = "circles";

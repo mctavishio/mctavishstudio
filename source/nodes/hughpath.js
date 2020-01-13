@@ -11,57 +11,19 @@ module.exports = () => {
 			title: "for Hugh ::: count map pulse breathe",
 			subtitle: `for the <a href="http://josephneasegallery.com">JNG</a> exhibit`, 
 			keywords: ["count map pulse breathe", "index", "hugh", "project", "webpage"],
-			description: "index of count map pulse breathe ::: map3 sound", 
+			description: "Hugh index of count map pulse breathe ::: map3 sound", 
 			code:  [...mapcode, "code/map5elements.js", "code/map5streams.js"],
 			score: mapscore,
-			content: `<p>count map pulse breathe with sound from map3 ::: used at the <a href="http://josephneasegallery.com">Joseph Nease Gallery</a> 12/2019 - 2/2020</p>`,
+			content: `<p>count map pulse breathe with sound from map3 ::: used at the <a href="http://josephneasegallery.com">Joseph Nease Gallery</a> 12/2019 - 2/2020</p><p>index of works for Hugh</p>`,
 			links: [],
 			css: [],
+			index: "hive",
 			home: { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", url: name },
 		},
 		pathpoints: []
 		
 	};
-	// const texts = [
-	// 	{
-	// 		title: "zip drive vial",
-	// 		subtitle: "traces",
-	// 		content: `<p><br/>data ::: zip drive from jules ::: tiny vial ::: traces ...<br/><br/>heart beat coordinates<br/>velocities<br/>heat<br/>the body's dimensions<br/>measures ::: movement<br/>change<br/>what it means to be human<br/>these numbers<br/>blood :::<br/>remembering AIDS<br/>epidemic performance<br/>(s)<br/>blood coursing spilled flung drawn tested<br/>the virus tentacular reaching filling expanding ...<br/>the body's battle :::<br/>::: still alive ::: still here ...<br/>cellular resistance street stage ::: performance / words / noise /<br/>life force :::<br/>the physics of life<br/>the contours of loss<br/><br/>time between heart beats (seconds)<br/><br/>flex pulse<br/>breathe`
-	// 	},
-	// 	{
-	// 		title: "the sky ::: the cloud",
-	// 		subtitle: "pours",
-	// 		content: `<p>chance-infused, open systems ::: a pool ::: generative, networked, multichannel arterial flow :::</p>
-	// 		<p>cross-sensory, polyphonic landscapes || the digital web || the sky ::: the cloud<br/>
-	// 		pours through glassy screens into this room </p>`
-	// 	},
-	// 	{
-	// 		title: "the infinite bendable between", subtitle: "",
-	// 		content: `<p>multi-threaded, dynamical systems ::: chance-infused, emergent patterns</p>
-	// 		<p>queer construct ::: personal story || myth &amp; the infinite, bendable between</p>`
-	// 	},
-	// 	{
-	// 		title: "&amp; &amp; &amp;",
-	// 		content: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>`
-	// 	},
-	// 	{
-	// 		title: "humans &amp; machines", subtitle: "carbon cycle",
-	// 		content: `<p>the porous, intimate boundaries between humans and machines ::: the erotic dynamics of tapping glass :::  the carbon cycle ::: the cyborg body ::: the fragile electric body ::: the resistance cyborg ::: the networked, digital hive mind ::: the swarm.</p>`
-	// 	},
-	// 	{
-	// 		title: "the opacity continuum", subtitle: "film",
-	// 		content: `
-	// 			<p>the opacity continuum ::: old school films ::: light through celluloid ::: electrified pixels ::: glass .... textile drawings ::: 
-	// 			animations piling up on an opaque material ... light casting shadow ... illuminating texture ... physical dimensionality
-	// 			::: becoming object
-	// 			</p>
-	// 			<p>a machine rendering ... projector reeling ... stitch robot piling up drawings ... in space in time</p>
-	// 			<p>the difficult leap from frame to frame ... frameless drawing ... multiple layers of single-frame screens</p>
-	// 			<p><a><href="http://mctavish.io">mctavish.io</a></p>
-	// 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-	// 			`
-	// 	}
-	// ];
+	
 	const points = [
 		{title: "map 3a", uri: "hughmap3a", code: [...mapcode, "code/map3elements.js",  "code/map3astreams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }},
 		{title: "map 3b", uri: "hughmap3b", code: [...mapcode, "code/map3elements.js",  "code/map3bstreams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }},
@@ -89,7 +51,7 @@ module.exports = () => {
 			id:  "id_"+ Date.now() + "_" + j, 
 			uri: point.uri,
 			title: point.title, subtitle: point.uri, 
-			content: `<p>count map pulse breathe with sound from map3 ::: used at the <a href="http://josephneasegallery.com">Joseph Nease Gallery</a> 12/2019 - 2/2020</p>`, 
+			content: `<p>count map pulse breathe with sound from map3 ::: used at the <a href="http://josephneasegallery.com">Joseph Nease Gallery</a> 12/2019 - 2/2020</p><p>index of works for Hugh</p>`, 
 			keywords: ["countmappulsebreathe", "hugh", "exhibit", "webpage"],
 			description: "count map pulse breathe ::: map ::: " + point.uri, 
 			code: point.code, score: point.score,

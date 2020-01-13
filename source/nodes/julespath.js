@@ -5,7 +5,7 @@ module.exports = () => {
 	const mapcontrols = ["home", "next", "about"];
 	const nshapes = {acc: [2,3], bvp: [8,16], eda: [3,6], hr: [2,2], temp: [2,2]};
 	let mapscore = {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .125, dataset: ["acc", "bvp", "eda", "hr", "temp"]};
-	const name = "julesindex";
+	const name = "jules";
 
 	let path = 
 	{
@@ -22,6 +22,7 @@ module.exports = () => {
 			content: ``,
 			links: [],
 			css: [],
+			index: "studio",
 			home: { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", url: name }
 		},
 		pathpoints: [

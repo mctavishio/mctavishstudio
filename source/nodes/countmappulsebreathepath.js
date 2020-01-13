@@ -17,6 +17,7 @@ module.exports = () => {
 			content: `<p>count map pulse breathe with sound from map3 ::: used at the <a href="http://josephneasegallery.com">Joseph Nease Gallery</a> 12/2019 - 2/2020</p>`,
 			links: [],
 			css: [],
+			index: "studio",
 			home: { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", url: name },
 			access: "all"
 		},
@@ -63,6 +64,7 @@ module.exports = () => {
 				`
 		}
 	];
+
 	const points = [
 		{title: "map 3a", uri: "map3a", code: [...mapcode, "code/map3elements.js",  "code/map3astreams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }},
 		{title: "map 3b", uri: "map3b", code: [...mapcode, "code/map3elements.js",  "code/map3bstreams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8] }},

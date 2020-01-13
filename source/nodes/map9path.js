@@ -1,7 +1,7 @@
 module.exports = () => {
 	const mapcode = ["code/velocity.min.js", "code/kefir201911.min.js", "code/tools.js", "code/mapdata.js", "code/radio.js", "code/mapcoreelements.js", "code/mapdrawp.js", "code/mapdashboard.js", "code/mapstart.js"];
-	const mapscore = {soundplaylist: "map3", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [2,4] };
-	const name = "map9index";
+	const mapscore = {soundplaylist: "map3", colorplaylist: "primary", nrows:[4,8], ncols:[4,8], m: [2,4] };
+	const name = "map9";
 
 	let path = 
 	{
@@ -17,6 +17,7 @@ module.exports = () => {
 			content: `<p>count map pulse breathe ::: map 9 film / sound work</p>`,
 			links: [],
 			css: [],
+			index: "studio",
 			home: { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", url: name },
 			access: "all"
 		},

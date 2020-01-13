@@ -119,6 +119,29 @@ createdata = z => {
 					["#fcfbe3", "#191918"], //"warmbw",
 					["#fcfbe3", "#e2e1cc", "#c9c8b5", "#b0af9e", "#979688", "#7e7d71", "#64645a", "#4b4b44", "#32322d", "#191916", "#000000"], //warmgrays
 				],
+				industry: [
+					["#fcfbe3", "#191918"], //"warmbw",
+					["#9a0000", "#fcfbe3", "#191918"], //"warmbwred",
+					["#ffcc00", "#fcfbe3", "#191918"], //"warmbwyellow",
+					["#fcfbe3", "#191918"], //"warmbw",
+					["#ffcc00", "#fcfbe3", "#191918"], //"warmbwyellow",
+					["#9a0000", "#fcfbe3", "#191918"], //"warmbwred",
+					["#fcfbe3", "#191918"], //"warmbw",
+					["#9a0000", "#fcfbe3", "#191918"], //"warmbwred",
+				],
+				checkers: [
+					["#fcfbe3", "#191918"], //"warmbw",
+					["#9a0000", "#fcfbe3", "#191918"], //"warmbwred",
+					["#fcfbe3", "#191918"], //"warmbw",
+					["#9a0000", "#fcfbe3", "#191918"], //"warmbwred",
+					["#9a0000", "#fcfbe3", "#191918"], //"warmbwred",
+				],
+				primary: [
+					["#fcfbe3", "#191918"], //"warmbw",
+					["#9a0000", "#fcfbe3", "#191918"], //"warmbwred",
+					["#ffcc00", "#fcfbe3", "#191918"], //"warmbwyellow",
+					["#006699", "#fcfbe3", "#191918"], //"warmbwblue",
+				],
 			}
 		},
 		timesteps: [

@@ -30,21 +30,21 @@ let createstreams = z => {
 				if(e.count%5!==0) {
 					Velocity({	
 						elements: e.elements.el,
-						properties: { fillOpacity: 0.0, strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(e.canvas.min/100, e.canvas.min/20), strokeDasharray: z.tools.randominteger(10, e.canvas.max*2), fill: color, x: 0, y: 0, width: e.canvas.width, height: e.canvas.height },
+						properties: { fillOpacity: 0.0, strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(e.canvas.min/40, e.canvas.min/10), strokeDasharray: z.tools.randominteger(10, e.canvas.max*2), fill: color, x: 0, y: 0, width: e.canvas.width, height: e.canvas.height },
 						options: { duration: z.tools.randominteger(e.dt*800,e.dt*900),  delay: z.tools.randominteger(0,e.dt*80), easing: "easeInOutQuad" },
 					});
 				}
 				else if(e.count%3===0) {
 					Velocity({	
 						elements: e.elements.el,
-						properties: { fillOpacity: 0.0, strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(e.canvas.min/40, e.canvas.min/10), strokeDasharray: 9, fill: color, x: 0, y: 0, width: e.canvas.width, height: e.canvas.height },
+						properties: { fillOpacity: 0.0, strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(e.canvas.min/4, e.canvas.min/2), strokeDasharray: 9, fill: color, x: 0, y: 0, width: e.canvas.width, height: e.canvas.height },
 						options: { duration: z.tools.randominteger(e.dt*800,e.dt*900),  delay: z.tools.randominteger(0,e.dt*80), easing: "easeInOutQuad" },
 					});
 				}
 				else if(e.count%2===0) {
 					Velocity({	
 						elements: e.elements.el,
-						properties: { fillOpacity: 0.0, strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(e.canvas.min/100, e.canvas.min/40), strokeDasharray: z.tools.randominteger(10, e.canvas.min*2), fill: color, x: z.tools.randominteger(0,e.canvas.grid.nrows-1)*e.canvas.grid.dx, y: 0, width: e.canvas.grid.dx, height: e.canvas.height },
+						properties: { fillOpacity: 0.0, strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(e.canvas.min/40, e.canvas.min/10), strokeDasharray: z.tools.randominteger(10, e.canvas.min*2), fill: color, x: z.tools.randominteger(0,e.canvas.grid.nrows-1)*e.canvas.grid.dx, y: 0, width: e.canvas.grid.dx, height: e.canvas.height },
 						options: { duration: z.tools.randominteger(e.dt*800,e.dt*900),  delay: z.tools.randominteger(0,e.dt*80), easing: "easeInOutQuad" },
 					});
 				}
@@ -62,58 +62,58 @@ let createstreams = z => {
 	})();
 
 	// ***** text stream ---------
-	(function() {
-		let name = "text";
-		let dt = 4; //in seconds
-		let ratios = [5,10,15,20,30,40];
-		let rhythms = [
-			[980, 0], [680, 300], [940, 40], [480, 480], [880,100], [680, 300], [800,180]
-		];
-		let tostring = function(e) {return "text"};
-		let text0 = {
-			elements: z.elements["texts"],
-			count: 0, data: z.data.language.playlists["maps1"],
-			dt:dt, tostring: tostring, name:name 
-		};
-		z.streams[name] = z.streams["drawp"].filter( e => e.tick.t%dt===0 )
-			.scan( (state, e) => { 
-				state.tick = e.tick;
-				state.palette = e.palette;
-				state.canvas = e.canvas;
-				state.count = state.count + 1;
-				return state;
-			}, text0  )
-		z.streams[name].onValue( e => { 
-			try {
-				e.elements.forEach( (textel, r) => {
-					if( z.tools.randominteger(0,10) < 4 ) {
-						let texts = e.data[z.tools.randominteger(0,e.data.length)];
-						let text = z.data.language.texts[texts];
-						let n = (e.count+r)%text.length;
-						// z.tools.logmsg("e.tick.dt = " + e.tick.dt + " e.dt = " + e.dt)
-						let pulsedt = 100;
-						let color = e.palette.colors[z.tools.randominteger(0,e.palette.colors.length)];
-						let fontsize = z.tools.randominteger(e.canvas.min*.4, e.canvas.max);
-						let top = z.tools.randominteger(0, e.canvas.height  - fontsize*1.5);
-						let left = z.tools.randominteger(0,  e.canvas.width - fontsize);
-						let staticCSS = {
-							color: color,
-							opacity: function(j,n){ return z.tools.randominteger(0,10)/10 },
-							top: function(j,n){ return top.toString() + "px" }, 
-							left: function(j,n){ return left.toString() + "px" }, 
-							"font-size": fontsize + "px"
-						};
-						z.tools.applyCSS(e.elements[r].el, staticCSS);
-						Kefir.sequentially(pulsedt, text[n]+" ").onValue( l => {
-							e.elements[r].el.innerHTML = l;
-						})
-					}
-				});
+	// (function() {
+	// 	let name = "text";
+	// 	let dt = 4; //in seconds
+	// 	let ratios = [5,10,15,20,30,40];
+	// 	let rhythms = [
+	// 		[980, 0], [680, 300], [940, 40], [480, 480], [880,100], [680, 300], [800,180]
+	// 	];
+	// 	let tostring = function(e) {return "text"};
+	// 	let text0 = {
+	// 		elements: z.elements["texts"],
+	// 		count: 0, data: z.data.language.playlists["maps1"],
+	// 		dt:dt, tostring: tostring, name:name 
+	// 	};
+	// 	z.streams[name] = z.streams["drawp"].filter( e => e.tick.t%dt===0 )
+	// 		.scan( (state, e) => { 
+	// 			state.tick = e.tick;
+	// 			state.palette = e.palette;
+	// 			state.canvas = e.canvas;
+	// 			state.count = state.count + 1;
+	// 			return state;
+	// 		}, text0  )
+	// 	z.streams[name].onValue( e => { 
+	// 		try {
+	// 			e.elements.forEach( (textel, r) => {
+	// 				if( z.tools.randominteger(0,10) < 4 ) {
+	// 					let texts = e.data[z.tools.randominteger(0,e.data.length)];
+	// 					let text = z.data.language.texts[texts];
+	// 					let n = (e.count+r)%text.length;
+	// 					// z.tools.logmsg("e.tick.dt = " + e.tick.dt + " e.dt = " + e.dt)
+	// 					let pulsedt = 100;
+	// 					let color = e.palette.colors[z.tools.randominteger(0,e.palette.colors.length)];
+	// 					let fontsize = z.tools.randominteger(e.canvas.min*.4, e.canvas.max);
+	// 					let top = z.tools.randominteger(0, e.canvas.height  - fontsize*1.5);
+	// 					let left = z.tools.randominteger(0,  e.canvas.width - fontsize);
+	// 					let staticCSS = {
+	// 						color: color,
+	// 						opacity: function(j,n){ return z.tools.randominteger(0,10)/10 },
+	// 						top: function(j,n){ return top.toString() + "px" }, 
+	// 						left: function(j,n){ return left.toString() + "px" }, 
+	// 						"font-size": fontsize + "px"
+	// 					};
+	// 					z.tools.applyCSS(e.elements[r].el, staticCSS);
+	// 					Kefir.sequentially(pulsedt, text[n]+" ").onValue( l => {
+	// 						e.elements[r].el.innerHTML = l;
+	// 					})
+	// 				}
+	// 			});
 
-			} catch(err) {z.tools.logerror("text " + err)}
-			// z.tools.logmsg(JSON.stringify(e));
-		});
-	})();
+	// 		} catch(err) {z.tools.logerror("text " + err)}
+	// 		// z.tools.logmsg(JSON.stringify(e));
+	// 	});
+	// })();
 
 	// ***** square stream ---------
 	(function() {
@@ -143,16 +143,16 @@ let createstreams = z => {
 						let sw = z.tools.randominteger(e.canvas.min/10, e.canvas.min/2);
 						Velocity({	
 							elements: e.elements[m].el,
-							properties: { fillOpacity: 0.0, strokeOpacity: 1.0, stroke: color, strokeWidth: sw, strokeDasharray: z.tools.randominteger(10, e.canvas.max), fill: color, x: z.tools.randominteger(10, e.canvas.width-10), y: 0, opacity: z.tools.randominteger(4,10)/10, width: z.tools.randominteger(10, e.canvas.width-10), height: e.canvas.height },
-							options: { duration: z.tools.randominteger(e.dt*400,e.dt*600),  delay: z.tools.randominteger(0,e.dt*200), easing: "easeInOutQuad" },
+							properties: { fillOpacity: 0.0, strokeOpacity: 1.0, stroke: color, strokeWidth: sw, strokeDasharray: z.tools.randominteger(10, e.canvas.max), fill: color, x: z.tools.randominteger(10, e.canvas.width-10), y: 0, width: z.tools.randominteger(10, e.canvas.width-10), height: e.canvas.height, opacity: z.tools.randominteger(4,10)/10  },
+							options: { duration: z.tools.randominteger(e.dt*400,e.dt*1400),  delay: z.tools.randominteger(0,e.dt*400), easing: "easeInOutQuad" },
 						});
 					}
 					else {
 						let sw = z.tools.randominteger(e.canvas.min/40, e.canvas.min/4);
 						Velocity({	
 							elements: e.elements[m].el,
-							properties: { fillOpacity: 0.0, strokeOpacity: 1.0, stroke: color, strokeWidth: sw, strokeDasharray: z.tools.randominteger(10, e.canvas.max), fill: color, x: 0, y: e.canvas.height, width: e.canvas.width, height: 0 },
-							options: { duration: z.tools.randominteger(e.dt*400,e.dt*600),  delay: z.tools.randominteger(0,e.dt*200), easing: "easeInOutQuad" },
+							properties: { fillOpacity: 0.0, strokeOpacity: 1.0, stroke: color, strokeWidth: sw, strokeDasharray: z.tools.randominteger(10, e.canvas.max), fill: color, x: 0, y: e.canvas.height, width: e.canvas.width, height: 0, opacity: 1 },
+							options: { duration: z.tools.randominteger(e.dt*400,e.dt*1600),  delay: z.tools.randominteger(0,e.dt*200), easing: "easeInOutQuad" },
 						});
 					}
 				// } catch(err) {}
