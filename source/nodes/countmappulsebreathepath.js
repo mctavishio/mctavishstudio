@@ -7,7 +7,7 @@ module.exports = () => {
 	{
 		site: {
 			id:  "id_"+ Date.now() + "_cmpb",
-			uri: name,
+			uri: name, url: name + ".html",
 			title: "count map pulse breathe",
 			subtitle: `for the <a href="http://josephneasegallery.com">JNG</a> exhibit`, 
 			keywords: ["count map pulse breathe", "index", "project", "webpage"],
@@ -18,7 +18,7 @@ module.exports = () => {
 			links: [],
 			css: [],
 			index: "studio",
-			home: { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", url: name },
+			home: { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", uri: name, url: name + ".html" },
 			access: "all"
 		},
 		pathpoints: []
@@ -83,7 +83,7 @@ module.exports = () => {
 			return {
 				actuate: "onrequest", type: "internal", //internal, external
 				format: "html", keywords: nextj===k ? ["path", "next"] : ["path"],
-				title: p.title, url: p.uri
+				title: p.title, uri: p.uri, url: p.uri + ".html", action: "traverse"
 			}
 		});
 		// console.log("******" + JSON.stringify(pathlinks,null,2));

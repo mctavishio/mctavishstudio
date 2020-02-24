@@ -7,18 +7,18 @@ module.exports = () => {
 	{
 		site: {
 			id:  "id_"+ Date.now() + "_cmpb",
-			uri: name,
+			uri: name, url: name + ".html",
 			title: "for Hugh ::: count map pulse breathe",
-			subtitle: `for the <a href="http://josephneasegallery.com">JNG</a> exhibit`, 
+			subtitle: `for the JNG exhibit`, 
 			keywords: ["count map pulse breathe", "index", "hugh", "project", "webpage"],
 			description: "Hugh index of count map pulse breathe ::: map3 sound", 
 			code:  [...mapcode, "code/map5elements.js", "code/map5streams.js"],
 			score: mapscore,
-			content: `<p>count map pulse breathe with sound from map3 ::: used at the <a href="http://josephneasegallery.com">Joseph Nease Gallery</a> 12/2019 - 2/2020</p><p>index of works for Hugh</p>`,
+			content: `<p>count map pulse breathe with sound from map3 ::: used at the Joseph Nease Gallery 12/2019 - 2/2020</p>`,
 			links: [],
 			css: [],
 			index: "hive",
-			home: { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", url: name },
+			home: { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", uri: name },
 		},
 		pathpoints: []
 		
@@ -42,16 +42,16 @@ module.exports = () => {
 			return {
 				actuate: "onrequest", type: "internal", //internal, external
 				format: "html", keywords: nextj===k ? ["path", "next"] : ["path"],
-				title: p.title, url: p.uri
+				title: p.title, uri: p.uri, url: p.uri + ".html", action: "traverse"
 			}
 		});
 		// console.log("******" + JSON.stringify(pathlinks,null,2));
 
 		path.pathpoints.push( {
 			id:  "id_"+ Date.now() + "_" + j, 
-			uri: point.uri,
+			uri: point.uri, url: point.uri + ".html",
 			title: point.title, subtitle: point.uri, 
-			content: `<p>count map pulse breathe with sound from map3 ::: used at the <a href="http://josephneasegallery.com">Joseph Nease Gallery</a> 12/2019 - 2/2020</p><p>index of works for Hugh</p>`, 
+			content: `<p>count map pulse breathe with sound from map3 ::: used at the Joseph Nease Gallery 12/2019 - 2/2020</p>`, 
 			keywords: ["countmappulsebreathe", "hugh", "exhibit", "webpage"],
 			description: "count map pulse breathe ::: map ::: " + point.uri, 
 			code: point.code, score: point.score,

@@ -6,7 +6,7 @@ module.exports = () => {
 		site: {
 			title: 'example path',
 			description: 'example path with sine wave tones',
-			baseurl: "http://mctavish.studio",
+			baseuri: "http://mctavish.studio",
 			basecss: ["css/draw.css"],
 			basecode: mapcode,
 			basescore: {soundplaylist: "sinewavetones", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] },
@@ -24,7 +24,7 @@ module.exports = () => {
 						format: "html", //pdf,ejs,html,mp3,vimeo
 						keywords: ["navigation", "home"], //ex: reference, next, navigation?
 						title: "home",
-						url: "swarm"
+						uri: "swarm"
 			},
 			next: {
 						actuate: "onrequest", //onload, onrequest, searchembed
@@ -32,7 +32,7 @@ module.exports = () => {
 						format: "html", //pdf,ejs,html,mp3,vimeo
 						keywords: ["navigation", "next"], //ex: reference, next, navigation?
 						title: "next",
-						url: "swarm"
+						uri: "swarm"
 			},
 		},
 		pathpoints: [
@@ -45,11 +45,11 @@ module.exports = () => {
 				code:  [...mapcode, "code/map3elements.js", "code/map3astreams.js"],
 				score: {soundplaylist: "sinewavetones", colorplaylist: "map3", nrows:[4,8], ncols:[4,8], m: [4,8] },
 				links: [
-					{ url: "swarmpress3", actuate: "onload", type: "internal", title: "swarm press 3", keywords: ["next"], format: "html" },
-					{ url: "swarmpress", actuate: "onload", type: "internal", title: "swarm press", keywords: ["component"], format: "html" },
-					{ url: "swarmpress2", actuate: "onload", type: "internal", title: "swarm press 2", keywords: ["next"], format: "html" },
-					{ url: "map58", actuate: "onrequest", type: "internal", title: "map 58", keywords: ["next", "reference"], format: "html" },
-					{ url: "map88", actuate: "onrequest", type: "internal", title: "map 88", keywords: ["next", "reference"], format: "html" }
+					{ uri: "swarmpress3", actuate: "onload", type: "internal", title: "swarm press 3", keywords: ["next"], format: "html" },
+					{ uri: "swarmpress", actuate: "onload", type: "internal", title: "swarm press", keywords: ["component"], format: "html" },
+					{ uri: "swarmpress2", actuate: "onload", type: "internal", title: "swarm press 2", keywords: ["next"], format: "html" },
+					{ uri: "map58", actuate: "onrequest", type: "internal", title: "map 58", keywords: ["next", "reference"], format: "html" },
+					{ uri: "map88", actuate: "onrequest", type: "internal", title: "map 88", keywords: ["next", "reference"], format: "html" }
 				],
 				content: 
 				`
@@ -70,11 +70,11 @@ module.exports = () => {
 				links: [
 					{
 						title: "Sun Yung Shin catalogue essay",
-						url: "http://blueboatfilms.com/text/swarm/FINALAOV10ShinEssay.pdf"
+						uri: "http://blueboatfilms.com/text/swarm/FINALAOV10ShinEssay.pdf"
 					},
 					{
 						title: "award announcement",
-						url: "http://northern.lights.mn/platform/artist-on-the-verge-10/"
+						uri: "http://northern.lights.mn/platform/artist-on-the-verge-10/"
 					}, 
 				],
 				content: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>'
@@ -90,11 +90,11 @@ module.exports = () => {
 				links: [
 					{
 						title: "Sun Yung Shin catalogue essay",
-						url: "http://blueboatfilms.com/text/swarm/FINALAOV10ShinEssay.pdf"
+						uri: "http://blueboatfilms.com/text/swarm/FINALAOV10ShinEssay.pdf"
 					},
 					{
 						title: "award announcement",
-						url: "http://northern.lights.mn/platform/artist-on-the-verge-10/"
+						uri: "http://northern.lights.mn/platform/artist-on-the-verge-10/"
 					}, 
 				],
 				content: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>'
@@ -110,11 +110,11 @@ module.exports = () => {
 				links: [
 					{
 						title: "Sun Yung Shin catalogue essay",
-						url: "http://blueboatfilms.com/text/swarm/FINALAOV10ShinEssay.pdf"
+						uri: "http://blueboatfilms.com/text/swarm/FINALAOV10ShinEssay.pdf"
 					},
 					{
 						title: "award announcement",
-						url: "http://northern.lights.mn/platform/artist-on-the-verge-10/"
+						uri: "http://northern.lights.mn/platform/artist-on-the-verge-10/"
 					}, 
 				],
 				content: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>'

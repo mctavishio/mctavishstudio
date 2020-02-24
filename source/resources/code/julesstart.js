@@ -25,7 +25,7 @@ window.onload = function() {
 		currentnext: 0, soundloaded: false, soundplaying: false, contentvisible: true,
 		dataset: z.score0.dataset ? z.score0.dataset : ["acc", "bvp", "eda", "hr", "temp"],
 		nshapes: z.score0.nshapes,
-		video: z.score0.video ? z.score0.video : "382500846",
+		vimeo: z.score0.vimeo ? z.score0.vimeo : "382500846",
 		orchestration: z.score0.soundplaylist ? z.data.sounds.playlists[z.score0.soundplaylist] : z.data.sounds.playlists["map3"],
 		palette: z.score0.colorplaylist ? z.data.colors.playlists[z.score0.colorplaylist] : z.data.colors.playlists["map3"],
 	};

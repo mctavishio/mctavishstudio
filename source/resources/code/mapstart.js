@@ -26,7 +26,8 @@ window.onload = function() {
 	z.score.winmin = Math.min(window.innerWidth, window.innerHeight);
 	z.score.winmax = Math.max(window.innerWidth, window.innerHeight);
 	z.score.version = (z.score.winmin < 480 && z.score.winmax < 1025) ? "small" : "large";
-	if(z.score0.video) { z.score.video = z.score0.video; }
+	if(z.score0.vimeo) { z.score.vimeo = z.score0.vimeo; };
+	if(z.score0.canvas) { z.score.canvas = z.score0.canvas; };
 	z.tools.logmsg("z.score = " + JSON.stringify(z.score,null,2));
 	z.tools.logmsg("z.score0 = " + JSON.stringify(z.score0,null,2));
 	z.score.nrows = z.score.version === "small" ? z.score0.nrows[0] : z.score0.nrows[1];
@@ -36,6 +37,7 @@ window.onload = function() {
 	z.data = createdata( z );
 	z.score.orchestration = z.data.sounds.playlists[z.score0.soundplaylist];
 	z.score.palette = z.data.colors.playlists[z.score0.colorplaylist];
+	z.score.text = z.score0.textplaylist ? z.data.language.texts[z.data.language.playlists[z.score0.textplaylist]] : [];
 	z.elements = {};
 	addcoreelements(z);
 	addelements(z);

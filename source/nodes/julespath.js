@@ -11,7 +11,7 @@ module.exports = () => {
 	{
 		site: {
 			id:  "id_"+ Date.now() + "_jules",
-			uri: name,
+			uri: name, url: name + ".html",
 			title: 'jules data research',
 			description: 'research with jules rosskam ::: film / data',
 			subtitle: "jules data index",
@@ -23,31 +23,31 @@ module.exports = () => {
 			links: [],
 			css: [],
 			index: "studio",
-			home: { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", url: name }
+			home: { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", uri: name, url: name + ".html" }
 		},
 		pathpoints: [
 		]
 	};
 
 	const points = [
-		{uri: "julessketch2019.10.14_all_2", title: "2019.10.14 all data ::: grayscale jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .125, dataset: ["acc", "bvp", "eda", "hr", "temp"], video: "382475998" } },
-		{uri: "julessketch2019.10.14_acc_2", title: "2019.10.14 acc data ::: grayscale jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .25, dataset: ["acc"], video: "382475998" } },
-		{uri: "julessketch2019.10.14_bvp_2", title: "2019.10.14 bvp data ::: grayscale jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .125, dataset: ["bvp"], video: "382475998" } },
-		{uri: "julessketch2019.10.14_eda_2", title: "2019.10.14 eda data ::: grayscale jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .5, dataset: ["eda"], video: "382475998" } },
-		{uri: "julessketch2019.10.14_hr_2", title: "2019.10.14 hr data ::: grayscale jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: 1, dataset: ["hr"], video: "382475998" } },
-		{uri: "julessketch2019.10.14_temp_2", title: "2019.10.14 temp data ::: grayscale jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .5, dataset: ["temp"], video: "382475998" } },
-		{uri: "julessketch2019.10.14_all_1", title: "2019.10.14 all data ::: abstracted jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .125, dataset: ["acc", "bvp", "eda", "hr", "temp"], video: "382500846" } },
-		{uri: "julessketch2019.10.14_acc_1", title: "2019.10.14 acc data ::: abstracted jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .25, dataset: ["acc"], video: "382500846" } },
-		{uri: "julessketch2019.10.14_bvp_1", title: "2019.10.14 bvp data ::: abstracted jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .125, dataset: ["bvp"], video: "382500846" } },
-		{uri: "julessketch2019.10.14_eda_1", title: "2019.10.14 eda data ::: abstracted jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .5, dataset: ["eda"], video: "382500846" } },
-		{uri: "julessketch2019.10.14_hr_1", title: "2019.10.14 hr data ::: grayscale jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: 1, dataset: ["hr"], video: "382500846" } },
-		{uri: "julessketch2019.10.14_temp_1", title: "2019.10.14 temp data ::: grayscale jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .5, dataset: ["temp"], video: "382500846" } },
-		{uri: "julessketch2019.10.14_all_3", title: "2019.10.14 all data ::: abstracted walking film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .125, dataset: ["acc", "bvp", "eda", "hr", "temp"], video: "382957610" } },
-		{uri: "julessketch2019.10.14_acc_3", title: "2019.10.14 acc data ::: abstracted walking film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .25, dataset: ["acc"], video: "382957610" } },
-		{uri: "julessketch2019.10.14_bvp_3", title: "2019.10.14 bvp data ::: abstracted walking film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .125, dataset: ["bvp"], video: "382957610" } },
-		{uri: "julessketch2019.10.14_eda_3", title: "2019.10.14 eda data ::: abstracted walking film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .5, dataset: ["eda"], video: "382957610" } },
-		{uri: "julessketch2019.10.14_hr_3", title: "2019.10.14 hr data ::: abstracted walking film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: 1, dataset: ["hr"], video: "382957610" } },
-		{uri: "julessketch2019.10.14_temp_3", title: "2019.10.14 temp data ::: abstracted walking film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .5, dataset: ["temp"], video: "382957610" } },
+		{uri: "julessketch2019.10.14_all_2", title: "2019.10.14 all data ::: grayscale jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .125, dataset: ["acc", "bvp", "eda", "hr", "temp"], vimeo: "382475998" } },
+		{uri: "julessketch2019.10.14_acc_2", title: "2019.10.14 acc data ::: grayscale jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .25, dataset: ["acc"], vimeo: "382475998" } },
+		{uri: "julessketch2019.10.14_bvp_2", title: "2019.10.14 bvp data ::: grayscale jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .125, dataset: ["bvp"], vimeo: "382475998" } },
+		{uri: "julessketch2019.10.14_eda_2", title: "2019.10.14 eda data ::: grayscale jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .5, dataset: ["eda"], vimeo: "382475998" } },
+		{uri: "julessketch2019.10.14_hr_2", title: "2019.10.14 hr data ::: grayscale jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: 1, dataset: ["hr"], vimeo: "382475998" } },
+		{uri: "julessketch2019.10.14_temp_2", title: "2019.10.14 temp data ::: grayscale jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .5, dataset: ["temp"], vimeo: "382475998" } },
+		{uri: "julessketch2019.10.14_all_1", title: "2019.10.14 all data ::: abstracted jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .125, dataset: ["acc", "bvp", "eda", "hr", "temp"], vimeo: "382500846" } },
+		{uri: "julessketch2019.10.14_acc_1", title: "2019.10.14 acc data ::: abstracted jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .25, dataset: ["acc"], vimeo: "382500846" } },
+		{uri: "julessketch2019.10.14_bvp_1", title: "2019.10.14 bvp data ::: abstracted jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .125, dataset: ["bvp"], vimeo: "382500846" } },
+		{uri: "julessketch2019.10.14_eda_1", title: "2019.10.14 eda data ::: abstracted jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .5, dataset: ["eda"], vimeo: "382500846" } },
+		{uri: "julessketch2019.10.14_hr_1", title: "2019.10.14 hr data ::: abstracted jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: 1, dataset: ["hr"], vimeo: "382500846" } },
+		{uri: "julessketch2019.10.14_temp_1", title: "2019.10.14 temp data ::: abstracted jules film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .5, dataset: ["temp"], vimeo: "382500846" } },
+		// {uri: "julessketch2019.10.14_all_3", title: "2019.10.14 all data ::: abstracted walking film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .125, dataset: ["acc", "bvp", "eda", "hr", "temp"], vimeo: "382957610" } },
+		// {uri: "julessketch2019.10.14_acc_3", title: "2019.10.14 acc data ::: abstracted walking film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .25, dataset: ["acc"], vimeo: "382957610" } },
+		// {uri: "julessketch2019.10.14_bvp_3", title: "2019.10.14 bvp data ::: abstracted walking film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .125, dataset: ["bvp"], vimeo: "382957610" } },
+		// {uri: "julessketch2019.10.14_eda_3", title: "2019.10.14 eda data ::: abstracted walking film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .5, dataset: ["eda"], vimeo: "382957610" } },
+		// {uri: "julessketch2019.10.14_hr_3", title: "2019.10.14 hr data ::: abstracted walking film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: 1, dataset: ["hr"], vimeo: "382957610" } },
+		// {uri: "julessketch2019.10.14_temp_3", title: "2019.10.14 temp data ::: abstracted walking film", score: {nshapes: nshapes, nrows:[4,8], ncols:[4,8], m: [4,8], soundplaylist: "map3", colorplaylist: "jules", tickrate: .5, dataset: ["temp"], vimeo: "382957610" } },
 	]
 
 	points.forEach( ( point, j ) => {
@@ -58,14 +58,15 @@ module.exports = () => {
 			return {
 				actuate: "onrequest", type: "internal", //internal, external
 				format: "html", keywords: nextj===k ? ["path", "next"] : ["path"],
-				title: p.title, url: p.uri
+				action: "traverse",
+				title: p.title, uri: p.uri
 			}
 		});
 
 		// console.log(JSON.stringify(links,null,2));
 		path.pathpoints.push( {
 			id:  "id_"+ Date.now() + "_" + j, 
-			uri: point.uri,
+			uri: point.uri, url: point.uri + ".html",
 			title: point.title, subtitle: point.uri, 
 			content: ``, 
 			keywords: ["jules", "data", "sketch", "webpage"],

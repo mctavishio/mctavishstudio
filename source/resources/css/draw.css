@@ -212,7 +212,7 @@ body {
 	text-align:left;
 	letter-spacing: 0.1em;
 }
-div.frame, svg.frame, h1.frame, main.frame {
+div.frame, svg.frame, h1.frame, main.frame, canvas.frame {
 	position: fixed;
 	top: 0; left: 0;
 	vertical-align: top; text-align: left;
@@ -454,7 +454,17 @@ code {
 	font-family: Courier, 'New Courier', monospace;
 	font-size: 0.8em;
 }
-p.code {
+div.billboard {
+	/*font-family: Courier, 'New Courier', monospace;*/
+	font-size: 2em;
+	white-space: pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -o-pre-wrap;
+	word-wrap: break-word;
+	padding-left:2vw;
+	padding-right:2vw;
+}
+p.code, div.code {
 	font-family: Courier, 'New Courier', monospace;
 	font-size: 0.8em;
 	white-space: pre-wrap;

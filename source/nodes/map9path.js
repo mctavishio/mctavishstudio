@@ -7,7 +7,7 @@ module.exports = () => {
 	{
 		site: {
 			id:  "id_"+ Date.now() + "_map9",
-			uri: name,
+			uri: name, url: name + ".html",
 			title: "count map pulse breathe ::: map 9",
 			subtitle: ``, 
 			keywords: ["count map pulse breathe", "index", "project", "webpage"],
@@ -18,7 +18,7 @@ module.exports = () => {
 			links: [],
 			css: [],
 			index: "studio",
-			home: { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", url: name },
+			home: { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", uri: name, url: name + ".html" },
 			access: "all"
 		},
 		pathpoints: []
@@ -65,8 +65,8 @@ module.exports = () => {
 		}
 	];
 	const points = [
-		{title: "map 9a", uri: "map9a", code: [...mapcode, "code/map9elements.js",  "code/map9streams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8], video: "382957610" }},
-		{title: "map 9b", uri: "map9b", code: [...mapcode, "code/map9elements.js",  "code/map9streams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8], video: "382957610" }},
+		{title: "map 9a", uri: "map9a", code: [...mapcode, "code/map9elements.js",  "code/map9streams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8], vimeo: "382957610" }},
+		{title: "map 9b", uri: "map9b", code: [...mapcode, "code/map9elements.js",  "code/map9streams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8], vimeo: "382957610" }},
 		];
 
 	points.forEach( ( point, j ) => {
@@ -78,14 +78,14 @@ module.exports = () => {
 			return {
 				actuate: "onrequest", type: "internal", //internal, external
 				format: "html", keywords: nextj===k ? ["path", "next"] : ["path"],
-				title: p.title, url: p.uri
+				title: p.title, uri: p.uri, url: p.uri + ".html", action: "traverse"
 			}
 		});
 		// console.log("******" + JSON.stringify(pathlinks,null,2));
 
 		path.pathpoints.push( {
 			id:  "id_"+ Date.now() + "_" + j, 
-			uri: point.uri,
+			uri: point.uri, url: point.uri + ".html",
 			title: text.title, subtitle: point.uri, 
 			content: text.content, 
 			keywords: ["countmappulsebreathe", "exhibit", "webpage"],

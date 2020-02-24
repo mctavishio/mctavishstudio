@@ -6,6 +6,9 @@ let createtools = z => {
 			normalrandominteger: (min, max, n) => { // CLT
 				return n === 0 ? z.tools.randominteger(min,max) : Math.floor(Array.from(Array(n).keys()).reduce( (sum, j) => { return sum + z.tools.randominteger(min,max) }, 0) / n)
 			},
+			clearDOMelement: (el) => {
+				el.innerHTML = "";
+			},
 			telegraph: (el, msg) => {
 				if(el) {
 					try { el.innerHTML =  msg; z.tools.logmsg("... " + msg);}

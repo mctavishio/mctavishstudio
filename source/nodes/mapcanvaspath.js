@@ -1,20 +1,20 @@
 module.exports = () => {
 	const mapcode = ["code/velocity.min.js", "code/kefir201911.min.js", "code/tools.js", "code/mapdata.js", "code/radio.js", "code/mapcoreelements.js", "code/mapdrawp.js", "code/mapdashboard.js", "code/mapstart.js"];
-	const mapscore = {soundplaylist: "ocean", colorplaylist: "industry", nrows:[4,8], ncols:[4,8], m: [2,4] };
-	const name = "map10";
+	const mapscore = {soundplaylist: "ocean", colorplaylist: "industry", nrows:[8,16], ncols:[8,16], m: [4,8], canvas: true };
+	const name = "mapcanvas";
 
 	let path = 
 	{
 		site: {
-			id:  "id_"+ Date.now() + "_map10",
+			id:  "id_"+ Date.now() + "_"+name,
 			uri: name, url: name + ".html",
-			title: "count map pulse breathe ::: map 10",
+			title: "count map pulse breathe ::: map canvas",
 			subtitle: ``, 
 			keywords: ["count map pulse breathe", "index", "project", "webpage"],
-			description: "index of map 10 ::: map3 sound", 
-			code:  [...mapcode, "code/map10elements.js", "code/map10streams.js"],
+			description: "index of map canvas ::: canvas and svg exploration", 
+			code:  [...mapcode, "code/mapcanvaselements.js", "code/mapcanvasstreams.js"],
 			score: mapscore,
-			content: `<p>count map pulse breathe ::: map 10 film / sound work</p>`,
+			content: `<p>count map pulse breathe ::: map canvas sound work</p>`,
 			links: [],
 			css: [],
 			index: "studio",
@@ -24,10 +24,9 @@ module.exports = () => {
 		pathpoints: []
 		
 	};
-	const points = [
-		{title: "map 10a", uri: "map10a", code: [...mapcode, "code/map10elements.js",  "code/map10streams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8], vimeo: "382957610" }},
-		{title: "map 10b", uri: "map10b", code: [...mapcode, "code/map10elements.js",  "code/map10streams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [8,16], vimeo: "382957610" }},
-		];
+	const points = [ 
+		{title: "map canvas", uri: "mapcanvas0", code: [...mapcode, "code/mapcanvaselements.js",  "code/mapcanvasstreams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[8,16], ncols:[8,16], m: [4,8], canvas: true }},
+	];
 
 	points.forEach( ( point, j ) => {
 		// let text = texts[j%texts.length];
@@ -38,7 +37,7 @@ module.exports = () => {
 			return {
 				actuate: "onrequest", type: "internal", //internal, external
 				format: "html", keywords: nextj===k ? ["path", "next"] : ["path"],
-				title: p.title, uri: p.uri, url: p.uri + ".html", action: "alert"
+				title: p.title, uri: p.uri, url: p.uri + ".html", action: "traverse"
 			}
 		});
 		// console.log("******" + JSON.stringify(pathlinks,null,2));

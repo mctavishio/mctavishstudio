@@ -1,6 +1,6 @@
 module.exports = () => {
 	const mapcode = ["code/velocity.min.js", "code/kefir201911.min.js", "code/tools.js", "code/mapdata.js", "code/radio.js", "code/mapcoreelements.js", "code/mapdrawp.js", "code/mapdashboard.js", "code/mapstart.js"];
-	const mapscore = {soundplaylist: "ocean", colorplaylist: "industry", nrows:[4,8], ncols:[4,8], m: [2,4] };
+	const mapscore = {soundplaylist: "ocean", colorplaylist: "industry", textplaylist: "cmpbtalk", nrows:[4,8], ncols:[4,8], m: [2,4] };
 	const name = "map10";
 
 	let path = 
@@ -25,9 +25,9 @@ module.exports = () => {
 		
 	};
 	const points = [
-		{title: "map 10a", uri: "map10a", code: [...mapcode, "code/map10elements.js",  "code/map10streams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [4,8], vimeo: "382957610" }},
-		{title: "map 10b", uri: "map10b", code: [...mapcode, "code/map10elements.js",  "code/map10streams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, nrows:[4,8], ncols:[4,8], m: [8,16], vimeo: "382957610" }},
-		];
+		{title: "map cmpb talk 1", uri: "mapcmpbtalk1", code: [...mapcode, "code/mapcmpbtalkelements.js",  "code/mapcmpbtalkstreams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, textplaylist: mapscore.textplaylist, nrows:[4,8], ncols:[4,8], m: [4,8], l: [2,4] }},
+		{title: "map cmpb talk 2", uri: "mapcmpbtalk2", code: [...mapcode, "code/mapcmpbtalkelements.js",  "code/mapcmpbtalkstreams.js"], score: {soundplaylist: mapscore.soundplaylist, colorplaylist: mapscore.colorplaylist, textplaylist: mapscore.textplaylist, nrows:[4,8], ncols:[4,8], m: [2,4], l: [1,2] }},
+	];
 
 	points.forEach( ( point, j ) => {
 		// let text = texts[j%texts.length];
@@ -38,7 +38,7 @@ module.exports = () => {
 			return {
 				actuate: "onrequest", type: "internal", //internal, external
 				format: "html", keywords: nextj===k ? ["path", "next"] : ["path"],
-				title: p.title, uri: p.uri, url: p.uri + ".html", action: "alert"
+				title: p.title, uri: p.uri, url: p.uri + ".html", action: "traverse"
 			}
 		});
 		// console.log("******" + JSON.stringify(pathlinks,null,2));

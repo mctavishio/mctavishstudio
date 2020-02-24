@@ -100,19 +100,19 @@ let createdrawp = z => {
 		let pick0 = {
 			row: 0, col: 0,
 			count: 0, nrows: z.score.nrows, ncols: z.score.ncols,
-			past: [0,0],
+			past: [z.tools.randominteger(0, z.score.nrows), z.tools.randominteger(0, z.score.ncols)],
 			dt:dt, tostring: tostring, name:name,
 			past: [],
 		};
 		//build memory
 		Array.from(Array(z.score.m).keys()).forEach(  r => {
-			pick0.past.unshift([0,0]);
+			pick0.past.unshift([z.tools.randominteger(0, z.score.nrows), z.tools.randominteger(0, z.score.ncols)]);
 		});
 		z.streams[name] = z.streams["tick"].filter( e => e.t%dt===0 )
 			.scan( (state, e) => { 
 				state.past.shift();
 				state.past.push([z.tools.randominteger(0, state.nrows), z.tools.randominteger(0, state.ncols)]);
-				state.row = z.tools.randominteger(0, state.nrows);
+				// state.row = z.tools.randominteger(0, state.nrows);
 				// state.col = z.tools.randominteger(0, state.ncols);
 				state.count = state.count + 1;
 				return state;
