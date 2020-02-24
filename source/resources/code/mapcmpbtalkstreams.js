@@ -181,11 +181,11 @@ let createstreams = z => {
 			[480, 480]
 		];
 		let tostring = function(e) {return "texts"};
+		
 		let text0 = {
 			elements: z.elements["texts"],
 			count: 0,
 			dt:dt, tostring: tostring, name:name,
-			text: z.score.text
 		};
 		z.streams[name] = z.streams["drawp"].filter( e => e.tick.t%dt===0 )
 			.scan( (state, e) => { 
@@ -193,13 +193,13 @@ let createstreams = z => {
 				state.palette = e.palette;
 				state.canvas = e.canvas;
 				state.boxpick = e.boxpick;
+				state.book = e.book;
 				state.count = state.count + 1;
 				return state;
 			}, text0  )
 		z.streams[name].onValue( e => { 
 			try {
 				// let past = e.boxpick.past.sort( (a, b) => b[1] - b[0] );
-				
 				let past = e.boxpick.past;
 				let min = Math.floor(e.canvas.min/8);
 				let n = z.tools.randominteger(0, rhythms.length);
@@ -209,9 +209,10 @@ let createstreams = z => {
 				l = e.count%z.score.l; 
 				//build memory
 				// Array.from(Array(z.score.l).keys()).forEach(  l => {
-					z.tools.logmsg("test test " + e.elements[l].el.innerHTML);
+					// z.tools.logmsg("test test " + e.elements[l].el.innerHTML);
 					color = colors[z.tools.randominteger(0,colors.length)];
-					word = e.text[z.tools.randominteger(0,e.text.length)];
+					word = e.book.text[z.tools.randominteger(0,e.book.text.length)];
+					// word="hello";
 					wl =  (e.canvas.width)/word.length;
 					size = Math.max(20, z.tools.randominteger(wl, 1.2*wl));
 					dy = z.tools.randominteger(0, e.canvas.height - size*1.2);

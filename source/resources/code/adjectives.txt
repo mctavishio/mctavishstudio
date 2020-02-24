@@ -1,16 +1,17 @@
-. . .
+!
 (en)coded
 (en)tranced
 (m)bodied
 abandoned
 absent
 activated
-again & again & again
+againAndAgain
 ahab
 alchemist
 algorithmic
 animal
 animate
+arachnid
 architectural
 armament
 arrow
@@ -27,10 +28,11 @@ blueprint
 boat
 bone
 boneyard
-book of
+bookOf
 bounded
 bread
 breathing
+breathless
 broken
 buildings
 burning
@@ -54,6 +56,7 @@ choreograph
 circled
 circuitous
 city
+clay
 clock
 clockwork
 cloth
@@ -128,11 +131,12 @@ frayed
 friction
 fugal
 generative
-geological
+geologic
 geometric
 ghost
 ghostly
 glassy
+graffiti
 graphite
 grid
 hand
@@ -144,7 +148,7 @@ honey
 horsehair
 human
 humming
-huricane
+hurricane
 hurtling
 hymnal
 immersive
@@ -158,7 +162,7 @@ infinite
 infinite
 ink
 intelligent
-intersecting
+intersect
 intimate
 jagged
 knotted
@@ -188,6 +192,7 @@ mended
 metal
 metallic
 metric
+monastic
 morning
 moth
 near
@@ -195,12 +200,12 @@ neon
 network
 networked
 night
+not
 now
 only
 open
 orchestral
-over & over
-over & over & over
+over
 oZ
 paper
 particle
@@ -212,7 +217,6 @@ petrochemical
 photosynthetic
 physical
 pigment
-pipelined
 pitch
 poet
 pointillist
@@ -220,7 +224,7 @@ polyphonic
 porous
 pulse
 pulsing
-radio
+queer
 radio
 ragged
 raining
@@ -279,10 +283,12 @@ street
 string
 subsumed
 surveillance
+suspended
 sutured
 swarm
 swarming
 swift
+symphonic
 synchronized
 tapping
 techno
@@ -316,7 +322,7 @@ variant
 viral
 waiting
 warped
-whispering
+whispered
 window
 winged
 wire

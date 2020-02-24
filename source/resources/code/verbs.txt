@@ -1,4 +1,6 @@
+!
 (en)code
+(m)
 (m)body
 abandon
 abstract
@@ -8,12 +10,16 @@ arc
 architect
 artifact
 awaken
+bang
 bead
 begin
 bend
+bind
 blaze
 blueprint
 bound
+box
+braid
 break
 breathe
 build
@@ -21,7 +27,6 @@ burn
 cable
 calculate
 capitulate
-carve
 cascade
 cast
 chance
@@ -29,11 +34,13 @@ change
 choreograph
 churn
 circle
+clang
 climb
 clock
 cloud
+clump
+cluster
 collide
-complexify
 compose
 compute
 conceal
@@ -49,18 +56,19 @@ course
 create
 cross
 crystalize
-cyberdream
 cycle
 darken
-de - compose
+deCompose
 delay
 deviate
 digitize
 disperse
 distance
+distill
 diverge
 draw
 dream
+drum
 echo
 electrify
 embrace
@@ -69,9 +77,10 @@ encode
 encompass
 end
 energize
-erasure
+erase
 etch
 evolve
+fall
 fever
 field
 filter
@@ -92,6 +101,7 @@ fuse
 generate
 grid
 grind
+heed
 hive
 howl
 hum
@@ -107,6 +117,7 @@ ink
 intersect
 intoxicate
 jump
+juxtapose
 knot
 lace
 layer
@@ -125,15 +136,16 @@ navigate
 net
 network
 noise
-noise
 open
 orchestrate
+pack
 paint
+perform
 permeate
-persist
 photosynthesize
 pipeline
 pitch
+pollinate
 pour
 pull
 pulse
@@ -144,8 +156,6 @@ reach
 record
 render
 repeat
-repeat
-repeat repeat
 resist
 resonate
 retrieve
@@ -155,6 +165,7 @@ revolt
 rhyme
 rise
 risk
+roll
 rope
 sacrifice
 sail
@@ -188,9 +199,11 @@ swarm
 synchronize
 tap
 tape
+tattoo
 tear
 telegraph
 test
+testify
 thread
 throw
 ticket
@@ -206,12 +219,13 @@ transition
 transmigrate
 transmit
 traverse
+triangulate
 tune
 tunnel
 turn
 twist
 type
-undo undo
+undoUndo
 untie
 wait
 walk
@@ -220,6 +234,7 @@ watch
 weave
 web
 whisper
+whittle
 wind
 wire
 witness

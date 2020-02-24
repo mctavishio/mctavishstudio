@@ -59,6 +59,35 @@ let createdrawp = z => {
 		// });
 	})();
 
+	// ***** book stream ---------
+	(function() {
+		let name = "book";
+		let dt = 68; //in seconds
+		let date0 = new Date();
+		let t0 = Math.floor(date0.getTime()/1000);
+		let texts = z.score.texts;
+		let tostring = function(e) {return "book palette"};
+		let palette0 = {
+			texts: texts,
+			text: z.data.language.texts[texts[ Math.floor(t0/dt)%texts.length ]],
+			count: 0,
+			past: ["Ö x x x ø 0 Ø", "x X x ø 0 Ø xº3"],
+			dt:dt, tostring: tostring, name:name 
+		};
+		// z.tools.logmsg(JSON.stringify("text" + palette0.text));
+		z.streams[name] = z.streams["tick"].filter( e => e.t%dt===0 )
+			.scan( (state, e) => { 
+				state.past = state.text;
+				state.text = z.data.language.texts[state.texts[ Math.floor(e.t/dt)%state.texts.length ]];
+				state.count = state.count + 1;
+				return state;
+			}, palette0  )
+		z.streams[name].onValue( e => { 
+			// z.elements["stage"].el.setAttribute("style", "background-color: " + e.colors[z.tools.randominteger(0, e.colors.length)]);
+			// z.tools.logmsg(JSON.stringify(e.text));
+		});
+	})();
+
 	// ***** canvas stream ---------
 	(function() {
 		let name = "canvas";
@@ -133,12 +162,13 @@ let createdrawp = z => {
 			count: 0,
 			dt:dt, t0:t0, tostring: tostring, name:name 
 		};
-		z.streams[name] = Kefir.combine([z.streams["tick"]], [z.streams["palette"], z.streams["canvas"], z.streams["boxpick"]], (tick, palette, canvas, boxpick) => { return {tick:tick, palette:palette, canvas:canvas, boxpick:boxpick } })
+		z.streams[name] = Kefir.combine([z.streams["tick"]], [z.streams["palette"], z.streams["canvas"], z.streams["boxpick"], z.streams["book"]], (tick, palette, canvas, boxpick, book) => { return {tick:tick, palette:palette, canvas:canvas, boxpick:boxpick, book:book } })
 			.scan( (state, e) => { 
 				state.tick = e.tick;
 				state.palette = e.palette;
 				state.canvas = e.canvas;
 				state.boxpick = e.boxpick;
+				state.book = e.book;
 				state.count = state.count + 1;
 				return state;
 		}, drawp0  );
