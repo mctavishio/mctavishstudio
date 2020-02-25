@@ -458,6 +458,7 @@ div.billboard {
 	/*font-family: Courier, 'New Courier', monospace;*/
 	font-size: 2em;
 	letter-spacing: 0.15em;
+	/*background-color: var(--warmgray);*/
 	white-space: pre-wrap;
 	white-space: -moz-pre-wrap;
 	white-space: -o-pre-wrap;

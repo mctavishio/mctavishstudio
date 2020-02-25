@@ -1,3 +1,4 @@
+&amp;&amp;
 !
 (en)code
 (m)
@@ -143,8 +144,8 @@ paint
 perform
 permeate
 photosynthesize
-pipeline
 pitch
+plumb
 pollinate
 pour
 pull
@@ -167,7 +168,6 @@ rise
 risk
 roll
 rope
-sacrifice
 sail
 sanctify
 sand
@@ -215,7 +215,6 @@ trace
 track
 transfer
 transform
-transition
 transmigrate
 transmit
 traverse
@@ -225,7 +224,7 @@ tunnel
 turn
 twist
 type
-undoUndo
+undo
 untie
 wait
 walk
