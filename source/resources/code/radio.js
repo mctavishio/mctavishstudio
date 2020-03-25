@@ -11,8 +11,8 @@ let createradio = z => {
 				if(!z.radio.loading.includes(clip.url)) {
 					z.radio.loading.push(clip.url);
 					let request = new XMLHttpRequest();
-					request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url, true);
-					// request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
+					// request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url, true);
+					request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
 					z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + "/"  + clip.url);
 					request.responseType = "arraybuffer";
 					request.onload = () =>  {
