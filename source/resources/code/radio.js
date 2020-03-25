@@ -11,8 +11,8 @@ let createradio = z => {
 				if(!z.radio.loading.includes(clip.url)) {
 					z.radio.loading.push(clip.url);
 					let request = new XMLHttpRequest();
-					// request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/" + clip.url, true);
-					request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
+					request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url, true);
+					// request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
 					z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + "/"  + clip.url);
 					request.responseType = "arraybuffer";
 					request.onload = () =>  {
@@ -39,7 +39,7 @@ let createradio = z => {
 			z.score.orchestration.forEach( (instruments, j) => {
 				instruments.forEach( instrument => 
 				{ 
-					// z.tools.logmsg("instrument = " + instrument)
+					z.tools.logmsg("instrument = " + instrument)
 					// z.data.instruments.push(instrument);
 					z.radio.instruments[instrument] = z.data.sounds.instruments[instrument];
 					z.radio.clips[z.data.sounds.instruments[instrument].clip] = z.data.sounds.clips[z.data.sounds.instruments[instrument].clip]

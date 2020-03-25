@@ -38,6 +38,7 @@ window.onload = function() {
 	z.score.orchestration = z.data.sounds.playlists[z.score0.soundplaylist];
 	z.score.palette = z.data.colors.playlists[z.score0.colorplaylist];
 	let textplaylist = z.score0.textplaylist ? z.score0.textplaylist : "default";
+	z.tools.logmsg("textplaylist = " + textplaylist);
 	z.score.texts = z.data.language.playlists[textplaylist];
 	z.elements = {};
 	addcoreelements(z);

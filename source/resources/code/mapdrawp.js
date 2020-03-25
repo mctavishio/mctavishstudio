@@ -65,11 +65,12 @@ let createdrawp = z => {
 		let dt = 68; //in seconds
 		let date0 = new Date();
 		let t0 = Math.floor(date0.getTime()/1000);
+		z.tools.logmsg("z.score.texts = " + z.score.texts);
 		let texts = z.score.texts;
 		let tostring = function(e) {return "book palette"};
 		let palette0 = {
 			texts: texts,
-			text: z.data.language.texts[texts[ Math.floor(t0/dt)%texts.length ]],
+			text: z.data.language.texts[ texts[ Math.floor(t0/dt)%texts.length ]],
 			count: 0,
 			past: ["Ö x x x ø 0 Ø", "x X x ø 0 Ø xº3"],
 			dt:dt, tostring: tostring, name:name 
