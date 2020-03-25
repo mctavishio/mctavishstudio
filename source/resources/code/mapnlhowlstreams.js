@@ -320,10 +320,10 @@ let createstreams = z => {
 	})();
 
 
-	// ***** sound set stream ---------
+	// ***** howl sound set stream ---------
 	(function() {
 		let name = "howlsounds";
-		let dt = 5; //in seconds
+		let dt = 15; //in seconds
 		let date0 = new Date();
 		let t0 = Math.floor(date0.getTime()/1000);
 		let tostring = function(e) {return "howl sounds"};
@@ -348,10 +348,10 @@ let createstreams = z => {
 		});
 	})();
 
-	// ***** sound set stream ---------
+	// ***** whowl sound set stream ---------
 	(function() {
 		let name = "whowlsounds";
-		let dt = 28; //in seconds
+		let dt = 18; //in seconds
 		let date0 = new Date();
 		let t0 = Math.floor(date0.getTime()/1000);
 		let tostring = function(e) {return "whispered howl sounds"};
@@ -376,7 +376,7 @@ let createstreams = z => {
 		});
 	})();
 
-	// ***** sound set stream ---------
+	// ***** tonal sound set stream ---------
 	(function() {
 		let name = "tonalsounds";
 		let dt = 38; //in seconds
@@ -429,7 +429,7 @@ let createstreams = z => {
 				let instrument = z.data.sounds.instruments[sound];
 				let vol = z.tools.randominteger(instrument.minvolume*10, instrument.maxvolume*10)/10;
 				z.radio.playbuffer( { instrument: sound, volume: vol, delay: z.tools.randominteger(0,4)/10 } );
-				if(z.tools.randominteger(0,10) < 1) {
+				if(z.tools.randominteger(0,10) < 2) {
 					Kefir.sequentially(400, [0, 1, 2, 3]).onValue( x => { 
 						z.radio.playgrain( { instrument: instrumentname, volume: vol, delay: 0 } );
 					});
@@ -464,7 +464,7 @@ let createstreams = z => {
 				let instrument = z.data.sounds.instruments[sound];
 				let vol = z.tools.randominteger(instrument.minvolume*10, instrument.maxvolume*10)/10;
 				z.radio.playbuffer( { instrument: sound, volume: vol, delay: z.tools.randominteger(0,4)/10 } );
-				if(z.tools.randominteger(0,10) < 2) {
+				if(z.tools.randominteger(0,10) < 2 || instrumentname.includes('ahowl')) {
 					Kefir.sequentially(400, [0, 1, 2, 3]).onValue( x => { 
 						z.radio.playgrain( { instrument: instrumentname, volume: vol, delay: 0 } );
 					});

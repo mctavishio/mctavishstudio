@@ -1,6 +1,6 @@
 module.exports = () => {
 	const mapcode = ["code/velocity.min.js", "code/kefir201911.min.js", "code/tools.js", "code/mapdata.js", "code/radio.js", "code/mapcoreelements.js", "code/mapdrawp.js", "code/mapdashboard.js", "code/mapstart.js"];
-	const mapscore = {soundplaylist: "howana", colorplaylist: "checkers", textplaylist: "hawonalines", nrows:[4,8], ncols:[4,8], m: [2,4], l: [2,4] };
+	const mapscore = {soundplaylist: "howana", colorplaylist: "hawona", textplaylist: "hawonalines", nrows:[4,8], ncols:[4,8], m: [2,4], l: [2,4] };
 	const name = "nlhowl";
 
 	let path = 
@@ -45,8 +45,8 @@ module.exports = () => {
 		path.pathpoints.push( {
 			id:  "id_"+ Date.now() + "_" + j, 
 			uri: point.uri, url: point.uri + ".html",
-			title: point.title, subtitle: point.uri, 
-			content: '', 
+			title: "the thing", subtitle: "by Hawona Sullivan Janzen", 
+			content: "<p class='center'>you are but one part of this<br/>what is it?<br/>it was nothing at first <br/>we had seen it before<br/>the frustration<br/>degradation<br/>instigation<br/>separation<br/>we had seen it all before <br/>an emergence<br/>a loop<br/>a bitmapped process, perhaps<br/>a solitary thing<br/>a sound a sound a sound<br/>then <br/>a formless form<br/>urging the other forms <br/>to get into formation <br/>a convergence<br/>we had seen it before <br/>you are but one part <br/>of this weather system <br/>uncommon in its commonness<br/>a reminder of what happens when nothing else is happening<br/>but we still can't sleep<br/>on the brink of this convergence<br/>there was a granular component <br/>a technicolored tidal wave <br/>a growing <br/>a shifted mass <br/>of us <br/>at first static <br/>then growling <br/>and pawing<br/>and feeding <br/>then tipping dipping flipping<br/>then dancing <br/>we were lost <br/>but never fearful<br/>we always saw the after  <br/>there was a respite <br/>then<br/>a coming together <br/>a coming together<br/>a coming together <br/>...something like a howl<br/></p>", 
 			keywords: ["northern lights", "hawona", "howl","index", "project", "webpage"],
 			description: "text for map ::: " + point.uri, 
 			code: point.code, score: point.score,

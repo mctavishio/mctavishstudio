@@ -35,7 +35,7 @@ let addelements = z => {
 	Array.from(Array(z.score.l).keys()).forEach(  (r,j) => {
 		z.elements["texts"][r] = { el: document.createElement("div") };
 		z.elements["texts"][r].el.setAttribute("id", "text"+j);
-		z.elements["texts"][r].el.setAttribute("class", "absolute zhigh billboard");
+		z.elements["texts"][r].el.setAttribute("class", "absolute zhigh hawona");
 		z.elements["texts"][r].el.style.opacity = 0;
 		// z.elements["texts"][r].el.style.backgroundColor = "#484848";
 		z.elements["texts"][r].el.innerHTML = "hello world";

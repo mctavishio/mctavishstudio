@@ -454,8 +454,23 @@ code {
 	font-family: Courier, 'New Courier', monospace;
 	font-size: 0.8em;
 }
+.center {
+	text-align: center;
+}
 div.billboard {
 	/*font-family: Courier, 'New Courier', monospace;*/
+	font-size: 2em;
+	letter-spacing: 0.15em;
+	/*background-color: var(--warmgray);*/
+	white-space: pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -o-pre-wrap;
+	word-wrap: break-word;
+	padding-left:2vw;
+	padding-right:2vw;
+}
+div.hawona {
+	font-family: Courier, 'New Courier', monospace;
 	font-size: 2em;
 	letter-spacing: 0.15em;
 	/*background-color: var(--warmgray);*/
