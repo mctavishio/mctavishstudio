@@ -1,6 +1,6 @@
 module.exports = () => {
 	const mapcode = ["code/velocity.min.js", "code/kefir201911.min.js", "code/tools.js", "code/mapdata.js", "code/radio.js", "code/mapcoreelements.js", "code/mapdrawp.js", "code/mapdashboard.js", "code/mapstart.js"];
-	const mapscore = {soundplaylist: "howana", colorplaylist: "industry", textplaylist: "hawonalines", nrows:[4,8], ncols:[4,8], m: [2,4], l: [2,4] };
+	const mapscore = {soundplaylist: "howana", colorplaylist: "checkers", textplaylist: "hawonalines", nrows:[4,8], ncols:[4,8], m: [2,4], l: [2,4] };
 	const name = "nlhowl";
 
 	let path = 

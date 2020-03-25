@@ -323,7 +323,7 @@ let createstreams = z => {
 	// ***** sound set stream ---------
 	(function() {
 		let name = "howlsounds";
-		let dt = 7; //in seconds
+		let dt = 5; //in seconds
 		let date0 = new Date();
 		let t0 = Math.floor(date0.getTime()/1000);
 		let tostring = function(e) {return "howl sounds"};
@@ -414,7 +414,7 @@ let createstreams = z => {
 			count: 0,
 			dt:dt, tostring: tostring, name:name 
 		};
-		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 && z.score.soundplaying && z.tools.randominteger(0,10)<8 )], [z.streams["howlsounds"]], (tick, sounds) => { return {tick:tick, sounds:sounds } })
+		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 && z.score.soundplaying && z.tools.randominteger(0,10)<4 )], [z.streams["howlsounds"]], (tick, sounds) => { return {tick:tick, sounds:sounds } })
 			.scan( (state, e) => { 
 				state.tick = e.tick;
 				state.sounds = e.sounds.sounds;
