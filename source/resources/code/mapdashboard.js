@@ -129,9 +129,15 @@ let createdashboard = z => {
 				if(!z.score.soundplaying) { z.dashboard.resumeaudio(z); }
 				else { z.dashboard.suspendaudio(z); }
 			});
-			z.elements["nextlink"].el.addEventListener('click', function() {
-				z.dashboard.next(z);
-			});
+			if(z.links.filter( link => link.keywords.includes("next")).length > 1) {
+				z.elements["nextlink"].el.addEventListener('click', function() {
+					z.dashboard.next(z);
+				});
+			}
+			else { 
+				z.elements["nextlink"].el.style.display='none';
+				z.elements["homelink"].el.style.display='none';
+			}
 			z.elements["hidelink"].el.addEventListener('click', function() {
 				z.dashboard.hidecontent(z);
 				z.dashboard.hidecontrols(z);

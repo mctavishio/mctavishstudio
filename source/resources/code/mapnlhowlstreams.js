@@ -180,6 +180,7 @@ let createstreams = z => {
 		let rhythms = [
 			[480, 480]
 		];
+		let fonts =  ["boycottregular", "carbontyperegular", "districtregular", "eraserregular", "gessoregular", "stencil", "typewriterreport1942", "universityregular", "woodcutbold"];    
 		let tostring = function(e) {return "texts"};
 		
 		let text0 = {
@@ -211,12 +212,13 @@ let createstreams = z => {
 				// Array.from(Array(z.score.l).keys()).forEach(  l => {
 					// z.tools.logmsg("test test " + e.elements[l].el.innerHTML);
 					color = colors[z.tools.randominteger(0,colors.length)];
-					word = e.book.text[z.tools.randominteger(0,e.book.text.length)];
+					word = e.book.text[Math.floor(e.tick.t/dt)%e.book.text.length];
 					// word="hello";
 					wl =  (e.canvas.width)/word.length;
 					size = Math.max(20, z.tools.randominteger(wl, 1.2*wl));
 					dy = z.tools.randominteger(0, e.canvas.height - size*1.2);
 					e.elements[l].el.innerHTML = word;
+					e.elements[l].el.style.fontFamily = fonts[z.tools.randominteger(0, fonts.length)] + ", Open Sans";
 					 
 					duration = z.score.l*z.tools.randominteger(e.dt*rhythms[(n+l)%rhythms.length][0]*.8, e.dt*rhythms[(n+l)%rhythms.length][0]);
 					delay = z.tools.randominteger(e.dt*rhythms[(n+l)%rhythms.length][1]*.8, e.dt*rhythms[(n+l)%rhythms.length][1]);
@@ -464,7 +466,7 @@ let createstreams = z => {
 				let instrument = z.data.sounds.instruments[sound];
 				let vol = z.tools.randominteger(instrument.minvolume*10, instrument.maxvolume*10)/10;
 				z.radio.playbuffer( { instrument: sound, volume: vol, delay: z.tools.randominteger(0,4)/10 } );
-				if(z.tools.randominteger(0,10) < 2 || instrumentname.includes('ahowl')) {
+				if(z.tools.randominteger(0,10) < 3 || instrumentname.includes('ahowl')) {
 					Kefir.sequentially(400, [0, 1, 2, 3]).onValue( x => { 
 						z.radio.playgrain( { instrument: instrumentname, volume: vol, delay: 0 } );
 					});

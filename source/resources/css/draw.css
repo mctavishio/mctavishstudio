@@ -18,19 +18,153 @@
   --zlower: -4444;
   --zlowest: -8888;
 }
+/* 
+	from http://www.fontsquirrel.com/ 
+	all ::: 
+	boycottregular
+	carbontyperegular
+	districtregular
+	eraserregular
+	gessoregular
+	icomoon
+	paint
+	railwayregular
+	stencil
+	typewriterreport1942
+	universityregular
+	woodcutnormal
+	woodcutbold
+	@font-face {
+  font-family: "Open Sans";
+  src: url("/fonts/OpenSans-Regular-webfont.woff2") format("woff2"),
+       url("/fonts/OpenSans-Regular-webfont.woff") format("woff");
+}
+*/
+@font-face {
+    font-family: 'boycottregular';
+    src: url('fonts/BOYCOTT_-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.boycott {
+	 font-family: "boycottregular", Courier;
+}
+@font-face {
+    font-family: 'carbontyperegular';
+    src: url('fonts/carbontype-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.carbon {
+	 font-family: "carbontyperegular", Courier;
+}
+@font-face {
+    font-family: 'districtregular';
+    src: url('fonts/District-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.district {
+	 font-family: "districtregular", Courier;
+}
+@font-face {
+    font-family: 'eraserregular';
+    src: url('fonts/EraserRegular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.erase {
+	 font-family: "eraserregular", Courier;
+}
+@font-face {
+    font-family: 'gessoregular';
+    src: url('fonts/GESSO___-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.gesso {
+	 font-family: "gessoregular", Courier;
+}
 @font-face {
 	font-family: 'icomoon';
-	src:  url('fonts/icomoon.eot');
-	src:  url('fonts/icomoon.eot?c0v5ys#iefix') format('embedded-opentype'),
-		url('fonts/icomoon.ttf') format('truetype'),
-		url('fonts/icomoon.woff') format('woff'),
-		url('fonts/icomoon.svg') format('svg');
+	src: url('fonts/icomoon/icomoon.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
 .icomoon {
 	 font-family: "icomoon", Courier;
 }
+/* paint splatter / no letters */
+@font-face {
+	font-family: 'paint';
+	src: url('fonts/WC_Rhesus_A_Bta-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+.paint {
+	 font-family: "paint", Courier;
+}
+/*clean sans ...*/
+@font-face {
+    font-family: 'railwayregular';
+    src: url('fonts/Railway-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.railway {
+	 font-family: "railwayregular", Courier;
+}
+/* grunge / stencil / graffiti */
+@font-face {
+	font-family: 'stencil';
+	src: url('fonts/Capture_it-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+.stencil {
+	 font-family: "stencil", Courier;
+}
+/* typewriter / grunge */
+@font-face {
+	font-family: 'typewriterreport1942';
+	src: url('fonts/1942-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+.report1942 {
+	 font-family: "typewriterreport1942", Courier;
+}
+@font-face {
+    font-family: 'universityregular';
+    src: url('fonts/TRENU___-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+.university {
+	 font-family: "universityregular", Courier;
+}
+/* woodcut look good sketched width letters */
+@font-face {
+	font-family: 'woodcutnormal';
+	src: url('fonts/Archistico_Simple-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+.woodcut {
+	 font-family: "woodcutnormal", Courier;
+}
+@font-face {
+	font-family: 'woodcutbold';
+	src: url('fonts/Archistico_Bold-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+.woodcutbold {
+	 font-family: "woodcutbold", Courier;
+}
+
+
+
 
 /* BLANK SLATE ::: Clear defaults */
 html, body, div, span, applet, object, iframe,
@@ -419,6 +553,15 @@ pre {
 i {
 	font-style: italic;
 }
+.italic {
+	font-style: italic;
+}
+small {
+	font-size: 0.8em;
+}
+.small {
+	font-size: 0.8em;
+}
 div.terminalentry {
 	font-family: Courier, monospace;
 	white-space: pre;
@@ -429,7 +572,6 @@ div.terminalentry {
 	color: #000000;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
-	-khtml-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
@@ -442,7 +584,6 @@ div.rhterminalentry {
 	margin-bottom: 1em;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
-	-khtml-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
@@ -470,7 +611,11 @@ div.billboard {
 	padding-right:2vw;
 }
 div.hawona {
-	font-family: Courier, 'New Courier', monospace;
+	/*font-family: stencil, monospace;*/
+	/*font-family: archisticonormal, monospace;*/
+	/*font-family: archisticobold, monospace;*/
+	/*font-family: typewriterreport1942, monospace;*/
+	font-family: paintsplatter, monospace;
 	font-size: 2em;
 	letter-spacing: 0.15em;
 	/*background-color: var(--warmgray);*/
