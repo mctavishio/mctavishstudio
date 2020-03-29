@@ -36,7 +36,7 @@ module.exports = () => {
 		let pathlinks = points.map( ( p, k ) => {
 			return {
 				actuate: "onrequest", type: "internal", //internal, external
-				format: "html", keywords: nextj===k ? ["path", "next"] : ["path"],
+				format: "html", keywords: nextj===k && points.length>1 ? ["path", "next"] : ["path"],
 				title: p.title, uri: p.uri, url: p.uri + ".html", action: "traverse"
 			}
 		});

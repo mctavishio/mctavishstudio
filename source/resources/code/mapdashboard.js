@@ -67,7 +67,7 @@ let createdashboard = z => {
 			try {
 				z.tools.logmsg("hidden");
 				z.elements["controls"].el.style.display='none';
-				// z.elements["menulink"].el.style.display='block';
+				z.elements["menulink"].el.style.display='block';
 			} catch(e) { z.tools.logerror("mapdashboard ::: hidecontrols " + e) }
 		},
 		showcontrols: (z) => {
@@ -129,7 +129,7 @@ let createdashboard = z => {
 				if(!z.score.soundplaying) { z.dashboard.resumeaudio(z); }
 				else { z.dashboard.suspendaudio(z); }
 			});
-			if(z.links.filter( link => link.keywords.includes("next")).length > 1) {
+			if(z.links.filter( link => link.keywords.includes("next")).length > 0) {
 				z.elements["nextlink"].el.addEventListener('click', function() {
 					z.dashboard.next(z);
 				});
