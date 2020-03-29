@@ -114,16 +114,6 @@
 .railway {
 	 font-family: "railwayregular", Courier;
 }
-/* grunge / stencil / graffiti */
-@font-face {
-	font-family: 'stencil';
-	src: url('fonts/Capture_it-webfont.woff') format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-.stencil {
-	 font-family: "stencil", Courier;
-}
 /* typewriter / grunge */
 @font-face {
 	font-family: 'typewriterreport1942';
@@ -133,6 +123,16 @@
 }
 .report1942 {
 	 font-family: "typewriterreport1942", Courier;
+}
+/* grunge / stencil / graffiti */
+@font-face {
+	font-family: 'stencil';
+	src: url('fonts/Capture_it-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+.stencil {
+	 font-family: "stencil", Courier;
 }
 @font-face {
     font-family: 'universityregular';
@@ -615,8 +615,13 @@ div.hawona {
 	/*font-family: archisticonormal, monospace;*/
 	/*font-family: archisticobold, monospace;*/
 	/*font-family: typewriterreport1942, monospace;*/
-	font-family: paintsplatter, monospace;
+	/*font-family: paintsplatter, monospace;*/
+	position: absolute;
+	left: 0; width:100%;
+	min-width:98%;
 	font-size: 2em;
+	text-align:center;
+	font-weight: bold;
 	letter-spacing: 0.15em;
 	/*background-color: var(--warmgray);*/
 	white-space: pre-wrap;

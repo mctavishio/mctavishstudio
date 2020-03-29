@@ -67,7 +67,7 @@ let createdashboard = z => {
 			try {
 				z.tools.logmsg("hidden");
 				z.elements["controls"].el.style.display='none';
-				z.elements["menulink"].el.style.display='block';
+				// z.elements["menulink"].el.style.display='block';
 			} catch(e) { z.tools.logerror("mapdashboard ::: hidecontrols " + e) }
 		},
 		showcontrols: (z) => {
@@ -146,7 +146,8 @@ let createdashboard = z => {
 				z.dashboard.showcontent(z);
 				z.dashboard.showcontrols(z);
 			});
-			z.elements["telegraph"].el.innerHTML = z.score0.title + " ::: " + z.score0.subtitle;
+			// z.elements["telegraph"].el.innerHTML = z.score0.title + " ::: " + z.score0.subtitle;
+			z.elements["telegraph"].el.innerHTML = z.score0.title;
 		}
 	}
 };

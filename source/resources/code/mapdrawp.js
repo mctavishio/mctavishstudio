@@ -115,9 +115,9 @@ let createdrawp = z => {
 				return state
 			}, canvas0)
 
-		// z.streams[name].onValue( e => { 
-		// 	z.tools.logmsg(JSON.stringify(e));
-		// });
+		z.streams[name].onValue( e => { 
+			z.tools.logmsg(JSON.stringify(e));
+		});
 	})();
 
 	// ***** box pick stream ---------

@@ -8,14 +8,14 @@ const glob = require('glob');
 const config = require('./source/nodes/config')();
 const paths = [
 	require('./source/nodes/hughpath')(),
-	require('./source/nodes/jngpath')(),
-	require('./source/nodes/julespath')(),
+	// require('./source/nodes/jngpath')(),
+	// require('./source/nodes/julespath')(),
 	// require('./source/nodes/countmappulsebreathepath')(),
-	require('./source/nodes/mapcanvaspath')(),
-	require('./source/nodes/map9path')(),
-	require('./source/nodes/map10path')(),
+	// require('./source/nodes/mapcanvaspath')(),
+	// require('./source/nodes/map9path')(),
+	// require('./source/nodes/map10path')(),
 	require('./source/nodes/nlhowlpath')(),
-	require('./source/nodes/mapcmpbtalkpath')(),
+	// require('./source/nodes/mapcmpbtalkpath')(),
 ];
 const tools = require('./tools')
 const defaultpathpoint = {

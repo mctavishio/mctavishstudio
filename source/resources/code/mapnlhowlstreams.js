@@ -180,7 +180,9 @@ let createstreams = z => {
 		let rhythms = [
 			[480, 480]
 		];
-		let fonts =  ["boycottregular", "carbontyperegular", "districtregular", "eraserregular", "gessoregular", "stencil", "typewriterreport1942", "universityregular", "woodcutbold"];    
+		// let fonts =  ["'Open Sans', Helvetica", "boycottregular", "carbontyperegular", "gessoregular", "stencil"];    
+		let fonts =  ["boycottregular", "carbontyperegular", "gessoregular", "stencil", "typewriterreport1942"];    
+		// let fonts =  ["boycottregular", "carbontyperegular", "districtregular", "eraserregular", "gessoregular", "stencil", "typewriterreport1942", "universityregular", "woodcutbold"];    
 		let tostring = function(e) {return "texts"};
 		
 		let text0 = {
@@ -215,17 +217,20 @@ let createstreams = z => {
 					word = e.book.text[Math.floor(e.tick.t/dt)%e.book.text.length];
 					// word="hello";
 					wl =  (e.canvas.width)/word.length;
-					size = Math.max(20, z.tools.randominteger(wl, 1.2*wl));
-					dy = z.tools.randominteger(0, e.canvas.height - size*1.2);
+					// let mult = l===0 ? 3 : 1.6;
+					size = Math.max(40, z.tools.randominteger(wl, 1.6*wl));
+					dy = z.tools.randominteger(-0.2*size, e.canvas.height - 1.2*size);
+					// dy = Math.floor(e.canvas.height / z.score.l)*l-size;
 					e.elements[l].el.innerHTML = word;
-					e.elements[l].el.style.fontFamily = fonts[z.tools.randominteger(0, fonts.length)] + ", Open Sans";
+					// e.elements[l].el.style.fontFamily = fonts[z.tools.randominteger(0, fonts.length)] + ", Courier";
+					// e.elements[l].el.style.fontWeight = ["bold","normal"][z.tools.randominteger(0, 2)];
 					 
 					duration = z.score.l*z.tools.randominteger(e.dt*rhythms[(n+l)%rhythms.length][0]*.8, e.dt*rhythms[(n+l)%rhythms.length][0]);
 					delay = z.tools.randominteger(e.dt*rhythms[(n+l)%rhythms.length][1]*.8, e.dt*rhythms[(n+l)%rhythms.length][1]);
 					
 					Velocity({	
 						elements: e.elements[l].el,
-						properties: { fontSize: size, color: color, left: z.tools.randominteger(0, e.canvas.width/8), top: dy },
+						properties: { fontSize: size, color: color, top: dy },
 						options: { duration: duration/8,  delay: 0, easing: "easeInOutQuad" },
 					});
 					Velocity({	
@@ -325,22 +330,24 @@ let createstreams = z => {
 	// ***** howl sound set stream ---------
 	(function() {
 		let name = "howlsounds";
-		let dt = 15; //in seconds
+		let dt = 8; //in seconds
 		let date0 = new Date();
 		let t0 = Math.floor(date0.getTime()/1000);
 		let tostring = function(e) {return "howl sounds"};
 		let soundslist = z.score.orchestration.filter( s => s[0].includes("howl") && !s[0].includes("whowl") );
-		z.tools.logmsg("howlsounds soundslist = " + JSON.stringify(soundslist));
+		// z.tools.logmsg("howlsounds soundslist = " + JSON.stringify(soundslist));
 		let sounds0 = {
 			sounds: soundslist[ Math.floor(t0/dt)% soundslist.length ],
+			randomsounds: soundslist[ z.tools.randominteger(0, soundslist.length) ],
 			count: 0,
-			past: ["piano1"],
+			past: soundslist[ Math.floor(t0/dt)% soundslist.length ],
 			dt:dt, tostring: tostring, name:name 
 		};
 		z.streams[name] = z.streams["tick"].filter( e => e.t%dt===0 )
 			.scan( (state, e) => { 
 				state.past = state.sounds;
-				state.sounds = soundslist[ Math.floor(e.t/dt)% soundslist.length ],
+				state.sounds = soundslist[ Math.floor(e.t/dt)% soundslist.length ];
+				state.randomsounds = soundslist[ z.tools.randominteger(0, soundslist.length) ];
 				state.count = state.count + 1;
 				return state;
 			}, sounds0  )
@@ -358,17 +365,19 @@ let createstreams = z => {
 		let t0 = Math.floor(date0.getTime()/1000);
 		let tostring = function(e) {return "whispered howl sounds"};
 		let soundslist = z.score.orchestration.filter( s => s[0].includes("whowl") );
-		z.tools.logmsg("whowlsounds soundslist = " + JSON.stringify(soundslist));
+		// z.tools.logmsg("whowlsounds soundslist = " + JSON.stringify(soundslist));
 		let sounds0 = {
 			sounds: soundslist[ Math.floor(t0/dt)% soundslist.length ],
+			randomsounds: soundslist[ z.tools.randominteger(0, soundslist.length) ],
 			count: 0,
-			past: ["piano1"],
+			past: soundslist[ Math.floor(t0/dt)% soundslist.length ],
 			dt:dt, tostring: tostring, name:name 
 		};
 		z.streams[name] = z.streams["tick"].filter( e => e.t%dt===0 )
 			.scan( (state, e) => { 
 				state.past = state.sounds;
-				state.sounds = soundslist[ Math.floor(e.t/dt)% soundslist.length ],
+				state.sounds = soundslist[ Math.floor(e.t/dt)% soundslist.length ];
+				state.randomsounds = soundslist[ z.tools.randominteger(0, soundslist.length) ];
 				state.count = state.count + 1;
 				return state;
 			}, sounds0  )
@@ -386,23 +395,23 @@ let createstreams = z => {
 		let t0 = Math.floor(date0.getTime()/1000);
 		let tostring = function(e) {return "tonal sounds"};
 		let soundslist = z.score.orchestration.filter( s => !s[0].includes("howl") );
-		z.tools.logmsg("tonalsounds soundslist = " + JSON.stringify(soundslist));
+		// z.tools.logmsg("tonalsounds soundslist = " + JSON.stringify(soundslist));
 		let sounds0 = {
 			sounds: soundslist[ Math.floor(t0/dt)% soundslist.length ],
 			count: 0,
-			past: ["piano1"],
+			past: soundslist[ Math.floor(t0/dt)% soundslist.length ],
 			dt:dt, tostring: tostring, name:name 
 		};
 		z.streams[name] = z.streams["tick"].filter( e => e.t%dt===0 )
 			.scan( (state, e) => { 
 				state.past = state.sounds;
-				state.sounds = soundslist[ Math.floor(e.t/dt)% soundslist.length ],
+				state.sounds = soundslist[ Math.floor(e.t/dt)% soundslist.length ];
 				state.count = state.count + 1;
 				return state;
 			}, sounds0  )
 		z.streams[name].onValue( e => { 
 			// z.elements["stage"].el.setAttribute("style", "background-color: " + e.colors[z.tools.randominteger(0, e.colors.length)]);
-			// z.tools.logmsg(JSON.stringify(e));
+			z.tools.logmsg(JSON.stringify(e));
 		});
 	})();
 
@@ -416,24 +425,26 @@ let createstreams = z => {
 			count: 0,
 			dt:dt, tostring: tostring, name:name 
 		};
-		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 && z.score.soundplaying && z.tools.randominteger(0,10)<4 )], [z.streams["howlsounds"]], (tick, sounds) => { return {tick:tick, sounds:sounds } })
+		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 && z.score.soundplaying && z.tools.randominteger(0,10)<3 )], [z.streams["howlsounds"]], (tick, sounds) => { return {tick:tick, sounds:sounds } })
 			.scan( (state, e) => { 
 				state.tick = e.tick;
 				state.sounds = e.sounds.sounds;
+				state.randomsounds = e.sounds.randomsounds;
 				state.count = state.count + 1;
 				return state;
 			}, sound0  )
 		z.streams[name].onValue( e => { 
 			try {
-				let sound = e.sounds[z.tools.randominteger(0,e.sounds.length)];
+				let sounds = z.tools.randominteger(0,10) < 3 ? e.randomsounds : e.sounds;
+				let sound = sounds[z.tools.randominteger(0,sounds.length)];
 				// z.tools.logmsg(" play instrument ::: " + sound);
 				let instrumentname = sound;
 				let instrument = z.data.sounds.instruments[sound];
 				let vol = z.tools.randominteger(instrument.minvolume*10, instrument.maxvolume*10)/10;
 				z.radio.playbuffer( { instrument: sound, volume: vol, delay: z.tools.randominteger(0,4)/10 } );
-				if(z.tools.randominteger(0,10) < 2) {
-					Kefir.sequentially(400, [0, 1, 2, 3]).onValue( x => { 
-						z.radio.playgrain( { instrument: instrumentname, volume: vol, delay: 0 } );
+				if(z.tools.randominteger(0,10) < 3) {
+					Kefir.sequentially(400, [0, 1, 2]).onValue( x => { 
+						z.radio.playgrain( { instrument: instrumentname, volume: vol, delay: z.tools.randominteger(0,200) } );
 					});
 				}
 
@@ -451,22 +462,26 @@ let createstreams = z => {
 			count: 0,
 			dt:dt, tostring: tostring, name:name 
 		};
-		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 && z.score.soundplaying && z.tools.randominteger(0,10)<4 )], [z.streams["whowlsounds"]], (tick, sounds) => { return {tick:tick, sounds:sounds } })
+		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 && z.score.soundplaying && z.tools.randominteger(0,10)<3 )], [z.streams["whowlsounds"]], (tick, sounds) => { return {tick:tick, sounds:sounds } })
 			.scan( (state, e) => { 
 				state.tick = e.tick;
 				state.sounds = e.sounds.sounds;
+				state.randomsounds = e.sounds.randomsounds;
 				state.count = state.count + 1;
 				return state;
 			}, sound0  )
 		z.streams[name].onValue( e => { 
 			try {
-				let sound = e.sounds[z.tools.randominteger(0,e.sounds.length)];
+				let sounds = z.tools.randominteger(0,10) < 2 ? e.randomsounds : e.sounds;
+				// let sound = e.sounds[z.tools.randominteger(0,e.sounds.length)];
+				let sound = sounds[z.tools.randominteger(0,sounds.length)];
 				// z.tools.logmsg(" play instrument ::: " + sound);
 				let instrumentname = sound;
 				let instrument = z.data.sounds.instruments[sound];
 				let vol = z.tools.randominteger(instrument.minvolume*10, instrument.maxvolume*10)/10;
 				z.radio.playbuffer( { instrument: sound, volume: vol, delay: z.tools.randominteger(0,4)/10 } );
 				if(z.tools.randominteger(0,10) < 3 || instrumentname.includes('ahowl')) {
+				// if(z.tools.randominteger(0,10) < 3) {
 					Kefir.sequentially(400, [0, 1, 2, 3]).onValue( x => { 
 						z.radio.playgrain( { instrument: instrumentname, volume: vol, delay: 0 } );
 					});
