@@ -162,7 +162,7 @@ createdata = z => {
 					["#fcfbe3", "#191918"], //"warmbw",
 					["#9a0000", "#fcfbe3", "#191918"], //"warmbwred",
 					["#fcfbe3", "#191918"], //"warmbw",
-					["#ffcc00", "#fcfbe3", "#191918"], //"warmbwyellow",
+					// ["#ffcc00", "#fcfbe3", "#191918"], //"warmbwyellow",
 					["#ffcc00", "#9a0000", "#fcfbe3", "#191918"], //"warmindustry",
 					["#fcfbe3", "#191918"], //"warmbw",
 					["#006699", "#fcfbe3", "#191918"], //"warmbwblue",
