@@ -222,7 +222,7 @@ let createstreams = z => {
 					dy = z.tools.randominteger(-0.2*size, e.canvas.height - 1.2*size);
 					// dy = Math.floor(e.canvas.height / z.score.l)*l-size;
 					e.elements[l].el.innerHTML = word;
-					// e.elements[l].el.style.fontFamily = fonts[z.tools.randominteger(0, fonts.length)] + ", Courier";
+					e.elements[l].el.style.fontFamily = fonts[z.tools.randominteger(0, fonts.length)] + ", Courier";
 					// e.elements[l].el.style.fontWeight = ["bold","normal"][z.tools.randominteger(0, 2)];
 					 
 					duration = z.score.l*z.tools.randominteger(e.dt*rhythms[(n+l)%rhythms.length][0]*.8, e.dt*rhythms[(n+l)%rhythms.length][0]);
