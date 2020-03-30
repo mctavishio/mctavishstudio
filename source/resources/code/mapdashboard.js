@@ -34,7 +34,8 @@ let createdashboard = z => {
 				}
 				z.radio.player.context.resume().then(() => {
 					z.tools.logmsg("Playback resumed successfully");
-					z.elements["telegraph"].el.innerHTML =  "sound on";
+					z.elements["telegraph"].el.innerHTML =  "<i>loading sound ...</i>";
+					window.setTimeout(() => { z.elements["telegraph"].el.innerHTML =  "sound on"}, 8000);
 					z.score.soundplaying = true;
 					z.elements["soundlink"].el.classList.add("active");
 				});

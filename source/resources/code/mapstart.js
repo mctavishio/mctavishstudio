@@ -11,7 +11,7 @@ z.start = () => {
 	  		nextnodes[j].style.display = "none";
 		}
 	}
-	setTimeout( () => { document.querySelector('#contentframe').scrollIntoView(); }, 12000);
+	setTimeout( () => { document.querySelector('#contentframe').scrollIntoView(); }, 18000);
 	z.dashboard.listen(z);
 	createstreams(z);
 };
