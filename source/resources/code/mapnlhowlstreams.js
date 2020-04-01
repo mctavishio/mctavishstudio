@@ -426,7 +426,7 @@ let createstreams = z => {
 			count: 0,
 			dt:dt, tostring: tostring, name:name 
 		};
-		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 && z.score.soundplaying && z.tools.randominteger(0,10)<3 )], [z.streams["howlsounds"]], (tick, sounds) => { return {tick:tick, sounds:sounds } })
+		z.streams[name] = Kefir.combine([z.streams["tick"].filter( e => e.t%dt===0 && z.score.soundplaying && z.tools.randominteger(0,10)<4 )], [z.streams["howlsounds"]], (tick, sounds) => { return {tick:tick, sounds:sounds } })
 			.scan( (state, e) => { 
 				state.tick = e.tick;
 				state.sounds = e.sounds.sounds;
@@ -443,7 +443,7 @@ let createstreams = z => {
 				let instrument = z.data.sounds.instruments[sound];
 				let vol = z.tools.randominteger(instrument.minvolume*10, instrument.maxvolume*10)/10;
 				z.radio.playbuffer( { instrument: sound, volume: vol, delay: z.tools.randominteger(0,4)/10 } );
-				if(z.tools.randominteger(0,10) < 3) {
+				if(z.tools.randominteger(0,10) < 4 || instrumentname.includes('ahowl')) {
 					Kefir.sequentially(400, [0, 1, 2]).onValue( x => { 
 						z.radio.playgrain( { instrument: instrumentname, volume: vol, delay: z.tools.randominteger(0,200) } );
 					});
