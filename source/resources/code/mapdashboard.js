@@ -154,7 +154,8 @@ let createdashboard = z => {
 				z.dashboard.showcontrols(z);
 			});
 			// z.elements["telegraph"].el.innerHTML = z.score0.title + " ::: " + z.score0.subtitle;
-			z.elements["telegraph"].el.innerHTML = z.score0.title;
+			// z.elements["telegraph"].el.innerHTML = z.score0.title;
+			z.elements["telegraph"].el.innerHTML = "<< = turn on sound";
 		}
 	}
 };

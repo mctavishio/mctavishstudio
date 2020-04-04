@@ -242,7 +242,7 @@ html {
 }
 @media only screen and (max-width: 480px) {
 	html {
-		font-size: 11px;
+		font-size: 12px;
 		line-height: 18px;
 		letter-spacing: 0.12em;
 	}
@@ -493,10 +493,11 @@ h5 {
 	margin: 0px;
 	margin-top: 1em;
 	margin-bottom: 0.6em;
-	font-size: 1em;
+	font-size: 1.2em;
 	line-height: 1em;
 	font-weight: bold;
 	color:#ffcc00;
+	color: var(--warmwhite);
 }
 .flexcontainer {
 	display: flex; /*or inline-flex*/
@@ -510,6 +511,17 @@ h5 {
 	flex-grow: 0; /* or 1, 2, 3 ... to let it grow to fit box ::: there is also a flex-shrink */
 	flex-basis: auto; /* or a value 150px; */
 	align-self:  auto; /* || flex-start || flex-end || center || baseline || stretch */
+}
+ul.circle, ol.circle, dl.circle {
+	margin-left:30px;
+	list-style: circle;
+	list-style-position: inside;
+}
+ul.circle li, ol.circle li, dl.circle dt { 
+	display: list-item;
+	padding-bottom: .6em;
+	list-style: circle;
+	list-style-position: outside;
 }
 /* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
 nav ul {
@@ -651,15 +663,15 @@ a {
 	z-index: var(--zhighest);
 	font-weight:bolder;
 	text-decoration: none;
-	color: #fcfbe3;
-	color: var(--warmlightgray);
+	color: #006699;
+	color: var(--yellow);
 }
 a:hover {
 	z-index: 8888;
 	z-index: var(--zhighest);
 	text-decoration: underline;
-	color: hsl(48, 100%, 64%);
-	fill: #191918;
+	color: #9a0000;
+	color: var(--red);
 }
 svg.icon {
 	width: 50px;
@@ -679,8 +691,8 @@ nav ul li a:hover {
 	z-index: 8888;
 	z-index: var(--zhighest);
 	text-decoration: none;
-	color: var(--warmblack);
-	fill: var(--warmblack);
+	color: var(--red);
+	fill: var(--red);
 	border-bottom: solid 8px #fcfbe3;
 }
 nav ul li.active a {
