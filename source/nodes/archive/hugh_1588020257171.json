@@ -1,0 +1,133 @@
+{
+  "id": "id_1588020256454_cmpb",
+  "uri": "hugh",
+  "url": "hugh.html",
+  "title": "for Hugh ::: count map pulse breathe",
+  "subtitle": "for the JNG exhibit",
+  "keywords": [
+    "count map pulse breathe",
+    "index",
+    "hugh",
+    "project",
+    "webpage"
+  ],
+  "description": "Hugh index of count map pulse breathe ::: map3 sound",
+  "code": [
+    "code/velocity.min.js",
+    "code/kefir201911.min.js",
+    "code/tools.js",
+    "code/mapdata.js",
+    "code/radio.js",
+    "code/mapcoreelements.js",
+    "code/mapdrawp.js",
+    "code/mapdashboard.js",
+    "code/mapstart.js",
+    "code/map5elements.js",
+    "code/map5streams.js"
+  ],
+  "score": {
+    "soundplaylist": "map3",
+    "colorplaylist": "map3",
+    "nrows": [
+      4,
+      8
+    ],
+    "ncols": [
+      4,
+      8
+    ],
+    "m": [
+      2,
+      4
+    ]
+  },
+  "content": "<p>count map pulse breathe with sound from map3 ::: used at the Joseph Nease Gallery 12/2019 - 2/2020</p>",
+  "links": [
+    {
+      "actuate": "onrequest",
+      "type": "internal",
+      "format": "html",
+      "keywords": [
+        "path",
+        "next"
+      ],
+      "title": "map 3a",
+      "uri": "hughmap3a",
+      "url": "hughmap3a.html",
+      "action": "traverse"
+    },
+    {
+      "actuate": "onrequest",
+      "type": "internal",
+      "format": "html",
+      "keywords": [
+        "path"
+      ],
+      "title": "map 3b",
+      "uri": "hughmap3b",
+      "url": "hughmap3b.html",
+      "action": "traverse"
+    },
+    {
+      "actuate": "onrequest",
+      "type": "internal",
+      "format": "html",
+      "keywords": [
+        "path"
+      ],
+      "title": "map 3c",
+      "uri": "hughmap3c",
+      "url": "hughmap3c.html",
+      "action": "traverse"
+    },
+    {
+      "actuate": "onrequest",
+      "type": "internal",
+      "format": "html",
+      "keywords": [
+        "path"
+      ],
+      "title": "map 54",
+      "uri": "hughmap54",
+      "url": "hughmap54.html",
+      "action": "traverse"
+    },
+    {
+      "actuate": "onrequest",
+      "type": "internal",
+      "format": "html",
+      "keywords": [
+        "path"
+      ],
+      "title": "map 58",
+      "uri": "hughmap58",
+      "url": "hughmap58.html",
+      "action": "traverse"
+    },
+    {
+      "actuate": "onrequest",
+      "type": "internal",
+      "format": "html",
+      "keywords": [
+        "path"
+      ],
+      "title": "map 88",
+      "uri": "hughmap88",
+      "url": "hughmap88.html",
+      "action": "traverse"
+    }
+  ],
+  "css": [],
+  "index": "hive",
+  "home": {
+    "actuate": "onrequest",
+    "type": "internal",
+    "format": "html",
+    "keywords": [
+      "navigation",
+      "home"
+    ],
+    "title": "home",
+    "uri": "hive.html"
+  }
+}

@@ -14,7 +14,7 @@ const paths = [
 	// require('./source/nodes/mapcanvaspath')(),
 	// require('./source/nodes/map9path')(),
 	// require('./source/nodes/map10path')(),
-	// require('./source/nodes/nlhowlpath')(),
+	require('./source/nodes/nlhowlpath')(),
 	// require('./source/nodes/mapcmpbtalkpath')(),
 ];
 const tools = require('./tools')

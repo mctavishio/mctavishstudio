@@ -1,0 +1,80 @@
+{
+  "id": "id_1588019285308_comingtogetherindex",
+  "uri": "comingtogetherindex",
+  "url": "comingtogetherindex.html",
+  "title": "northern lights howl ::: 2020.04",
+  "subtitle": "",
+  "keywords": [
+    "northern lights",
+    "coming together",
+    "spring howl",
+    "index",
+    "project",
+    "webpage"
+  ],
+  "description": "northern lights spring howl ::: 2020.04",
+  "code": [
+    "code/velocity.min.js",
+    "code/kefir201911.min.js",
+    "code/tools.js",
+    "code/mapdata.js",
+    "code/radio.js",
+    "code/mapcoreelements.js",
+    "code/mapdrawp.js",
+    "code/mapdashboard.js",
+    "code/mapstart.js",
+    "code/mapnlhowlelements.js",
+    "code/mapnlhowlstreams.js"
+  ],
+  "score": {
+    "soundplaylist": "howana",
+    "colorplaylist": "hawona",
+    "textplaylist": "hawonalines",
+    "nrows": [
+      4,
+      8
+    ],
+    "ncols": [
+      4,
+      8
+    ],
+    "m": [
+      2,
+      4
+    ],
+    "l": [
+      2,
+      4
+    ]
+  },
+  "content": "<p>Northern Lights.mn howl fundraiser ::: 2020.04 ::: text by Hawona Sullivan Janzen ::: mix by Kathy McTavish </p>",
+  "links": [
+    {
+      "actuate": "onrequest",
+      "type": "internal",
+      "format": "html",
+      "keywords": [
+        "path",
+        "next"
+      ],
+      "title": "a coming together",
+      "uri": "comingtogether",
+      "url": "comingtogether.html",
+      "action": "traverse"
+    }
+  ],
+  "css": [],
+  "index": "swarm",
+  "home": {
+    "actuate": "onrequest",
+    "type": "internal",
+    "format": "html",
+    "keywords": [
+      "navigation",
+      "home"
+    ],
+    "title": "home",
+    "uri": "comingtogetherindex.html"
+  },
+  "access": "all"
+}

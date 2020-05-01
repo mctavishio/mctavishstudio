@@ -42,7 +42,6 @@ let createradio = z => {
 				instruments.forEach( instrument => 
 				{ 
 					z.tools.logmsg("instrument = " + instrument)
-					// z.data.instruments.push(instrument);
 					z.radio.instruments[instrument] = z.data.sounds.instruments[instrument];
 					z.radio.clips[z.data.sounds.instruments[instrument].clip] = z.data.sounds.clips[z.data.sounds.instruments[instrument].clip]
 				});
@@ -87,11 +86,8 @@ let createradio = z => {
 		},
 		playbuffer: e =>  {
 			try {
-				// let instrument = z.data.sounds.instruments[e.instrument];
 				let instrument = z.radio.instruments[e.instrument];
 				let clip = z.radio.clips[instrument.clip];
-				// z.tools.logmsg("e = " + JSON.stringify(clip));
-				// z.tools.logmsg("buffer playing = " + JSON.stringify(clip));
 
 				if(clip.loaded) {
 					let rate = 1.0;
