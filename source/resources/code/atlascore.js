@@ -1,4 +1,5 @@
 let z = {};
+let z.controls = ["hidelink", "homelink", "pathlink", "coretextlink", "nextlink", "soundlink", "menulink"];
 
 let createatlascore = z => {
 	let atlascore = {};
@@ -6,13 +7,29 @@ let createatlascore = z => {
 	atlascore.createtools = z => {
 		return {
 			//normalize velocity timings
-			brokenstick: b => {
+			brokenstick: timingsp => {
 				//[ {durationmin: tn1, delaymin: dn1, durationmax: tn2, delaymax: dn2}, [duration2, delay2] ] => normalized
 				// ex ::: [ {durationmin: 4, delaymin: 1, durationmax: 8, delaymax: 3}, {durationmin: 6, delaymin: 0, durationmax: 9, delaymax: 0} ]
 				// => take randominteger(durationmin1, durationmax1), randominteger(delaymin1, delaymax1), randominteger(durationmin2, durationmax2), randominteger(delaymin2, delaymax2)
 				// return [ {duration: tn1, delay: dn1}, {duration: tn2, delay: dn2} ]
 				// => then normalize to a total of 900 (for 90% of dt ::: 900 ms * dt in velocity calls)
+				let initialValue = 0
+				let sum = [{x: 1}, {x: 2}, {x: 3}].reduce(function (accumulator, currentValue) {
+				    return accumulator + currentValue.x
+				}, initialValue)
 
+				console.log(sum) // logs 6
+
+				let rtimings = timingsp.map( t => {
+					return { duration: z.tools.randominteger( t.durationmin, t.durationmax),  duration: z.tools.randominteger( t.delaymin, t.delaymax) }
+				});
+				let ttotal = rtimings.reduce( (acc, t) => {
+					return acc + t.duration + t.delay;
+				}, 0 );
+				let ntimings = rtimings.map( t => {
+					return { duration: 900*t.duration/ttotal, delay: 900*t.delay/ttotal }
+				})
+				return ntimings;
 			}
 			randominteger: (min, max) => {
 				return Math.floor( min + Math.random()*(max-min));
@@ -75,7 +92,7 @@ let createatlascore = z => {
 				}
 				return blanks[ z.tools.randominteger(0,ndrawings+2) ];
 			},
-			shuffle: (array) => {
+			shuffle: array => {
 				copy = array.slice();
 				for (var i = copy.length - 1; i > 0; i--) {
 					var j = Math.floor(Math.random() * (i + 1));
@@ -91,11 +108,21 @@ let createatlascore = z => {
 					streams[key].onValue( e => { z.tools.logmsg("onvalue ::: " + key + ": " + JSON.stringify(e)) });
 				});
 			},
-			datestr: function(date, options) {
+			datestr: (date, options) => {
 				if(options===undefined) options = {year: "numeric", month: "2-digit", day: "numeric", hour12: true, hour: "2-digit", minute: "2-digit", second: "2-digit"};
 				return date.toLocaleTimeString("en-US", options);
 			},
-			applyCSS: function(el, css, j, n) {
+			vectorToMatrix: (array, nrows, ncols) => {
+				let matrix = [];
+				for(let r=0; r<nrows; ++r) {
+					matrix[r] = [];
+					for(let c=0; c<ncols; ++c) {
+						matrix[r][c] = array[r*c + c];
+					}
+				}
+				return matrix;
+			}
+			applyCSS: (el, css, j, n) => {
 				var j = j || 0, n = n || 1;
 				for (var key in css) {
 					if (css.hasOwnProperty(key)) {
@@ -106,6 +133,7 @@ let createatlascore = z => {
 			},
 		}
 	};
+
 	atlascore.createcompass = z => {
 		let date0 = new Date();
 		let t0 = Math.floor(date0.getTime()/1000);
@@ -114,15 +142,18 @@ let createatlascore = z => {
 		let min = Math.min(width, height), max = Math.max(width, height);
 		let version = (min < 480 && max < 1025) ? "small" : "large";
 		let v = version === "small" ? 0 : 1;
+		let pastn = Object.keys(z.score.elements.shapes).reduce(  (max, shape) => Math.max(max, z.score.elements.shapes[shape][v]), 0 );
 		return {
 			currentnode: 0, soundloaded: false, 
 			soundplaying: false, contentvisible: true,
 			version: version,
 			clock: clock0,
 			canvas: { 
-				min: min, max = max, width: width, height: height, grid: { ncols: z.score.grid.columns[v], nrows: z.score.grid.rows[v] },
-				colors: { choices: z.score.colors.playlist[0]}, sounds: { choices: z.score.sounds.playlist[0] }, 
-				texts: { choices: z.score.texts.playlist[0]}
+				min: min, max = max, width: width, height: height, 
+				grid: { ncols: z.score.grid.columns[v], nrows: z.score.grid.rows[v], sw: 12, pastn: pastn },
+				colors: z.score.colors.playlist[0],
+				sounds: z.score.sounds.playlist[0], 
+				text: z.score.texts.playlist[0]
 			}
 		}
 	}
@@ -289,8 +320,7 @@ let createatlascore = z => {
 
 	atlascore.createelements = z => {
 		let elements = {};
-		let divframes = ["projectionframe", "canvasframe", "subtextframe", "svgframe", "textframe", "contentframe"];
-		let controls = ["hidelink", "menulink", "homelink", "maplink", "aboutauthorlink", "aboutprojectlink", "nextlink", "documentlink", "artifactlink", "soundlink"];
+		let divframes = ["subtextframe", "svgframe", "textframe", "contentframe"];
 		elements["circles"] = []; 
 		elements["rectangles"] = []; 
 		elements["lines"] = [];
@@ -306,7 +336,7 @@ let createatlascore = z => {
 		z.elements["telegraph"] = { el: document.querySelector("#telegraph") };
 		z.elements["controls"] = { el: document.querySelector("#controls") };
 		
-		controls.forEach( (id,j) => {
+		z.controls.forEach( (id,j) => {
 			z.elements[id] = { el: document.querySelector("#"+id) }
 		})
 		divframes.forEach( (id,j) => {
@@ -316,25 +346,25 @@ let createatlascore = z => {
 			z.elements[id].el.setAttribute("style", "z-index:" + j*10);
 			z.elements["body"].el.appendChild(z.elements[id].el)
 		});
-		Array.from(Array(z.score.elements.textboxes[v]).keys()).forEach(  r => {
+		Array.from(Array(z.score.elements.boxes.textboxes[v]).keys()).forEach(  r => {
 			z.elements["textboxes"][r] = { el: document.createElement("canvas") };
 			z.elements["textboxes"][r].el.setAttribute("id", "canvas_" + r);
 			z.elements["textboxes"][r].el.setAttribute("class", "absolute");
 			z.elements["textframe"].el.appendChild(z.elements["textboxes"][r].el);
 		}
-		Array.from(Array(z.score.elements.canvasboxes[v]).keys()).forEach(  r => {
-			z.elements["canvasboxes"][r] = { el: document.createElement("canvas") };
-			z.elements["canvasboxes"][r].el.setAttribute("id", "canvas_" + r);
-			z.elements["canvasboxes"][r].el.setAttribute("class", "frame");
-			z.elements["canvasboxes"][r].ctx = z.elements["canvas"].el.getContext("2d");
-			z.elements["canvasframe"].el.appendChild(z.elements["canvasboxes"][r].el);
-		}
-		Array.from(Array(z.score.elements.imageboxes[v]).keys()).forEach(  r => {
-			z.elements["imageboxes"][r] = { el: document.createElement("img") };
-			z.elements["imageboxes"][r].el.setAttribute("id", "image_" + r);
-			z.elements["imageboxes"][r].el.setAttribute("class", "frame");
-			z.elements["projectionframe"].el.appendChild(z.elements["imageboxes"][r].el);
-		}
+		// Array.from(Array(z.score.elements.boxes.canvasboxes[v]).keys()).forEach(  r => {
+		// 	z.elements["canvasboxes"][r] = { el: document.createElement("canvas") };
+		// 	z.elements["canvasboxes"][r].el.setAttribute("id", "canvas_" + r);
+		// 	z.elements["canvasboxes"][r].el.setAttribute("class", "frame");
+		// 	z.elements["canvasboxes"][r].ctx = z.elements["canvas"].el.getContext("2d");
+		// 	z.elements["canvasframe"].el.appendChild(z.elements["canvasboxes"][r].el);
+		// }
+		// Array.from(Array(z.score.elements.boxes.imageboxes[v]).keys()).forEach(  r => {
+		// 	z.elements["imageboxes"][r] = { el: document.createElement("img") };
+		// 	z.elements["imageboxes"][r].el.setAttribute("id", "image_" + r);
+		// 	z.elements["imageboxes"][r].el.setAttribute("class", "frame");
+		// 	z.elements["imageframe"].el.appendChild(z.elements["imageboxes"][r].el);
+		// }
 		z.elements["svg"] = { el: document.createElementNS("http://www.w3.org/2000/svg", "svg") };
 		z.elements["svg"].el.setAttributeNS(null, "id", "svg");
 		z.elements["svg"].el.setAttributeNS(null, "class", "frame");
@@ -344,7 +374,7 @@ let createatlascore = z => {
 		z.elements["box"].el.setAttributeNS(null, "id", "box");
 		z.elements["box"].el.setAttributeNS(null, "class", "shape square");
 		z.elements["svg"].el.appendChild(z.elements["box"].el);
-		shapezorder.forEach( shape => {
+		z.score.elements.shapezorder.forEach( shape => {
 			Array.from(Array(z.score.elements[shape[0]][v]).keys()).forEach(  r => {
 				z.elements[shape[0]][r] = { el: document.createElementNS("http://www.w3.org/2000/svg", shape[1]) };
 				z.elements[shape[0]][r].el.setAttributeNS(null, "id", shape[0]+"_"+r);
@@ -356,48 +386,191 @@ let createatlascore = z => {
 		z.elements["svgframe"].el.appendChild(z.elements["svg"].el);
 	},
 
-	atlascore.createstreams = z => {
-
-		// ***** clock stream ---------
-		(function() {
-			let name = "tick";
-			let dt = 1; //in seconds
-			let date0 = new Date();
-			let t0 = Math.floor(date0.getTime()/1000);
-			let tostring = function(e) {return "clock"};
-			let clock0 = {
-				date: date0,
-				t: t0, count: 0,
-				changed: false,
-				count: 0,
-				past: Math.floor(t0 / 1000),
-				dt:dt, t0:t0, tostring: tostring, name:name 
-			};
-			z.streams[name] = Kefir.withInterval( 1000, emitter => { emitter.emit( { date: new Date() } ) })
-				.scan( (state, e) => { 
-					state.date = e.date;
-					state.past = state.t;
-					state.t = Math.floor(e.date.getTime()/1000);
-					state.changed = state.t !== state.past ? true : false;
-					state.count = state.count + 1;
-					return state;
-				}, clock0  )
-			z.streams[name].onValue( e => { 
-				// z.tools.logmsg(JSON.stringify(e));
-				// z.elements["clock"].el.innerHTML = z.tools.datestr(new Date(e.t*1000));
-				z.elements["clock"].el.innerHTML = z.tools.datestr(e.date);
-				z.compass.clock.date = e.date;
-				z.compass.clock.t = e.t;
-				// z.elements["clock"].el.innerHTML = z.tools.datestr(e.date, {hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit"});
-			});
-		})();
-
-		
-
-	},
-
 	atlascore.createdashboard = z => {
 	},
+
+	atlascore.createstreams = z => {
+		let streams = {};
+		streams["tick"] = ( () => {
+			let dt = 1;
+			let date0 = new Date();
+			let t0 = Math.floor(date0.getTime()/1000);
+			let state0 = { dt: dt, count: 0, date: date0, t: t0, t0: t0 };
+			return Kefir.withInterval( dt*1000, emitter => { emitter.emit( { date: new Date() } ) })
+						.scan( (state, e) => { 
+							state.date = e.date;
+							state.t = Math.floor(e.date.getTime()/1000);
+							state.count = state.count + 1;
+							return state;
+						}, state0  )
+		})( );
+		streams["dimensions"] = ( () => {
+			let dt = .4;
+			let width = window.innerWidth, height = window.innerHeight;
+			let dx = Math.floor(width/z.compass.canvas.grid.nrows), dy = Math.floor(height/z.compass.canvas.grid.ncols);
+			let sw = Math.floor(Math.max(dx*.03, dy*.03, 4));
+			let state0: { dt: dt, count: 0,
+				grid: { nrows: z.compass.canvas.grid.nrows, ncols: z.compass.canvas.grid.ncols, dx: dx, dy: dy, sw: sw },
+				width: width, height: height, 
+				max: Math.max(width, height), min: Math.min(width, height), 
+			};
+			return Kefir.fromEvents(window, "resize").throttle(dt*1000)
+				.scan( (state,e) => {
+					state.width = window.innerWidth;
+					state.height = window.innerHeight;
+					state.max = Math.max(state.width, state.height);
+					state.min = Math.min(state.width, state.height);
+					state.grid.dx = Math.floor(state.width/state.grid.nrows);
+					state.grid.dy = Math.floor(state.height/state.grid.ncols);
+					state.grid.sw = Math.floor(Math.max(state.grid.dx*.03, state.grid.dy*.03, 4));
+					return state
+				}, state0) 
+
+		})( );
+		
+
+		z.controls.forEach( control => {
+			streams[control] = ( () => {
+				return Kefir.fromEvents(z.elements[control].el, "click");
+			})( );
+		});
+
+		(z.score.createstreams(z)).keys().forEach( key => {streams[key] = pathpointstreams[key]} );
+		return streams;
+	}
+
+	atlascore.createactions = z => {
+		// let z.controls = ["hidelink", "homelink", "pathlink", "coretextlink", "nextlink", "soundlink", "menulink"];
+		let z.dashboard = {
+			resumeaudio: (z) => {
+				try {
+					if(!z.compass.soundloaded){
+						z.radio.loadclips(z);
+					}
+					z.radio.player.context.resume().then(() => {
+						z.tools.logmsg("playback resumed");
+						
+						if(!z.compass.soundplaying) {
+							z.elements["telegraph"].el.innerHTML =  "<i>loading sound ...</i>";
+							window.setTimeout(() => { z.elements["telegraph"].el.innerHTML =  "sound on"}, 8000);
+						}
+						else {
+							z.elements["telegraph"].el.innerHTML =  "sound on";
+						}
+						z.compass.soundplaying = true;
+						z.elements["soundlink"].el.classList.add("active");
+					});
+				} catch(e) { z.tools.logerror("dashboard ::: resumeaudio " + e) }
+			},
+			suspendaudio: (z) => {
+				try {
+					z.radio.player.context.suspend().then(() => {
+						z.elements["telegraph"].el.innerHTML =  "sound off";
+						z.compass.soundplaying = false;
+						z.elements["soundlink"].el.classList.remove("active");
+					});
+				} catch(e) { z.tools.logerror("dashboard ::: suspendaudio " + e) }
+			},
+			showcontent: (z) => {
+				try {
+					z.tools.logmsg("show content");
+					document.querySelector('main').style.opacity=0.8;
+					z.score.contentvisible = true;
+				} catch(e) { z.tools.logerror("dashboard ::: showcontent " + e) }
+			},
+			hidecontent: (z) => {
+				try {
+					z.tools.logmsg("hide content");
+					document.querySelector('main').style.opacity=0;
+					z.score.contentvisible = false;
+				} catch(e) { z.tools.logerror("dashboard ::: hidecontent " + e) }
+			},
+			hidecontrols: (z) => {
+				try {
+					z.tools.logmsg("hidden");
+					z.elements["controls"].el.style.display='none';
+					z.elements["menulink"].el.style.display='block';
+				} catch(e) { z.tools.logerror("dashboard ::: hidecontrols " + e) }
+			},
+			showcontrols: (z) => {
+				try {
+					z.tools.logmsg("show");
+					z.elements["controls"].el.style.display='block';
+					z.elements["menulink"].el.style.display='none';
+				} catch(e) { z.tools.logerror("dashboard ::: showcontrols " + e) }
+			},
+			next: (z) => {
+				let nextlinks = z.links.filter( link => link.keywords.includes("next"));
+				let next = nextlinks[0];
+				z.tools.logmsg("next ::: " + JSON.stringify(nextlinks));
+				try {
+					if( next.actuate === "onrequest" ) {
+						window.location = next.url;
+					}
+					else if ( next.type === "internal" && next.actuate === "onload" ) {
+						let nextnodes = document.querySelectorAll(".nextnode");
+						for(n=0; n<nextnodes.length; ++n) {
+							nextnodes[n].style.display = 'none';
+						}
+						document.querySelector("#"+next.url).style.display = 'block';
+					}
+					// z.score.currentnext = (z.score.currentnext + 1) % z.nav.next.length;
+					// z.tools.logmsg("next ::: z.score.currentnext = " + z.score.currentnext + " ::: " + JSON.stringify(z.nav.next[z.score.currentnext], null, "  "));
+					z.elements["nextlink"].el.classList.add("active");
+
+				} catch(err) { z.tools.logerror("dashboard ::: next " + err) }
+			},
+		};
+		return {
+			[
+				{
+					stream: "hidelink",
+					action: e => {
+						z.dashboard.hidecontent(z);
+						z.dashboard.hidecontrols(z);
+						// z.tools.logmsg("hidelink stream " + JSON.stringify(e));
+					}
+				},
+				{
+					stream: "homelink",
+					action: e => {
+						z.dashboard.gototransform1(z);
+						// z.tools.logmsg("hidelink stream " + JSON.stringify(e));
+					}
+				},
+				{
+					stream: "pathlink",
+					action: e => {
+						z.dashboard.showpath(z);
+						// z.tools.logmsg("hidelink stream " + JSON.stringify(e));
+					}
+				},
+				{
+					stream: "nextlink",
+					action: e => {
+						z.dashboard.gotonexttransform(z);
+						// z.tools.logmsg("hidelink stream " + JSON.stringify(e));
+					}
+				},
+				{
+					stream: "menulink",
+					action: e => {
+						z.dashboard.showcontent(z);
+						z.dashboard.showcontrols(z);
+						// z.tools.logmsg("hidelink stream " + JSON.stringify(e));
+					}
+				},
+				{
+					stream: "soundlink",
+					action: e => {
+						if(!z.compass.soundplaying) { z.dashboard.resumeaudio(z); }
+						else { z.dashboard.suspendaudio(z); }
+						// z.tools.logmsg("soundlink stream " + JSON.stringify(e));
+					}
+				},
+			]
+		}
+	}
 
 	return atlascore;
 }
