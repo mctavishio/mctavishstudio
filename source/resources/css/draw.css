@@ -247,6 +247,39 @@ html {
 		letter-spacing: 0.12em;
 	}
 }
+/*@media screen and (min-width: 320px) {
+	html {
+		font-size: 12px;
+		line-height: 18px;
+		font-size: calc(12px + 6 * ( (100vw - 320px) / 680 ));
+	}
+}
+
+@media screen and (min-width: 1000px) {
+	html {
+		font-size: 32px;
+	}
+}*/
+
+.small {
+	font-size: .8em;
+}
+.smaller {
+	font-size: .6em;
+}
+.smallest {
+	font-size: .5em;
+}
+.large {
+	font-size: 2em;
+}
+.larger {
+	font-size: 4em;
+}
+.largest {
+	font-size: 8em;
+}
+
 .zhighest {
 	z-index: 8888;
 	z-index: var(--zhighest);

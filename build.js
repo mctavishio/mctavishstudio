@@ -8,14 +8,14 @@ const glob = require('glob');
 const config = require('./source/nodes/config')();
 const paths = [
 	require('./source/nodes/hughpath')(),
-	// require('./source/nodes/jngpath')(),
+	require('./source/nodes/jngpath')(),
 	// require('./source/nodes/julespath')(),
 	// require('./source/nodes/countmappulsebreathepath')(),
 	// require('./source/nodes/mapcanvaspath')(),
 	// require('./source/nodes/map9path')(),
 	// require('./source/nodes/map10path')(),
 	// require('./source/nodes/nlhowlpath')(),
-	// require('./source/nodes/mapcmpbtalkpath')(),
+	require('./source/nodes/mapcmpbtalkpath')(),
 ];
 const tools = require('./tools')
 const defaultpathpoint = {
@@ -158,8 +158,8 @@ const build = ( () => {
 			})
 
 			//save archive file ::: 
-			try { fse.writeFileSync(config.archivepath + '/' + p.uri + "_" + Date.now()+'.json', JSON.stringify(p, null, "  "), 'utf8');
-				} catch(err) { tools.logmsg("problem writing file " + err); }
+			// try { fse.writeFileSync(config.archivepath + '/' + p.uri + "_" + Date.now()+'.json', JSON.stringify(p, null, "  "), 'utf8');
+			// 	} catch(err) { tools.logmsg("problem writing file " + err); }
 			
 			// render page
 			ejs.renderFile(config.sourcepath + '/layouts/' +  'layout.ejs', p, (err, result) => {
@@ -177,8 +177,8 @@ const build = ( () => {
 		p.home = { actuate: "onrequest", type: "internal", format: "html", keywords: ["navigation", "home"], title: "home", uri: (indexsite.hasOwnProperty("index") && indexes.hasOwnProperty(indexsite.index)) ? indexsite.index + ".html" : path.site.home.uri + ".html"  };
 		
 		//archive indexsite
-		try { fse.writeFileSync(config.archivepath + '/' + p.uri + "_" + Date.now()+'.json', JSON.stringify(p, null, "  "), 'utf8');
-		} catch(err) { tools.logmsg("problem writing file " + err); }
+		// try { fse.writeFileSync(config.archivepath + '/' + p.uri + "_" + Date.now()+'.json', JSON.stringify(p, null, "  "), 'utf8');
+		// } catch(err) { tools.logmsg("problem writing file " + err); }
 		
 		//render indexsite
 		ejs.renderFile(config.sourcepath + '/layouts/' +  'layout.ejs', p, (err, result) => {

@@ -48,6 +48,7 @@
 		let score0 = <%- JSON.stringify(score) %>;
 		score0.title = "<%= title %>";
 		score0.subtitle = "<%= subtitle %>";
+		score0.uri = "<%= uri %>";
 		score0.links = <%- JSON.stringify(links) %>;
 	</script>
 </head>
@@ -57,6 +58,9 @@
 		<iframe src="https://player.vimeo.com/video/117233282?background=1&autoplay=1&loop=1&byline=0&title=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
 	   <iframe src="https://player.vimeo.com/video/117233282?background=1&autoplay=1&loop=1&byline=0&title=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 	</div> -->
+	<div id="subtextframe" class="frame zlowest"></div>
+	<div id="svgframe" class="frame zlow"></div>
+	<div id="wordframe" class="frame z0"></div>
 	<div id="contentframe" class="absolute zhighest">
 		<nav id="controls">
 			<ul class="flex">
@@ -82,7 +86,7 @@
 				<li ><a href="#" ><svg class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 459 459"><path d="M0,382.5h459v-51H0V382.5z M0,255h459v-51H0V255z M0,76.5v51h459v-51H0z"/></svg></a></li>
 			</ul>
 		</nav>
-		<main style="opacity:0.8">
+		<main id="main" style="opacity:0.8">
 			<header>
 				<% if(title) {%><h1><%- title %></h1><%}%>
 				<% if(subtitle !== undefined) {%><h2><%- subtitle %></h2><%}%>
@@ -90,7 +94,7 @@
 			<article id="content" >
 				<div class="textContent">
 					<% if(content) {%><p><%- content %></p><%}%>
-					<% links.filter(link => link.actuate==="onrequest" && !link.keywords.includes("path") && !link.keywords.includes("next") && !link.keywords.includes("reference")).forEach( link => { %>
+					<% links.filter(link => link.actuate==="onrequest" && !link.keywords.includes("reference")).forEach( link => { %>
 						<p>&rarr;<a href="<%= link.url %>" title= "<%= link.title %>"><%= link.title %></a></p>
 					<% }) %>
 				</div>
@@ -108,20 +112,8 @@
 				</div>
 			</article>
 			<% } %>
-			<% if( links.filter(link => link.actuate==="onrequest" && link.keywords.includes("transformation") ).length > 1 ) { %>
-			<article id="pathlinks" >
-				<header>
-					<h1>transformation links</h1>
-				</header>
-				<div class="textContent">
-					<% links.filter(link => link.actuate==="onrequest" && link.keywords.includes("transformation") ).forEach( link => { %>
-					<p>&rarr; <a action="<%= link.action %>" id="<%= link.uri %>" href="#" title= "<%= link.title %>" class="transformation"><%= link.title %></a></p> 
-					<% }) %>
-				</div>
-			</article>
-			<% } %>
 			<% if( links.filter(link => link.actuate==="onrequest" && link.keywords.includes("path") ).length > 0 ) { %>
-			<article id="referencelinks" >
+			<article id="pathlinks" >
 				<header>
 					<h1>path links</h1>
 				</header>

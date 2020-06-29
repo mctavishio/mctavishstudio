@@ -1,9 +1,8 @@
 let z = {};
-let z.controls = ["hidelink", "homelink", "pathlink", "coretextlink", "nextlink", "soundlink", "menulink"];
+z.score0 = score0 ? score0 : { };
 
 let createatlascore = z => {
 	let atlascore = {};
-
 	atlascore.createtools = z => {
 		return {
 			//normalize velocity timings
@@ -133,7 +132,6 @@ let createatlascore = z => {
 			},
 		}
 	};
-
 	atlascore.createcompass = z => {
 		let date0 = new Date();
 		let t0 = Math.floor(date0.getTime()/1000);
@@ -141,23 +139,33 @@ let createatlascore = z => {
 		let width = window.innerWidth, height = window.innerHeight;
 		let min = Math.min(width, height), max = Math.max(width, height);
 		let version = (min < 480 && max < 1025) ? "small" : "large";
+		let gridn = [4,8], shapen = [8,16], wordn = [4,8], pastn = [8,16];
+
 		let v = version === "small" ? 0 : 1;
-		let pastn = Object.keys(z.score.elements.shapes).reduce(  (max, shape) => Math.max(max, z.score.elements.shapes[shape][v]), 0 );
+		let grid = { nrows: gridn[v], ncols: gridn[v], nshapes: dx: Math.floor(width/gridn[v]), dy: Math.floor(height/gridn[v]), sw: 12, pastn: pastn };
+
+		//build memory
+		let past = [];
+		Array.from(Array(pastn[v]).keys()).forEach(  r => {
+			past.unshift([z.tools.randominteger(0, grid.nrows), z.tools.randominteger(0, grid.ncols)]);
+		});
 		return {
-			currentnode: 0, soundloaded: false, 
-			soundplaying: false, contentvisible: true,
+			pathpoints: { actions: [], contents: [], currentaction: 0, currentcontent: 0, contentvisible: true },
+			sound: { loaded: false, playing: false },
 			version: version,
 			clock: clock0,
 			canvas: { 
 				min: min, max = max, width: width, height: height, 
-				grid: { ncols: z.score.grid.columns[v], nrows: z.score.grid.rows[v], sw: 12, pastn: pastn },
+				past: past,
+				grid: grid,
+				nshapes: shapen[v], nwords: wordn[v],
 				colors: z.score.colors.playlist[0],
 				sounds: z.score.sounds.playlist[0], 
-				text: z.score.texts.playlist[0]
+				words: z.score.words.playlist[0],
+				boxpick: past,
 			}
 		}
-	}
-
+	};
 	atlascore.createradio = z => {
 		return {
 			player: {}, loading: [],
@@ -194,7 +202,7 @@ let createatlascore = z => {
 						request.send();
 					}
 				});
-				z.score.soundloaded = true;
+				z.compass.sounds.loaded = true;
 			},
 			start: z => {
 				/* set up player*/
@@ -316,55 +324,33 @@ let createatlascore = z => {
 					catch(e) { z.tools.logerror("radio 141 " + e) }
 			}
 		}
-	},
-
+	};
 	atlascore.createelements = z => {
 		let elements = {};
-		let divframes = ["subtextframe", "svgframe", "textframe", "contentframe"];
+		let divframes = ["subtextframe", "svgframe", "wordframe", "contentframe"];
 		elements["circles"] = []; 
 		elements["rectangles"] = []; 
 		elements["lines"] = [];
-		elements["textboxes"] = [];
-		elements["canvasboxes"] = [];
-		elements["imageboxes"] = [];
-		let v = z.compass.version === "small" ? 0 : 1;
+		elements["words"] = [];
 
 		z.elements["body"] = { el: document.querySelector("body") };
-		z.elements["body"].el.setAttribute("id", "body");
-
+		z.elements["main"] = { el: document.querySelector("main") };
 		z.elements["clock"] = { el: document.querySelector("#clock") };
 		z.elements["telegraph"] = { el: document.querySelector("#telegraph") };
 		z.elements["controls"] = { el: document.querySelector("#controls") };
 		
-		z.controls.forEach( (id,j) => {
+		z.score.controls.forEach( (id,j) => {
 			z.elements[id] = { el: document.querySelector("#"+id) }
 		})
 		divframes.forEach( (id,j) => {
-			z.elements[id] = { el: document.createElement("div") };
-			z.elements[id].el.setAttribute("id", id);
-			z.elements[id].el.setAttribute("class", "frame");
-			z.elements[id].el.setAttribute("style", "z-index:" + j*10);
-			z.elements["body"].el.appendChild(z.elements[id].el)
+			z.elements[id] = { el: document.querySelector("#"+id) };
 		});
-		Array.from(Array(z.score.elements.boxes.textboxes[v]).keys()).forEach(  r => {
-			z.elements["textboxes"][r] = { el: document.createElement("canvas") };
-			z.elements["textboxes"][r].el.setAttribute("id", "canvas_" + r);
-			z.elements["textboxes"][r].el.setAttribute("class", "absolute");
-			z.elements["textframe"].el.appendChild(z.elements["textboxes"][r].el);
+		Array.from(Array(z.compass.canvas.nwords).keys()).forEach(  r => {
+			z.elements["words"][r] = { el: document.createElement("div") };
+			z.elements["words"][r].el.setAttribute("id", "word_" + r);
+			z.elements["words"][r].el.setAttribute("class", "absolute");
+			z.elements["wordframe"].el.appendChild(z.elements["words"][r].el);
 		}
-		// Array.from(Array(z.score.elements.boxes.canvasboxes[v]).keys()).forEach(  r => {
-		// 	z.elements["canvasboxes"][r] = { el: document.createElement("canvas") };
-		// 	z.elements["canvasboxes"][r].el.setAttribute("id", "canvas_" + r);
-		// 	z.elements["canvasboxes"][r].el.setAttribute("class", "frame");
-		// 	z.elements["canvasboxes"][r].ctx = z.elements["canvas"].el.getContext("2d");
-		// 	z.elements["canvasframe"].el.appendChild(z.elements["canvasboxes"][r].el);
-		// }
-		// Array.from(Array(z.score.elements.boxes.imageboxes[v]).keys()).forEach(  r => {
-		// 	z.elements["imageboxes"][r] = { el: document.createElement("img") };
-		// 	z.elements["imageboxes"][r].el.setAttribute("id", "image_" + r);
-		// 	z.elements["imageboxes"][r].el.setAttribute("class", "frame");
-		// 	z.elements["imageframe"].el.appendChild(z.elements["imageboxes"][r].el);
-		// }
 		z.elements["svg"] = { el: document.createElementNS("http://www.w3.org/2000/svg", "svg") };
 		z.elements["svg"].el.setAttributeNS(null, "id", "svg");
 		z.elements["svg"].el.setAttributeNS(null, "class", "frame");
@@ -372,258 +358,71 @@ let createatlascore = z => {
 		z.elements["svg"].el.setAttributeNS(null, "height", window.innerHeight);
 		z.elements["box"] = { el: document.createElementNS("http://www.w3.org/2000/svg", "rect") };
 		z.elements["box"].el.setAttributeNS(null, "id", "box");
-		z.elements["box"].el.setAttributeNS(null, "class", "shape square");
+		z.elements["box"].el.setAttributeNS(null, "class", "shape rect");
 		z.elements["svg"].el.appendChild(z.elements["box"].el);
-		z.score.elements.shapezorder.forEach( shape => {
-			Array.from(Array(z.score.elements[shape[0]][v]).keys()).forEach(  r => {
-				z.elements[shape[0]][r] = { el: document.createElementNS("http://www.w3.org/2000/svg", shape[1]) };
-				z.elements[shape[0]][r].el.setAttributeNS(null, "id", shape[0]+"_"+r);
-				z.elements[shape[0]][r].el.setAttributeNS(null, "class", "shape " + shape[1]);
-				z.elements["svg"].el.appendChild(z.elements[shape[0]][r].el);
-			});
+		Array.from(Array(z.compass.canvas.nshapes).keys()).forEach(  r => {
+			z.elements["circles"][r] = { el: document.createElementNS("http://www.w3.org/2000/svg", "circle") };
+			z.elements[shape[0]][r].el.setAttributeNS(null, "id", "circle_"+r);
+			z.elements[shape[0]][r].el.setAttributeNS(null, "class", "shape circle");
+			z.elements["svg"].el.appendChild(z.elements["circles"][r].el);
 
+			z.elements["rectangles"][r] = { el: document.createElementNS("http://www.w3.org/2000/svg", "rect") };
+			z.elements[shape[0]][r].el.setAttributeNS(null, "id", "rect_"+r);
+			z.elements[shape[0]][r].el.setAttributeNS(null, "class", "shape rect");
+			z.elements["svg"].el.appendChild(z.elements["rectangles"][r].el);
+
+			let l = r*2;
+			z.elements["lines"][l] = { el: document.createElementNS("http://www.w3.org/2000/svg", "line") };
+			z.elements[shape[0]][l].el.setAttributeNS(null, "id", "line_"+ l);
+			z.elements[shape[0]][l].el.setAttributeNS(null, "class", "shape line");
+			z.elements["svg"].el.appendChild(z.elements["lines"][l].el);
+
+			l = r*2 + 1;
+			z.elements["lines"][l] = { el: document.createElementNS("http://www.w3.org/2000/svg", "line") };
+			z.elements[shape[0]][l].el.setAttributeNS(null, "id", "line_"+ l);
+			z.elements[shape[0]][l].el.setAttributeNS(null, "class", "shape line");
+			z.elements["svg"].el.appendChild(z.elements["lines"][l].el);
 		});
 		z.elements["svgframe"].el.appendChild(z.elements["svg"].el);
-	},
-
-	atlascore.createdashboard = z => {
-	},
-
-	atlascore.createstreams = z => {
-		let streams = {};
-		streams["tick"] = ( () => {
-			let dt = 1;
-			let date0 = new Date();
-			let t0 = Math.floor(date0.getTime()/1000);
-			let state0 = { dt: dt, count: 0, date: date0, t: t0, t0: t0 };
-			return Kefir.withInterval( dt*1000, emitter => { emitter.emit( { date: new Date() } ) })
-						.scan( (state, e) => { 
-							state.date = e.date;
-							state.t = Math.floor(e.date.getTime()/1000);
-							state.count = state.count + 1;
-							return state;
-						}, state0  )
-		})( );
-		streams["dimensions"] = ( () => {
-			let dt = .4;
-			let width = window.innerWidth, height = window.innerHeight;
-			let dx = Math.floor(width/z.compass.canvas.grid.nrows), dy = Math.floor(height/z.compass.canvas.grid.ncols);
-			let sw = Math.floor(Math.max(dx*.03, dy*.03, 4));
-			let state0: { dt: dt, count: 0,
-				grid: { nrows: z.compass.canvas.grid.nrows, ncols: z.compass.canvas.grid.ncols, dx: dx, dy: dy, sw: sw },
-				width: width, height: height, 
-				max: Math.max(width, height), min: Math.min(width, height), 
-			};
-			return Kefir.fromEvents(window, "resize").throttle(dt*1000)
-				.scan( (state,e) => {
-					state.width = window.innerWidth;
-					state.height = window.innerHeight;
-					state.max = Math.max(state.width, state.height);
-					state.min = Math.min(state.width, state.height);
-					state.grid.dx = Math.floor(state.width/state.grid.nrows);
-					state.grid.dy = Math.floor(state.height/state.grid.ncols);
-					state.grid.sw = Math.floor(Math.max(state.grid.dx*.03, state.grid.dy*.03, 4));
-					return state
-				}, state0) 
-
-		})( );
-		
-
-		z.controls.forEach( control => {
-			streams[control] = ( () => {
-				return Kefir.fromEvents(z.elements[control].el, "click");
-			})( );
-		});
-
-		(z.score.createstreams(z)).keys().forEach( key => {streams[key] = pathpointstreams[key]} );
-		return streams;
-	}
-
-	atlascore.createactions = z => {
-		// let z.controls = ["hidelink", "homelink", "pathlink", "coretextlink", "nextlink", "soundlink", "menulink"];
-		let z.dashboard = {
-			resumeaudio: (z) => {
-				try {
-					if(!z.compass.soundloaded){
-						z.radio.loadclips(z);
-					}
-					z.radio.player.context.resume().then(() => {
-						z.tools.logmsg("playback resumed");
-						
-						if(!z.compass.soundplaying) {
-							z.elements["telegraph"].el.innerHTML =  "<i>loading sound ...</i>";
-							window.setTimeout(() => { z.elements["telegraph"].el.innerHTML =  "sound on"}, 8000);
-						}
-						else {
-							z.elements["telegraph"].el.innerHTML =  "sound on";
-						}
-						z.compass.soundplaying = true;
-						z.elements["soundlink"].el.classList.add("active");
-					});
-				} catch(e) { z.tools.logerror("dashboard ::: resumeaudio " + e) }
-			},
-			suspendaudio: (z) => {
-				try {
-					z.radio.player.context.suspend().then(() => {
-						z.elements["telegraph"].el.innerHTML =  "sound off";
-						z.compass.soundplaying = false;
-						z.elements["soundlink"].el.classList.remove("active");
-					});
-				} catch(e) { z.tools.logerror("dashboard ::: suspendaudio " + e) }
-			},
-			showcontent: (z) => {
-				try {
-					z.tools.logmsg("show content");
-					document.querySelector('main').style.opacity=0.8;
-					z.score.contentvisible = true;
-				} catch(e) { z.tools.logerror("dashboard ::: showcontent " + e) }
-			},
-			hidecontent: (z) => {
-				try {
-					z.tools.logmsg("hide content");
-					document.querySelector('main').style.opacity=0;
-					z.score.contentvisible = false;
-				} catch(e) { z.tools.logerror("dashboard ::: hidecontent " + e) }
-			},
-			hidecontrols: (z) => {
-				try {
-					z.tools.logmsg("hidden");
-					z.elements["controls"].el.style.display='none';
-					z.elements["menulink"].el.style.display='block';
-				} catch(e) { z.tools.logerror("dashboard ::: hidecontrols " + e) }
-			},
-			showcontrols: (z) => {
-				try {
-					z.tools.logmsg("show");
-					z.elements["controls"].el.style.display='block';
-					z.elements["menulink"].el.style.display='none';
-				} catch(e) { z.tools.logerror("dashboard ::: showcontrols " + e) }
-			},
-			next: (z) => {
-				let nextlinks = z.links.filter( link => link.keywords.includes("next"));
-				let next = nextlinks[0];
-				z.tools.logmsg("next ::: " + JSON.stringify(nextlinks));
-				try {
-					if( next.actuate === "onrequest" ) {
-						window.location = next.url;
-					}
-					else if ( next.type === "internal" && next.actuate === "onload" ) {
-						let nextnodes = document.querySelectorAll(".nextnode");
-						for(n=0; n<nextnodes.length; ++n) {
-							nextnodes[n].style.display = 'none';
-						}
-						document.querySelector("#"+next.url).style.display = 'block';
-					}
-					// z.score.currentnext = (z.score.currentnext + 1) % z.nav.next.length;
-					// z.tools.logmsg("next ::: z.score.currentnext = " + z.score.currentnext + " ::: " + JSON.stringify(z.nav.next[z.score.currentnext], null, "  "));
-					z.elements["nextlink"].el.classList.add("active");
-
-				} catch(err) { z.tools.logerror("dashboard ::: next " + err) }
-			},
-		};
-		return {
-			[
-				{
-					stream: "hidelink",
-					action: e => {
-						z.dashboard.hidecontent(z);
-						z.dashboard.hidecontrols(z);
-						// z.tools.logmsg("hidelink stream " + JSON.stringify(e));
-					}
-				},
-				{
-					stream: "homelink",
-					action: e => {
-						z.dashboard.gototransform1(z);
-						// z.tools.logmsg("hidelink stream " + JSON.stringify(e));
-					}
-				},
-				{
-					stream: "pathlink",
-					action: e => {
-						z.dashboard.showpath(z);
-						// z.tools.logmsg("hidelink stream " + JSON.stringify(e));
-					}
-				},
-				{
-					stream: "nextlink",
-					action: e => {
-						z.dashboard.gotonexttransform(z);
-						// z.tools.logmsg("hidelink stream " + JSON.stringify(e));
-					}
-				},
-				{
-					stream: "menulink",
-					action: e => {
-						z.dashboard.showcontent(z);
-						z.dashboard.showcontrols(z);
-						// z.tools.logmsg("hidelink stream " + JSON.stringify(e));
-					}
-				},
-				{
-					stream: "soundlink",
-					action: e => {
-						if(!z.compass.soundplaying) { z.dashboard.resumeaudio(z); }
-						else { z.dashboard.suspendaudio(z); }
-						// z.tools.logmsg("soundlink stream " + JSON.stringify(e));
-					}
-				},
-			]
-		}
-	}
-
+	};
 	return atlascore;
 }
 
-z.start = () => {
-	// ***** initialize resources ---------
-	z.radio = createradio(z);
-	z.radio.start(z);
-	z.dashboard = createdashboard(z);
 
-	let nextnodes = document.querySelectorAll('.nextnode');
-	if(nextnodes.length > 0) {
-		for (let j = 1; j < nextnodes.length; ++j) {
-	  		nextnodes[j].style.display = "none";
-		}
-	}
-	setTimeout( () => { document.querySelector('#contentframe').scrollIntoView(); }, 18000);
-	z.dashboard.listen(z);
-	createstreams(z);
-};
 window.onload = z => { 
 	z.score = createscore(z);
 	z.atlascore = createatlascore(z);
-	z.tools = atlascore.createtools(z);
-	z.compass = atlascore.createcompass(z);
-	z.elements = atlascore.createelements(z);
-	z.radio = atlascore.createradio(z);
+	z.tools = z.atlascore.createtools(z);
+	z.compass = z.atlascore.createcompass(z);
+	z.elements = z.atlascore.createelements(z);
+	z.radio = z.atlascore.createradio(z);
 	z.radio.start(z);
+	z.streams = z.score.createstreams(z);
+	z.actions = z.score.createactions(z);
+	z.compass.pathpoints.actions = Object.keys(z.actions).filter( key => key !== "all" );
+	z.compass.pathpoints.contents = document.querySelectorAll(".content").values().map( el => el.getAttribute("id") );
+	
 
-	setTimeout( () => { document.querySelector('#contentframe').scrollIntoView() }, 8);
-	z.tools = createtools( z );
-	z.score = {
-		currentnext: 0, soundloaded: false, soundplaying: false, contentvisible: true
-	}; 
-	z.score.winmin = Math.min(window.innerWidth, window.innerHeight);
-	z.score.winmax = Math.max(window.innerWidth, window.innerHeight);
-	z.score.version = (z.score.winmin < 480 && z.score.winmax < 1025) ? "small" : "large";
-	if(z.score0.vimeo) { z.score.vimeo = z.score0.vimeo; };
-	if(z.score0.canvas) { z.score.canvas = z.score0.canvas; };
-	z.tools.logmsg("z.score = " + JSON.stringify(z.score,null,2));
-	z.tools.logmsg("z.score0 = " + JSON.stringify(z.score0,null,2));
-	z.score.nrows = z.score.version === "small" ? z.score0.nrows[0] : z.score0.nrows[1];
-	z.score.ncols = z.score.version === "small" ? z.score0.ncols[0] : z.score0.ncols[1];
-	z.score.m = z.score.version === "small" ? z.score0.m[0] : z.score0.m[1];
-	z.tools.logmsg(JSON.stringify(z.score, null, 2));
-	z.data = createdata( z );
-	z.score.orchestration = z.data.sounds.playlists[z.score0.soundplaylist];
-	z.score.palette = z.data.colors.playlists[z.score0.colorplaylist];
-	let textplaylist = z.score0.textplaylist ? z.score0.textplaylist : "default";
-	z.tools.logmsg("textplaylist = " + textplaylist);
-	z.score.texts = z.data.language.playlists[textplaylist];
-	z.elements = {};
-	addcoreelements(z);
-	addelements(z);
-	z.start(); 
+	z.elements["contents"] = [];
+	document.querySelectorAll(".content").values().forEach( ( el, j ) => {
+		z.elements["contents"][ el.getAttribute("id") ? el.getAttribute("id") : j ] = { el: el }
+	});
+
+	let coreactions = z.actions["all"] ? z.actions["all"] : [];
+
+	coreactions.forEach( action => {
+		if( z.actions[action.stream] ) {
+			z.actions[action.stream].onValue( action.action );
+		}
+	});
+
+	z.actions[ z.compass.pathpoints.actions[0] ].forEach( action => {
+		if( z.actions[action.stream] ) {
+			z.actions[action.stream].onValue( action.action );
+		}
+	});
+	
+	z.compass.pathpoints.contents.forEach( id => z.elements["contents"][id].el.style.display="none" );
+	z.elements["contents"][z.compass.pathpoints.contents[0]].el.style.display="block";
+	// z.tools.logmsg("z.score = " + JSON.stringify(z.score,null,2));
 }

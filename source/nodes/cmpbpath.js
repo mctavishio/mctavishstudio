@@ -14,7 +14,8 @@ module.exports = () => {
 			description: "index of count map pulse breathe ::: map3 sound", 
 			code:  [...mapcode, "code/map5elements.js", "code/map5streams.js"],
 			score: mapscore,
-			content: `<p>count map pulse breathe with sound from map3 ::: used at the <a href="http://josephneasegallery.com">Joseph Nease Gallery</a> 12/2019 - 2/2020</p>`,
+			content: `<p>count map pulse breathe with sound from map3 ::: used at the 
+<a href="http://josephneasegallery.com">Joseph Nease Gallery</a> 12/2019 - 2/2020</p>`,
 			links: [],
 			css: [],
 			index: "index",
