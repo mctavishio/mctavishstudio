@@ -1,5 +1,5 @@
 let z = {};
-z.score0 = score0 ? score0 : { };
+// z.score0 = score0 ? score0 : { };
 
 let createatlascore = z => {
 	let atlascore = {};
@@ -29,7 +29,7 @@ let createatlascore = z => {
 					return { duration: 900*t.duration/ttotal, delay: 900*t.delay/ttotal }
 				})
 				return ntimings;
-			}
+			},
 			randominteger: (min, max) => {
 				return Math.floor( min + Math.random()*(max-min));
 			},
@@ -50,7 +50,7 @@ let createatlascore = z => {
 			},
 			logmsg: function(msg) {
 				try { 
-					// console.log("### ::: " + msg); 
+					console.log("### ::: " + msg); 
 				}
 				catch(err) { z.tools.logerror(err) }
 			},
@@ -120,7 +120,7 @@ let createatlascore = z => {
 					}
 				}
 				return matrix;
-			}
+			},
 			applyCSS: (el, css, j, n) => {
 				var j = j || 0, n = n || 1;
 				for (var key in css) {
@@ -139,26 +139,26 @@ let createatlascore = z => {
 		let width = window.innerWidth, height = window.innerHeight;
 		let min = Math.min(width, height), max = Math.max(width, height);
 		let version = (min < 480 && max < 1025) ? "small" : "large";
-		let gridn = [4,8], shapen = [8,16], wordn = [4,8], pastn = [8,16];
 
 		let v = version === "small" ? 0 : 1;
-		let grid = { nrows: gridn[v], ncols: gridn[v], nshapes: dx: Math.floor(width/gridn[v]), dy: Math.floor(height/gridn[v]), sw: 12, pastn: pastn };
+		let grid = { nrows: z.score.ngrids[v], ncols: z.score.ngrids[v], dx: Math.floor(width/z.score.ngrids[v]), dy: Math.floor(height/z.score.ngrids[v]), sw: 12, pastn: z.score.npasts[v] };
+		let nshapes = z.score.nshapes[v], nwords = z.score.nwords[v], npasts = z.score.npasts[v];
 
 		//build memory
 		let past = [];
-		Array.from(Array(pastn[v]).keys()).forEach(  r => {
+		Array.from(Array(npasts).keys()).forEach(  r => {
 			past.unshift([z.tools.randominteger(0, grid.nrows), z.tools.randominteger(0, grid.ncols)]);
 		});
 		return {
 			pathpoints: { actions: [], contents: [], currentaction: 0, currentcontent: 0, contentvisible: true },
-			sound: { loaded: false, playing: false },
+			sound: { loaded: false, playing: false, durationthrottle: z.score.sounds.playing.durationthrottle[v], maxbuffers: z.score.sounds.playing.maxbuffers[v], maxgrains: z.score.sounds.playing.maxgrains[v]  },
 			version: version,
 			clock: clock0,
 			canvas: { 
-				min: min, max = max, width: width, height: height, 
+				min: min, max: max, width: width, height: height, 
 				past: past,
 				grid: grid,
-				nshapes: shapen[v], nwords: wordn[v],
+				nshapes: nshapes, nwords: nwords, npasts: npasts,
 				colors: z.score.colors.playlist[0],
 				sounds: z.score.sounds.playlist[0], 
 				words: z.score.words.playlist[0],
@@ -171,8 +171,8 @@ let createatlascore = z => {
 			player: {}, loading: [],
 			clipduration: { min:0, max:0 },
 			n: { buffersplaying: 0, grainsplaying:0 },
-			max: { buffersplaying: z.compass.version === "small" ? z.score.sound.playing.maxbuffers[0] : z.score.sound.playing.maxbuffers[1], grainsplaying: z.compass.version === "small" ? z.score.sound.playing.maxgrains[0] : z.score.sound.playing.maxgrains[1] },
-			durationthrottle: z.compass.version === "small" ? z.score.sound.playing.durationthrottle[0] : z.score.sound.playing.durationthrottle[1],
+			max: { buffersplaying: z.compass.sound.maxbuffers, grainsplaying: z.compass.sound.maxgrains },
+			durationthrottle: z.compass.sound.durationthrottle,
 			loadclips: z => {
 				Object.keys(z.score.sound.clips).forEach( key => {
 					let clip = z.score.sound.clips[key];
@@ -180,9 +180,9 @@ let createatlascore = z => {
 						z.radio.loading.push(clip.url);
 						let request = new XMLHttpRequest();
 						//for localhost testing
-						// request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url, true);
+						request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url, true);
 						// for deploy
-						request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
+						// request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
 						z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + "/"  + clip.url);
 						request.responseType = "arraybuffer";
 						request.onload = () =>  {
@@ -333,57 +333,60 @@ let createatlascore = z => {
 		elements["lines"] = [];
 		elements["words"] = [];
 
-		z.elements["body"] = { el: document.querySelector("body") };
-		z.elements["main"] = { el: document.querySelector("main") };
-		z.elements["clock"] = { el: document.querySelector("#clock") };
-		z.elements["telegraph"] = { el: document.querySelector("#telegraph") };
-		z.elements["controls"] = { el: document.querySelector("#controls") };
+		elements["body"] = { el: document.querySelector("body") };
+		elements["main"] = { el: document.querySelector("main") };
+		elements["clock"] = { el: document.querySelector("#clock") };
+		elements["telegraph"] = { el: document.querySelector("#telegraph") };
+		elements["controls"] = { el: document.querySelector("#controls") };
 		
 		z.score.controls.forEach( (id,j) => {
-			z.elements[id] = { el: document.querySelector("#"+id) }
+			elements[id] = { el: document.querySelector("#"+id) }
 		})
 		divframes.forEach( (id,j) => {
-			z.elements[id] = { el: document.querySelector("#"+id) };
+			elements[id] = { el: document.querySelector("#"+id) };
 		});
 		Array.from(Array(z.compass.canvas.nwords).keys()).forEach(  r => {
-			z.elements["words"][r] = { el: document.createElement("div") };
-			z.elements["words"][r].el.setAttribute("id", "word_" + r);
-			z.elements["words"][r].el.setAttribute("class", "absolute");
-			z.elements["wordframe"].el.appendChild(z.elements["words"][r].el);
-		}
-		z.elements["svg"] = { el: document.createElementNS("http://www.w3.org/2000/svg", "svg") };
-		z.elements["svg"].el.setAttributeNS(null, "id", "svg");
-		z.elements["svg"].el.setAttributeNS(null, "class", "frame");
-		z.elements["svg"].el.setAttributeNS(null, "width", window.innerWidth);
-		z.elements["svg"].el.setAttributeNS(null, "height", window.innerHeight);
-		z.elements["box"] = { el: document.createElementNS("http://www.w3.org/2000/svg", "rect") };
-		z.elements["box"].el.setAttributeNS(null, "id", "box");
-		z.elements["box"].el.setAttributeNS(null, "class", "shape rect");
-		z.elements["svg"].el.appendChild(z.elements["box"].el);
+			elements["words"][r] = { el: document.createElement("div") };
+			elements["words"][r].el.setAttribute("id", "word_" + r);
+			elements["words"][r].el.setAttribute("class", "absolute");
+			elements["wordframe"].el.appendChild(elements["words"][r].el);
+		});
+		elements["svg"] = { el: document.createElementNS("http://www.w3.org/2000/svg", "svg") };
+		elements["svg"].el.setAttributeNS(null, "id", "svg");
+		elements["svg"].el.setAttributeNS(null, "class", "frame");
+		elements["svg"].el.setAttributeNS(null, "width", window.innerWidth);
+		elements["svg"].el.setAttributeNS(null, "height", window.innerHeight);
+		elements["box"] = { el: document.createElementNS("http://www.w3.org/2000/svg", "rect") };
+		elements["box"].el.setAttributeNS(null, "id", "box");
+		elements["box"].el.setAttributeNS(null, "class", "shape rect");
+		elements["svg"].el.appendChild(elements["box"].el);
 		Array.from(Array(z.compass.canvas.nshapes).keys()).forEach(  r => {
-			z.elements["circles"][r] = { el: document.createElementNS("http://www.w3.org/2000/svg", "circle") };
-			z.elements[shape[0]][r].el.setAttributeNS(null, "id", "circle_"+r);
-			z.elements[shape[0]][r].el.setAttributeNS(null, "class", "shape circle");
-			z.elements["svg"].el.appendChild(z.elements["circles"][r].el);
-
-			z.elements["rectangles"][r] = { el: document.createElementNS("http://www.w3.org/2000/svg", "rect") };
-			z.elements[shape[0]][r].el.setAttributeNS(null, "id", "rect_"+r);
-			z.elements[shape[0]][r].el.setAttributeNS(null, "class", "shape rect");
-			z.elements["svg"].el.appendChild(z.elements["rectangles"][r].el);
-
+			elements["rectangles"][r] = { el: document.createElementNS("http://www.w3.org/2000/svg", "rect") };
+			elements["rectangles"][r].el.setAttributeNS(null, "id", "rect_"+r);
+			elements["rectangles"][r].el.setAttributeNS(null, "class", "shape rect");
+			elements["svg"].el.appendChild(elements["rectangles"][r].el);
+		});
+		Array.from(Array(z.compass.canvas.nshapes).keys()).forEach(  r => {
+			elements["circles"][r] = { el: document.createElementNS("http://www.w3.org/2000/svg", "circle") };
+			elements["circles"][r].el.setAttributeNS(null, "id", "circle_"+r);
+			elements["circles"][r].el.setAttributeNS(null, "class", "shape circle");
+			elements["svg"].el.appendChild(elements["circles"][r].el);
+		});
+		Array.from(Array(z.compass.canvas.nshapes).keys()).forEach(  r => {
 			let l = r*2;
-			z.elements["lines"][l] = { el: document.createElementNS("http://www.w3.org/2000/svg", "line") };
-			z.elements[shape[0]][l].el.setAttributeNS(null, "id", "line_"+ l);
-			z.elements[shape[0]][l].el.setAttributeNS(null, "class", "shape line");
-			z.elements["svg"].el.appendChild(z.elements["lines"][l].el);
+			elements["lines"][l] = { el: document.createElementNS("http://www.w3.org/2000/svg", "line") };
+			elements["lines"][l].el.setAttributeNS(null, "id", "line_"+ l);
+			elements["lines"][l].el.setAttributeNS(null, "class", "shape line");
+			elements["svg"].el.appendChild(elements["lines"][l].el);
 
 			l = r*2 + 1;
-			z.elements["lines"][l] = { el: document.createElementNS("http://www.w3.org/2000/svg", "line") };
-			z.elements[shape[0]][l].el.setAttributeNS(null, "id", "line_"+ l);
-			z.elements[shape[0]][l].el.setAttributeNS(null, "class", "shape line");
-			z.elements["svg"].el.appendChild(z.elements["lines"][l].el);
+			elements["lines"][l] = { el: document.createElementNS("http://www.w3.org/2000/svg", "line") };
+			elements["lines"][l].el.setAttributeNS(null, "id", "line_"+ l);
+			elements["lines"][l].el.setAttributeNS(null, "class", "shape line");
+			elements["svg"].el.appendChild(elements["lines"][l].el);
 		});
-		z.elements["svgframe"].el.appendChild(z.elements["svg"].el);
+		elements["svgframe"].el.appendChild(elements["svg"].el);
+		return elements;
 	};
 	return atlascore;
 }
@@ -399,30 +402,35 @@ window.onload = z => {
 	z.radio.start(z);
 	z.streams = z.score.createstreams(z);
 	z.actions = z.score.createactions(z);
-	z.compass.pathpoints.actions = Object.keys(z.actions).filter( key => key !== "all" );
-	z.compass.pathpoints.contents = document.querySelectorAll(".content").values().map( el => el.getAttribute("id") );
 	
+	z.compass.pathpoints.actions = Object.keys(z.actions).filter( key => key !== "all" );
+	
+	z.tools.logmsg("z.compass.pathpoints.actions = " + JSON.stringify(z.compass.pathpoints.actions));
 
+	z.compass.pathpoints.contents = [];
 	z.elements["contents"] = [];
-	document.querySelectorAll(".content").values().forEach( ( el, j ) => {
-		z.elements["contents"][ el.getAttribute("id") ? el.getAttribute("id") : j ] = { el: el }
+
+	document.querySelectorAll(".content").forEach( ( el, j ) => {
+		z.elements["contents"][ el.getAttribute("id") ] = { el: el };
+		z.tools.logmsg('el.getAttribute("id") = ' + el.getAttribute("id"));
+		z.compass.pathpoints.contents.push(el.getAttribute("id"));
 	});
 
 	let coreactions = z.actions["all"] ? z.actions["all"] : [];
 
 	coreactions.forEach( action => {
-		if( z.actions[action.stream] ) {
-			z.actions[action.stream].onValue( action.action );
+		if( z.streams[action.stream] ) {
+			z.streams[action.stream].onValue( action.action );
 		}
 	});
 
 	z.actions[ z.compass.pathpoints.actions[0] ].forEach( action => {
-		if( z.actions[action.stream] ) {
-			z.actions[action.stream].onValue( action.action );
+		if( z.streams[action.stream] ) {
+			z.streams[action.stream].onValue( action.action );
 		}
 	});
-	
-	z.compass.pathpoints.contents.forEach( id => z.elements["contents"][id].el.style.display="none" );
+	z.tools.logmsg("z.compass.pathpoints.contents = " + JSON.stringify(z.compass.pathpoints.contents));
+	// z.compass.pathpoints.contents.forEach( id => z.elements["contents"][id].el.style.display="none" );
 	z.elements["contents"][z.compass.pathpoints.contents[0]].el.style.display="block";
 	// z.tools.logmsg("z.score = " + JSON.stringify(z.score,null,2));
 }

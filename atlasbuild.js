@@ -2,19 +2,16 @@
 const fse = require('fs-extra');
 // const path = require('path');
 const ejs = require('ejs');
-const savearchive = false;
+const savearchive = true;
 const marked = require('marked');
 const frontMatter = require('front-matter');
 const glob = require('glob');
-const config = require('./source/nodes/config')();
+const config = require('./source/nodes/atlasconfig')();
 const paths = [
-	require('./source/nodes/atlaspath')(),
+	require('./source/nodes/atlasprototypepath')(),
+	require('./source/nodes/atlaspath20200705')(),
 ];
 const tools = require('./tools')
-const defaultpathpoint = {
-	id: Date.now(), uri: "default", title: "default title", keywords: ["mctavish"],
-	description: "default description"
-}
 
 const defaultlink = {
 	actuate: "onrequest", uri: "http://mctavish.io/index.html",
@@ -34,8 +31,8 @@ const build = ( () => {
 		console.log("*** in build loop ::: path.title = " + path.title);
 		//save archive file ::: 
 		if(savearchive) {
-			try { fse.writeFileSync(config.archivepath + '/' + p.uri + "_" + Date.now()+'.json', JSON.stringify(p, null, "  "), 'utf8');
-				} catch(err) { tools.logmsg("problem writing file " + err); }
+			try { fse.writeFileSync(config.archivepath + '/' + path.uri + "_" + Date.now()+'.js', JSON.stringify(path, null, "  "), 'utf8');
+				} catch(err) { console.log("problem writing file " + err); }
 		}
 		// render page
 		ejs.renderFile(config.sourcepath + '/layouts/' +  'template.ejs', path, (err, result) => {

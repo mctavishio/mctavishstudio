@@ -1,6 +1,6 @@
 module.exports = () => {
-	const corecode = ["code/velocity.min.js", "code/kefir201911.min.js", "code/atlas3.js"];
-	const name = "atlas3";
+	const corecode = ["code/velocity.min.js", "code/kefir201911.min.js", "code/atlasprototype.js"];
+	const name = "atlasprototype";
 
 	const pathpoints = [
 		{
