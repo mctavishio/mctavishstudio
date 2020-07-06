@@ -10,6 +10,7 @@ const config = require('./source/nodes/atlasconfig')();
 const paths = [
 	require('./source/nodes/atlasprototypepath')(),
 	require('./source/nodes/atlaspath20200705')(),
+	require('./source/nodes/atlaspath20200706')(),
 ];
 const tools = require('./tools')
 

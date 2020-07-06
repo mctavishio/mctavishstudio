@@ -40,7 +40,7 @@
 			"license": "http://creativecommons.org/licenses/by-nc-sa/3.0/us/deed.en_US"
 		}
 	</script>
-	<link rel="stylesheet" href="css/draw.css"/>
+	<link rel="stylesheet" href="css/atlas.css"/>
 	<% css.forEach( file => { %>
 	<link rel="stylesheet" href="<%= file %>"/>
 	<% }) %>
@@ -79,7 +79,8 @@
 				<li ><a href="#" ><svg class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 459 459"><path d="M0,382.5h459v-51H0V382.5z M0,255h459v-51H0V255z M0,76.5v51h459v-51H0z"/></svg></a></li>
 			</ul>
 		</nav>
-		<main id="main" style="opacity:0.8">
+		<div id="mainflex">
+		<main id="main">
 			<% pathpoints.forEach( point => { %>
 				<div id="<%= point.uri %>" class="content">
 					<header>
@@ -135,6 +136,7 @@
 					<% } %>
 			</div>
 		</main>
+		</div>
 	</div>
 </body>
 

@@ -1,99 +1,82 @@
 module.exports = () => {
-	const uri = "atlas20200705";
+	const pubdate = "20200706";
+	const uri = "atlas"+pubdate;
 	const corecode = ["code/velocity.min.js", "code/kefir201911.min.js", "code/"+uri+".js"];
 	
 
 	const pathpoints = [
 		{
-			title: "2020.07.05 ::: a",
+			title: "2020.07.06 ::: a",
 			subtitle: "count map pulse breathe", uri: uri+"a",
 			content: `<p>
-			i was a tryst<br/>
-			a confluence<br/>
-			a weaving the woven<br/>
-			ecologies arteries forgiven<br/>
-			a boat<br/>
+			if i were a bird<br/>
+			i would fly<br/>
+			over your<br/>
+			rooftop<br/>
+			</p><p>
+			at night<br/>
+			when you<br/>
+			were sleeping<br/>
+			</p>
+			<p>
+			i would<br/>
+			i would fly<br/>
+			</p>
+			<p>
+			fly<br/>
+			over your<br/>
+			roof top sleeping<br/>
 			</p>`,
 			score: {},
 			links: [],
 		},
 		{
-			title: "2020.07.05 ::: b",
+			title: "2020.07.06 ::: b",
 			subtitle: "count map pulse breathe", uri: uri+"b",
 			content: `<p>
-			solitude<br/>
-			not silence<br/>
+			if i were a cloud<br/>
+			i would shelter you<br/>
 			</p>
 			<p>
-			every morning<br/>
-			heat rises<br/>
-			in this<br/>
-			basin<br/>
-			these bones<br/>
+			from this baking<br/>
+			sun<br/>
 			</p>`,
 			score: {},
 			links: [],
 		},
 		{
-			title: "2020.07.05 ::: c",
+			title: "2020.07.06 ::: c",
 			subtitle: "count map pulse breathe", uri: uri+"c",
 			content: `<p>
-			on fire<br/>
-			balsam fir<br/>
-			lit by<br/>
-			tiny moths<br/>
-			a swarm<br/>
-			a flock<br/>
-			a hurricane<br/>
+			Ö x x x ø 0 Ø x X x ø 0 Ø xº3<br/>
+			i i i <br/>
+			</p>
+			<p>
+			would<br/>
+			shelter<br/>
+			you<br/>
 			</p>`,
 			score: {},
 			links: [],
 		},
-				{
-			title: "2020.07.05 ::: d",
+		{
+			title: "2020.07.06 ::: d",
 			subtitle: "count map pulse breathe", uri: uri+"d",
 			content: `<p>
-			polar landscapes<br/>
-			melt<br/>
-			colonists of wind<br/>
-			dust storms<br/>
-			settle the globe<br/>
+			i was<br/>i<br/>i was looking<br/>i was looking for you<br/>i was
+			</p><p>
+			walking
 			</p>`,
 			score: {},
 			links: [],
 		},
 		{
-			title: "2020.07.05 ::: e",
+			title: "2020.07.06 ::: e",
 			subtitle: "count map pulse breathe", uri: uri+"e",
 			content: `<p>
-			no rain<br/>
-			longing<br/>
-			thirst<br/>
-			drought<br/>
-			</p>
-			<p>
-			it was like this</br>
-			every morning
-			</p>
-			<p>
-			watering can<br/>
-			metalic echo<br/>
-			pale green<br/>
-			drip<br/>
-			</p>`,
-			score: {},
-			links: [],
-		},
-		{
-			title: "2020.07.05 ::: f",
-			subtitle: "count map pulse breathe", uri: uri+"f",
-			content: `<p>
-			this boyhood<br/>
-			finally a burst of rain<br/>
-			</p>
-			<p>
-			the poet girlfriend</br>
-			sewing masks<br/>
+			i i i<br/>i<br/>i was a bird<br/>
+			</p><p>
+			walking
 			</p>`,
 			score: {},
 			links: [],
@@ -103,7 +86,7 @@ module.exports = () => {
 	let path = 
 	{
 		uri: uri, url: uri + ".html",
-		title: "daily journal ::: 2020.07.05",
+		title: "daily journal ::: " + pubdate,
 		subtitle: "count map pulse breathe",
 		keywords: ["count map pulse breathe", "mctavish", "journal", "2020"],
 		description: "count map pulse breathe ::: 2020 ::: funded by the jerome foundation", 
@@ -115,7 +98,13 @@ module.exports = () => {
 			{
 				actuate: "onrequest", type: "external", //internal, external
 				format: "html", keywords: ["reference"],
-				title: "weather.gov drought index", uri: "weather.gov_droughtindex20200630", url: "http://blueboatfilms.com/stills/weather.gov_droughtindex20200630.jpg",
+				title: "journal 2020.07.05", uri: "", url: "https://mctavish.studio/atlas20200706.html",
+				action: "traverse"
+			},
+			{
+				actuate: "onrequest", type: "external", //internal, external
+				format: "html", keywords: ["reference"],
+				title: "other studio projects", uri: "", url: "https://mctavish.studio/studio.html",
 				action: "traverse"
 			}
 		],

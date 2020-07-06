@@ -220,7 +220,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 html {
 	font-family: "Lucida Console", Monaco, monospace;
 	font-family: 'Open Sans', Helvetica, sans-serif;
-	font-size: 16px;
+	font-size: 18px;
 	line-height: 24px;
 	letter-spacing: 0.1em;
 	margin: 0;padding: 0;border: 0;
@@ -230,10 +230,10 @@ html {
 }
 @media only screen and (max-width: 900px) {
 	html {
-		font-size: 14px;
+		font-size: 16px;
 	}
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 480px) {
 	html {
 		font-size: 14px;
 		line-height: 19px;
@@ -433,9 +433,16 @@ div.absolute {
 	min-height: 90%;
 	max-height: 90%;
 }
+#mainflex {
+	display: flex;
+  	justify-content: center;
+  	width: 90%;
+  	margin-left: 8%;
+}
 main {
 	position: relative;
 	padding: 1em;
+	padding-top: 2em;
 	/*overflow-y: scroll;
 	overflow-x: hidden;*/
 	border: 0px;
@@ -445,8 +452,9 @@ main {
   	flex-wrap: wrap;*/
   	background-color: var(--warmblack);
   	transition: opacity 4s ease-in-out;
-  	margin-left: 8%;
-  	width: 80%; max-width: 80%;
+  	/*margin-left: 8%;*/
+  	width: 90%; max-width: 90%;
+  	max-width: 680px;
   	/*background-color:rgba(0, 0, 0, 0.4);*/
   	/*border: .5em var(--warmlightgray) dashed;
   	border-left: .5em var(--warmgray) dashed;
