@@ -1,5 +1,382 @@
 // ***** ############## initialize z ############## ---------
-let z = {};
+let z = { tools: {}, radio: {}, streams: {}, actions: {}, start: {}, elements: {} };
+
+z.tools = ( () => {
+	return {
+		randominteger: (min, max) => {
+			return Math.floor( min + Math.random()*(max-min));
+		},
+		normalrandominteger: (min, max, n) => { // CLT
+			return n === 0 ? z.tools.randominteger(min,max) : Math.floor(Array.from(Array(n).keys()).reduce( (sum, j) => { return sum + z.tools.randominteger(min,max) }, 0) / n)
+		},
+		logmsg: function(msg) {
+			try { 
+				console.log("### ::: " + msg); 
+			}
+			catch(err) { z.tools.logerror(err) }
+		},
+		logerror: function(error) {
+			try { console.log("rusty error ... " + error + " ::: " + console.trace); }
+			catch(err) {}
+		},
+		togrid: (min=1, max=1, x=1, ndivisions=1) => {
+			let dx = Math.floor( (max-min) / ndivisions );
+			return Math.floor( ( x-min+dx/2)/dx )*dx + min;
+		},
+		logstreams: streams => {
+			Object.keys(streams).filter( key => {return key !== "clock"}).forEach( key => {
+				z.tools.logmsg("key " + key );
+				streams[key].onValue( e => { z.tools.logmsg("onvalue ::: " + key + ": " + JSON.stringify(e)) });
+			});
+		},
+		datestr: (date, options) => {
+			if(options===undefined) options = {year: "numeric", month: "2-digit", day: "numeric", hour12: true, hour: "2-digit", minute: "2-digit", second: "2-digit"};
+			return date.toLocaleTimeString("en-US", options);
+		},
+	}
+})()
+
+z.radio = (() => {
+	let filters = {
+		randomhighharmonic: () => {
+			let multipliers = [10.0, 12.5, 13.33, 15, 20];
+			return multipliers[ z.tools.randominteger( 0, multipliers.length) ];
+		},
+		randomharmonic: () => {
+			let multipliers = [5, 7.5, 10.0, 12.5, 13.33, 15, 20];
+			return multipliers[ z.tools.randominteger( 0, multipliers.length) ];
+		},
+		randomlowharmonic: () => {
+			let multipliers = [5, 7.5, 10.0, 12.5, 13.33, 15, 20];
+			return multipliers[ z.tools.randominteger( 0, multipliers.length) ]/2;
+		},
+	};
+	let intervals = {
+		lowi: function(basetone){ return Math.floor(basetone/4) },
+		i: function(basetone){ return Math.floor(basetone/2) },
+		I: function(basetone){ return Math.floor(basetone/1) },
+		II: function(basetone){ return Math.floor(basetone*9/8) },
+		III: function(basetone){ return Math.floor(basetone*5/4) },
+		iii: function(basetone){ return Math.floor(basetone*6/5) },
+		IV: function(basetone){ return Math.floor(basetone*4/3) },
+		V: function(basetone){ return Math.floor(basetone*3/2) },
+		VI: function(basetone){ return Math.floor(basetone*5/3) },
+		VII: function(basetone){ return Math.floor(basetone*15/8) },
+		vii: function(basetone){ return Math.floor(basetone*9/5) },
+		VIII: function(basetone){ return Math.floor(basetone*2) },
+	};
+	let instruments = {
+		bell6: {clip: "bell6", minvolume: 0.5, maxvolume: 0.9, playbackRate: () => { return z.tools.randominteger(5,20)/10 } },
+		bell11: {clip: "bell11", minvolume: 0.5, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(4,13)/10 } },
+		bell11low: {clip: "bell11", minvolume: 0.5, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(2,6)/10 } },
+		longbell: {clip: "longbell", minvolume: 0.4, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(9,18)/10 } },
+
+		bird1: {clip: "bird1", minvolume: 0.8, maxvolume: 1.0 },
+		bird1random: {clip: "bird1", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randominteger(6, 18)/10 } },
+		bird1harmonic: {clip: "bird1", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		bird2: {clip: "bird2", minvolume: 0.8, maxvolume: 1.0 },
+		bird3: {clip: "bird3", minvolume: 0.8, maxvolume: 1.0 },
+		clarinet2: {clip: "clarinet2",minvolume: 0.5, maxvolume: 0.9 },
+		clarinet1harmonic: {clip: "clarinet2",minvolume: 0.5, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		clarinet1: {clip: "clarinet1",minvolume: 0.5, maxvolume: 0.9 },
+		clarinet1harmonic: {clip: "clarinet1",minvolume: 0.5, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		clarinethighbuzz: {clip: "clarinet1",minvolume: 0.1, maxvolume: 0.4, playbackRate: () => { return z.tools.randominteger(38,40)/10 } },
+		clarinetI: {clip: "clarinet1",minvolume: 0.4, maxvolume: 0.8, playbackRate: () => { return z.data.sounds.intervals.I(100) / 100 } },
+		clarinetIII: {clip: "clarinet1",minvolume: 0.4, maxvolume: 0.8, playbackRate: () => { return z.data.sounds.intervals.III(100) / 100 } },
+		clarinetII: {clip: "clarinet1",minvolume: 0.4, maxvolume: 0.8, playbackRate: () => { return z.data.sounds.intervals.II(100) / 100 } },
+		clarinetIV: {clip: "clarinet1",minvolume: 0.4, maxvolume: 0.8, playbackRate: () => { return z.data.sounds.intervals.IV(100) / 100 } },
+		clarinetV: {clip: "clarinet1",minvolume: 0.4, maxvolume: 0.8, playbackRate: () => { return z.data.sounds.intervals.V(100) / 100 } },
+		clarineti: {clip: "clarinet1",minvolume: 0.4, maxvolume: 0.8, playbackRate: () => { return z.data.sounds.intervals.i(100) / 100 } },
+		clarinetvii: {clip: "clarinet1",minvolume: 0.4, maxvolume: 0.8, playbackRate: () => { return z.data.sounds.intervals.vii(100) / 100 } },
+		clarinetVIII: {clip: "clarinet1",minvolume: 0.4, maxvolume: 0.8, playbackRate: () => { return z.data.sounds.intervals.VIII(100) / 100 } },
+		cmpb20200708_3: {clip: "cmpb20200708_3", minvolume: 0.4, maxvolume: 0.9 },//*
+		cmpb20200708_3harmonic: {clip: "cmpb20200708_3", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/5 } },
+		cmpb20200708_4: {clip: "cmpb20200708_4", minvolume: 0.4, maxvolume: 0.9 },//*
+		cmpb20200708_4harmonic: {clip: "cmpb20200708_4", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomhighharmonic()/10 } },//* voice
+		cmpb20200708_5: {clip: "cmpb20200708_5", minvolume: 0.4, maxvolume: 0.9 },//* voice
+		cmpb20200708_5harmonic: {clip: "cmpb20200708_5", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomhighharmonic()/10 } },//* voice
+		crow: {clip: "crow1", minvolume: 0.8, maxvolume: 0.9, playbackRate: () => { return z.tools.randominteger(6, 18)/10 } },
+		kantela1: {clip: "kantela1", minvolume: 0.5, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/8 } },
+		kantela3: {clip: "kantela3", minvolume: 0.5, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/6 } },
+		kantelarandom: {clip: "kantela1", minvolume: 0.5, maxvolume: 0.9, playbackRate: () => { return z.tools.randominteger(2,28)/10 } },
+		knocking1: {clip: "knocking1", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randominteger(4,48)/10 } },
+		knocking2: {clip: "knocking2", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randominteger(4,48)/10 } },
+
+		mags1: {clip: "magsSessionClips_1", minvolume: 0.3, maxvolume: 0.8 },
+		mags1harmonic: {clip: "magsSessionClips_1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
+		mags4: {clip: "magsSessionClips_4b", minvolume: 0.3, maxvolume: 0.8 },
+		mags4harmonic: {clip: "magsSessionClips_4b", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
+		mags5: {clip: "magsSessionClips_5b", minvolume: 0.3, maxvolume: 0.8 },
+		mags5harmonic: {clip: "magsSessionClips_5b", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
+		vox20200118_8_3b: {clip: "vox20200118_8_3b", minvolume: 0.4, maxvolume: 0.9 },
+
+		piano1: {clip: "piano1", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return filters.randomharmonic()/10 } }
+		piano1low: {clip: "piano1", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
+		piano1random: {clip: "piano1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(2,48)/10 } },
+		weatherradio1: {clip: "weatherradio1", minvolume: 0.2, maxvolume: 0.4,  playbackRate: () => { return z.tools.randominteger(6,12)/10 }  },
+		train: {clip: "train", minvolume: 0.3, maxvolume: 0.6, playbackRate: () => { return z.tools.randominteger(6,18)/10 } },
+		surf: {clip: "surf", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(4,20)/10 } },
+		silencetrain: {clip: "train", minvolume: 0.1, maxvolume: 0.4 },
+		silencesurf: {clip: "surf", minvolume: 0.1, maxvolume: 0.4 },
+		silencetrainpitched: {clip: "train", minvolume: 0.2, maxvolume: 0.5, playbackRate: () => { return z.tools.randominteger(6,18)/10 } },
+		silencesurfpitched: {clip: "surf", minvolume: 0.2, maxvolume: 0.5, playbackRate: () => { return z.tools.randominteger(4,20)/10 } },
+		submarineecho1: {clip: "submarineecho", minvolume: 0.2, maxvolume: 0.8 },
+		submarineecho2: {clip: "submarineecho",  minvolume: 0.2, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		submarineecho3: {clip: "submarineecho",  minvolume: 0.2, maxvolume: 0.8, playbackRate: () => { return z.tools.randomlowharmonic()/14 } },
+		typewriter1random: {clip: "typewriter1", minvolume: 0.6, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		typewriter1harmonic: {clip: "typewriter1", minvolume: 0.6, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(4,14)/10 } },
+		typewriter1: {clip: "typewriter1", minvolume: 0.6, maxvolume: 0.8 },
+		tone64hz: {clip: "tone64hz_clip", minvolume: 0.6, maxvolume: 0.8 },
+		tone64hzhighharmonic: {clip: "tone64hz_clip", minvolume: 0.6, maxvolume: 0.8, playbackRate: () => { return z.tools.randomhighharmonic()/10 } },
+	};
+	let clips = {};
+	Object.entries(instruments).forEach( instrument => {
+		console.log(instrument[1].clip);
+		clips[instrument[1].clip] = { url: soundcorepath + instrument[1].clip + ".mp3", loading: false, loaded: false, duration:0, buffer:{} };
+	});
+	return {
+		player: {}, isplaying: false, nplaying: 0, maxplaying: 18,
+		instruments: instruments, clips: clips,
+		loadclip: ( z, clip ) => {
+			if( z.radio.clips.hasOwnProperty(clip) && !z.radio.clips[clip].loaded && !z.radio.clips[clip].loading ) {
+				z.radio.clips[clip].loading=true;
+				let request = new XMLHttpRequest();
+					//for localhost testing
+					request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url, true);
+					// for deploy
+					// request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
+					z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + "/"  + clip.url);
+					request.responseType = "arraybuffer";
+					request.onload = () =>  {
+						z.radio.player.context.decodeAudioData(request.response, buffer => {
+							clip.loading = false;
+							clip.loaded = true;
+							clip.buffer = buffer;
+							clip.duration = clip.buffer.duration;
+							if( clip.duration > z.radio.clipduration.max) {z.radio.clipduration.max = clip.duration}
+							else if( clip.duration < z.radio.clipduration.min) {z.radio.clipduration.min  = clip.duration}
+							// z.tools.logmsg("decoded" + clip.url);
+						}, e => {
+							z.tools.logerror("audio error! loading clip = " + clip.url + ", err = " + e);
+						});
+					};
+					request.send();
+			}
+		},
+		loadclips: ( z, clipset )  => {
+			Object.keys(clips).forEach( key => {
+				let clip = z.score.sounds.clips[key];
+				if(!z.radio.loading.includes(clip.url)) {
+					z.radio.loading.push(clip.url);
+					let request = new XMLHttpRequest();
+					//for localhost testing
+					request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url, true);
+					// for deploy
+					// request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
+					z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + "/"  + clip.url);
+					request.responseType = "arraybuffer";
+					request.onload = () =>  {
+						// z.tools.logmsg("loaded" + clip.url);
+						z.radio.player.context.decodeAudioData(request.response, buffer => {
+							clip.loaded = true;
+							clip.buffer = buffer;
+							clip.duration = clip.buffer.duration;
+							if( clip.duration > z.radio.clipduration.max) {z.radio.clipduration.max = clip.duration}
+							else if( clip.duration < z.radio.clipduration.min) {z.radio.clipduration.min  = clip.duration}
+							// z.tools.logmsg("decoded" + clip.url);
+						}, e => {
+							z.tools.logerror("audio error! clip = " + clip.url + ", err = " + e);
+						});
+						
+					};
+					request.send();
+				}
+			});
+			z.compass.sound.loaded = true;
+		},
+				start: z => {
+					/* set up player*/
+					window.AudioContext = window.AudioContext || window.webkitAudioContext;
+					z.radio.player.context = new AudioContext();
+					/* experimental parameters */
+					let parameters = [
+						{ gain: 0.4, threshold: -24, knee: 30, ratio: 12, attack: 0.003, release: 0.25 }, //default
+						{ gain: 0.3, threshold: -18, knee: 30, ratio: 18, attack: 0.0003, release: 0.28 },
+						{ gain: 0.5, threshold: -8, knee: 30, ratio: 18, attack: 0.003, release: 0.28 },
+						{ gain: 0.8, threshold: -8, knee: 30, ratio: 18, attack: 0.003, release: 0.28 },
+						];
+					let n = 3;
+
+					z.radio.player.gain = z.radio.player.context.createGain();
+					z.radio.player.gain.gain.value = parameters[n].gain;
+					//with no compressor
+					z.radio.player.gain.connect(z.radio.player.context.destination);
+				},
+				playtone: e => {
+					let vco = z.radio.player.context.createOscillator();
+					vco.frequency.value = e.frequency;
+					vco.type = "sine";
+					let vca = z.radio.player.context.createGain();
+					
+					vco.connect(vca);
+					vca.connect(z.radio.player.gain);
+					let now = z.radio.player.context.currentTime;
+					//fade in
+					vca.gain.exponentialRampToValueAtTime(0.001, now + e.delay);
+					vca.gain.exponentialRampToValueAtTime(e.volume, now + e.fadetime + e.delay);
+					//fade out
+					vca.gain.linearRampToValueAtTime(e.volume, now + e.duration + e.delay - e.fadetime);
+					vca.gain.linearRampToValueAtTime(0.001, now + e.duration + e.delay);
+					vco.start(now + e.delay);
+					vco.stop(now + e.delay + e.duration + e.fadetime);
+					vco.onended = function() {
+					  	vco.disconnect(); vca.disconnect();
+					}
+				},
+				playinstrument: e =>  { //{name, volume, delay}
+					try {
+						if( z.radio.nplaying > z.radio.maxplaying ) {
+							let instrument = z.radio.instruments[name];
+							let clip = z.radio.clips[instrument.clip];
+							z.tools.logmsg("instrument playing = " + name);
+							z.tools.logmsg("clip playing = " + clip.url);
+							z.tools.logmsg("nplaying = " + z.radio.nplaying + " / " + z.radio.maxplaying);
+							let vca = z.radio.player.context.createGain(); 
+							vca.gain.value = e.volume;
+							let source = z.radio.player.context.createBufferSource();
+							source.buffer = clip.buffer;
+							source["playbackRate"].value = rate;
+							source.connect(vca);
+							vca.connect(z.radio.player.gain);
+							source.loop = false;
+							source.onended = e =>  { 
+								z.radio.nplaying=z.radio.nplaying-1
+							} ;
+							++z.radio.nplaying;
+							// let now = z.radio.player.context.currentTime;
+							source.start(z.radio.player.context.currentTime + e.delay);
+							// z.tools.logmsg("playing = " + clip.url);
+						}
+						else {
+							z.tools.logmsg("NOT playing instrument " + name + " clip ::: " + clip.url);
+						}
+					} catch(err) { z.tools.logerror("play instrument ::: " + err) }
+				},
+				playbuffer: e =>  {
+					try {
+						let instrument = z.score.sounds.instruments[e.instrument];
+						let clip = z.score.sounds.clips[instrument.clip];
+						z.tools.logmsg("buffer playing = " + instrument.clip);
+						if(clip.loaded) {
+							let rate = 1.0;
+							if(instrument.playbackRate) {
+								rate = instrument.playbackRate();
+								
+							}
+							let prob = z.tools.randominteger(0,100)/100;
+							let isplayed = (z.radio.n.buffersplaying<z.radio.max.buffersplaying-1) || z.radio.durationthrottle.reduce( (isplayed,d) => { 
+								// z.tools.logmsg("prob = " + prob + " ::: isplayed = " + isplayed + " ::: d = " + d + " ::: duration = " + clip.duration*rate); 
+								return isplayed || (clip.duration*rate < d[0] && prob <= d[1]) }, false);
+							if(isplayed) {
+								try {
+									// z.tools.logmsg("rate = " + rate + " ::: duration = " + clip.duration*rate);
+									let vca = z.radio.player.context.createGain(); 
+									vca.gain.value = e.volume;
+									let source = z.radio.player.context.createBufferSource();
+									source.buffer = clip.buffer;
+									source["playbackRate"].value = rate;
+									source.connect(vca);
+									vca.connect(z.radio.player.gain);
+									source.loop = false;
+									source.onended = e =>  { 
+										z.radio.n.buffersplaying=z.radio.n.buffersplaying-1
+									} ;
+									++z.radio.n.buffersplaying;
+									let now = z.radio.player.context.currentTime;
+									source.start(now + e.delay);
+									// z.tools.logmsg("playing = " + clip.url);
+								} catch(e) { z.tools.logerror("error applying params to audio buffer e::: " + e) }
+							}
+							else {	
+								z.tools.logmsg("NOT playing = " + clip.url);
+							}
+						}
+					}
+					catch(err) { z.tools.logerror("line playbuffer" + err) }
+				},
+				playgrain: e =>  {
+					// z.tools.logmsg("ngrainsplaying = " + z.radio.n.grainsplaying);
+					// if(z.radio.n.grainsplaying<z.radio.max.grainsplaying) {
+					try {
+						let instrument = z.score.sounds.instruments[e.instrument];
+						let clip = z.score.sounds.clips[instrument.clip];
+						z.tools.logmsg("grain playing = instrument ::: " + e.instrument + " ::: clip ::: " + instrument.clip);
+						if(clip.loaded) {
+							let rate = 1.0;
+							if(instrument.playbackRate) {
+									rate = instrument.playbackRate();
+							}
+							let now = z.radio.player.context.currentTime;
+							let dt = Math.min(z.tools.randominteger(18,48)/10,rate*clip.duration*.25);
+							// let dt = Math.min(z.tools.randominteger(18,48)/40,rate*clip.duration*.25);
+							let offset = z.tools.randominteger(0, (rate*clip.duration-4*dt)*10)/10;
+							let vca = z.radio.player.context.createGain(); 
+							let source = z.radio.player.context.createBufferSource();
+							source.buffer = clip.buffer;
+							source["playbackRate"].value = rate;
+							source.connect(vca);
+							vca.connect(z.radio.player.gain);
+							source.loop = false;
+							source.onended = e =>  { z.radio.n.grainsplaying=z.radio.n.grainsplaying-1} ;
+							++z.radio.n.grainsplaying;
+							source.start(now, offset, dt*4); //parameters (when,offset,duration)
+							vca.gain.setValueAtTime(0.0, now);
+							vca.gain.linearRampToValueAtTime(e.volume, now + dt);
+							vca.gain.setValueAtTime(e.volume, now + 2*dt);
+							vca.gain.linearRampToValueAtTime(0, now + 3*dt ); 
+						}
+					}
+					catch(err) { z.tools.logerror("radio playgrain " + err) }
+				},
+				playparticle: e =>  {
+					// z.tools.logmsg("ngrainsplaying = " + z.radio.n.grainsplaying);
+					// if(z.radio.n.grainsplaying<z.radio.max.grainsplaying) {
+					try {
+						let instrument = z.score.sounds.instruments[e.instrument];
+						let clip = z.score.sounds.clips[instrument.clip];
+						z.tools.logmsg("particle playing = instrument ::: " + e.instrument + " ::: clip ::: " + instrument.clip);
+						if(clip.loaded) {
+							let rate = 1.0;
+							if(instrument.playbackRate) {
+									rate = instrument.playbackRate();
+							}
+							let now = z.radio.player.context.currentTime;
+							let dt = Math.min(z.tools.randominteger(120,240)/100,rate*clip.duration*.25);
+							let offset = z.tools.randominteger(0, (rate*clip.duration-4*dt)*10)/10;
+							let vca = z.radio.player.context.createGain(); 
+							let source = z.radio.player.context.createBufferSource();
+							source.buffer = clip.buffer;
+							source["playbackRate"].value = rate;
+							source.connect(vca);
+							vca.connect(z.radio.player.gain);
+							source.loop = false;
+							source.onended = e =>  { z.radio.n.grainsplaying=z.radio.n.grainsplaying-1} ;
+							++z.radio.n.grainsplaying;
+							source.start(now, offset, dt*4); //parameters (when,offset,duration)
+							vca.gain.setValueAtTime(0.0, now);
+							vca.gain.linearRampToValueAtTime(e.volume, now + dt);
+							vca.gain.setValueAtTime(e.volume, now + 2*dt);
+							vca.gain.linearRampToValueAtTime(0, now + 3*dt ); 
+						}
+					}
+					catch(err) { z.tools.logerror("radio playgrain " + err) }
+				}
+
+
+
+
+
+})()
 
 let createscore = z => {
 	let soundcorepath = "data/sound/";
@@ -18,15 +395,47 @@ let createscore = z => {
 				VIII: function(basetone){ return Math.floor(basetone*2) },
 			};
 	let instruments = {
-		cello_pitch4: {clip: "cello_pitch4", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		cello_pitch5: {clip: "cello_pitch5", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		cello_pitch1: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		cello_pitch1I: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return intervals.I(100) / 100 } },
-		cello_pitch1random: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(6,14)/10 } },
-		cello_pitch1harmonic: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		cello_pitch1IV: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return intervals.IV(100) / 100 } },
-		cello_pitch1V: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return intervals.V(100) / 100 } },
+		// tone64_c: {clip: "64_c", minvolume: 0.5, maxvolume: 0.6, },
+		// tone64_c2: {clip: "tone64hz_clip", minvolume: 0.3, maxvolume: 0.6, },
+		// tone128_c: {clip: "128_c", minvolume: 0.3, maxvolume: 0.6, },
+		// tone144_d: {clip: "144_d", minvolume: 0.3, maxvolume: 0.6, },
+		// tone192_g: {clip: "192_g", minvolume: 0.3, maxvolume: 0.6, },
+		// tone288_d: {clip: "288_d", minvolume: 0.3, maxvolume: 0.6, },
+		// tone384_g: {clip: "384_g", minvolume: 0.3, maxvolume: 0.6, },
+		// tone432_a: {clip: "432_a", minvolume: 0.3, maxvolume: 0.6, },
+		thunk: {clip: "thunk", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		thunkhighharmonic: {clip: "thunk", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomhighharmonic()/10 } },
+		// birds5: {clip: "birds5",minvolume: 0.2, maxvolume: 0.5, playbackRate: () => { return z.tools.randominteger(4, 24)/10 } },
+		// birds5harmonic: {clip: "birds5",minvolume: 0.2, maxvolume: 0.5, playbackRate: () => { return z.tools.randomhighharmonic()/10 } },
+		knocking1: {clip: "knocking1", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randominteger(4,48)/10 } },
+		// cmpb20200708_1: {clip: "cmpb20200708_1", minvolume: 0.4, maxvolume: 0.9 },
+		// cmpb20200708_1: {clip: "cmpb20200708_1", minvolume: 0.4, maxvolume: 0.9 },
+		// cmpb20200708_3: {clip: "cmpb20200708_3", minvolume: 0.4, maxvolume: 0.9 },//*
+		// cmpb20200708_4: {clip: "cmpb20200708_4", minvolume: 0.4, maxvolume: 0.9 },//*
+		// cmpb20200708_5: {clip: "cmpb20200708_5", minvolume: 0.4, maxvolume: 0.9 },//* voice
+		piano1: {clip: "piano1", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		cmpb20200708_5harmonic: {clip: "cmpb20200708_5", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomhighharmonic()/10 } },//* voice
+		// // cmpb20200708_6: {clip: "cmpb20200708_6", minvolume: 0.4, maxvolume: 0.9 },
+		// vox20200118_8_3b: {clip: "vox20200118_8_3b_mixdown", minvolume: 0.4, maxvolume: 0.9 },//*
+		cmpb20200708_1harmonic: {clip: "cmpb20200708_1", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/5 } },
+		// cello_pitch4harmonic: {clip: "cello_pitch4", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		// cello_pitch5harmonic: {clip: "cello_pitch5", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		// cello_pitch5: {clip: "cello_pitch5", minvolume: 0.4, maxvolume: 0.9 },
+		// cello_pitch5IV: {clip: "cello_pitch5", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return intervals.IV(100) / 100 } },
+		// // cello_pitch1: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		// // cello_pitch1I: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return intervals.I(100) / 100 } },
+		// // cello_pitch1random: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(6,14)/10 } },
+		// // cello_pitch1harmonic: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		// // cello_pitch1IV: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return intervals.IV(100) / 100 } },
+		// // cello_pitch1V: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return intervals.V(100) / 100 } },
+		// // whowl_howl4: {clip: "whowl_howl4", minvolume: 0.4, maxvolume: 0.8 },
+		// bird1harmonic: {clip: "bird1", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		// tornadosirenharmonic: {clip: "tornadosiren", minvolume: 0.1, maxvolume: 0.6, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
+
+		mags1harmonic: {clip: "magsSessionClips_1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
+		// mags2harmonic: {clip: "magsSessionClips_2a", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
 				
+	
 	};
 	console.log(JSON.stringify(Object.entries(instruments)));
 	let clips = {};
@@ -45,16 +454,25 @@ let createscore = z => {
 	return {
 		// controls: ["hidelink", "homelink", "pathlink", "coretextlink", "nextlink", "soundlink", "menulink"],
 		controls: ["hidelink", "homelink", "pathlink", "nextlink", "soundlink", "menulink"],
-		ngrids: [2,4], nshapes: [4,16], nwords: [0,0], npasts: [2,4],
+		ngrids: [2,2], nshapes: [4,8], nwords: [0,0], npasts: [0,0],
 		sounds: {
 			clips: clips,
 			instruments: instruments,
 			playlist: [  
 				// ["tone64_c", "tone64_c2", "tone144_d", "tone192_g", "tone288_d", "tone384_g", "tone432_a"],
-				["cello_pitch4", "cello_pitch5"],
-				["cello_pitch1", "cello_pitch1I", "cello_pitch1IV"],
-				["cello_pitch1", "cello_pitch1I", "cello_pitch1IV", "cello_pitch1V"],
-				["cello_pitch1harmonic"],
+				// ["cmpb20200708_1"]
+				// ["cmpb20200708_1harmonic"],
+				
+				// ["vox20200118_8_3b","cello_pitch5harmonic"],
+				
+				["mags1harmonic", "cmpb20200708_5harmonic"],
+				["cmpb20200708_5harmonic", "piano1"],
+				["piano1"],
+				["piano1", "knocking1"],
+				["thunkhighharmonic", "piano1"],
+				["cmpb20200708_5harmonic", "knocking1"], 
+				["cmpb20200708_5harmonic", "thunkhighharmonic"]
+				// ["cmpb20200708_1harmonic", "thunk"],
 				],
 			playing: { maxbuffers: [6,12], maxgrains: [6,12], durationthrottle: [[[6,0.9],[8,0.6],[14,0.4],[18,0.2],[40,0.1]], [[6,1.0],[8,0.8],[14,0.6],[18,0.4],[40,0.3]]]},
 		},
@@ -62,28 +480,23 @@ let createscore = z => {
 			pigments: {
 				white: "#ffffff", warmwhite: "#fcfbe3", black: "#000000", warmblack: "#191918",
 				gray: "#484848", lightgray: "#888888", warmlightgray: "#656560", warmgray: "#4b4b44",
-				blue: "#006699", red: "#9a0000", yellow: "ffcc00"
+				blue: "#006699", red: "#9a0000", yellow: "ffcc00",
+				blues: ["#006699","#0a7293","#0a7c8e","#008888"],
+				yellows: ["#fcfbe3","#ffeba9","#ffdc6e","#ffcc00"],
+				bluesyellows: ["#fcfbe3","#ffeba9","#ffdc6e","#ffcc00", "#006699","#0a7293","#0a7c8e","#fcfbe3", "#64645a", "#4b4b44"]
 			}, 
 		playlist: [
 				["#fcfbe3", "#191918"], //"warmbw",
 				["#9a0000", "#fcfbe3", "#191918"], //"warmbwred",
 				["#fcfbe3", "#191918"], //"warmbw",
-				["#9a0000", "#fcfbe3", "#191918"], //"warmbwred",
 				["#fcfbe3", "#191918"], //"warmbw",
-				["#9a0000", "#fcfbe3", "#191918"], //"warmbwred",
 				["#fcfbe3", "#191918"], //"warmbw",
-				["#9a0000", "#fcfbe3", "#191918"], //"warmbwred",
 				["#ffcc00", "#fcfbe3", "#191918"], //"warmbwyellow",
 				["#fcfbe3", "#191918"], //"warmbw",
-				["#fcfbe3", "#e2e1cc", "#c9c8b5", "#b0af9e", "#979688", "#7e7d71", "#64645a", "#4b4b44", "#32322d", "#191916", "#000000"], //warmgrays
+				// ["#006699", "#fcfbe3", "#191918"], //"warmbwblue",
 			], 
 		},
 		words: { playlist: [] },
-		transformations: [
-				{ uri: "map3a", title: "map3a", subtitle: "", content: ""},
-				{ uri: "map3b", title: "map3b", subtitle: "", content: ""},
-				{ uri: "map3c", title: "map3c", subtitle: "", content: ""},
-		],
 		createcompass: z => {
 			let date0 = new Date();
 			let t0 = Math.floor(date0.getTime()/1000);
@@ -155,7 +568,7 @@ let createscore = z => {
 
 			})( );
 			streams["boxpick"] = ( () => {
-				let dt = 9;
+				let dt = 13;
 				let state0 = { 
 						dt: dt, count: 0,
 						row: 0, col: 0,
@@ -225,7 +638,7 @@ let createscore = z => {
 			})( );
 			streams["playsounds"] = ( () => {
 				let dt = 1;
-				let chance = .8;
+				let chance = .6;
 				let state0 = { 
 					dt: dt, count: 0, chance: chance,
 				};
@@ -266,7 +679,7 @@ let createscore = z => {
 
 			let gears = [
 				{name: "box", dt: 2, chance:1.0},
-				{name: "rectangles", dt: 4, chance:1.0},
+				{name: "rectangles", dt: 15, chance:1.0},
 				{name: "circles", dt: 3, chance:1.0},
 				{name: "main", dt: 8, chance:1.0},
 				{name: "lines", dt: 2, chance:0.8},
@@ -346,10 +759,18 @@ let createscore = z => {
 							// z.tools.logmsg(" play instrument ::: " + sound);
 							let instrument = z.score.sounds.instruments[sound];
 							let vol = z.tools.randominteger(instrument.minvolume*10, instrument.maxvolume*10)/10;
-							z.radio.playbuffer( { instrument: sound, volume: vol, delay: z.tools.randominteger(0,4)/10 } );
-							if(z.tools.randominteger(0,10) < 2) {
-								Kefir.sequentially(400, [0, 1, 2, 3]).onValue( x => { 
+							let chance = e.count%5===0 ? [1,3,5] : [0,1,8];
+							// if(z.tools.randominteger(0,10) < chance[0]) {
+							// 	z.radio.playbuffer( { instrument: sound, volume: vol, delay: z.tools.randominteger(0,4)/10 } );
+							// }
+							if(z.tools.randominteger(0,10) < chance[1]) {
+								Kefir.sequentially(900, [0, 1, 2]).onValue( x => { 
 									z.radio.playgrain( { instrument: sound, volume: vol, delay: 0 } );
+								});
+							}
+							if(z.tools.randominteger(0,10) < chance[2]) {
+								Kefir.sequentially(400, [0, 1, 2, 3, 4]).onValue( x => { 
+									z.radio.playparticle( { instrument: sound, volume: vol, delay: 0 } );
 								});
 							}
 
@@ -362,65 +783,45 @@ let createscore = z => {
 					action: e => {
 						try {
 							let color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];
+							// let color = "#aa0000";
 							let elements = z.elements["box"];
-							if(e.count%5!==0) {
+							
 								Velocity({	
-									elements: elements.el,
-									properties: { fillOpacity: 0.0, strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(z.compass.canvas.min/100, z.compass.canvas.min/40), strokeDasharray: z.tools.randominteger(10, z.compass.canvas.max*2), fill: color, x: 0, y: 0, width: z.compass.canvas.width, height: z.compass.canvas.height },
+									elements: elements.el, 
+									properties: { fillOpacity: 1.0, strokeOpacity: 0.0, fill: color, width: z.compass.canvas.width, height: z.compass.canvas.height },
 									options: { duration: z.tools.randominteger(e.dt*800,e.dt*900),  delay: z.tools.randominteger(0,e.dt*80), easing: "easeInOutQuad" },
 								});
-							}
-							else if(e.count%3===0) {
-								Velocity({	
-									elements: elements.el,
-									properties: { fillOpacity: 0.0, strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(z.compass.canvas.min/40, z.compass.canvas.min/10), strokeDasharray: 9, fill: color, x: 0, y: 0, width: z.compass.canvas.width, height: z.compass.canvas.height },
-									options: { duration: z.tools.randominteger(e.dt*800,e.dt*900),  delay: z.tools.randominteger(0,e.dt*80), easing: "easeInOutQuad" },
-								});
-							}
-							else if(e.count%2===0) {
-								Velocity({	
-									elements: elements.el,
-									properties: { fillOpacity: 0.0, strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(z.compass.canvas.min/100, z.compass.canvas.min/40), strokeDasharray: z.tools.randominteger(10, z.compass.canvas.min*2), fill: color, x: z.tools.randominteger(0,z.compass.canvas.grid.nrows-1)*z.compass.canvas.grid.dx, y: 0, width: z.compass.canvas.grid.dx, height: z.compass.canvas.height },
-									options: { duration: z.tools.randominteger(e.dt*800,e.dt*900),  delay: z.tools.randominteger(0,e.dt*80), easing: "easeInOutQuad" },
-								});
-							}
-							else {
-								Velocity({	
-									elements: elements.el,
-									properties: { fillOpacity: 0.0, strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(z.compass.canvas.min/100, z.compass.canvas.min/40), strokeDasharray: z.tools.randominteger(10, z.compass.canvas.min*2), fill: color, x: 0, y: z.tools.randominteger(0,z.compass.canvas.grid.ncols-1)*z.compass.canvas.grid.dy, width: z.compass.canvas.width, height: z.compass.canvas.grid.dy },
-									options: { duration: z.tools.randominteger(e.dt*800,e.dt*900),  delay: z.tools.randominteger(0,e.dt*80), easing: "easeInOutQuad" },
-								});
-							}
+							
 						} catch(err) { z.tools.logerror("all ::: boxes ::: " + err ) }
 					},
 				},
-				{
-					stream: "circles",
-					action: e => {
-						try {
-							let dx = z.compass.canvas.grid.dx, dy = z.compass.canvas.grid.dy;
-							let min = Math.min(dx,dy);
-							// let elements = z.tools.vectorToMatrix(z.elements["circles"].filter( (circle, j, circles) => j < circles.length/2 ), Math.floor(z.compass.canvas.grid.nrows/2), Math.floor(z.compass.canvas.grid.ncols/2));
-							// let elements = z.tools.vectorToMatrix(z.elements["circles"], Math.floor(z.compass.canvas.grid.nrows), Math.floor(z.compass.canvas.grid.ncols));
-							let color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];
-							e.elements.forEach( (element, j) => {
-								let cy = Math.floor(j/z.compass.canvas.grid.ncols)*dy  + dy/2;
-								let cx = (j%z.compass.canvas.grid.ncols)*dx + dx/2;
-								let radius = min*z.tools.randominteger(1,5)/10;
-								if(Math.floor(e.tick.t/e.dt)%4!==0 && j%z.compass.canvas.grid.ncols===0) { color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];}
-								if(Math.floor(e.tick.t/e.dt)%5!==0  && j%z.compass.canvas.grid.nrows===0) { color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];}
-								// z.tools.logmsg("c="+e.palette.colors.length + " color="+color);
-								Velocity({	
-									elements: element.el,
-									properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: z.compass.canvas.grid.sw, fill: color, cx: cx, cy: cy, r: radius },
-									options: { duration: z.tools.randominteger(e.dt*400,e.dt*600),  delay: z.tools.randominteger(0,e.dt*600) },
-								});
-
-							})
-						} catch(err) { z.tools.logerror("map1 ::: circles 1 ::: " + err ) }
-						// z.tools.logmsg("dimensions stream " + JSON.stringify(e));
-					}
-				},
+				// {
+				// 	stream: "rectangles",
+				// 	action: e => {
+				// 		// z.tools.logmsg("all ::: squares e = " + JSON.stringify(e));
+				// 		try {
+				// 			let dx = z.compass.canvas.grid.dx, dy = z.compass.canvas.grid.dy;
+				// 			let color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];
+				// 			let ratios = [5,10,15,20,30,40];
+				// 			// z.tools.logmsg("all ::: squares elements = " + JSON.stringify(elements));
+				// 			e.elements.forEach( (element, j) => {
+				// 				let color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];
+				// 				// z.tools.logmsg("c="+e.palette.colors.length + " color="+color);
+				// 				Velocity({	
+				// 					elements: element.el,
+				// 					properties: { fillOpacity: 0.0, strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(10,z.compass.canvas.min), strokeDasharray: z.tools.randominteger(4, z.compass.canvas.min/4), fill: color, x: 0, y: 0, width: z.compass.canvas.width, height: z.compass.canvas.height },
+				// 					options: { duration: z.tools.randominteger(900,2000),  delay: z.tools.randominteger(0,2000) },
+				// 				});
+				// 				Velocity({	
+				// 					elements: element.el,
+				// 					properties: { fillOpacity: 0.0, strokeOpacity: 1.0, stroke: color, strokeWidth: 10, fill: color, x: 0, y: 0, width: z.compass.canvas.width, height: z.compass.canvas.height },
+				// 					options: { duration: z.tools.randominteger(800,1200),  delay: 0 },
+				// 				});
+				// 			})
+				// 		} catch(err) { z.tools.logerror("all ::: squares ::: " + err ) }
+				// 		// z.tools.logmsg("rectangles stream " + JSON.stringify(e));
+				// 	}
+				// },
 				{
 					stream: "lines",
 					action: e => {
@@ -431,20 +832,20 @@ let createscore = z => {
 							// z.tools.logmsg("lines array = " + JSON.stringify(e.elements));
 							e.elements.filter((element,j) => j%2===0).forEach( (element, j) => {
 								// z.tools.logmsg("j/2%z.compass.canvas.grid.ncols = " + (j/2)%z.compass.canvas.grid.ncols);
-								let cx = (j%z.compass.canvas.grid.ncols)*dx + dx/2;
+								let cy = (j%z.compass.canvas.grid.nrows)*dx;
 								let color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];
 								// z.tools.logmsg("cx = " + cx);
 								Velocity({	
 									elements: e.elements[2*j].el,
-									properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: z.compass.canvas.grid.sw*z.tools.randominteger(1,9), strokeDasharray: z.tools.randominteger(10, z.compass.canvas.min), x1: cx, x2: cx, y1: 0, y2: z.compass.canvas.height*z.tools.randominteger(4,20)/10 },
+									properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(12,z.compass.canvas.max), strokeDasharray: z.tools.randominteger(8, z.compass.canvas.min), x1: 0, x2: z.compass.canvas.width, y1: cy, y2: cy },
 									options: { duration: z.tools.randominteger(e.dt*200,e.dt*400),  delay: z.tools.randominteger(0,e.dt*600), easing: "linear" },
 								});
-								let cy = Math.floor((j+1)%z.compass.canvas.grid.nrows)*dy + dy/2;
+								// let cy = Math.floor((j+1)%z.compass.canvas.grid.nrows)*dy;
 								color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];
 								// z.tools.logmsg("cy = " + cy);
 								Velocity({	
 									elements: e.elements[2*j+1].el,
-									properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: z.compass.canvas.grid.sw*z.tools.randominteger(1,9), strokeDasharray: z.tools.randominteger(10, z.compass.canvas.min), x1: 0, x2: z.compass.canvas.width*z.tools.randominteger(4,20)/10, y1: cy, y2: cy },
+									properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(10,z.compass.canvas.min), strokeDasharray: z.tools.randominteger(4, z.compass.canvas.min/4), x1: 0, x2: z.compass.canvas.width, y1: cy, y2: cy },
 									options: { duration: z.tools.randominteger(e.dt*600,e.dt*800),  delay: z.tools.randominteger(0,e.dt*600), easing: "linear" },
 								});
 								
@@ -591,31 +992,31 @@ let createscore = z => {
 					}
 				},
 				{
-					stream: "rectangles",
+					stream: "circles",
 					action: e => {
-						// z.tools.logmsg("all ::: squares e = " + JSON.stringify(e));
 						try {
 							let dx = z.compass.canvas.grid.dx, dy = z.compass.canvas.grid.dy;
+							let min = Math.min(dx,dy);
 							let color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];
-							let ratios = [5,10,15,20,30,40];
-							// z.tools.logmsg("all ::: squares elements = " + JSON.stringify(elements));
 							e.elements.forEach( (element, j) => {
-								let y = Math.floor(j/z.compass.canvas.grid.ncols)*dy;
-								let x = (j%z.compass.canvas.grid.ncols)*dx;
+								let cy = Math.floor(j/(2*z.compass.canvas.grid.ncols))*dy  + dy/2;
+								let cx = (j%z.compass.canvas.grid.ncols)*dx + dx/2;
+								let radius = min*z.tools.randominteger(1,6)/10;
 								if(Math.floor(e.tick.t/e.dt)%4!==0 && j%z.compass.canvas.grid.ncols===0) { color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];}
-								else if(Math.floor(e.tick.t/e.dt)%5!==0  && j%z.compass.canvas.grid.nrows===0) { color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];}
-								else if(Math.floor(e.tick.t/e.dt)%3!==0) { color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];}
+								if(Math.floor(e.tick.t/e.dt)%5!==0  && j%z.compass.canvas.grid.nrows===0) { color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];}
 								// z.tools.logmsg("c="+e.palette.colors.length + " color="+color);
 								Velocity({	
 									elements: element.el,
-									properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: 12, fill: color, x: x, y: y, width: dx*ratios[z.tools.randominteger(0, ratios.length)]/10, height: dy },
-									options: { duration: z.tools.randominteger(e.dt*200,e.dt*400),  delay: z.tools.randominteger(0,e.dt*600), easing: "easeInOutQuad" },
+									properties: { fillOpacity: (j+e.count)%3===0 ? 1.0 : 0.0, strokeOpacity: (j+e.count)%3===0 ? 0.0 : 1.0, stroke: color, strokeWidth: z.compass.canvas.grid.sw, fill: color, cx: cx, cy: cy, r: radius },
+									options: { duration: z.tools.randominteger(e.dt*400,e.dt*600),  delay: z.tools.randominteger(0,e.dt*600) },
 								});
+
 							})
-						} catch(err) { z.tools.logerror("all ::: squares ::: " + err ) }
-						// z.tools.logmsg("rectangles stream " + JSON.stringify(e));
+						} catch(err) { z.tools.logerror("map1 ::: circles 1 ::: " + err ) }
+						// z.tools.logmsg("dimensions stream " + JSON.stringify(e));
 					}
 				},
+				
 			],
 			map1: [
 				{
@@ -625,30 +1026,28 @@ let createscore = z => {
 					}
 				},
 				{
-					stream: "rectangles",
+					stream: "circles",
 					action: e => {
-						// z.tools.logmsg("all ::: squares e = " + JSON.stringify(e));
 						try {
 							let dx = z.compass.canvas.grid.dx, dy = z.compass.canvas.grid.dy;
+							let min = Math.min(dx,dy);
 							let color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];
-							let ratios = [5,10,15,20,30,40];
-							// z.tools.logmsg("all ::: squares elements = " + JSON.stringify(elements));
 							e.elements.forEach( (element, j) => {
-								let y = Math.floor(j/z.compass.canvas.grid.ncols)*dy;
-								let x = (j%z.compass.canvas.grid.ncols)*dx;
+								let cy = Math.floor(j/(2*z.compass.canvas.grid.ncols))*dy  + dy/2;
+								let cx = (j%z.compass.canvas.grid.ncols)*dx + dx/2;
+								let radius = min*z.tools.randominteger(1,6)/10;
 								if(Math.floor(e.tick.t/e.dt)%4!==0 && j%z.compass.canvas.grid.ncols===0) { color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];}
-								else if(Math.floor(e.tick.t/e.dt)%5!==0  && j%z.compass.canvas.grid.nrows===0) { color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];}
-								else if(Math.floor(e.tick.t/e.dt)%3!==0) { color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];}
+								if(Math.floor(e.tick.t/e.dt)%5!==0  && j%z.compass.canvas.grid.nrows===0) { color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];}
 								// z.tools.logmsg("c="+e.palette.colors.length + " color="+color);
 								Velocity({	
 									elements: element.el,
-									properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: 12, fill: color, x: x, y: y, width: dx, height: dy },
-									options: { duration: z.tools.randominteger(e.dt*200,e.dt*400),  delay: z.tools.randominteger(0,e.dt*600), easing: "easeInOutQuad" },
+									properties: { fillOpacity: (j+e.count)%3===0 ? 1.0 : 0.0, strokeOpacity: (j+e.count)%3===0 ? 0.0 : 1.0, stroke: color, strokeWidth: z.tools.randominteger(10,radius*2), strokeDasharray: z.tools.randominteger(4, radius*4), fill: color, cx: cx, cy: cy, r: radius },
+									options: { duration: z.tools.randominteger(e.dt*400,e.dt*600),  delay: z.tools.randominteger(0,e.dt*600) },
 								});
 
 							})
-						} catch(err) { z.tools.logerror("all ::: squares ::: " + err ) }
-						// z.tools.logmsg("rectangles stream " + JSON.stringify(e));
+						} catch(err) { z.tools.logerror("map1 ::: circles 1 ::: " + err ) }
+						// z.tools.logmsg("dimensions stream " + JSON.stringify(e));
 					}
 				},
 			],
@@ -657,14 +1056,34 @@ let createscore = z => {
 					stream: "start",
 					action: e => {
 						z.tools.logmsg("initialize map2");
-						z.elements["rectangles"].forEach( (element,j) => {
-								z.tools.logmsg("in map2 start ::: j = " + j);
+					}
+				},
+				{
+					stream: "circles",
+					action: e => {
+						try {
+							let dx = z.compass.canvas.grid.dx, dy = z.compass.canvas.grid.dy;
+							let min = Math.min(dx,dy);
+							let color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];
+							let l = e.elements.length;
+							let minradius = z.compass.canvas.min/l*z.tools.randominteger(2,14)/10;
+							
+							e.elements.forEach( (element, j) => {
+								let cy = Math.floor(z.compass.canvas.height/2);
+								let cx = Math.floor(z.compass.canvas.width/2);
+								let radius = (l-j)*minradius;
+								if(Math.floor(e.tick.t/e.dt)%4!==0 && j%z.compass.canvas.grid.ncols===0) { color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];}
+								if(Math.floor(e.tick.t/e.dt)%5!==0  && j%z.compass.canvas.grid.nrows===0) { color = z.compass.canvas.colors[z.tools.randominteger(0, z.compass.canvas.colors.length)];}
+								// z.tools.logmsg("c="+e.palette.colors.length + " color="+color);
 								Velocity({	
 									elements: element.el,
-									properties: { fillOpacity: 0.0, strokeOpacity: 0.0, stroke: "#000000", strokeWidth: 12, fill: "#000000", x: 0, y: 0, width: z.compass.canvas.grid.dx, height: z.compass.canvas.grid.dy },
-									options: { duration: z.tools.randominteger(800,1400),  delay: z.tools.randominteger(100,600), easing: "easeInOutQuad" },
+									properties: { fillOpacity: (j+e.count)%5===0 ? 1.0 : 0.0, strokeOpacity: (j+e.count)%5===0 ? 0.0 : 1.0, stroke: color, strokeWidth: z.tools.randominteger(4,radius/2), strokeDasharray: z.tools.randominteger(4, radius*2), fill: color, cx: cx, cy: cy, r: radius },
+									options: { duration: z.tools.randominteger(e.dt*400,e.dt*600),  delay: z.tools.randominteger(0,e.dt*600) },
 								});
-						})
+
+							})
+						} catch(err) { z.tools.logerror("map1 ::: circles 1 ::: " + err ) }
+						// z.tools.logmsg("dimensions stream " + JSON.stringify(e));
 					}
 				},
 			],
@@ -903,7 +1322,6 @@ let createscore = z => {
 									vca.connect(z.radio.player.gain);
 									source.loop = false;
 									source.onended = e =>  { 
-										// z.tools.logmsg("ended ::: " + JSON.stringify(e));
 										z.radio.n.buffersplaying=z.radio.n.buffersplaying-1
 									} ;
 									++z.radio.n.buffersplaying;
@@ -925,18 +1343,16 @@ let createscore = z => {
 					try {
 						let instrument = z.score.sounds.instruments[e.instrument];
 						let clip = z.score.sounds.clips[instrument.clip];
-						z.tools.logmsg("grain playing = " + instrument.clip);
+						z.tools.logmsg("grain playing = instrument ::: " + e.instrument + " ::: clip ::: " + instrument.clip);
 						if(clip.loaded) {
 							let rate = 1.0;
 							if(instrument.playbackRate) {
 									rate = instrument.playbackRate();
 							}
 							let now = z.radio.player.context.currentTime;
-							let dt = Math.min(z.tools.randominteger(18,48)/10,rate*clip.duration*.4);
-							// let dt = Math.min(z.tools.randominteger(18,24)/10,clip.duration*.3);
-							let offset = z.tools.randominteger(0, (rate*clip.duration-2*dt)*10)/10;
-							// let offset = z.tools.randominteger(0, (clip.duration-2*dt)*10)/10;
-							// z.tools.logmsg("in playgrain ::: clip = " + e.instrument + ", clip duration = " + clip.duration + ", clip new duration = " + clip.duration*rate + ", dt = " + dt + ", rate = " + rate + ", offset = " + offset);
+							let dt = Math.min(z.tools.randominteger(18,48)/10,rate*clip.duration*.25);
+							// let dt = Math.min(z.tools.randominteger(18,48)/40,rate*clip.duration*.25);
+							let offset = z.tools.randominteger(0, (rate*clip.duration-4*dt)*10)/10;
 							let vca = z.radio.player.context.createGain(); 
 							let source = z.radio.player.context.createBufferSource();
 							source.buffer = clip.buffer;
@@ -946,11 +1362,44 @@ let createscore = z => {
 							source.loop = false;
 							source.onended = e =>  { z.radio.n.grainsplaying=z.radio.n.grainsplaying-1} ;
 							++z.radio.n.grainsplaying;
-							source.start(now, offset, dt*3); //parameters (when,offset,duration
+							source.start(now, offset, dt*4); //parameters (when,offset,duration)
 							vca.gain.setValueAtTime(0.0, now);
 							vca.gain.linearRampToValueAtTime(e.volume, now + dt);
-							// vca.gain.linearRampToValueAtTime(1.0, now + dt);
-							vca.gain.linearRampToValueAtTime(0, now + 2*dt ); 
+							vca.gain.setValueAtTime(e.volume, now + 2*dt);
+							vca.gain.linearRampToValueAtTime(0, now + 3*dt ); 
+						}
+					}
+					catch(err) { z.tools.logerror("radio playgrain " + err) }
+				},
+				playparticle: e =>  {
+					// z.tools.logmsg("ngrainsplaying = " + z.radio.n.grainsplaying);
+					// if(z.radio.n.grainsplaying<z.radio.max.grainsplaying) {
+					try {
+						let instrument = z.score.sounds.instruments[e.instrument];
+						let clip = z.score.sounds.clips[instrument.clip];
+						z.tools.logmsg("particle playing = instrument ::: " + e.instrument + " ::: clip ::: " + instrument.clip);
+						if(clip.loaded) {
+							let rate = 1.0;
+							if(instrument.playbackRate) {
+									rate = instrument.playbackRate();
+							}
+							let now = z.radio.player.context.currentTime;
+							let dt = Math.min(z.tools.randominteger(120,240)/100,rate*clip.duration*.25);
+							let offset = z.tools.randominteger(0, (rate*clip.duration-4*dt)*10)/10;
+							let vca = z.radio.player.context.createGain(); 
+							let source = z.radio.player.context.createBufferSource();
+							source.buffer = clip.buffer;
+							source["playbackRate"].value = rate;
+							source.connect(vca);
+							vca.connect(z.radio.player.gain);
+							source.loop = false;
+							source.onended = e =>  { z.radio.n.grainsplaying=z.radio.n.grainsplaying-1} ;
+							++z.radio.n.grainsplaying;
+							source.start(now, offset, dt*4); //parameters (when,offset,duration)
+							vca.gain.setValueAtTime(0.0, now);
+							vca.gain.linearRampToValueAtTime(e.volume, now + dt);
+							vca.gain.setValueAtTime(e.volume, now + 2*dt);
+							vca.gain.linearRampToValueAtTime(0, now + 3*dt ); 
 						}
 					}
 					catch(err) { z.tools.logerror("radio playgrain " + err) }
@@ -996,36 +1445,32 @@ let createscore = z => {
 			elements["svg"].el.setAttributeNS(null, "class", "frame");
 			elements["svg"].el.setAttributeNS(null, "width", window.innerWidth);
 			elements["svg"].el.setAttributeNS(null, "height", window.innerHeight);
+			
 			elements["box"] = { el: document.createElementNS("http://www.w3.org/2000/svg", "rect") };
 			elements["box"].el.setAttributeNS(null, "id", "box");
 			elements["box"].el.setAttributeNS(null, "class", "shape rect");
 			elements["svg"].el.appendChild(elements["box"].el);
+			
+			Array.from(Array(z.compass.canvas.nshapes).keys()).forEach(  r => {
+				elements["lines"][r] = { el: document.createElementNS("http://www.w3.org/2000/svg", "line") };
+				elements["lines"][r].el.setAttributeNS(null, "id", "line_"+ r);
+				elements["lines"][r].el.setAttributeNS(null, "class", "shape line");
+				elements["svg"].el.appendChild(elements["lines"][r].el);
+			});
+			Array.from(Array(z.compass.canvas.grid.nrows*z.compass.canvas.grid.ncols*2).keys()).forEach(  r => {
+				elements["circles"][r] = { el: document.createElementNS("http://www.w3.org/2000/svg", "circle") };
+				elements["circles"][r].el.setAttributeNS(null, "id", "circle_"+r);
+				elements["circles"][r].el.setAttributeNS(null, "class", "shape circle");
+				elements["svg"].el.appendChild(elements["circles"][r].el);
+			});
 			Array.from(Array(z.compass.canvas.nshapes).keys()).forEach(  r => {
 				elements["rectangles"][r] = { el: document.createElementNS("http://www.w3.org/2000/svg", "rect") };
 				elements["rectangles"][r].el.setAttributeNS(null, "id", "rect_"+r);
 				elements["rectangles"][r].el.setAttributeNS(null, "class", "shape rect");
 				elements["svg"].el.appendChild(elements["rectangles"][r].el);
 			});
-			Array.from(Array(z.compass.canvas.nshapes).keys()).forEach(  r => {
-				let l = r*2;
-				elements["lines"][l] = { el: document.createElementNS("http://www.w3.org/2000/svg", "line") };
-				elements["lines"][l].el.setAttributeNS(null, "id", "line_"+ l);
-				elements["lines"][l].el.setAttributeNS(null, "class", "shape line");
-				elements["svg"].el.appendChild(elements["lines"][l].el);
-
-				l = r*2 + 1;
-				elements["lines"][l] = { el: document.createElementNS("http://www.w3.org/2000/svg", "line") };
-				elements["lines"][l].el.setAttributeNS(null, "id", "line_"+ l);
-				elements["lines"][l].el.setAttributeNS(null, "class", "shape line");
-				elements["svg"].el.appendChild(elements["lines"][l].el);
-			});
-			Array.from(Array(z.compass.canvas.nshapes).keys()).forEach(  r => {
-				elements["circles"][r] = { el: document.createElementNS("http://www.w3.org/2000/svg", "circle") };
-				elements["circles"][r].el.setAttributeNS(null, "id", "circle_"+r);
-				elements["circles"][r].el.setAttributeNS(null, "class", "shape circle");
-				elements["svg"].el.appendChild(elements["circles"][r].el);
-			});
 			
+
 			elements["svgframe"].el.appendChild(elements["svg"].el);
 			return elements;
 		},

@@ -18,15 +18,32 @@ let createscore = z => {
 				VIII: function(basetone){ return Math.floor(basetone*2) },
 			};
 	let instruments = {
-		cello_pitch4: {clip: "cello_pitch4", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		cello_pitch5: {clip: "cello_pitch5", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		cello_pitch1: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		cello_pitch1I: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return intervals.I(100) / 100 } },
-		cello_pitch1random: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(6,14)/10 } },
-		cello_pitch1harmonic: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		cello_pitch1IV: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return intervals.IV(100) / 100 } },
-		cello_pitch1V: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return intervals.V(100) / 100 } },
+		// tone64_c: {clip: "64_c", minvolume: 0.5, maxvolume: 0.6, },
+		// tone64_c2: {clip: "tone64hz_clip", minvolume: 0.3, maxvolume: 0.6, },
+		// tone128_c: {clip: "128_c", minvolume: 0.3, maxvolume: 0.6, },
+		// tone144_d: {clip: "144_d", minvolume: 0.3, maxvolume: 0.6, },
+		// tone192_g: {clip: "192_g", minvolume: 0.3, maxvolume: 0.6, },
+		// tone288_d: {clip: "288_d", minvolume: 0.3, maxvolume: 0.6, },
+		// tone384_g: {clip: "384_g", minvolume: 0.3, maxvolume: 0.6, },
+		// tone432_a: {clip: "432_a", minvolume: 0.3, maxvolume: 0.6, },
+		cello_pitch4harmonic: {clip: "cello_pitch4", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		cello_pitch5harmonic: {clip: "cello_pitch5", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		cello_pitch5: {clip: "cello_pitch5", minvolume: 0.4, maxvolume: 0.9 },
+		cello_pitch5IV: {clip: "cello_pitch5", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return intervals.IV(100) / 100 } },
+		// cello_pitch1: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		// cello_pitch1I: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return intervals.I(100) / 100 } },
+		// cello_pitch1random: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(6,14)/10 } },
+		// cello_pitch1harmonic: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		// cello_pitch1IV: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return intervals.IV(100) / 100 } },
+		// cello_pitch1V: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return intervals.V(100) / 100 } },
+		// whowl_howl4: {clip: "whowl_howl4", minvolume: 0.4, maxvolume: 0.8 },
+		bird1harmonic: {clip: "bird1", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		tornadosirenharmonic: {clip: "tornadosiren", minvolume: 0.1, maxvolume: 0.6, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
+
+		mags1harmonic: {clip: "magsSessionClips_1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
+		// mags2harmonic: {clip: "magsSessionClips_2a", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
 				
+	
 	};
 	console.log(JSON.stringify(Object.entries(instruments)));
 	let clips = {};
@@ -51,10 +68,16 @@ let createscore = z => {
 			instruments: instruments,
 			playlist: [  
 				// ["tone64_c", "tone64_c2", "tone144_d", "tone192_g", "tone288_d", "tone384_g", "tone432_a"],
-				["cello_pitch4", "cello_pitch5"],
-				["cello_pitch1", "cello_pitch1I", "cello_pitch1IV"],
-				["cello_pitch1", "cello_pitch1I", "cello_pitch1IV", "cello_pitch1V"],
-				["cello_pitch1harmonic"],
+				["cello_pitch4harmonic", "cello_pitch5harmonic"],
+				["cello_pitch5", "cello_pitch5IV"],
+				["cello_pitch5harmonic", "tornadosirenharmonic"],["cello_pitch5IV"],
+				["cello_pitch5harmonic", "tornadosirenharmonic"],
+				// ["cello_pitch1", "cello_pitch1I", "cello_pitch1IV"],
+				// ["cello_pitch1", "cello_pitch1I", "cello_pitch1IV", "cello_pitch1V"],
+				// ["cello_pitch1harmonic"],
+				["bird1harmonic", "tornadosirenharmonic"],
+				// ["mags1harmonic"],
+				// ["cello_pitch1harmonic"],
 				],
 			playing: { maxbuffers: [6,12], maxgrains: [6,12], durationthrottle: [[[6,0.9],[8,0.6],[14,0.4],[18,0.2],[40,0.1]], [[6,1.0],[8,0.8],[14,0.6],[18,0.4],[40,0.3]]]},
 		},
@@ -79,11 +102,6 @@ let createscore = z => {
 			], 
 		},
 		words: { playlist: [] },
-		transformations: [
-				{ uri: "map3a", title: "map3a", subtitle: "", content: ""},
-				{ uri: "map3b", title: "map3b", subtitle: "", content: ""},
-				{ uri: "map3c", title: "map3c", subtitle: "", content: ""},
-		],
 		createcompass: z => {
 			let date0 = new Date();
 			let t0 = Math.floor(date0.getTime()/1000);
@@ -225,7 +243,7 @@ let createscore = z => {
 			})( );
 			streams["playsounds"] = ( () => {
 				let dt = 1;
-				let chance = .8;
+				let chance = .6;
 				let state0 = { 
 					dt: dt, count: 0, chance: chance,
 				};
@@ -346,10 +364,18 @@ let createscore = z => {
 							// z.tools.logmsg(" play instrument ::: " + sound);
 							let instrument = z.score.sounds.instruments[sound];
 							let vol = z.tools.randominteger(instrument.minvolume*10, instrument.maxvolume*10)/10;
-							z.radio.playbuffer( { instrument: sound, volume: vol, delay: z.tools.randominteger(0,4)/10 } );
-							if(z.tools.randominteger(0,10) < 2) {
-								Kefir.sequentially(400, [0, 1, 2, 3]).onValue( x => { 
+							let chance = e.count%5===0 ? [1,4,8] : [2,8,0];
+							if(z.tools.randominteger(0,10) < chance[0]) {
+								z.radio.playbuffer( { instrument: sound, volume: vol, delay: z.tools.randominteger(0,4)/10 } );
+							}
+							if(z.tools.randominteger(0,10) < chance[1]) {
+								Kefir.sequentially(400, [0, 1, 2, 3, 4]).onValue( x => { 
 									z.radio.playgrain( { instrument: sound, volume: vol, delay: 0 } );
+								});
+							}
+							if(z.tools.randominteger(0,10) < chance[2]) {
+								Kefir.sequentially(400, [0, 1, 2, 3, 4, 5, 6]).onValue( x => { 
+									z.radio.playparticle( { instrument: sound, volume: vol, delay: 0 } );
 								});
 							}
 
@@ -903,7 +929,6 @@ let createscore = z => {
 									vca.connect(z.radio.player.gain);
 									source.loop = false;
 									source.onended = e =>  { 
-										// z.tools.logmsg("ended ::: " + JSON.stringify(e));
 										z.radio.n.buffersplaying=z.radio.n.buffersplaying-1
 									} ;
 									++z.radio.n.buffersplaying;
@@ -925,18 +950,16 @@ let createscore = z => {
 					try {
 						let instrument = z.score.sounds.instruments[e.instrument];
 						let clip = z.score.sounds.clips[instrument.clip];
-						z.tools.logmsg("grain playing = " + instrument.clip);
+						z.tools.logmsg("grain playing = instrument ::: " + e.instrument + " ::: clip ::: " + instrument.clip);
 						if(clip.loaded) {
 							let rate = 1.0;
 							if(instrument.playbackRate) {
 									rate = instrument.playbackRate();
 							}
 							let now = z.radio.player.context.currentTime;
-							let dt = Math.min(z.tools.randominteger(18,48)/10,rate*clip.duration*.4);
-							// let dt = Math.min(z.tools.randominteger(18,24)/10,clip.duration*.3);
-							let offset = z.tools.randominteger(0, (rate*clip.duration-2*dt)*10)/10;
-							// let offset = z.tools.randominteger(0, (clip.duration-2*dt)*10)/10;
-							// z.tools.logmsg("in playgrain ::: clip = " + e.instrument + ", clip duration = " + clip.duration + ", clip new duration = " + clip.duration*rate + ", dt = " + dt + ", rate = " + rate + ", offset = " + offset);
+							let dt = Math.min(z.tools.randominteger(18,48)/10,rate*clip.duration*.25);
+							// let dt = Math.min(z.tools.randominteger(18,48)/40,rate*clip.duration*.25);
+							let offset = z.tools.randominteger(0, (rate*clip.duration-4*dt)*10)/10;
 							let vca = z.radio.player.context.createGain(); 
 							let source = z.radio.player.context.createBufferSource();
 							source.buffer = clip.buffer;
@@ -946,11 +969,44 @@ let createscore = z => {
 							source.loop = false;
 							source.onended = e =>  { z.radio.n.grainsplaying=z.radio.n.grainsplaying-1} ;
 							++z.radio.n.grainsplaying;
-							source.start(now, offset, dt*3); //parameters (when,offset,duration
+							source.start(now, offset, dt*4); //parameters (when,offset,duration)
 							vca.gain.setValueAtTime(0.0, now);
 							vca.gain.linearRampToValueAtTime(e.volume, now + dt);
-							// vca.gain.linearRampToValueAtTime(1.0, now + dt);
-							vca.gain.linearRampToValueAtTime(0, now + 2*dt ); 
+							vca.gain.setValueAtTime(e.volume, now + 2*dt);
+							vca.gain.linearRampToValueAtTime(0, now + 3*dt ); 
+						}
+					}
+					catch(err) { z.tools.logerror("radio playgrain " + err) }
+				},
+				playparticle: e =>  {
+					// z.tools.logmsg("ngrainsplaying = " + z.radio.n.grainsplaying);
+					// if(z.radio.n.grainsplaying<z.radio.max.grainsplaying) {
+					try {
+						let instrument = z.score.sounds.instruments[e.instrument];
+						let clip = z.score.sounds.clips[instrument.clip];
+						z.tools.logmsg("particle playing = instrument ::: " + e.instrument + " ::: clip ::: " + instrument.clip);
+						if(clip.loaded) {
+							let rate = 1.0;
+							if(instrument.playbackRate) {
+									rate = instrument.playbackRate();
+							}
+							let now = z.radio.player.context.currentTime;
+							let dt = Math.min(z.tools.randominteger(120,240)/100,rate*clip.duration*.25);
+							let offset = z.tools.randominteger(0, (rate*clip.duration-4*dt)*10)/10;
+							let vca = z.radio.player.context.createGain(); 
+							let source = z.radio.player.context.createBufferSource();
+							source.buffer = clip.buffer;
+							source["playbackRate"].value = rate;
+							source.connect(vca);
+							vca.connect(z.radio.player.gain);
+							source.loop = false;
+							source.onended = e =>  { z.radio.n.grainsplaying=z.radio.n.grainsplaying-1} ;
+							++z.radio.n.grainsplaying;
+							source.start(now, offset, dt*4); //parameters (when,offset,duration)
+							vca.gain.setValueAtTime(0.0, now);
+							vca.gain.linearRampToValueAtTime(e.volume, now + dt);
+							vca.gain.setValueAtTime(e.volume, now + 2*dt);
+							vca.gain.linearRampToValueAtTime(0, now + 3*dt ); 
 						}
 					}
 					catch(err) { z.tools.logerror("radio playgrain " + err) }

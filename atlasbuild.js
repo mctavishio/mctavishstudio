@@ -8,9 +8,12 @@ const frontMatter = require('front-matter');
 const glob = require('glob');
 const config = require('./source/nodes/atlasconfig')();
 const paths = [
-	require('./source/nodes/atlasprototypepath')(),
+	// require('./source/nodes/atlasprototypepath')(),
 	require('./source/nodes/atlaspath20200705')(),
 	require('./source/nodes/atlaspath20200706')(),
+	require('./source/nodes/atlaspath20200707')(),
+	require('./source/nodes/atlaspath20200708')(),
+	require('./source/nodes/atlaspath20200709')(),
 ];
 const tools = require('./tools')
 
@@ -31,10 +34,10 @@ const build = ( () => {
 	paths.forEach( (path, j) => {
 		console.log("*** in build loop ::: path.title = " + path.title);
 		//save archive file ::: 
-		if(savearchive) {
-			try { fse.writeFileSync(config.archivepath + '/' + path.uri + "_" + Date.now()+'.js', JSON.stringify(path, null, "  "), 'utf8');
-				} catch(err) { console.log("problem writing file " + err); }
-		}
+		// if(savearchive) {
+		// 	try { fse.writeFileSync(config.archivepath + '/' + path.uri + "_" + Date.now()+'.js', JSON.stringify(path, null, "  "), 'utf8');
+		// 		} catch(err) { console.log("problem writing file " + err); }
+		// }
 		// render page
 		ejs.renderFile(config.sourcepath + '/layouts/' +  'template.ejs', path, (err, result) => {
 		    if (err) { tools.logmsg("problem rendering file " + path.uri + " ::: " + err); }
