@@ -454,7 +454,7 @@ main {
   	transition: opacity 4s ease-in-out;
   	/*margin-left: 8%;*/
   	width: 90%; max-width: 90%;
-  	max-width: 680px;
+  	max-width: 880px;
   	/*background-color:rgba(0, 0, 0, 0.4);*/
   	/*border: .5em var(--warmlightgray) dashed;
   	border-left: .5em var(--warmgray) dashed;

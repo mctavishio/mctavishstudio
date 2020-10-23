@@ -26,36 +26,42 @@ let createscore = z => {
 		// tone288_d: {clip: "288_d", minvolume: 0.3, maxvolume: 0.6, },
 		// tone384_g: {clip: "384_g", minvolume: 0.3, maxvolume: 0.6, },
 		// tone432_a: {clip: "432_a", minvolume: 0.3, maxvolume: 0.6, },
+		bagpipe1a: {clip: "bagpipe1a", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
+		bagpipe1ahigh: {clip: "bagpipe1a", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		// bagpipe1b: {clip: "bagpipe1b", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
+		// bagpipe1c: {clip: "bagpipe1c", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
+		// bagpipe1d: {clip: "bagpipe1d", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		bagpipe1e: {clip: "bagpipe1e", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		bagpipe1f: {clip: "bagpipe1f", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		bagpipe1g: {clip: "bagpipe1g", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		bagpipe1h: {clip: "bagpipe1h", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
+		bagpipe1: {clip: "bagpipe1", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomlowharmonic()/4 } },
+		bagpipe1high: {clip: "bagpipe1", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/4 } },
 		thunk: {clip: "thunk", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 		thunkhighharmonic: {clip: "thunk", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomhighharmonic()/10 } },
 		// birds5: {clip: "birds5",minvolume: 0.2, maxvolume: 0.5, playbackRate: () => { return z.tools.randominteger(4, 24)/10 } },
-		// birds5harmonic: {clip: "birds5",minvolume: 0.2, maxvolume: 0.5, playbackRate: () => { return z.tools.randomhighharmonic()/10 } },
+		birds5harmonic: {clip: "birds5",minvolume: 0.2, maxvolume: 0.5, playbackRate: () => { return z.tools.randomhighharmonic()/10 } },
 		knocking1: {clip: "knocking1", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randominteger(4,48)/10 } },
-		// cmpb20200708_1: {clip: "cmpb20200708_1", minvolume: 0.4, maxvolume: 0.9 },
-		// cmpb20200708_1: {clip: "cmpb20200708_1", minvolume: 0.4, maxvolume: 0.9 },
-		// cmpb20200708_3: {clip: "cmpb20200708_3", minvolume: 0.4, maxvolume: 0.9 },//*
-		// cmpb20200708_4: {clip: "cmpb20200708_4", minvolume: 0.4, maxvolume: 0.9 },//*
+		// cmpb20200708_4: {clip: "cmpb20200708_4", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomhighharmonic()/10 } },//*
 		// cmpb20200708_5: {clip: "cmpb20200708_5", minvolume: 0.4, maxvolume: 0.9 },//* voice
 		piano1: {clip: "piano1", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 		cmpb20200708_5harmonic: {clip: "cmpb20200708_5", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomhighharmonic()/10 } },//* voice
-		// // cmpb20200708_6: {clip: "cmpb20200708_6", minvolume: 0.4, maxvolume: 0.9 },
-		// vox20200118_8_3b: {clip: "vox20200118_8_3b", minvolume: 0.4, maxvolume: 0.9 },//*
-		cmpb20200708_1harmonic: {clip: "cmpb20200708_1", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/5 } },
+		vox20200118_8_3b: {clip: "vox20200118_8_3b", minvolume: 0.4, maxvolume: 0.9 },//*
 		// cello_pitch4harmonic: {clip: "cello_pitch4", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 		// cello_pitch5harmonic: {clip: "cello_pitch5", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 		// cello_pitch5: {clip: "cello_pitch5", minvolume: 0.4, maxvolume: 0.9 },
 		// cello_pitch5IV: {clip: "cello_pitch5", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return intervals.IV(100) / 100 } },
-		// // cello_pitch1: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		cello_pitch1: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 		// // cello_pitch1I: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return intervals.I(100) / 100 } },
 		// // cello_pitch1random: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(6,14)/10 } },
-		// // cello_pitch1harmonic: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		cello_pitch1harmonic: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 		// // cello_pitch1IV: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return intervals.IV(100) / 100 } },
 		// // cello_pitch1V: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return intervals.V(100) / 100 } },
-		// // whowl_howl4: {clip: "whowl_howl4", minvolume: 0.4, maxvolume: 0.8 },
-		// bird1harmonic: {clip: "bird1", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		whowl_howl4: {clip: "whowl_howl4", minvolume: 0.4, maxvolume: 0.8 },
+		bird1harmonic: {clip: "bird1", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 		// tornadosirenharmonic: {clip: "tornadosiren", minvolume: 0.1, maxvolume: 0.6, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
 
-		mags1harmonic: {clip: "magsSessionClips_1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
+		// mags1harmonic: {clip: "magsSessionClips_1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
 		// mags2harmonic: {clip: "magsSessionClips_2a", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
 				
 	
@@ -88,13 +94,35 @@ let createscore = z => {
 				
 				// ["vox20200118_8_3b","cello_pitch5harmonic"],
 				
-				["mags1harmonic", "cmpb20200708_5harmonic"],
-				["cmpb20200708_5harmonic", "piano1"],
-				["piano1"],
-				["piano1", "knocking1"],
-				["thunkhighharmonic", "piano1"],
-				["cmpb20200708_5harmonic", "knocking1"], 
-				["cmpb20200708_5harmonic", "thunkhighharmonic"]
+				// ["mags1harmonic", "cmpb20200708_5harmonic"],
+				// ["cmpb20200708_5harmonic", "piano1"],
+				// ["piano1"],
+				// ["piano1", "knocking1"],
+				// ["thunkhighharmonic", "piano1"],
+				// ["bagpipe1"],["bagpipe1", "bagpipe1high"],
+				// ["bagpipe1a"],["bagpipe1a", "bagpipe1ahigh"],
+				// ["bagpipe1e"],
+				// ["bagpipe1f"],["bagpipe1g"],["bagpipe1h"],
+				// ["bagpipe1","bagpipe1a"],
+				// ["bagpipe1e","bagpipe1f","bagpipe1g","bagpipe1h"],
+				// ["cmpb20200708_5harmonic"],
+				["bagpipe1e","bagpipe1f","bagpipe1g","bagpipe1h"],
+				["bagpipe1e","bagpipe1f","bagpipe1g","bagpipe1h","knocking1"],
+				["cmpb20200708_5harmonic","bagpipe1e","bagpipe1f","bagpipe1g","bagpipe1h"],
+				// ["cmpb20200708_4"],
+				["cmpb20200708_4", "bagpipe1a", "bagpipe1ahigh"],
+				// ["cmpb20200708_5harmonic", "cmpb20200708_4"],
+				// ["cmpb20200708_5harmonic", "bird1harmonic"],
+				// ["cmpb20200708_5harmonic", "bird1harmonic"], ["birds5harmonic"],
+				["birds5harmonic", "bagpipe1a", "bagpipe1ahigh"],
+				// ["cello_pitch1harmonic"],
+				// ["cello_pitch5harmonic"],
+				// ["cello_pitch5harmonic", "cello_pitch5"], ["vox20200118_8_3b"],
+				// ["vox20200118_8_3b", "cmpb20200708_5harmonic"],
+
+				// ["cmpb20200708_5harmonic", "knocking1"], 
+				// ["cmpb20200708_5harmonic", "thunkhighharmonic"]
+
 				// ["cmpb20200708_1harmonic", "thunk"],
 				],
 			playing: { maxbuffers: [6,12], maxgrains: [6,12], durationthrottle: [[[6,0.9],[8,0.6],[14,0.4],[18,0.2],[40,0.1]], [[6,1.0],[8,0.8],[14,0.6],[18,0.4],[40,0.3]]]},
@@ -383,9 +411,9 @@ let createscore = z => {
 							let instrument = z.score.sounds.instruments[sound];
 							let vol = z.tools.randominteger(instrument.minvolume*10, instrument.maxvolume*10)/10;
 							let chance = e.count%5===0 ? [1,3,5] : [0,1,8];
-							// if(z.tools.randominteger(0,10) < chance[0]) {
-							// 	z.radio.playbuffer( { instrument: sound, volume: vol, delay: z.tools.randominteger(0,4)/10 } );
-							// }
+							if(z.tools.randominteger(0,10) < chance[0]) {
+								z.radio.playbuffer( { instrument: sound, volume: vol, delay: z.tools.randominteger(0,4)/10 } );
+							}
 							if(z.tools.randominteger(0,10) < chance[1]) {
 								Kefir.sequentially(900, [0, 1, 2]).onValue( x => { 
 									z.radio.playgrain( { instrument: sound, volume: vol, delay: 0 } );
@@ -933,6 +961,7 @@ let createscore = z => {
 							let isplayed = (z.radio.n.buffersplaying<z.radio.max.buffersplaying-1) || z.radio.durationthrottle.reduce( (isplayed,d) => { 
 								// z.tools.logmsg("prob = " + prob + " ::: isplayed = " + isplayed + " ::: d = " + d + " ::: duration = " + clip.duration*rate); 
 								return isplayed || (clip.duration*rate < d[0] && prob <= d[1]) }, false);
+								// return true});
 							if(isplayed) {
 								try {
 									// z.tools.logmsg("rate = " + rate + " ::: duration = " + clip.duration*rate);
@@ -1115,15 +1144,15 @@ window.onload = z => {
 	z.tools.logmsg("z.compass.pathpoints.actions = " + JSON.stringify(z.compass.pathpoints.actions));
 
 	z.compass.pathpoints.contents = [];
-	z.elements["contents"] = [];
-	document.querySelectorAll(".content").forEach( ( el, j ) => {
-		z.elements["contents"][ el.getAttribute("id") ] = { el: el };
-		z.tools.logmsg('el.getAttribute("id") = ' + el.getAttribute("id"));
-		z.compass.pathpoints.contents.push(el.getAttribute("id"));
-	});
-	z.tools.logmsg("z.compass.pathpoints.contents = " + JSON.stringify(z.compass.pathpoints.contents));
-	z.compass.pathpoints.contents.forEach( id => z.elements["contents"][id].el.style.display="none" );
-	z.elements["contents"][z.compass.pathpoints.contents[0]].el.style.display="block";
+	// z.elements["contents"] = [];
+	// document.querySelectorAll(".content").forEach( ( el, j ) => {
+	// 	z.elements["contents"][ el.getAttribute("id") ] = { el: el };
+	// 	z.tools.logmsg('el.getAttribute("id") = ' + el.getAttribute("id"));
+	// 	z.compass.pathpoints.contents.push(el.getAttribute("id"));
+	// });
+	// z.tools.logmsg("z.compass.pathpoints.contents = " + JSON.stringify(z.compass.pathpoints.contents));
+	// z.compass.pathpoints.contents.forEach( id => z.elements["contents"][id].el.style.display="none" );
+	// z.elements["contents"][z.compass.pathpoints.contents[0]].el.style.display="block";
 
 	if(!z.actions["all"]) z.actions["all"] = [];
 
