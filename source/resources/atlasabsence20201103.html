@@ -1527,7 +1527,6 @@ z.tools = {
 		return Math.floor( ( x-min+dx/2)/dx )*dx + min;
 	},
 };
-//core elements
 z.elements = ( () => {
 	return {
 		body: { el: document.querySelector("body") },
@@ -1535,6 +1534,11 @@ z.elements = ( () => {
 		clock: { el: document.querySelector("#clock") },
 		telegraph: { el: document.querySelector("#telegraph") },
 		svg:  { el: document.querySelector("#svg") },
+		controls: ["controls", "hidelink", "soundlink", "menulink"].reduce( (acc, id) => {
+			z.tools.logmsg("create control element ::: " + id);
+			acc[id] = { el: document.querySelector("#"+id) };
+			return acc;
+		}, {}),
 		frames: ["subtextframe", "svgframe", "wordframe", "contentframe"].reduce( (acc, id) => {
 			z.tools.logmsg("create frame element ::: " + id);
 			acc[id] = { el: document.querySelector("#"+id) };
@@ -1577,37 +1581,81 @@ z.streams = {
 				return state
 			}, state0) 
 	})( ),
+	controls: ["hidelink", "soundlink", "menulink"].reduce( (acc, id) => {
+		z.tools.logmsg("start control click stream ::: " + id);
+		acc[id] = Kefir.fromEvents(z.elements["controls"][id].el, "click");
+		acc[id].onValue( e => { z.tools.logmsg(" clicked " + id); 
+			// z.radio.playtone({duration:0.4, frequency: z.tools.randominteger(200,380)}); 
+			z.radio.playbuffer({duration:8, fadetime:2, instrument:z.radio.instruments["birds5harmonic"], volume:z.tools.randominteger(z.radio.instruments["birds5harmonic"].minvolume*10, z.radio.instruments["birds5harmonic"].maxvolume*10)/10}); 
+			Kefir.sequentially(400, [0, 1, 2, 3, 4]).onValue( x => { 
+				z.radio.playbuffer({duration:4, fadetime:.4, instrument:z.radio.instruments["bagpipe1f"], volume: z.radio.instruments["bagpipe1f"].maxvolume});
+			});
+			// z.radio.playbuffer({delay:9, fadetime:2, duration:8, zinstrument:"cello_pitch1harmonic",volume:1.0});
+		});
+		return acc;
+	}, {}),
 };
 
 z.draw = z => {
 	z.streams["clock"].onValue( e => {
 		z.elements["clock"].el.innerHTML = z.tools.datestr(new Date(e.t*1000));
 	});
-	//visibility controls
-	( () => { 
+	z.streams["controls"]["hidelink"].onValue( e => {
+		z.tools.logmsg("hide content !");
 		let main = document.querySelector("#main");
 		let controls = document.querySelector("#controls");
 		let hidelink = document.querySelector("#hidelink");
 		let menulink = document.querySelector("#menulink");
-		//hidelink
-		Kefir.fromEvents(hidelink, "click").onValue( e => {
-			try {
-				z.tools.logmsg("hide content");
-				main.style.opacity=0;
-				controls.style.display='none';
-				menulink.style.display='block';
-			} catch(e) { z.tools.logerror("hidelink " + e) }
-		});
-		//menulink
-		Kefir.fromEvents(menulink, "click").onValue( e => {
-			try {
-				z.tools.logmsg("show content");
-				main.style.opacity=0.8;
-				menulink.style.display='none';
-				controls.style.display='block';
-			} catch(e) { z.tools.logerror("menulink " + e) }
-		});
+		try {
+			z.tools.logmsg("hide content");
+			z.elements["main"].el.style.opacity=0;
+			z.elements["controls"]["controls"].el.style.display='none';
+			z.elements["controls"]["menulink"].el.style.display='block';
+		} catch(e) { z.tools.logerror("dashboard ::: hidelink " + e) }
+	});
+	z.streams["controls"]["menulink"].onValue( e => {
+		z.tools.logmsg("hide content !");
+		try {
+			z.tools.logmsg("show content");
+			z.elements["main"].el.style.opacity=0.9;
+			z.elements["controls"]["controls"].el.style.display='block';
+			z.elements["controls"]["menulink"].el.style.display='none';
+		} catch(e) { z.tools.logerror("dashboard ::: menulink " + e) }
+	});
+	( () => {
+		let soundplaying = false;
+		let element = document.querySelector("#soundlink");
+		Kefir.fromEvents(element, "click").onValue( e => {
+			z.tools.logmsg("play sound !");
+			if(!soundplaying) { 
+				try {
+					z.radio.player.context.resume().then(() => {
+						z.tools.logmsg("playback resumed");
+						if(!soundplaying) {
+							z.elements["telegraph"].el.innerHTML =  "<i>loading sound ...</i>";
+							window.setTimeout(() => { z.elements["telegraph"].el.innerHTML =  "sound on"}, 8000);
+						}
+						else {
+							z.elements["telegraph"].el.innerHTML =  "sound on";
+						}
+						soundplaying = true;
+						element.classList.add("active");
+						// z.radio.play(z);
+					});
+				} catch(e) { z.tools.logerror("dashboard ::: resumeaudio " + e) } 
+			}
+			else { 
+				try {
+					z.radio.player.context.suspend().then(() => {
+						z.elements["telegraph"].el.innerHTML =  "sound off";
+						soundplaying = false;
+						element.classList.remove("active");
+					});
+				} catch(e) { z.tools.logerror("dashboard ::: suspendaudio " + e) }
+			}
+		})
 	})();
+	z.elements["frames"]["contentframe"].el.style.opacity = 1.0;
 
 	const playlist = [
 		["#fcfbe3", "#191918"], //"warmbw",
@@ -1936,9 +1984,8 @@ z.radio = ( () => {
 	Object.entries(instruments).forEach( instrument => {
 		clips[instrument[1].clip] = { url: soundcorepath + instrument[1].clip + ".mp3", loaded:false, duration:0, buffer:{} };
 	});
-	let radio = {
-		player: {}, loading: [], loaded: false,
-		soundplaying:false,
+	return {
+		player: {}, loading: [],loaded: false,
 		instruments: instruments, clips: clips,
 		clipduration: { min:0, max:0 },
 		nbuffersplaying: 0, maxbuffersplaying: [9,18][v],
@@ -2079,14 +2126,15 @@ z.radio = ( () => {
 			catch(err) { z.tools.logerror("line playbuffer" + err) }
 		},
 		play: z => {
+
 			let chance = .6;
-			z.streams["clock"].filter( e => e.t%2===0 && z.tools.randominteger(0,10)<chance*10 && z.radio.soundplaying)
+			z.streams["clock"].filter( e => e.t%2===0 && z.tools.randominteger(0,10)<chance*10 )
 				.onValue( e=> {
 					Kefir.sequentially(400, [0, 1, 2, 3, 4]).onValue( x => { 
 						z.radio.playbuffer({duration:2, fadetime:0.1, instrument:z.radio.instruments["bagpipe1f"], volume: z.tools.randominteger(z.radio.instruments["bagpipe1f"].minvolume*10, z.radio.instruments["bagpipe1f"].maxvolume*10)/10});
 					});
 				})
-			z.streams["clock"].filter( e => e.t%5===0 && z.tools.randominteger(0,10)<chance*10 && z.radio.soundplaying )
+			z.streams["clock"].filter( e => e.t%5===0 && z.tools.randominteger(0,10)<chance*10 )
 				.onValue( e=> {
 					Kefir.sequentially(500, [0, 1, 2, 3, 4]).onValue( x => { 
 						z.radio.playbuffer({duration:4, fadetime:0.1, instrument:z.radio.instruments["bagpipe1"], volume: z.radio.instruments["bagpipe1"].minvolume});
@@ -2095,13 +2143,13 @@ z.radio = ( () => {
 						z.radio.playbuffer({duration:8, fadetime:0.1, instrument:z.radio.instruments["bagpipe1a"], volume: z.radio.instruments["bagpipe1a"].minvolume});
 					});
 				})
-			z.streams["clock"].filter( e => e.t%7===0 && z.tools.randominteger(0,10)<chance*10  && z.radio.soundplaying)
+			z.streams["clock"].filter( e => e.t%7===0 && z.tools.randominteger(0,10)<chance*10 )
 				.onValue( e=> {
 					Kefir.sequentially(400, [0, 1, 2, 3, 4]).onValue( x => { 
 						z.radio.playbuffer({duration:18, fadetime:0.1, instrument:z.radio.instruments["thunkhighharmonic"], volume: z.radio.instruments["thunkhighharmonic"].minvolume});
 					});
 				})
-			z.streams["clock"].filter( e => e.t%3===0 && z.tools.randominteger(0,10)<chance*10  && z.radio.soundplaying)
+			z.streams["clock"].filter( e => e.t%3===0 && z.tools.randominteger(0,10)<chance*10 )
 				.onValue( e=> {
 					Kefir.sequentially(400, [0, 1, 2, 3, 4]).onValue( x => { 
 						z.radio.playbuffer({duration:18, fadetime:0.1, instrument:z.radio.instruments["cmpb20200708_5harmonic"], volume: z.tools.randominteger(z.radio.instruments["cmpb20200708_5harmonic"].minvolume*10, z.radio.instruments["cmpb20200708_5harmonic"].maxvolume*10)/10});
@@ -2109,43 +2157,16 @@ z.radio = ( () => {
 				})
 				
 		}
-	};
-	
-	let soundlink = document.querySelector("#soundlink");
-	let telegraph = document.querySelector("#telegraph");
-	Kefir.fromEvents(soundlink, "click").onValue( e => {
-		z.tools.logmsg("play sound !");
-		if(!radio.soundplaying) { 
-			try {
-				radio.player.context.resume().then(() => {
-					z.tools.logmsg("playback resumed");
-					telegraph.innerHTML =  "sound on";
-					radio.soundplaying = true;
-					soundlink.classList.add("active");
-				});
-			} catch(e) { z.tools.logerror("dashboard ::: resumeaudio " + e) } 
-		}
-		else { 
-			try {
-				radio.player.context.suspend().then(() => {
-					telegraph.innerHTML =  "sound off";
-					radio.soundplaying = false;
-					soundlink.classList.remove("active");
-				});
-			} catch(e) { z.tools.logerror("dashboard ::: suspendaudio " + e) }
-		}
-	});
-
-	return radio;
+	}
 })();
 //test
 z.radio.start(z);
 z.radio.loadclips(z);
 z.radio.playtone();
 window.onload = () => {
-  z.radio.play(z);
+  // z.radio.play(z);
   z.draw(z);
-  window.setTimeout(() => { document.querySelector("#contentframe").style.opacity = 1.0 }, 4800);
+
 };
 </script>
 </html>
