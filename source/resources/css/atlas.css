@@ -444,7 +444,6 @@ main {
 	position: relative;
 	padding: 1em;
 	padding-top: 2em;
-	transition: opacity 4s ease-in-out;
 	/*overflow-y: scroll;
 	overflow-x: hidden;*/
 	border: 0px;
@@ -562,6 +561,7 @@ ul.circle li, ol.circle li, dl.circle dt {
 	list-style: circle;
 	list-style-position: outside;
 }
+
 /* https://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
 nav ul {
 	position: relative;
