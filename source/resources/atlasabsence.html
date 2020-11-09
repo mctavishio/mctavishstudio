@@ -55,7 +55,7 @@
 		ul[data-role="rider"]:nth-child(odd)::after {
 			content: "( + + + +)";
 		}*/
-		ul[data-role="rider"]:nth-child(odd) > li:nth-child(even) {
+		/*ul[data-role="rider"]:nth-child(odd) > li:nth-child(even) {
 			color: white;
 		}
 		ul[data-role="rider"]:nth-child(odd) > li:nth-child(odd) {
@@ -72,22 +72,63 @@
 		}
 		ul[data-role="rider"]:nth-child(6n+11) > li:nth-child(odd) {
 			color: #ffdc6e;
-		}
-		ul.stanza li:nth-child(even) {
+		}*/
+		/*ul.stanza li:nth-child(even) {
 			display: block;
 		}
 		ul.stanza li:nth-child(odd) {
 			display: inline;
-		}
+		}*/
 		ul.stanza li::after {
-			color: black;
+			color: #fcfbe3;
 			font-family:Courier;
-			content: " - - &.& # - - > ";
+			content: "  ||| ";
+		}
+		ul.stanza li {
+			color: red;
+			font-family:Courier;
+			display: inline;
+		}
+		ul.stanza > li:nth-child(even) {
+			color: #fcfbe3;
+		}
+		ul.stanza > li:nth-child(odd) {
+			color: #ffeba9;
 		}
 		ul.stanza_red li::after {
+			/*color: #ffeba9;*/
+			color: #ffcc00;
+			font-family:Courier;
+			content: " |.| ";
+		}
+		ul.stanza_red li {
 			color: white;
 			font-family:Courier;
-			content: " < - * &.& # - - ";
+			display: inline;
+		}
+		ul.stanza_red > li:nth-child(odd) {
+			color: #fcfbe3;
+		}
+		ul.stanza_red > li:nth-child(even) {
+			color: #ffeba9;
+		}
+
+		ul.stanza_black li::after {
+			/*color: #ffeba9;*/
+			color: #ffffff;
+			font-family:Courier;
+			content: " |+| ";
+		}
+		ul.stanza_black li {
+			color: #ffffff;
+			font-family:Courier;
+			display: inline;
+		}
+		ul.stanza_black > li:nth-child(odd) {
+			color: #cccccc;
+		}
+		ul.stanza_black > li:nth-child(even) {
+			color: #aaaaaa;
 		}
 		ul.stanza:nth-child(1n+0) > li:only-child {
 			display: block;
@@ -143,7 +184,8 @@
 			</ul>
 
 			<ul data-role="rider" class="stanza">
-			<li>the repairman(our hero zero rider *) (left the throng of city depot) arrived alone on the platform worn suitcase sandwich lukewarm coffee thermos tepid brown liquid greasy paper rusted texaco station creased map</li>
+			<li>the repairman(our hero zero rider *) (left the throng of city depot) arrived alone</li>
+			<li>worn suitcase sandwich lukewarm coffee thermos tepid brown liquid greasy paper rusted texaco station creased map</li>
 			</ul>
 
 			<ul data-role="rider" class="stanza">
@@ -152,14 +194,6 @@
 			<li>critical mission ::: fix the system</li>
 			<li>repair reclaim rebuild reweave the prairie meadow sequestration</li>
 			</ul>
-			</div>
-		</article>
-
-		<article id="atlas20200709b_content" class="poem" >
-			<header>
-			<h1>*()</h2>
-			</header>
-			<div class="textContent">
 				<ul data-role="rider" class="stanza">
 					<li>downward glance creased map marked path</li>
 					<li>radio research building factory institute platform station</li>
@@ -194,22 +228,18 @@
 					<li>once again repeat again retie retry reweave again a name uttered speak again</li>
 					<li>reclaim restore correct</li>
 				</ul>
+			</div>
+		</article>
+
+		<article id="atlas20200709b_content" class="poem" >
+			<header>
+			<h1><a href="#top">| ^ |</a> *() </h2>
+			</header>
+			<div class="textContent">
+
 
 			<ul data-role="rider" class="stanza">
 			<li>ignite</li>
-			</ul>
-
-			<ul data-role="rider" class="stanza">
-			<li>trace erosion fragment shadow on the window time</li>
-			<li>season shifted local sundial noon-line fragment blueprint blue light paper pressing cyanotype remembrance</li>
-			<li>chronometer opacity odometer silent breath grass blade whisper vapor ghost carbon cycle chlorophyl bone detrital join uptake weight rhizome tent matrix building frame</li>
-			</ul>
-
-			<ul data-role="rider" class="stanza">
-			<li>dyke blade flame night graffiti gesture neon brandish flight</li>
-			<li>for each map filter fold list railway table</li>
-			<li>(off || on 0 || 1)</li>
-			<li>repair(*) passenger rider sun(&#9737;) thatch radio signal static dial clock pulse</li>
 			</ul>
 
 			<ul data-role="rider" class="stanza">
@@ -408,6 +438,19 @@
 			</ul>
 
 			<ul data-role="rider" class="stanza">
+			<li>trace erosion fragment shadow window time</li>
+			<li>season shifted local sundial noon-line fragment blueprint blue light paper pressing</li>
+			<li>chronometer opacity odometer silent breath grass blade whisper vapor ghost carbon cycle chlorophyl bone detrital join uptake weight rhizome tent matrix building frame</li>
+			</ul>
+
+			<ul data-role="rider" class="stanza">
+			<li>dyke blade flame night graffiti gesture neon brandish flight</li>
+			<li>for each map filter fold list railway table</li>
+			<li>(off || on 0 || 1)</li>
+			<li>repair(*) passenger rider sun(&#9737;) thatch radio signal static dial clock pulse</li>
+			</ul>
+
+			<ul data-role="rider" class="stanza">
 			<li>database of tools</li>
 			<li>inventory manuscript</li>
 			<li>shadow cave projection</li>
@@ -421,8 +464,9 @@
 			</ul>
 
 			<ul data-role="rider" class="stanza">
-			<li>time bends forward then leans back</li>
-			<li>tensile stem a cellular conductance</li>
+			<li>time bends forward leans back</li>
+			<li>circles like a bird of prey</li>
+			<li>tensile stem ::: a cellular conductance</li>
 			<li>electric neural circuit blood</li>
 			<li>windswept dream of flight</li>
 			<li>vessel heart rib and loom</li>
@@ -888,7 +932,7 @@
 			</ul>
 
 			<ul data-role="rider" class="stanza">
-			<li>the repair(⚃) reviewed the course the notes the goal</li>
+			<li>the repair(*) reviewed the course the notes the goal</li>
 			</ul>
 
 			<ul data-role="rider" class="stanza">
@@ -1572,7 +1616,7 @@ z.streams = {
 				state.height = window.innerHeight;
 				state.max = Math.max(state.width, state.height);
 				state.min = Math.min(state.width, state.height);
-				state.grid.dx = Math.floor(state.width/state.grid.nrcols);
+				state.grid.dx = Math.floor(state.width/state.grid.ncols);
 				state.grid.dy = Math.floor(state.height/state.grid.nrows);
 				state.grid.sw = Math.floor(Math.max(state.grid.dx*.03, state.grid.dy*.03, 4));
 				return state
@@ -1581,6 +1625,8 @@ z.streams = {
 };
 
 z.draw = z => {
+	const timings = [ [380,600], [400,580], [480,500], [500,480], [580,400], [600,380], [640,340], [680,300], [700,280], [740,240], [780,200], [800,180], [840,140], [880,100]];
+	// const timings = [ [180,800], [200,780], [280,700], [300,680], [380,600], [400,580], [480,500], [500,480], [580,400], [600,380], [640,340], [680,300], [700,280], [740,240], [780,200], [800,180], [840,140], [880,100]];
 	z.streams["clock"].onValue( e => {
 		z.elements["clock"].el.innerHTML = z.tools.datestr(new Date(e.t*1000));
 	});
@@ -1645,37 +1691,36 @@ z.draw = z => {
 
 	//box
 	( dt => {
-		const element = ( () => {
-			let el = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-			el.setAttributeNS(null, "id", "box");
-			el.setAttributeNS(null, "class", "shape rect");
-			z.elements["svg"].el.appendChild(el);
-			return el
-		});
+		const element = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+		element.setAttributeNS(null, "id", "box");
+		element.setAttributeNS(null, "class", "shape square");
+		z.elements["svg"].el.appendChild(element);
+			
 		z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
 			try {
 				let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
-				z.tools.logmsg("in BOX " + color + " (e.clock.t) " + e.clock.t);
+				z.tools.logmsg("in BOX " + color + " color =  " + color);
 				Velocity({	
 					elements: element, 
 					properties: { fillOpacity: 1.0, strokeOpacity: 0.0, fill: color, width: e.dimensions.width, height: e.dimensions.height },
-					options: { duration: z.tools.randominteger(dt*800,dt*900),  delay: z.tools.randominteger(0,dt*80), easing: "easeInOutQuad" },
+					options: { duration: 2000,  delay: 0, easing: "easeInOutQuad" },
 				});
 			} catch(err) { z.tools.logerror("box animation ::: " + err ) }
 		})
-	})(8);
+	})(5);
 
 	//poems
 	( dt => {
+		const classnames = ["stanza_red", "stanza", "stanza_black"];
 		const elements = ( () => {
 			return Array.from(document.querySelectorAll(".poem")).reduce( (acc,el,j)=> {
 				z.tools.logmsg("create poem element ::: " + j);
 				el.setAttribute("id", "poem"+j);
 				acc[j]={ el:el, id:"poem"+j, stanzas: Array.from(el.querySelectorAll(".stanza")).reduce( (acc,el,j)=> {
-					// z.tools.logmsg("create stanza element ::: " + j);
+					z.tools.logmsg("create stanza element ::: " + j);
 					// el.setAttribute("id", "stanza"+j);
 					acc[j]={ el:el, lines:Array.from(el.querySelectorAll("li")).reduce( (acc,el,j)=> {
-						// z.tools.logmsg("create line element ::: " + j);
+						z.tools.logmsg("create line element ::: " + j);
 						// el.setAttribute("id", "line"+j);
 						acc[j]={ el:el };
 						return acc;
@@ -1691,7 +1736,7 @@ z.draw = z => {
 				let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
 				elements.map((poem,j) => {
 					poem["stanzas"].map((stanza,j) => {
-						stanza.el.className= count%2===0 ? "stanza_red" : "stanza";
+						stanza.el.className= classnames[count%classnames.length];
 					})
 					// filter( (poem, j) => j%2===0).map()
 				});
@@ -1703,14 +1748,14 @@ z.draw = z => {
 				// });
 			} catch(err) { z.tools.logerror("poem animation ::: " + err ) }
 		})
-	})(5);
+	})(13);
 
 	//words
 	( dt => {
 		const nwords = [[0,1],[0,1,2,3]][v];
-		const words = ["one","two","three","four"];
+		const words = ["_.._._+ . < +=_.._._+ . < +=_.._._+ . < +=", ": :  . < > '",". . . . . .","& | { . . ::: x"];
 		const elements = nwords.reduce( (acc, id, j) => {
-			// z.tools.logmsg("create word element ::: " + id);
+			z.tools.logmsg("create word element ::: " + id);
 			let el = document.createElement("div");
 			el.setAttribute("id", "word_" + id);
 			el.setAttribute("class", "absolute");
@@ -1745,11 +1790,12 @@ z.draw = z => {
 				} catch(err) { z.tools.logerror("word 1 animation ::: " + err ) }
 			},
 		]
-		z.tools.logmsg("#words elements = " + elements.length);
+		z.tools.logmsg("#circ elements = " + elements.length);
 		z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
 			drawings[Math.floor(e.clock.t/(dt*elements.length))%drawings.length](e);
 		})
 	})(8);
+
 	//lines
 	( dt => {
 		const nlines=[[0,1,2,3],[0,1,2,3,4,5,6,7]][v];
@@ -1766,19 +1812,21 @@ z.draw = z => {
 			e => {
 				try {
 					let dx = e.dimensions.grid.dx, dy = e.dimensions.grid.dy;
+					let timing = timings[z.tools.randominteger(0,timings.length)];
 					elements.filter((element,j) => j%2===0).forEach( (element, j) => {
 						let cy = e.dimensions.height/2;
 						let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
 						Velocity({	
 							elements: elements[2*j].el,
 							properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(12, e.dimensions.max), strokeDasharray: z.tools.randominteger(8, e.dimensions.min), x1: 0, x2: e.dimensions.width, y1: cy, y2: cy },
-							options: { duration: z.tools.randominteger(dt*400,dt*600),  delay: z.tools.randominteger(0,e.dt*200), easing: "linear" },
+							options: { duration: z.tools.randominteger(e.dt*timing[0], e.dt*timing[0]*3),  delay: 200 },
 						});
 						color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
+
 						Velocity({	
 							elements: elements[2*j+1].el,
 							properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(10, e.dimensions.min), strokeDasharray: z.tools.randominteger(4, e.dimensions.min/4), x1: 0, x2: e.dimensions.width, y1: cy, y2: cy },
-							options: { duration: z.tools.randominteger(dt*480,dt*680),  delay: z.tools.randominteger(0,e.dt*200), easing: "linear" },
+							options: { duration: z.tools.randominteger(e.dt*timing[0], e.dt*timing[0]*3),  delay: 300 },
 						});
 					})
 				} catch(err) { z.tools.logerror("line animation 1 ::: " + err ) }
@@ -1786,19 +1834,21 @@ z.draw = z => {
 			e => {
 				try {
 					let dx = e.dimensions.grid.dx, dy = e.dimensions.grid.dy;
+					let timing = timings[z.tools.randominteger(0,timings.length)];
 					elements.filter((element,j) => j%2===0).forEach( (element, j) => {
 						let cx = (j%e.dimensions.grid.ncols)*dx + dx/2;
 						let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
 						Velocity({	
 							elements: elements[2*j].el,
 							properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(12, e.dimensions.max), strokeDasharray: z.tools.randominteger(8, e.dimensions.min), y1: 0, y2: e.dimensions.height, x1: cx, x2: cx },
-							options: { duration: z.tools.randominteger(dt*400,dt*600),  delay: z.tools.randominteger(0,e.dt*200), easing: "linear" },
+							options: { duration: z.tools.randominteger(e.dt*timing[0], e.dt*timing[0]*3),  delay: 0 },
 						});
 						color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
+						timing = timings[z.tools.randominteger(0,timings.length)];
 						Velocity({	
 							elements: elements[2*j+1].el,
 							properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(10, e.dimensions.min), strokeDasharray: z.tools.randominteger(4, e.dimensions.min/4), y1: 0, y2: e.dimensions.height, x1: cx, x2: cx },
-							options: { duration: z.tools.randominteger(dt*480,dt*600),  delay: z.tools.randominteger(0,e.dt*200), easing: "linear" },
+							options: { duration: z.tools.randominteger(e.dt*timing[0], e.dt*timing[0]*3),  delay: 500 },
 						});
 					})
 				} catch(err) { z.tools.logerror("line animation 2 ::: " + err ) }
@@ -1806,19 +1856,21 @@ z.draw = z => {
 			e => {
 				try {
 					let dx = e.dimensions.grid.dx, dy = e.dimensions.grid.dy;
+					let timing = timings[z.tools.randominteger(0,timings.length)];
 					elements.filter((element,j) => j%2===0).forEach( (element, j) => {
 						let cy = j%2===0 ? 0 : e.dimensions.height/2;
 						let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
 						Velocity({	
 							elements: elements[2*j].el,
 							properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(12, e.dimensions.max), strokeDasharray: z.tools.randominteger(8, e.dimensions.min), y1: cy, y2: cy, x1: 0, x2: e.dimensions.width },
-							options: { duration: z.tools.randominteger(dt*400,dt*600),  delay: z.tools.randominteger(0,e.dt*600), easing: "linear" },
+							options: { duration: z.tools.randominteger(e.dt*timing[0], e.dt*timing[0]*3),  delay: 0 },
 						});
 						color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
+						timing = timings[z.tools.randominteger(0,timings.length)];
 						Velocity({	
 							elements: elements[2*j+1].el,
 							properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(10, e.dimensions.min*2), strokeDasharray: z.tools.randominteger(4, e.dimensions.min/2), y1: cy, y2: cy, x1: 0, x2: e.dimensions.width },
-							options: { duration: z.tools.randominteger(dt*600,dt*800),  delay: z.tools.randominteger(0,e.dt*600), easing: "linear" },
+							options: { duration: z.tools.randominteger(e.dt*timing[0], e.dt*timing[0]*3),  delay: 300 },
 						});
 					})
 				} catch(err) { z.tools.logerror("line animation 3 ::: " + err ) }
@@ -1828,6 +1880,7 @@ z.draw = z => {
 			drawings[Math.floor(e.clock.t/(dt*elements.length))%drawings.length](e);
 		})
 	})(2);
+
 	//circles
 	( dt => {
 		const ncircles=[[0,1,2,3,4,5,6,7],[0,1,2,3,4,5,6,7,8,9,10,12,13,14,15]][v];
@@ -1844,40 +1897,41 @@ z.draw = z => {
 		const drawings = [
 			e => {
 				try {
-					let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
+					let timing = timings[z.tools.randominteger(0,timings.length)];
+					let count = e.clock.t/dt;
 					let l = elements.length;
 					let minradius = e.dimensions.min/l*z.tools.randominteger(2,14)/10;
 					elements.forEach( (element, j) => {
 						let cy = Math.floor(e.dimensions.height/2);
 						let cx = Math.floor(e.dimensions.width/2);
 						let radius = (l-j)*minradius;
-						if(Math.floor(e.clock.t/dt)%4!==0 && j%e.dimensions.grid.ncols===0) { color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];}
-						if(Math.floor(e.clock.t/dt)%5!==0  && j%e.dimensions.grid.nrows===0) { color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];}
-						z.tools.logmsg("circle 1 (e.clock.t/dt) = " + e.clock.t/dt);
-						z.tools.logmsg("(j+e.clock.t/dt)%3 = "+(j+e.clock.t/dt)%3);					Velocity({	
+						z.tools.logmsg("circle 1 cx= "+cx+" cy= " + cy + " radius = " + radius);
+						let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
+						Velocity({	
 							elements: element.el,
-							properties: { fillOpacity: (j+e.clock.t/dt)%2===0 ? 1.0 : 0.0, strokeOpacity: (j+e.clock.t/dt)%2===0 ? 0.0 : 1.0, stroke: color, strokeWidth: z.tools.randominteger(4,radius/2), strokeDasharray: z.tools.randominteger(4, radius*2), fill: color, cx: cx, cy: cy, r: radius },
-							options: { duration: z.tools.randominteger(dt*400,dt*800),  delay: z.tools.randominteger(0,dt*600) },
+							properties: { fillOpacity: (j+count)%3===0 ? 1.0 : 0.0, strokeOpacity: (j+count)%2===0 ? 0.0 : 1.0, stroke: color, strokeWidth: z.tools.randominteger(4,radius/2), strokeDasharray: z.tools.randominteger(4, radius*2), fill: color, cx: cx, cy: cy, r: radius },
+							options: { duration: z.tools.randominteger(e.dt*timing[0], e.dt*timing[0]*3),  delay: j*60 },
 						});
+						
 					})
 				} catch(err) { z.tools.logerror("circles 1 animation ::: " + err ) }
 			},
 			e => {
 				try {
 					let dx = e.dimensions.grid.dx, dy = e.dimensions.grid.dy;
+					let timing = timings[z.tools.randominteger(0,timings.length)];
 					let min = Math.min(dx,dy);
-					let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
+					let count = e.clock.t/dt;
 					elements.forEach( (element, j) => {
 						let cy = Math.floor(j/(2*e.dimensions.grid.ncols))*dy  + dy/2;
 						let cx = (j%e.dimensions.grid.ncols)*dx + dx/2;
 						let radius = min*z.tools.randominteger(1,6)/10;
-						z.tools.logmsg("circle 2 cx= "+cx+" cy= " + cy); 
-						if(Math.floor(e.clock.t/dt)%4!==0 && j%e.dimensions.grid.ncols===0) { color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];}
-						if(Math.floor(e.clock.t/dt)%5!==0 && j%e.dimensions.grid.nrows===0) { color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];}
+						z.tools.logmsg("circle 2 cx= "+cx+" cy= " + cy + " radius = " + radius); 
+						let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
 						Velocity({	
 							elements: element.el,
-							properties: { fillOpacity: (j+e.clock.t/dt)%2===0 ? 1.0 : 0.0, strokeOpacity: (j+e.clock.t/dt)%2===0 ? 0.0 : 1.0, stroke: color, strokeWidth: z.tools.randominteger(10,radius*2), strokeDasharray: z.tools.randominteger(4, radius*4), fill: color, cx: cx, cy: cy, r: radius },
-							options: { duration: z.tools.randominteger(dt*400,dt*600),  delay: z.tools.randominteger(0,dt*600) },
+							properties: { fillOpacity: (j+count)%3===0 ? 1.0 : 0.0, strokeOpacity: (j+count)%2===0 ? 0.0 : 1.0, stroke: color, strokeWidth: z.tools.randominteger(10,radius*2), strokeDasharray: z.tools.randominteger(4, radius*4), fill: color, cx: cx, cy: cy, r: radius },
+							options: { duration: z.tools.randominteger(e.dt*timing[0], e.dt*timing[0]*3),  delay: 0 },
 						});
 
 					})
@@ -1886,23 +1940,47 @@ z.draw = z => {
 			e => {
 				try {
 					let dx = e.dimensions.grid.dx, dy = e.dimensions.grid.dy;
+					let timing = timings[z.tools.randominteger(0,timings.length)];
 					let min = Math.min(dx,dy);
-					let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
+					let count = e.clock.t/dt;
 					elements.forEach( (element, j) => {
 						let cy = e.dimensions.height/2;
 						let cx = j%3===0 ? 0 : (j%2===0 ? e.dimensions.width/2 : e.dimensions.width);
 						let radius = min*z.tools.randominteger(1,20)/10;
-						z.tools.logmsg("circle 3 cx= "+cx+" cy= " + cy); 
-						if(Math.floor(e.clock.t/dt)%3!==0 && j%e.dimensions.grid.ncols===0) { color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];}
-						if(Math.floor(e.clock.t/dt)%4!==0 && j%e.dimensions.grid.nrows===0) { color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];}
+						z.tools.logmsg("circle 3 cx= "+cx+" cy= " + cy + " radius = " + radius); 
+						// if(Math.floor(count)%3!==0 && j%e.dimensions.grid.ncols===0) { color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];}
+						// if(Math.floor(count)%4!==0 && j%e.dimensions.grid.nrows===0) { color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];}
+						let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
 						Velocity({	
 							elements: element.el,
-							properties: { fillOpacity: (j+e.clock.t/dt)%2===0 ? 1.0 : 0.0, strokeOpacity: (j+e.clock.t/dt)%2===0 ? 0.0 : 1.0, stroke: color, strokeWidth: z.tools.randominteger(10,radius*2), strokeDasharray: z.tools.randominteger(4, radius*4), fill: color, cx: cx, cy: cy, r: radius },
-							options: { duration: z.tools.randominteger(dt*400,dt*600),  delay: z.tools.randominteger(0,dt*600) },
+							properties: { fillOpacity: (j+count)%3===0 ? 1.0 : 0.0, strokeOpacity: (j+count)%2===0 ? 0.0 : 1.0, stroke: color, strokeWidth: z.tools.randominteger(10,radius*2), strokeDasharray: z.tools.randominteger(4, radius*4), fill: color, cx: cx, cy: cy, r: radius },
+							options: { duration: z.tools.randominteger(e.dt*timing[0], e.dt*timing[0]*3),  delay: 0 },
 						});
 
 					})
-				} catch(err) { z.tools.logerror("circles 2 animation ::: " + err ) }
+				} catch(err) { z.tools.logerror("circles 3 animation ::: " + err ) }
+			},
+			e => {
+				try {
+					let dx = e.dimensions.grid.dx, dy = e.dimensions.grid.dy;
+					let timing = timings[z.tools.randominteger(0,timings.length)];
+					let min = Math.min(dx,dy);
+					let count = e.clock.t/dt;
+					
+					elements.forEach( (element, j) => {
+						let cy = e.dimensions.height/2;
+						let cx = j%2===0 ? e.dimensions.width/2 -dx : e.dimensions.width/2 + dx;
+						let radius = min*z.tools.randominteger(1,20)/10;
+						z.tools.logmsg("circle 4 cx= "+cx+" cy= " + cy + " radius = " + radius); 
+						let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
+						Velocity({	
+							elements: element.el,
+							properties: { fillOpacity: (j+count)%5===0 ? 1.0 : 0.0, strokeOpacity: (j+count)%2===0 ? 0.0 : 1.0, stroke: color, strokeWidth: z.tools.randominteger(10,radius*2), strokeDasharray: z.tools.randominteger(4, radius*4), fill: color, cx: cx, cy: cy, r: radius },
+							options: { duration: z.tools.randominteger(e.dt*timing[0], e.dt*timing[0]*3),  delay: 0 },
+						});
+
+					})
+				} catch(err) { z.tools.logerror("circles 4 animation ::: " + err ) }
 			}
 		]
 		z.tools.logmsg("#circ elements = " + elements.length);
@@ -1974,11 +2052,11 @@ z.radio = ( () => {
 					z.radio.loading.push(clip.url);
 					let request = new XMLHttpRequest();
 					//for localhost testing
-					// request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url, true);
+					request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url, true);
 					// z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url);
 					// for deploy
-					request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
-					z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + "/"  + clip.url);
+					// request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
+					// z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + "/"  + clip.url);
 					request.responseType = "arraybuffer";
 					request.onload = () =>  {
 						z.tools.logmsg("loaded" + clip.url);
@@ -2115,7 +2193,7 @@ z.radio = ( () => {
 			z.streams["clock"].filter( e => e.t%3===0 && z.tools.randominteger(0,10)<chance*10  && z.radio.soundplaying)
 				.onValue( e=> {
 					Kefir.sequentially(400, [0, 1, 2, 3, 4]).onValue( x => { 
-						z.radio.playbuffer({duration:18, fadetime:0.1, instrument:z.radio.instruments["bagpipegeese"], volume: z.tools.randominteger(z.radio.instruments["bagpipegeese"].minvolume*10, z.radio.instruments["cmpb20200708_5harmonic"].maxvolume*10)/10});
+						z.radio.playbuffer({duration:18, fadetime:0.1, instrument:z.radio.instruments["birdcanyon"], volume: z.tools.randominteger(z.radio.instruments["birdcanyon"].minvolume*10, z.radio.instruments["cmpb20200708_5harmonic"].maxvolume*10)/10});
 					});
 				})
 				
@@ -2152,7 +2230,7 @@ z.radio = ( () => {
 //test
 z.radio.start(z);
 z.radio.loadclips(z);
-z.radio.playtone();
+// z.radio.playtone();
 window.onload = () => {
   z.radio.play(z);
   z.draw(z);
@@ -2160,23 +2238,3 @@ window.onload = () => {
 };
 </script>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
