@@ -1672,10 +1672,10 @@ z.draw = z => {
 				z.tools.logmsg("create poem element ::: " + j);
 				el.setAttribute("id", "poem"+j);
 				acc[j]={ el:el, id:"poem"+j, stanzas: Array.from(el.querySelectorAll(".stanza")).reduce( (acc,el,j)=> {
-					z.tools.logmsg("create stanza element ::: " + j);
+					// z.tools.logmsg("create stanza element ::: " + j);
 					// el.setAttribute("id", "stanza"+j);
 					acc[j]={ el:el, lines:Array.from(el.querySelectorAll("li")).reduce( (acc,el,j)=> {
-						z.tools.logmsg("create line element ::: " + j);
+						// z.tools.logmsg("create line element ::: " + j);
 						// el.setAttribute("id", "line"+j);
 						acc[j]={ el:el };
 						return acc;
@@ -1710,7 +1710,7 @@ z.draw = z => {
 		const nwords = [[0,1],[0,1,2,3]][v];
 		const words = ["one","two","three","four"];
 		const elements = nwords.reduce( (acc, id, j) => {
-			z.tools.logmsg("create word element ::: " + id);
+			// z.tools.logmsg("create word element ::: " + id);
 			let el = document.createElement("div");
 			el.setAttribute("id", "word_" + id);
 			el.setAttribute("class", "absolute");
@@ -1745,7 +1745,7 @@ z.draw = z => {
 				} catch(err) { z.tools.logerror("word 1 animation ::: " + err ) }
 			},
 		]
-		z.tools.logmsg("#circ elements = " + elements.length);
+		z.tools.logmsg("#words elements = " + elements.length);
 		z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
 			drawings[Math.floor(e.clock.t/(dt*elements.length))%drawings.length](e);
 		})
@@ -1772,13 +1772,13 @@ z.draw = z => {
 						Velocity({	
 							elements: elements[2*j].el,
 							properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(12, e.dimensions.max), strokeDasharray: z.tools.randominteger(8, e.dimensions.min), x1: 0, x2: e.dimensions.width, y1: cy, y2: cy },
-							options: { duration: z.tools.randominteger(dt*400,dt*600),  delay: z.tools.randominteger(0,e.dt*600), easing: "linear" },
+							options: { duration: z.tools.randominteger(dt*400,dt*600),  delay: z.tools.randominteger(0,e.dt*200), easing: "linear" },
 						});
 						color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
 						Velocity({	
 							elements: elements[2*j+1].el,
 							properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(10, e.dimensions.min), strokeDasharray: z.tools.randominteger(4, e.dimensions.min/4), x1: 0, x2: e.dimensions.width, y1: cy, y2: cy },
-							options: { duration: z.tools.randominteger(dt*600,dt*800),  delay: z.tools.randominteger(0,e.dt*600), easing: "linear" },
+							options: { duration: z.tools.randominteger(dt*480,dt*680),  delay: z.tools.randominteger(0,e.dt*200), easing: "linear" },
 						});
 					})
 				} catch(err) { z.tools.logerror("line animation 1 ::: " + err ) }
@@ -1792,13 +1792,13 @@ z.draw = z => {
 						Velocity({	
 							elements: elements[2*j].el,
 							properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(12, e.dimensions.max), strokeDasharray: z.tools.randominteger(8, e.dimensions.min), y1: 0, y2: e.dimensions.height, x1: cx, x2: cx },
-							options: { duration: z.tools.randominteger(dt*400,dt*600),  delay: z.tools.randominteger(0,e.dt*600), easing: "linear" },
+							options: { duration: z.tools.randominteger(dt*400,dt*600),  delay: z.tools.randominteger(0,e.dt*200), easing: "linear" },
 						});
 						color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
 						Velocity({	
 							elements: elements[2*j+1].el,
 							properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(10, e.dimensions.min), strokeDasharray: z.tools.randominteger(4, e.dimensions.min/4), y1: 0, y2: e.dimensions.height, x1: cx, x2: cx },
-							options: { duration: z.tools.randominteger(dt*600,dt*800),  delay: z.tools.randominteger(0,e.dt*600), easing: "linear" },
+							options: { duration: z.tools.randominteger(dt*480,dt*600),  delay: z.tools.randominteger(0,e.dt*200), easing: "linear" },
 						});
 					})
 				} catch(err) { z.tools.logerror("line animation 2 ::: " + err ) }
@@ -1974,11 +1974,11 @@ z.radio = ( () => {
 					z.radio.loading.push(clip.url);
 					let request = new XMLHttpRequest();
 					//for localhost testing
-					request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url, true);
+					// request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url, true);
 					// z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url);
 					// for deploy
-					// request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
-					// z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + "/"  + clip.url);
+					request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
+					z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + "/"  + clip.url);
 					request.responseType = "arraybuffer";
 					request.onload = () =>  {
 						z.tools.logmsg("loaded" + clip.url);
