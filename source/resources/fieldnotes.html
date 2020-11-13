@@ -2478,10 +2478,10 @@ z.radio = ( () => {
 					z.radio.loading.push(clip.url);
 					let request = new XMLHttpRequest();
 					//for localhost testing
-					request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url, true);
+					// request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url, true);
 					// z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url);
 					// for deploy
-					// request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
+					request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
 					// z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + "/"  + clip.url);
 					request.responseType = "arraybuffer";
 					request.onload = () =>  {
@@ -2594,6 +2594,9 @@ z.radio = ( () => {
 			catch(err) { z.tools.logerror("line playbuffer" + err) }
 		},
 		play: z => {
+			const defaultduration = (dt,n,graintdt,clip) => dt/(graindt*2);
+			const defaultfadetime = (dt,n,graintdt,clip) => dt/(graindt*20);
+			const defaultpart = (dt=4000, n=4, graindt=400, chance=0.8, duration=defaultduration, fadetime=defaultfadetime, instruments=["celloknockcanyon"]) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: duration(dt,n,graintdt), fadetime: fadetime(dt,n,graintdt), instruments: ["celloknockcanyon"] } };
 			const score = [
 				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["birdcanyon", "birds5harmonic", "voxmct0", "cmpb20200708_5harmonic", "longbell"] } })(14000,5,500),
 				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["train1", "tornadosirenharmonic",] } })(4000,6,500),
