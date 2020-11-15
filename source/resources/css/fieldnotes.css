@@ -145,6 +145,12 @@ html {
 .largest {
 	font-size: 8em;
 }
+.bold {
+	font-weight: bold;
+}
+.underline {
+	text-decoration: underline;
+}
 
 .zhighest {
 	z-index: 8888;
@@ -173,6 +179,62 @@ html {
 .zlowest {
 	z-index: -8888;
 	z-index: var(--zlowest);
+}
+
+.redbg {
+	background-color: #9a0000;
+	background-color: var(--red);
+	fill: var(--red);
+}
+.yellowbg {
+	background-color: #ffcc00;
+	background-color: var(--yellow);
+	fill: var(--yellow);
+}
+.bluebg {
+	background-color: #006699;
+	background-color: var(--blue);
+	fill: var(--blue);
+}
+.blackbg {
+	background-color: #000000;
+	background-color: var(--black);
+	fill: var(--black);
+}
+.warmblackbg {
+	background-color: #191918;
+	background-color: var(--warmblack);
+	fill: var(--warmblack);
+}
+.graybg {
+	background-color: #484848;
+	background-color: var(--gray);
+	fill: var(--gray);
+}
+.lightgraybg {
+	background-color: #888888;
+	background-color: var(--lightgray);
+	fill: var(--lightgray);
+}
+.warmgraybg {
+	background-color: #4b4b44;
+	background-color: var(--warmgray);
+	fill: var(--warmgray);
+}
+.warmlightgraybg {
+	background-color: #656560;
+	background-color: var(--warmlightgray);
+	fill: var(--warmlightgray);
+}
+.whitebg {
+	background-color: #ffffff;
+	background-color: var(--white);
+	fill: var(--white);
+}
+.warmwhitebg {
+	background-color: #fcfbe3;
+	background-color: var(--warmwhite);
+	fill: var(--warmwhite);
 }
 
 .red {
@@ -230,6 +292,7 @@ html {
 	color: var(--warmwhite);
 	fill: var(--warmwhite);
 }
+
 
 .monospace_code {
 	font-family: Courier, 'Andale Mono', AndaleMono, Monaco, monospace;
@@ -345,7 +408,7 @@ div.absolute {
 	max-width: 90%;
 	min-height: 90%;
 	max-height: 90%;
-	transition: opacity 4s ease-in-out;
+	transition: opacity 1s ease-in-out;
 }
 #mainflex {
 	display: flex;
@@ -357,7 +420,7 @@ main {
 	position: relative;
 	padding: 1em;
 	padding-top: 2em;
-	transition: opacity 4s ease-in-out;
+	transition: opacity 1s ease-in-out;
 	/*overflow-y: scroll;
 	overflow-x: hidden;*/
 	border: 0px;
@@ -374,6 +437,7 @@ main {
   	border-left: .5em var(--warmgray) dashed;
   	border-right: .5em var(--warmwhite) dashed;*/
 }
+
 article {
 	padding: 1em;
 	/*margin: 20px 20px;*/
@@ -594,6 +658,9 @@ main.expand ul.stanza > li {
 main.compress ul.stanza > li {
 	display: inline;
 	line-height: 1.8em;
+}
+#home {
+	margin-top:4em;
 }
 
 
