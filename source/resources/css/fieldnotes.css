@@ -644,25 +644,32 @@ ul.after13 > li::after {
 	content: " ::: ";
 }
 
-main.expand ul.stanza > li::after {
+/*main.expand ul.stanza > li::after {
 	font-family: Courier, 'Andale Mono', AndaleMono, Monaco, monospace;
 	font-family: var(--monospace_zerodot);
 	content: "";
-}
+}*/
 
 main.expand ul.stanza > li {
 	display: block;
 	line-height: 2em;
 }
-
 main.compress ul.stanza > li {
+	display: inline;
+	line-height: 1.8em;
+}
+
+main ul.expand > li {
+	display: block;
+	line-height: 2em;
+}
+main ul.compress > li {
 	display: inline;
 	line-height: 1.8em;
 }
 #home {
 	margin-top:4em;
 }
-
 
 ul.stanza.afterblackwhite > li:nth-child(even):after {
 	color: #ffeba9;
