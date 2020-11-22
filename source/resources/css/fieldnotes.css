@@ -419,7 +419,7 @@ div.absolute {
 main {
 	position: relative;
 	padding: 1em;
-	padding-top: 2em;
+	/*padding-top: 2em;*/
 	transition: opacity 1s ease-in-out;
 	/*overflow-y: scroll;
 	overflow-x: hidden;*/
@@ -656,7 +656,7 @@ main.expand ul.stanza > li {
 }
 main.compress ul.stanza > li {
 	display: inline;
-	line-height: 1.8em;
+	line-height: 2em;
 }
 
 main ul.expand > li {
@@ -665,8 +665,10 @@ main ul.expand > li {
 }
 main ul.compress > li {
 	display: inline;
-	line-height: 1.8em;
+	line-height: 2em;
 }
+
+
 #home {
 	margin-top:4em;
 }
@@ -840,22 +842,23 @@ a {
 	z-index: 8888;
 	z-index: var(--zhighest);
 	font-weight:bolder;
-	text-decoration: underline;
-	color: #000000;
-	color: var(--warmblack);
+	text-decoration: none;
+	color: #fcfbe3;
+	color: var(--warmwhite);
 }
 main a:before {
-	content: "::: ";
+	content: ". ";
 }
 main a:after {
-	content: " ::: ";
+	content: " . ";
 }
 a:hover {
 	z-index: 8888;
 	z-index: var(--zhighest);
 	text-decoration: underline;
-	color: #fcfbe3;
-	color: var(--warmwhite);
+	color: #000000;
+	color: var(--warmblack);
+
 }
 svg.icon {
 	width: 50px;

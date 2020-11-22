@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>planets</title>
+	<title>blue atlas</title>
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-	<meta name="description" content="the planets" />
+	<meta name="description" content="blue atlas ::: home / about / table of contents" />
 	<meta name="author" content="kathy mctavish">
 	<!-- from ::: http://www.favicon-generator.org/ -->
 	<link rel="apple-touch-icon" sizes="57x57" href="apple-icon-57x57.png">
@@ -30,10 +30,10 @@
 		{
 			"@context": "http://schema.org",
 			"@type": "WebPage",
-			"name": "the planets",
-			"breadcrumb": "mctavish.studio > the planets",
-          		"url": "http://www.mctavish.studio/blueatlas/planets.html",
-			"description": "night sky",
+			"name": "blue atlas",
+			"breadcrumb": "mctavish.studio > blue atlas",
+          		"url": "http://www.mctavish.studio/blueatlas/index.html",
+			"description": "blue atlas ::: home page",
 			"datePublished": "Wed Nov 18 2020 12:10:53 GMT-0500 (Central Daylight Time)",
           		"image": "http://www.mctavish.io/data/mctavishIcon-01-04-01-01-01.png",
 			"author": "http://mctavish.io",
@@ -47,6 +47,7 @@
 		}
 		main ul.stanza li {
 			font-weight: bold;
+			margin-bottom: 2em;
 		}
 		main article:nth-child(odd) a:before {
 			color: #fcfbe3;
@@ -61,31 +62,18 @@
 		a {
 			text-decoration: none;
 		}
-		main article:nth-child(odd) a:after {
-			color: #000000;
-			color: var(--warmblack);
-			content: " :";
-		}
-		main article:nth-child(even) a:after {
-			color: #fcfbe3;
-			color: var(--warmwhite);
-			content: " :";
-		}
-		main {
-			max-width: 600px;
-		}
 	</style>
 </head>
-<body id="body" >
+<body id="top" >
 <div id="subtextframe" class="frame zlowest"></div>
 <div id="svgframe" class="frame zlow"><svg xmlns="http://www.w3.org/2000/svg" id="svg" class="frame"></svg></div>
 <div id="wordframe" class="frame z0"></div>
 <!-- <div id="controlframe" class="frame zhighest"></div> -->
 <div id="contentframe" class="absolute zhighest" style="opacity:0">
-<nav id="controls"">
+<nav id="controls">
 	<ul class="flex">
 		<li title="hide controls" id="hidelink"><a href="#" ><svg class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 470 470" ><g><path d="M231.147,160.373l67.2,67.2l0.32-3.52c0-35.307-28.693-64-64-64L231.147,160.373z"/><path d="M234.667,117.387c58.88,0,106.667,47.787,106.667,106.667c0,13.76-2.773,26.88-7.573,38.933l62.4,62.4 c32.213-26.88,57.6-61.653,73.28-101.333c-37.013-93.653-128-160-234.773-160c-29.867,0-58.453,5.333-85.013,14.933l46.08,45.973 C207.787,120.267,220.907,117.387,234.667,117.387z"/><path d="M21.333,59.253l48.64,48.64l9.707,9.707C44.48,145.12,16.64,181.707,0,224.053c36.907,93.653,128,160,234.667,160 c33.067,0,64.64-6.4,93.547-18.027l9.067,9.067l62.187,62.293l27.2-27.093L48.533,32.053L21.333,59.253z M139.307,177.12 l32.96,32.96c-0.96,4.587-1.6,9.173-1.6,13.973c0,35.307,28.693,64,64,64c4.8,0,9.387-0.64,13.867-1.6l32.96,32.96  c-14.187,7.04-29.973,11.307-46.827,11.307C175.787,330.72,128,282.933,128,224.053C128,207.2,132.267,191.413,139.307,177.12z" /></g></svg></a></li>
-		<li title="home" id="homelink"><a href="#home" ><svg class="icon" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 510 510" ><polygon points="204,471.75 204,318.75 306,318.75 306,471.75 433.5,471.75 433.5,267.75 510,267.75 255,38.25 0,267.75 76.5,267.75 76.5,471.75"/></svg></a></li>
+		<li title="home" id="homelink"><a href="index.html" ><svg class="icon" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 510 510" ><polygon points="204,471.75 204,318.75 306,318.75 306,471.75 433.5,471.75 433.5,267.75 510,267.75 255,38.25 0,267.75 76.5,267.75 76.5,471.75"/></svg></a></li>
 		<li title="sound" id="soundlink"><a href="#" ><svg class="icon" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 459 459" ><path d="M0,153v153h102l127.5,127.5v-408L102,153H0z M344.25,229.5c0-45.9-25.5-84.15-63.75-102v204 C318.75,313.65,344.25,275.4,344.25,229.5z M280.5,5.1v53.55C354.45,81.6,408,147.899,408,229.5S354.45,377.4,280.5,400.35V453.9 C382.5,430.949,459,339.15,459,229.5C459,119.85,382.5,28.049,280.5,5.1z"/></svg></a></li>
 		<li class="title typewriter" title="telegraph" id="telegraph">(sound off)</li>
 		<li class="title  typewriter" title="clock" id="clock">here | now</li>
@@ -100,23 +88,28 @@
 <main id="main" class="expand" data-state="expanded">	
 <header>
 	<h1>blue atlas</h1>
-	<h2>(- books -)</h2>
+	<h2>(- home -)</h2>
 </header>
-<article class="poem" id="home">
+<article class="poem">
 	<div class="textContent">
-		<h5>book list</h5>
+		<h5>book links</h5>
 		<ul data-role="narrator" class="info expand">
 		<li><a href="fieldnotes.html">field notes</a></li>
 		<li><a href="surface.html">surface displacement</a></li>
+		<li><a href="stars.html">the stars</a></li>
 		<li><a href="nighttrainbluewindow.html">night train blue window</a></li>
 		<li><a href="epilogue.html">night train blue window ::: epilogue</a></li>
 		<li><a href="planets.html">the planets</a></li>
 		</ul>
 		<h5>about</h5>
 		<ul data-role="narrator" class="info">
-		<li>this is ...</li>
-		<li></li>
-		<li></li>
+		<li>this is an absence diorama a bird a map a web ...</li>
+		<li>not a picture of a bird but the gears spark beak motion</li>
+		<li>memory feather archive</li>
+		<li>this is a knapsack of artifacts</li>
+		<li>pigments from old photos</li>
+		<li>recorded sound</li>
+		<li>diagrams equations codes a telegram</li>
 		</ul>
 		<h5>thanks</h5>
 		<ul data-role="narrator" class="info">
@@ -296,16 +289,17 @@ z.draw = z => {
 	})();
 
 	const playlist = [
-		//primary colors
 		["#fcfbe3", "#191918"], //"warmbw",
 		// ["#9a0000", "#fcfbe3", "#191918"], //"warmbwred",
 		// ["#fcfbe3", "#191918"], //"warmbw",
 		// ["#ffcc00", "#fcfbe3", "#191918"], //"warmbwyellow",
 		// ["#fcfbe3", "#191918"], //"warmbw",
-		// ["#006699", "#fcfbe3", "#191918", "#4b4b44"], //"warmbwbluegray",
+		// ["#006699", "#fcfbe3", "#191918", "#4b4b44"], //"warmbwgray",
 		// ["#006699", "#fcfbe3", "#191918", "#004488"], //"warmbwbluegray",
 		// ["#006699", "#fcfbe3", "#191918"], //"warmbwblue",
 		// ["#006699", "#006666", "#fcfbe3", "#191918"], //"warmbwbluegreen",
+		["#191918", "#2f2f2f", "#464646", "#5e5e5d", "#757574", "#8c8c8b", "#a3a3a2", "#babab9", "#b0af9e", "#979688", "#7e7d71", "#64645a", "#4b4b44", "#32322d", "#191916", "#191916", "#000000"], //warmgrayscale dark
+		// ["#191918", "#2f2f2f", "#464646", "#5e5e5d", "#757574", "#8c8c8b", "#a3a3a2", "#babab9", "#d1d1d0", "#e8e8e7", "#ffffff", "#fcfbe3", "#e2e1cc", "#c9c8b5", "#b0af9e", "#979688", "#7e7d71", "#64645a", "#4b4b44", "#32322d", "#191916", "#000000"], //warmgrayscale
 		//lake superior
 		// ["#CCD8EA", "#CBD3DA", "#818794", "#5B5756", "#413A36", "#413B30"], //lake superior
 		// ["#BEC4D0", "#C9CDD8", "#7E808C", "#282730", "#54545F", "#A5ACBF", "#AAA9A5", "#FBFBFF", "#535763", "#211F2B"], //canada snow
@@ -365,30 +359,30 @@ z.draw = z => {
 		// ["#332725", "#535051", "#705E5A", "#80807F", "#7A756B", "#80807F", "#E8EDF2", "#785E56", "#47484A"], //nystairs
 		// ["#42433E", "#5C5C58", "#81796C", "#484238", "#5C5042", "#000000", "#1F2C40", "#2B3E57", "#2A3540", "#78766D"], //nystairs
 		// ["#5E646F", "#9BB4C6", "#7F7976", "#4E596E", "#3E3839", "#70625A"], //nystairs (some blue)
-		["#786652", "#5B4031", "#1A1E1C", "#B6B7B5", "#9B999C", "#16190D", "#5F3D35", "#71391E"], //nystairs
-		["#FBFBFD", "#7B7879", "#575758", "#5D5048", "#7F7066", "#3C3C3C"], //nystairs
-		["#977A6D", "#5B5350", "#87847D", "#57646F", "#AFBBC2", "#B6ADA8", "#1B3B51", "#2D2E31", "#546877"], //nystairs (blues)
-		["#873E04", "#463730", "#7D838A", "#CE8430", "#732F02", "#4E4340", "#453732", "#A19F9B", "#5B4F44"], //nylibrary browns grays
-		["#403B37", "#444242", "#444242", "#2F2824", "#423D3B", "#423D3B", "#8B5D3E", "#3F3E3F", "#2A211A", "#D8D8D8", "#6C727D"], //nylibrary browns grays blues
-		["#644C39", "#5B4536", "#B69D88", "#614C3E", "#16100C", "#150F0B", "#120D07"], //ny art haring? all browns dark
-		["#662512", "#865E40", "#B9916F", "#B58562", "#965C3D", "#662512", "#53200A", "#432916", "#955C3D", "#4A3321"], //ny art reds browns clay
-		["#040302", "#75604F", "#CDBBAB", "#77614A", "#0E0A06", "#BEA794", "#603102", "#93520D", "#A99588", "#A97D51"], //ny art reds browns clay
-		["#C09A7A", "#C68425", "#9C1704", "#B38968", "#0D0604", "#967051", "#941102", "#A64A25"], //nyart yellow orange red (vivid color)
-		["#A4886E", "#866648", "#5F3B1A", "#452B14", "#79552C", "#896338", "#0D0903", "#AA9179", "#4F3015"], //nyart browns
-		["#AE7C41", "#A54B18", "#AC6C35", "#90350F", "#75270D", "#633E1A", "#0A0502", "#A3270C"], //nyart browns red harring
+		// ["#786652", "#5B4031", "#1A1E1C", "#B6B7B5", "#9B999C", "#16190D", "#5F3D35", "#71391E"], //nystairs
+		// ["#FBFBFD", "#7B7879", "#575758", "#5D5048", "#7F7066", "#3C3C3C"], //nystairs
+		// ["#977A6D", "#5B5350", "#87847D", "#57646F", "#AFBBC2", "#B6ADA8", "#1B3B51", "#2D2E31", "#546877"], //nystairs (blues)
+		// ["#873E04", "#463730", "#7D838A", "#CE8430", "#732F02", "#4E4340", "#453732", "#A19F9B", "#5B4F44"], //nylibrary browns grays
+		// ["#403B37", "#444242", "#444242", "#2F2824", "#423D3B", "#423D3B", "#8B5D3E", "#3F3E3F", "#2A211A", "#D8D8D8", "#6C727D"], //nylibrary browns grays blues
+		// ["#644C39", "#5B4536", "#B69D88", "#614C3E", "#16100C", "#150F0B", "#120D07"], //ny art haring? all browns dark
+		// ["#662512", "#865E40", "#B9916F", "#B58562", "#965C3D", "#662512", "#53200A", "#432916", "#955C3D", "#4A3321"], //ny art reds browns clay
+		// ["#040302", "#75604F", "#CDBBAB", "#77614A", "#0E0A06", "#BEA794", "#603102", "#93520D", "#A99588", "#A97D51"], //ny art reds browns clay
+		// ["#C09A7A", "#C68425", "#9C1704", "#B38968", "#0D0604", "#967051", "#941102", "#A64A25"], //nyart yellow orange red (vivid color)
+		// ["#A4886E", "#866648", "#5F3B1A", "#452B14", "#79552C", "#896338", "#0D0903", "#AA9179", "#4F3015"], //nyart browns
+		// ["#AE7C41", "#A54B18", "#AC6C35", "#90350F", "#75270D", "#633E1A", "#0A0502", "#A3270C"], //nyart browns red harring
 		// ["#C39B72", "#C29464", "#9A622C", "#864B12", "#823607", "#69350D", "#86480F", "#583D26", "#51270E"], //nyart browns  hesse
 		// ["#676863", "#3E3E3C", "#82796D", "#444037", "#5F5343", "#000000", "#3B5478", "#233047", "#333630", "#413A33", "#343C35", "#20293C", "#4E483E"], //ny street sky blue gray brown
 		// ["#B1B4B0", "#7D7672", "#604A49", "#504343", "#583E3F", "#828F87", "#61605B"], //nystreet (bg brown)
 		// ["#392F28", "#34342E", "#696966", "#5F5B56", "#CDCDCD", "#FFFFFF", "#503D34", "#262420"], //nystreet grays bg brown
 		// ["#2C2F2E", "#505351", "#271814", "#823A2B", "#A15444", "#777673", "#453D34"], //ny stairs grays reds bg orange
 		//city
-		["#46474A", "#6C665F", "#6C6C6C", "#2C2D25", "#8D9194", "#2C2920", "#57524E", "#5C5D58"], //window mpls warehouse (green gray brown beige)
-		["#848482", "#BEAA81", "#88816F", "#9D9892", "#463D2C", "#7F745E", "#30251A", "#3F3626", "#A09C93"], //mpls warehouse window (some yellow)
-		["#AFBDD0", "#D7DCE1", "#93A7B8", "#4D585B", "#585151", "#908985", "#848181", "#4D585"], //tiger dancing (blues gray)
-		["#D0D0D0", "#FBFBFB", "#999B99", "#91867F", "#5B4939", "#47392B", "#3C5D5C", "#535351", "#586463", "#304142", "#33261D", "#745C4B"], //bridge bgs (bg brown white0)
-		["#4B2D13", "#081B30", "#194874", "#0B1C2C", "#0B1C2C", "#101721", "#305F83"], //canada night image w/brown blue dark too vivid?
-		["#172F4F", "#2A68A1", "#2B4E6B", "#103354", "#3C6FA4"], //canada night image ll blue dark combine with above?
-		["#EFF0F2", "#DAD1C5", "#828075", "#353934", "#0F1214", "#091007", "#47493D", "#393E2F", "#484E42", "#2D372E"], //greens mist railway duluth with white
+		// ["#46474A", "#6C665F", "#6C6C6C", "#2C2D25", "#8D9194", "#2C2920", "#57524E", "#5C5D58"], //window mpls warehouse (green gray brown beige)
+		// ["#848482", "#BEAA81", "#88816F", "#9D9892", "#463D2C", "#7F745E", "#30251A", "#3F3626", "#A09C93"], //mpls warehouse window (some yellow)
+		// ["#AFBDD0", "#D7DCE1", "#93A7B8", "#4D585B", "#585151", "#908985", "#848181", "#4D585"], //tiger dancing (blues gray)
+		// ["#D0D0D0", "#FBFBFB", "#999B99", "#91867F", "#5B4939", "#47392B", "#3C5D5C", "#535351", "#586463", "#304142", "#33261D", "#745C4B"], //bridge bgs (bg brown white0)
+		// ["#4B2D13", "#081B30", "#194874", "#0B1C2C", "#0B1C2C", "#101721", "#305F83"], //canada night image w/brown blue dark too vivid?
+		// ["#172F4F", "#2A68A1", "#2B4E6B", "#103354", "#3C6FA4"], //canada night image ll blue dark combine with above?
+		// ["#EFF0F2", "#DAD1C5", "#828075", "#353934", "#0F1214", "#091007", "#47493D", "#393E2F", "#484E42", "#2D372E"], //greens mist railway duluth with white
 		//iowa
 		// ["#CAC4BE", "#A49C99", "#716863", "#675F5A", "#8C857F", "#6D6560", "#635A55", "#948D87", "#655D58", "#C7C1BA"], //iowa farm gradient (all beige)
 		// ["#5B534E", "#685E59", "#9E948E", "#C3BBB5", "#999089", "#978D87"], //iowa farm gradient (all beige)
@@ -409,12 +403,12 @@ z.draw = z => {
 		// ["#78747E", "#B3A895", "#6D6D60", "#605038", "#D7D3CE", "#AAA8AF", "#4D4739", "#241809", "#442500", "#40392A", "#494234", "#69695D"], //iowa cedar rapids under bridge 1
 		// ["#A3A8AC", "#FAF1E5", "#969494", "#706B62", "#69788A", "#3C587C", "#171717", "#273F5A", "#48413A"], //iowa cedar rapids under bridge
 		//cello
-		// ["#1A0A03", "#2D0E08", "#6B2E12", "#613716", "#9E6528", "#5F370C", "#9A1905", "#FFF9C9"], //cello at sacred heart
-		// ["#0E0600", "#2E0F04", "#0F0700", "#484E42", "#577871", "#010101", "#FFFFFF", "#406861", "#902200"], //cello at sacred heart
-		// ["#78685B", "#B4A19A", "#877C6A", "#2F3C35", "#435046", "#242216", "#6B867D", "#993B21", "#000100", "#725128", "#15211D"], //cello at sacred heart
-		// ["#6B6259", "#43403B", "#51524D", "#8A300F", "#743B1D", "#988071", "#2D2F2E", "#B9AA8D", "#64655E"], //cello stairwell*
-		// ["#3D1C04", "#0D0604", "#411B0D", "#6D3F26", "#8E7061", "#8E9490"], //cellosacredheart
-		//birdland
+		["#1A0A03", "#2D0E08", "#6B2E12", "#613716", "#9E6528", "#5F370C", "#9A1905", "#FFF9C9"], //cello at sacred heart
+		["#0E0600", "#2E0F04", "#0F0700", "#484E42", "#577871", "#010101", "#FFFFFF", "#406861", "#902200"], //cello at sacred heart
+		["#78685B", "#B4A19A", "#877C6A", "#2F3C35", "#435046", "#242216", "#6B867D", "#993B21", "#000100", "#725128", "#15211D"], //cello at sacred heart
+		["#6B6259", "#43403B", "#51524D", "#8A300F", "#743B1D", "#988071", "#2D2F2E", "#B9AA8D", "#64655E"], //cello stairwell*
+		["#3D1C04", "#0D0604", "#411B0D", "#6D3F26", "#8E7061", "#8E9490"], //cellosacredheart
+		// birdland
 		["#163341", "#172F47", "#4477A8", "#2A4A69", "#52779B", "#000000", "#384B60", "#1F3350", "#153A69", "#153559", "#9D9990", "#9D9990", "#181E21", "#0C1D32", "#706959", "#D6D3CE", "#534E48", "#3E5766", "#222E34", "#BBB4A4", "#7C7D7F"], //birdland
 
 	];
@@ -467,13 +461,14 @@ z.draw = z => {
 ( dt => {
 	const element = document.querySelector("main");
 	const bgcolors = ["rgba(25, 25, 24, 0.4)", "rgba(25, 25, 24, 0.6)", "rgba(25, 25, 24, 0.9)", "rgba(252, 251, 227, 0.4)", "rgba(252, 251, 227, 0.9)", , "rgba(252, 251, 227, 0.6)"]
-	// const warmblacktints = ["#191918", "#2f2f2f", "#464646", "#5e5e5d", "#757574", "#8c8c8b", "#a3a3a2", "#babab9", "#d1d1d0", "#e8e8e7", "#ffffff", "#fcfbe3", "#e2e1cc", "#c9c8b5", "#b0af9e", "#979688", "#7e7d71", "#64645a", "#4b4b44", "#32322d", "#191916", "#000000"];
-	const warmblacktints = ["#191918", "#fcfbe3", "#000000"];
+	const warmblacktints = ["#191918", "#2f2f2f", "#464646", "#5e5e5d", "#757574", "#8c8c8b", "#a3a3a2", "#babab9", "#d1d1d0", "#e8e8e7", "#ffffff", "#fcfbe3", "#e2e1cc", "#c9c8b5", "#b0af9e", "#979688", "#7e7d71", "#64645a", "#4b4b44", "#32322d", "#191916", "#000000"];
+	// const warmblacktints = ["#191918", "#fcfbe3", "#000000"];
 
 	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
 		try {
 			let count = e.clock.t/dt;
-			let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
+			// let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
+			let color = warmblacktints[z.tools.randominteger(0, warmblacktints.length)];
 			// z.tools.logmsg("in BOX " + color + " color =  " + color);
 			Velocity({	
 				elements: element, 
@@ -494,10 +489,10 @@ z.draw = z => {
 	// "01101000 01100101 01101100 01101100 01101111 00100000 01110111 01101111 01110010 01101100 01100100", //hello world
 	// "aGVsbG8gd29ybGQ=", //hello world
 	// "i0i000i0000iiii0i000i0000iii", //i
-	// "_.._._+ . < +=_.._._+ . < +=_.._._+ . < +=: :  . < > '",". . . . . .& | { . . ::: x",
+	"_.._._+ . < +=_.._._+ . < +=_.._._+ . < +=: :  . < > '",". . . . . .& | { . . ::: x",
 	// "#thecount ‰ 0 1 2 3 4 5 6 7 8 9 iº #aftercount #aftertime", //
 	// "høly h0L¥ hølY H0ly ® Å Ö x x x ø 0 Ø x X x ø 0 Ø xº3",
-	// "ø 0 ¥ ø Y H L ® Å Ö x x x ø 0 Ø x X x ø 0 Ø xº3",
+	"ø 0 ¥ ø Y H L ® Å Ö x x x ø 0 Ø x X x ø 0 Ø xº3",
 	// "forEach Å øn t0uch Ž",
 	".. - / .-- .- ... / .-.. .. -.- . / - .... .. ... / . ...- . .-. -.-- / -- --- .-. -. .. -. --.",
 	// ":::::::::::::::::;+ ` #@@' `. @ :# +@@@@@' '@@@@@@@@' :@@@@@@@#@##' ,@@@@@@@##@+#++' :#@@@@@#@##+#'++'' +@ ;@@@@@##+''+'+''' '@@@@ @@@#@++'''+''';' ;@@@@@@@ +@##+'+';;';+;;' ,#@@@@#@@@# #+#++''';'';';;",
@@ -556,7 +551,7 @@ z.draw = z => {
 	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
 		drawings[Math.floor(e.clock.t/(dt*elements.length))%drawings.length](e);
 	})
-})(4);
+})(9);
 
 //poems
 ( dt => {
@@ -589,200 +584,17 @@ z.draw = z => {
 					if(count%2===0) {
 						stanza.el.className= "stanza " + afterclassnames2[count/2%afterclassnames2.length] + " " + afterclassnames1[z.tools.randominteger(0,afterclassnames1.length)];
 					}
-					else {
-						stanza["lines"].forEach( (line,l) => {
-							line.el.style["color"] = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
-						})
-					}
+					// else {
+					// 	stanza["lines"].forEach( (line,l) => {
+					// 		line.el.style["color"] = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
+					// 	})
+					// }
 				})
 			});
 		} catch(err) { z.tools.logerror("poem animation ::: " + err ) }
 	})
 })(18);
 
-// //poems 1
-// ( ()  => {
-// 	const nelements=[[...Array(8).keys()],[...Array(16).keys()]][v];
-// 	const elements = nelements.reduce( (acc, id) => {
-// 		let el = document.createElementNS("article");
-// 		el.setAttributeNS(null, "id", "circle1_"+ id);
-// 		el.setAttributeNS(null, "class", "shape circle");
-// 		el.setAttributeNS(null, "stroke-opacity", "0.0");
-// 		el.setAttributeNS(null, "fill-opacity", "0.0");
-// 		el.setAttributeNS(null, "cy", Math.floor(window.innerHeight/2));
-// 		el.setAttributeNS(null, "cx", Math.floor(window.innerWidth/2));
-// 		z.elements["svg"].el.appendChild(el);
-// 		acc[id] = { el: el };
-// 	return acc;
-// 	}, []);
-// 	// const cxs = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9];
-// 	const cxs = [0.2,0.4,0.6,0.8];
-// 	const cys = [0.2,0.4,0.6,0.8];
-// 	const n = elements.length;
-// 	const drawings = [
-// 		e => {
-// 			try {
-// 				let count = e.clock.t/dt;
-// 				let timing = timings[z.tools.randominteger(0,timings.length)];
-// 				let duration = dt*timing[0]*n, delay = z.tools.randominteger(0, dt*timing[1]*n);
-// 				let element = elements[count%n];
-// 				let cy = z.tools.randominteger(0, e.dimensions.height);
-// 				let cx = z.tools.randominteger(0, e.dimensions.width);
-// 				let radius = z.tools.randominteger(14, e.dimensions.min);
-// 				let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
-// 				Velocity({	
-// 					elements: element.el,
-// 					properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: z.tools.randominteger(e.dimensions.min/2, e.dimensions.min/6), strokeDasharray: z.tools.randominteger(8, e.dimensions.min), fill: color, cx: cx, cy: cy, r: radius },
-// 					options: { duration: duration,  delay: delay },
-// 				});
-// 			} catch(err) { z.tools.logerror("circle animation 1 ::: " + err ) }
-// 		},
-		
-// 	];
-// 	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
-// 		drawings[Math.floor(e.clock.t/(dt*elements.length))%drawings.length](e);
-// 	})
-// })();
-
-//circles 1
-( dt => {
-	const nelements=[[...Array(4).keys()],[...Array(4).keys()]][v];
-	const elements = nelements.reduce( (acc, id) => {
-		z.tools.logmsg("create line element ::: " + id);
-		let el = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-		el.setAttributeNS(null, "id", "circle1_"+ id);
-		el.setAttributeNS(null, "class", "shape circle");
-		el.setAttributeNS(null, "stroke-opacity", "0.0");
-		el.setAttributeNS(null, "fill-opacity", "0.0");
-		el.setAttributeNS(null, "cy", Math.floor(window.innerHeight/2));
-		el.setAttributeNS(null, "cx", Math.floor(window.innerWidth/2));
-		z.elements["svg"].el.appendChild(el);
-		acc[id] = { el: el };
-	return acc;
-	}, []);
-	// const cxs = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9];
-	const cxs = [0.2,0.4,0.6,0.8];
-	const cys = [0.2,0.4,0.6,0.8];
-	const n = elements.length;
-	const drawings = [
-		e => {
-			try {
-				let count = e.clock.t/dt;
-				let timing = timings[z.tools.randominteger(0,timings.length)];
-				let duration = dt*timing[0]*n, delay = z.tools.randominteger(0, dt*timing[1]*n);
-				let element = elements[count%n];
-				let cy = z.tools.randominteger(0, e.dimensions.height);
-				let cx = z.tools.randominteger(0, e.dimensions.width);
-				let radius = z.tools.randominteger(14, e.dimensions.min);
-				let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
-				Velocity({	
-					elements: element.el,
-					properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: z.tools.randominteger(e.dimensions.min/2, e.dimensions.min/6), strokeDasharray: z.tools.randominteger(8, e.dimensions.min), fill: color, cx: cx, cy: cy, r: radius },
-					options: { duration: duration,  delay: delay },
-				});
-			} catch(err) { z.tools.logerror("circle animation 1 ::: " + err ) }
-		},
-		
-	];
-	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
-		drawings[Math.floor(e.clock.t/(dt*elements.length))%drawings.length](e);
-	})
-})(5);
-
-//circles 2
-( dt => {
-	const nelements=[[...Array(16).keys()],[...Array(32).keys()]][v];
-	let width = window.innerWidth, height = window.innerHeight;
-	const elements = nelements.reduce( (acc, id) => {
-		z.tools.logmsg("create line element ::: " + id);
-		let el = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-		el.setAttributeNS(null, "id", "circle2_"+ id);
-		el.setAttributeNS(null, "class", "shape circle");
-		el.setAttributeNS(null, "stroke-opacity", "0.0");
-		el.setAttributeNS(null, "fill-opacity", "0.1");
-		el.setAttributeNS(null, "cy", height/2);
-		el.setAttributeNS(null, "cx", width/2);
-		// el.setAttributeNS(null, "r", height/6);
-		z.elements["svg"].el.appendChild(el);
-		acc[id] = { el: el };
-	return acc;
-	}, []);
-	// const cxs = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9];
-	const cxs = [0.2,0.5,0.8];
-	const cys = [0.2,0.5,0.8];
-	const n = elements.length;
-	const drawings = [
-		e => {
-			try {
-				let count = e.clock.t/dt;
-				let timing = timings[z.tools.randominteger(0,timings.length)];
-				let duration = dt*timing[0], delay = z.tools.randominteger(0, dt*timing[1]);
-				let element = elements[count%n];
-				let cy = e.dimensions.height*cys[z.tools.randominteger(0,cys.length)];
-				// let cx = e.dimensions.width*cxs[z.tools.randominteger(0,cxs.length)];
-				let cx = e.dimensions.width*cxs[(count%n)%cxs.length];
-				let radius = z.tools.randominteger(14, e.dimensions.min/2);
-				let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
-				Velocity({	
-					elements: element.el,
-					properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: z.tools.randominteger(radius/2, radius/4), strokeDasharray: z.tools.randominteger(8, radius), fill: color, cx: cx, cy: cy, r: radius },
-					options: { duration: duration*n/2,  delay: delay },
-				});
-				Velocity({	
-					elements: element.el,
-					properties: { r: radius/4 },
-					options: { duration: duration*n/2,  delay: delay*n },
-				});
-			} catch(err) { z.tools.logerror("circle animation 1 ::: " + err ) }
-		},
-		
-	];
-	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
-		drawings[Math.floor(e.clock.t/(dt*elements.length))%drawings.length](e);
-	})
-})(1);
-
-
-
-
-//circles
-// ( dt => {
-// 	const nelements=[[...Array(4).keys()],[...Array(8).keys()]][v];
-// 	const elements = nelements.reduce( (acc, id) => {
-// 		z.tools.logmsg("create line element ::: " + id);
-// 		let el = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-// 		el.setAttributeNS(null, "id", "circle_"+ id);
-// 		el.setAttributeNS(null, "class", "shape circle");
-// 		z.elements["svg"].el.appendChild(el);
-// 		acc[id] = { el: el };
-// 	return acc;
-// 	}, []);
-// 	const n = elements.length;
-// 	const drawings = [
-// 		e => {
-// 			try {
-// 				let count = e.clock.t/dt;
-// 				let timing = timings[z.tools.randominteger(0,timings.length)];
-// 				let duration = dt*timing[0]*n, delay = z.tools.randominteger(0, dt*timing[1]*n);
-// 				let element = elements[count%n];
-// 				let cy = Math.floor(e.dimensions.height/2);
-// 				let cx = Math.floor(e.dimensions.width/2);
-// 				let radius = z.tools.randominteger(40, e.dimensions.min/2);
-// 				// z.tools.logmsg("circle 1 cx= "+cx+" cy= " + cy + " radius = " + radius);
-// 				let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
-// 				Velocity({	
-// 					elements: element.el,
-// 					properties: { fillOpacity: count%5===0 ? 1.0 : 1.0, strokeOpacity: count%5===1 ? 0.0 : 0.0, stroke: color, strokeWidth: z.tools.randominteger(e.dimensions.min/2, e.dimensions.min/6), strokeDasharray: z.tools.randominteger(8, e.dimensions.min), fill: color, cx: cx, cy: cy, r: radius },
-// 					options: { duration: duration,  delay: delay },
-// 				});
-// 			} catch(err) { z.tools.logerror("circle animation 1 ::: " + err ) }
-// 		},
-		
-// 	];
-// 	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
-// 		drawings[Math.floor(e.clock.t/(dt*elements.length))%drawings.length](e);
-// 	})
-// })(1);
 
 const p = [
 	e => {
@@ -818,84 +630,46 @@ const p = [
 		}
 	}
 ];
-// 	//line 1
-// 	( dt => {
-// 	const nelements=[[...Array(4).keys()],[...Array(8).keys()]][v];
-// 	const elements = nelements.reduce( (acc, id) => {
-// 		z.tools.logmsg("create line element ::: " + id);
-// 		let el = document.createElementNS("http://www.w3.org/2000/svg", "line");
-// 		el.setAttributeNS(null, "id", "line1_"+ id);
-// 		el.setAttributeNS(null, "class", "shape line");
-// 		z.elements["svg"].el.appendChild(el);
-// 		acc[id] = { el: el };
-// 	return acc;
-// 	}, []);
-// 	const n = elements.length;
-// 	const drawings = [
-// 		e => {
-// 			try {
-// 				let count = e.clock.t/dt;
-// 				let params = p[z.tools.randominteger(0,p.length)](e);
-// 				let timing = timings[z.tools.randominteger(0,timings.length)];
-// 				let duration = dt*timing[0]*n, delay = z.tools.randominteger(0, dt*timing[1]*n);
-// 				let element = elements[count%elements.length];
-// 				let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
-// 				element.el.setAttribute("stroke", color);
-// 				element.el.setAttribute("x1", params.xstart[0]); element.el.setAttribute("x2", params.xstart[1]);
-// 				element.el.setAttribute("y1", params.ystart[0]); element.el.setAttribute("y2", params.ystart[1]);
-// 				element.el.setAttribute("strokeOpacity", z.tools.randominteger(0.1,8)/10);
-// 				Velocity({	
-// 					elements: element.el,
-// 					properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(e.dimensions.min/2,e.dimensions.max), strokeDasharray: z.tools.randominteger(8, e.dimensions.min), x1: params.xend[0], x2: params.xend[1], y1: params.yend[0], y2: params.yend[1] },
-// 					options: { duration: duration,  delay: delay },
-// 				});
-// 			} catch(err) { z.tools.logerror("line animation 1 ::: " + err ) }
-// 		},
-// 	];
-// 	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
-// 		drawings[Math.floor(e.clock.t/(dt*elements.length*2))%drawings.length](e);
-// 	})
-// })(2);
+	//line 1
+	( dt => {
+	const nelements=[[...Array(4).keys()],[...Array(8).keys()]][v];
+	const elements = nelements.reduce( (acc, id) => {
+		z.tools.logmsg("create line element ::: " + id);
+		let el = document.createElementNS("http://www.w3.org/2000/svg", "line");
+		el.setAttributeNS(null, "id", "line1_"+ id);
+		el.setAttributeNS(null, "class", "shape line");
+		z.elements["svg"].el.appendChild(el);
+		acc[id] = { el: el };
+	return acc;
+	}, []);
+	const n = elements.length;
+	const drawings = [
+		e => {
+			try {
+				let count = e.clock.t/dt;
+				let params = p[z.tools.randominteger(0,p.length)](e);
+				let timing = timings[z.tools.randominteger(0,timings.length)];
+				let duration = dt*timing[0]*n, delay = z.tools.randominteger(0, dt*timing[1]*n);
+				let element = elements[count%elements.length];
+				let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
+				element.el.setAttribute("stroke", color);
+				element.el.setAttribute("x1", params.xstart[0]); element.el.setAttribute("x2", params.xstart[1]);
+				element.el.setAttribute("y1", params.ystart[0]); element.el.setAttribute("y2", params.ystart[1]);
+				element.el.setAttribute("strokeOpacity", z.tools.randominteger(0.1,8)/10);
+				Velocity({	
+					elements: element.el,
+					properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(e.dimensions.min,e.dimensions.max), strokeDasharray: z.tools.randominteger(e.dimensions.min/4, e.dimensions.min), x1: params.xend[0], x2: params.xend[1], y1: params.yend[0], y2: params.yend[1] },
+					options: { duration: duration,  delay: delay },
+				});
+			} catch(err) { z.tools.logerror("line animation 1 ::: " + err ) }
+		},
+	];
+	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
+		drawings[Math.floor(e.clock.t/(dt*elements.length*2))%drawings.length](e);
+	})
+})(4);
 
-// //line 2
-// 	( dt => {
-// 	const nelements=[[...Array(4).keys()],[...Array(8).keys()]][v];
-// 	const elements = nelements.reduce( (acc, id) => {
-// 		z.tools.logmsg("create line element ::: " + id);
-// 		let el = document.createElementNS("http://www.w3.org/2000/svg", "line");
-// 		el.setAttributeNS(null, "id", "line2_"+ id);
-// 		el.setAttributeNS(null, "class", "shape line");
-// 		z.elements["svg"].el.appendChild(el);
-// 		acc[id] = { el: el };
-// 	return acc;
-// 	}, []);
-// 	const n = elements.length;
-// 	const drawings = [
-// 		e => {
-// 			try {
-// 				let count = e.clock.t/dt;
-// 				let params = p[z.tools.randominteger(0,p.length)](e);
-// 				let timing = timings[z.tools.randominteger(0,timings.length)];
-// 				let duration = dt*timing[0]*n, delay = z.tools.randominteger(0, dt*timing[1]*n);
-// 				let element = elements[count%elements.length];
-// 				let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
-// 				element.el.setAttribute("stroke", color);
-// 				element.el.setAttribute("x1", params.xstart[1]); element.el.setAttribute("x2", params.xstart[0]);
-// 				element.el.setAttribute("y1", params.ystart[1]); element.el.setAttribute("y2", params.ystart[0]);
-// 				element.el.setAttribute("strokeOpacity", z.tools.randominteger(0.1,8)/10);
-// 				Velocity({	
-// 					elements: element.el,
-// 					properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: z.tools.randominteger(e.dimensions.min/2,e.dimensions.max), strokeDasharray: z.tools.randominteger(8, e.dimensions.min), x1: params.xend[1], x2: params.xend[0], y1: params.yend[1], y2: params.yend[0] },
-// 					options: { duration: duration,  delay: delay },
-// 				});
-// 			} catch(err) { z.tools.logerror("line animation 1 ::: " + err ) }
-// 		},
-// 	];
-// 	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
-// 		drawings[Math.floor(e.clock.t/(dt*elements.length*2))%drawings.length](e);
-// 	})
-// })(3);
-
+//
 
 };
 z.radio = ( () => { 
