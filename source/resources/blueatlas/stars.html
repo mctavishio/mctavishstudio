@@ -366,7 +366,9 @@
 	</div>
 </article>
 <audio loop=true id="audio1">
-  <source src="http://www.blueboatfilms.com/sound/starfallremix.mp3" type="audio/mpeg">
+  <!-- <source src="http://www.blueboatfilms.com/sound/starfallremix.mp3" type="audio/mpeg"> -->
+  <!-- <source src="https://storage.cloud.google.com/www.blueboatfilms.com/sound/starfallremix.mp3" type="audio/mpeg"> -->
+  <source src="../data/sound/starfallremix.mp3" type="audio/mpeg">
   Your browser does not support the audio tag.
 </audio>
 
@@ -496,6 +498,9 @@ z.draw = z => {
 		let controls = document.querySelector("#controls");
 		let hidelink = document.querySelector("#hidelink");
 		let menulink = document.querySelector("#menulink");
+		let soundlink = document.querySelector("#soundlink");
+		let telegraph = document.querySelector("#telegraph");
+		let soundplaying = false;
 		//hidelink
 		Kefir.fromEvents(hidelink, "click").onValue( e => {
 			try {
@@ -514,6 +519,26 @@ z.draw = z => {
 				menulink.style.display='none';
 				controls.style.display='block';
 			} catch(e) { z.tools.logerror("menulink " + e) }
+		});
+		Kefir.fromEvents(soundlink, "click").onValue( e => {
+			z.tools.logmsg("play sound !");
+			if(!soundplaying) { 
+				try {
+					document.querySelector("#audio1").play();
+					z.tools.logmsg("playback resumed");
+					telegraph.innerHTML =  "(sound on)";
+					soundplaying = true;
+					soundlink.classList.add("active");
+				} catch(e) { z.tools.logerror("dashboard ::: resumeaudio " + e) } 
+			}
+			else { 
+				try {
+					document.querySelector("#audio1").pause();
+					telegraph.innerHTML =  "(sound off)";
+					soundplaying = false;
+					soundlink.classList.remove("active");
+				} catch(e) { z.tools.logerror("dashboard ::: suspendaudio " + e) }
+			}
 		});
 	})();
 
@@ -839,265 +864,10 @@ z.draw = z => {
 
 
 };
-z.radio = ( () => { 
-	const soundcorepath = "../data/sound/";
-	const instruments = {
-		bagpipe1a: {clip: "bagpipe1a", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
-		bagpipe1ahigh: {clip: "bagpipe1a", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		bagpipe1e: {clip: "bagpipe1e", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		bagpipe1f: {clip: "bagpipe1f", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		bagpipe1g: {clip: "bagpipe1g", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		bagpipe1h: {clip: "bagpipe1h", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
-		bagpipe1: {clip: "bagpipe1", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomlowharmonic()/4 } },
-		bagpipe1high: {clip: "bagpipe1", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/4 } },
-		thunk: {clip: "thunk", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		thunkhighharmonic: {clip: "thunk", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomhighharmonic()/10 } },
-		birds5harmonic: {clip: "birds5",minvolume: 0.2, maxvolume: 0.5, playbackRate: () => { return z.tools.randomhighharmonic()/10 } },
-		knocking1: {clip: "knocking1", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randominteger(4,48)/10 } },
-		cmpb20200708_5harmonic: {clip: "cmpb20200708_5", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomhighharmonic()/10 } },//* voice
-		// cello_pitch1: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		// cello_pitch1harmonic: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		bird1harmonic: {clip: "bird1", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		birdcanyon: {clip: "birdcanyon", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		bagpipegeese: {clip: "bagpipegeese", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		celloknockcanyon: {clip: "celloknockcanyon", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		voxmct0: {clip: "voxmct0", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		stapler: {clip: "stapler", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		train1: {clip: "train1", minvolume: 0.4, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(6,18)/10 } },
-		weatherradio1: {clip: "weatherradio1", minvolume: 0.6, maxvolume: 1.0,  playbackRate: () => { return z.tools.randominteger(6,12)/10 } },
-		longbell: {clip: "longbell", minvolume: 0.4, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(9,18)/10 } },
-		// cellothunktelephone: {clip: "cellothunktelephone", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		// cellothunkradio: {clip: "cellothunkradio", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		t0: {clip: "t0", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		tornadosirenharmonic: {clip: "tornadosiren", minvolume: 0.1, maxvolume: 0.6, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },									
-	};
-	let clips = {};
-	Object.entries(instruments).forEach( instrument => {
-		clips[instrument[1].clip] = { url: soundcorepath + instrument[1].clip + ".mp3", loaded:false, duration:0, buffer:{} };
-	});
-	let radio = {
-		player: {}, loading: [], loaded: false,
-		soundplaying:false,
-		instruments: instruments, clips: clips,
-		clipduration: { min:0, max:0 },
-		nbuffersplaying: 0, maxbuffersplaying: [14,18][v],
-		intervals: {
-			lowi: function(basetone){ return Math.floor(basetone/4) },
-			i: function(basetone){ return Math.floor(basetone/2) },
-			I: function(basetone){ return Math.floor(basetone/1) },
-			II: function(basetone){ return Math.floor(basetone*9/8) },
-			III: function(basetone){ return Math.floor(basetone*5/4) },
-			iii: function(basetone){ return Math.floor(basetone*6/5) },
-			IV: function(basetone){ return Math.floor(basetone*4/3) },
-			V: function(basetone){ return Math.floor(basetone*3/2) },
-			VI: function(basetone){ return Math.floor(basetone*5/3) },
-			VII: function(basetone){ return Math.floor(basetone*15/8) },
-			vii: function(basetone){ return Math.floor(basetone*9/5) },
-			VIII: function(basetone){ return Math.floor(basetone*2) },
-		},
-		loadclips: z => {
-			Object.keys(z.radio.clips).forEach( key => {
-				let clip = z.radio.clips[key];
-				if(!z.radio.loading.includes(clip.url)) {
-					z.radio.loading.push(clip.url);
-					let request = new XMLHttpRequest();
-					//for localhost testing
-					// request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url, true);
-					// z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url);
-					// for deploy
-					request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
-					// z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + "/"  + clip.url);
-					request.responseType = "arraybuffer";
-					request.onload = () =>  {
-						z.tools.logmsg("loaded" + clip.url);
-						z.radio.player.context.decodeAudioData(request.response, buffer => {
-							clip.loaded = true;
-							clip.buffer = buffer;
-							clip.duration = clip.buffer.duration;
-							if( clip.duration > z.radio.clipduration.max) {z.radio.clipduration.max = clip.duration}
-							else if( clip.duration < z.radio.clipduration.min) {z.radio.clipduration.min  = clip.duration}
-							z.tools.logmsg("decoded" + clip.url);
-						}, e => {
-							z.tools.logerror("audio error! clip = " + clip.url + ", err = " + e);
-						});
-						
-					};
-					request.send();
-				}
-			});
-			z.radio.loaded = true;
-		},
-		start: z => {
-			/* set up player*/
-			window.AudioContext = window.AudioContext || window.webkitAudioContext;
-			z.radio.player.context = new AudioContext();
-			/* experimental parameters */
-			let parameters = [
-				{ gain: 0.4, threshold: -24, knee: 30, ratio: 12, attack: 0.003, release: 0.25 }, //default
-				{ gain: 0.3, threshold: -18, knee: 30, ratio: 18, attack: 0.0003, release: 0.28 },
-				{ gain: 0.5, threshold: -8, knee: 30, ratio: 18, attack: 0.003, release: 0.28 },
-				{ gain: 0.8, threshold: -8, knee: 30, ratio: 18, attack: 0.003, release: 0.28 },
-				];
-			let n = 0;
 
-			//with compressor
-			z.radio.player.compressor = z.radio.player.context.createDynamicsCompressor();
-			z.radio.player.compressor.threshold.value = parameters[n].threshold;
-			z.radio.player.compressor.knee.value = parameters[n].knee;
-			z.radio.player.compressor.ratio.value = parameters[n].ratio;
-			
-			z.radio.player.compressor.attack.value = parameters[n].attack;
-			z.radio.player.compressor.release.value = parameters[n].release;
-			z.radio.player.gain = z.radio.player.context.createGain();
-			z.radio.player.gain.value = parameters[n].gain;
-			z.radio.player.compressor.connect(z.radio.player.gain);
-			z.radio.player.gain.connect(z.radio.player.context.destination);
-			// //with no compressor
-			// z.radio.player.gain = z.radio.player.context.createGain();
-			// z.radio.player.gain.value = parameters[n].gain;
-			// z.radio.player.gain.connect(z.radio.player.context.destination);
-		},
-		playtone: ({ volume=0.8, delay=0, fadetime=0.1, duration=1.0, frequency=380 } = {}) => { 
-			let vco = z.radio.player.context.createOscillator();
-			vco.frequency.value = frequency;
-			vco.type = "sine";
-			let vca = z.radio.player.context.createGain();
-			
-			vco.connect(vca);
-			vca.connect(z.radio.player.gain);
-			let now = z.radio.player.context.currentTime;
-			//fade in
-			vca.gain.exponentialRampToValueAtTime(0.001, now + delay);
-			vca.gain.exponentialRampToValueAtTime(volume, now + fadetime + delay);
-			//fade out
-			vca.gain.exponentialRampToValueAtTime(volume, now + duration + delay - fadetime);
-			vca.gain.exponentialRampToValueAtTime(0.001, now + duration + delay);
-			vco.start(now + delay);
-			vco.stop(now + delay + duration + fadetime);
-			vco.onended = function() {
-			  	vco.disconnect(); vca.disconnect();
-			}
-		},
-		playbuffer: ( { volume=0.8, delay=0, fadetime=1, duration=2, instrument=z.radio.instruments["bagpipe1f"] } = {} ) =>  {
-			try {
-				// let instrument = z.radio.instruments[zinstrument];
-				let clip = z.radio.clips[instrument.clip];
-				z.tools.logmsg("***buffer requested = " + instrument.clip + " z.radio.nbuffersplaying = " + z.radio.nbuffersplaying);
-				if(clip.loaded && (z.radio.nbuffersplaying<z.radio.maxbuffersplaying-1 || z.radio.nbuffersplaying>z.radio.maxbuffersplaying+2)) {
-					let rate = instrument.playbackRate ? instrument.playbackRate() : 1.0;
-					try {
-						// z.tools.logmsg("rate = " + rate + " ::: duration = " + clip.duration*rate);
-						let vca = z.radio.player.context.createGain(); 
-						let source = z.radio.player.context.createBufferSource();
-						source.buffer = clip.buffer;
-						source["playbackRate"].value = rate;
-						source.connect(vca);
-						vca.connect(z.radio.player.gain);
-						source.loop = false;
-						source.onended = e =>  { 
-							z.radio.nbuffersplaying=z.radio.nbuffersplaying-1;
-						};
-						++z.radio.nbuffersplaying;
-						let now = z.radio.player.context.currentTime;
-						let dur = clip.duration < duration ? clip.duration/rate : rate*duration/rate;
-						let dt = Math.min(fadetime, dur*.25);
-						let offset = z.tools.randominteger(0, (dur-4*dt)*10)/10;
-						// source.start(now, offset, dt*4); //parameters (when,offset,duration)
-						vca.gain.setValueAtTime(0.001, now);
-						vca.gain.exponentialRampToValueAtTime(volume, now + dt);
-						vca.gain.setValueAtTime(volume, dur - 2*dt);
-						vca.gain.exponentialRampToValueAtTime(0.001, now + dur-dt*0.5 );
-						source.start(now, offset, dur); //parameters (when,offset,duration)
-						// z.tools.logmsg("playing = " + clip.url);
-					} catch(e) { z.tools.logerror("error applying params to audio buffer e::: " + e) }
-				}
-				else {	
-					z.tools.logmsg("NOT playing = " + clip.url);
-				}
-			}
-			catch(err) { z.tools.logerror("line playbuffer" + err) }
-		},
-		play: z => {
-			const defaultduration = (dt,n,graintdt,clip) => dt/(graindt*2);
-			const defaultfadetime = (dt,n,graintdt,clip) => dt/(graindt*20);
-			const defaultpart = (dt=4000, n=4, graindt=400, chance=0.8, duration=defaultduration, fadetime=defaultfadetime, instruments=["celloknockcanyon"]) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: duration(dt,n,graintdt), fadetime: fadetime(dt,n,graintdt), instruments: ["celloknockcanyon"] } };
-			const score = [
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["birdcanyon", "birds5harmonic", "voxmct0", "cmpb20200708_5harmonic", "longbell"] } })(14000,5,500),
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["train1", "tornadosirenharmonic",] } })(4000,6,500),
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["celloknockcanyon", "stapler", "t0", "cmpb20200708_5harmonic", "thunkhighharmonic"] } })(5000,3,500,0.6),
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["bagpipe1", "bagpipe1a", "tornadosirenharmonic", "tornadosirenharmonic"] } })(17000,6,400,0.8),
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["celloknockcanyon"] } })(5000,4,400,0.8),
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["bagpipe1e","bagpipe1f","bagpipe1g","bagpipe1h"] } })(3000,4,400,0.8),
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["cmpb20200708_5harmonic"] } })(9000,6,400,0.8),
-			];
-			score.forEach( (part,j) => {
-				z.streams["clock"].filter( e => e.t%Math.floor(part.dt/1000)===0 && z.tools.randominteger(0,10)<part.chance*10 && z.radio.soundplaying)
-					.onValue( e=> {
-						let clip = part.instruments[z.tools.randominteger(0,part.instruments.length)];
-						Kefir.sequentially(part.graindt, [...Array(part.n).keys()]).onValue( x => { 
-							z.radio.playbuffer({duration:part.duration, fadetime:part.fadetime, instrument:z.radio.instruments[clip], volume: z.tools.randominteger(z.radio.instruments[clip].minvolume*10, z.radio.instruments[clip].maxvolume*10)/10});
-						});
-					})
-			});
-		}
-	};
-	
-	let soundlink = document.querySelector("#soundlink");
-	let telegraph = document.querySelector("#telegraph");
 
-	// Kefir.fromEvents(soundlink, "click").onValue( e => {
-	// 	z.tools.logmsg("play sound !");
-	// 	if(!radio.soundplaying) { 
-	// 		try {
-	// 			radio.player.context.resume().then(() => {
-	// 				z.tools.logmsg("playback resumed");
-	// 				telegraph.innerHTML =  "(sound on)";
-	// 				radio.soundplaying = true;
-	// 				soundlink.classList.add("active");
-	// 			});
-	// 		} catch(e) { z.tools.logerror("dashboard ::: resumeaudio " + e) } 
-	// 	}
-	// 	else { 
-	// 		try {
-	// 			radio.player.context.suspend().then(() => {
-	// 				telegraph.innerHTML =  "(sound off)";
-	// 				radio.soundplaying = false;
-	// 				soundlink.classList.remove("active");
-	// 			});
-	// 		} catch(e) { z.tools.logerror("dashboard ::: suspendaudio " + e) }
-	// 	}
-	// });
-
-	Kefir.fromEvents(soundlink, "click").onValue( e => {
-		z.tools.logmsg("play sound !");
-		if(!radio.soundplaying) { 
-			try {
-				document.querySelector("#audio1").play();
-				z.tools.logmsg("playback resumed");
-				telegraph.innerHTML =  "(sound on)";
-				radio.soundplaying = true;
-				soundlink.classList.add("active");
-			} catch(e) { z.tools.logerror("dashboard ::: resumeaudio " + e) } 
-		}
-		else { 
-			try {
-				document.querySelector("#audio1").pause();
-				telegraph.innerHTML =  "(sound off)";
-				radio.soundplaying = false;
-				soundlink.classList.remove("active");
-			} catch(e) { z.tools.logerror("dashboard ::: suspendaudio " + e) }
-		}
-	});
-
-	return radio;
-})();
-//test
-z.radio.start(z);
-z.radio.loadclips(z);
-// z.radio.playtone();
 window.addEventListener('load', e => {
-  z.radio.play(z);
-  z.draw(z);
+   z.draw(z);
   window.scroll(0,0);
   window.setTimeout(() => { document.querySelector("#contentframe").style.opacity = 1.0 }, 3800);
   // window.setTimeout(() => { document.querySelector("#controls").style.backgroundColor = "rgba(0,0,0,0.0)" }, 6800);
