@@ -80,10 +80,11 @@
 	</style>
 </head>
 <body id="top" >
-<div id="subtextframe" class="frame zlowest"></div>
+
 <div id="svgframe" class="frame zlow"><svg xmlns="http://www.w3.org/2000/svg" id="svg" class="frame"></svg></div>
 <div id="wordframe" class="frame z0"></div>
 <!-- <div id="controlframe" class="frame zhighest"></div> -->
+<div id="subtextframe" class="frame z0"></div>
 <div id="contentframe" class="absolute zhighest" style="opacity:0">
 <nav id="controls">
 	<ul class="flex">
@@ -344,7 +345,7 @@ z.draw = z => {
 		["#778BA8", "#5E6D86", "#686C76", "#4F463D", "#5A432F", "#44301D", "#37261A", "#3F231C", "#4D739F", "#5D1215", "#352B28", "#4A2A28"], //outdoors sumac
 		["#675944", "#2E2E27", "#927F56", "#A18462", "#4B4437", "#544A39", "#2C352D", "#BEA886"], //grass shadow
 		["#7A6C57", "#46382F", "#745F4F", "#928B88", "#977E6C", "#E2E3E7", "#3C3023", "#41491D", "#2C2521"], //muddy creek (greens browns)
-		["#A3958A", "#A49389", "#82706C", "#7C6D66", "#786662", "#746663"], //gravelroadcanada (all beige)
+		// ["#A3958A", "#A49389", "#82706C", "#7C6D66", "#786662", "#746663"], //gravelroadcanada (all beige)
 		["#17180E", "#585743", "#A9A497", "#938A5E", "#676320", "#463922", "#A76F09", "#A76406", "#3E441F", "#47502D", "#6F7948", "#A1A294", "#272C12"], //lake summer woods (green orange)
 		["#45424A", "#393536", "#726558", "#B3A6A0", "#6C6060", "#818175", "#8C8E76", "#565C57"], //river rock (greens)
 		["#B5C1CF", "#79838F", "#988D82", "#5B5351", "#665B49", "#5A5A4C", "#575D4E", "#4B594A", "#8291A4"], //finland fields () 
@@ -461,25 +462,25 @@ z.draw = z => {
 })(5);
 
 //main
-// ( dt => {
-// 	const element = document.querySelector("main");
-// 	const bgcolors = ["rgba(25, 25, 24, 0.4)", "rgba(25, 25, 24, 0.6)", "rgba(25, 25, 24, 0.9)", "rgba(252, 251, 227, 0.4)", "rgba(252, 251, 227, 0.9)", , "rgba(252, 251, 227, 0.6)"]
-// 	// const warmblacktints = ["#191918", "#2f2f2f", "#464646", "#5e5e5d", "#757574", "#8c8c8b", "#a3a3a2", "#babab9", "#d1d1d0", "#e8e8e7", "#ffffff", "#fcfbe3", "#e2e1cc", "#c9c8b5", "#b0af9e", "#979688", "#7e7d71", "#64645a", "#4b4b44", "#32322d", "#191916", "#000000"];
-// 	const warmblacktints = ["#191918", "#fcfbe3", "#000000"];
+( dt => {
+	const element = document.querySelector("main");
+	const bgcolors = ["rgba(25, 25, 24, 0.4)", "rgba(25, 25, 24, 0.6)", "rgba(25, 25, 24, 0.9)", "rgba(252, 251, 227, 0.4)", "rgba(252, 251, 227, 0.9)", , "rgba(252, 251, 227, 0.6)"]
+	// const warmblacktints = ["#191918", "#2f2f2f", "#464646", "#5e5e5d", "#757574", "#8c8c8b", "#a3a3a2", "#babab9", "#d1d1d0", "#e8e8e7", "#ffffff", "#fcfbe3", "#e2e1cc", "#c9c8b5", "#b0af9e", "#979688", "#7e7d71", "#64645a", "#4b4b44", "#32322d", "#191916", "#000000"];
+	const warmblacktints = ["#191918", "#fcfbe3", "#000000"];
 
-// 	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
-// 		try {
-// 			let count = e.clock.t/dt;
-// 			let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
-// 			// z.tools.logmsg("in BOX " + color + " color =  " + color);
-// 			Velocity({	
-// 				elements: element, 
-// 				properties: { backgroundColor:  color, backgroundColorAlpha: z.tools.randominteger(0.1,6)/10},
-// 				options: { duration: 1200,  delay: 0, easing: "easeInOutQuad" },
-// 			});
-// 		} catch(err) { z.tools.logerror("box animation ::: " + err ) }
-// 	})
-// })(9);
+	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
+		try {
+			let count = e.clock.t/dt;
+			let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
+			// z.tools.logmsg("in BOX " + color + " color =  " + color);
+			Velocity({	
+				elements: element, 
+				properties: { backgroundColor:  color, backgroundColorAlpha: z.tools.randominteger(0.1,6)/10},
+				options: { duration: 1200,  delay: 0, easing: "easeInOutQuad" },
+			});
+		} catch(err) { z.tools.logerror("box animation ::: " + err ) }
+	})
+})(9);
 
 //poems
 ( dt => {
@@ -487,6 +488,12 @@ z.draw = z => {
 	const afterclassnames2 = ["afterblackwhite", "afterwhiteblack"];
 	const symbols = "01101000_.._._+ / - .. _.._._+. < +=_.._._+ . < +=_.._._+ . < +=: :  . < > '. . . . . .& | { . . ::: x ø 0 ¥ ø Y H L ® Å Ö x x x ø 0 Ø x X x ø 0 Ø xº3 @@##+''+'+''' '@".split("");
 	const nsymbols = symbols.length;
+	const subtext = document.querySelector("#subtextframe");
+	subtext.innerText = [...Array([200,480][v]).keys()].reduce( (text,t) => {
+		text = text + symbols[z.tools.randominteger(0,nsymbols)];
+		return text;
+	}, "");
+	subtext.style["font-size"] = "10vh";
 	const elements = ( () => {
 		return Array.from(document.querySelectorAll(".poem")).reduce( (acc,el,j)=> {
 			z.tools.logmsg("create poem element ::: " + j);
@@ -511,6 +518,17 @@ z.draw = z => {
 		try {
 			let count = e.clock.t/dt;
 			let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
+			if(count%5===0) {
+				subtext.innerText = [...Array([200,480][v]).keys()].reduce( (text,t) => {
+					text = text + symbols[z.tools.randominteger(0,nsymbols)];
+					return text;
+				}, "");
+			}
+			Velocity({	
+				elements: subtext,
+				properties: { color: color, opacity:z.tools.randominteger(1,8)/10},
+				options: { duration: 2400, delay: 0 },
+			});
 			elements.forEach((poem,p) => {
 				poem["stanzas"].forEach((stanza,s) => {
 					if(count%2===0) {
@@ -518,7 +536,6 @@ z.draw = z => {
 					}
 					else {
 						stanza["lines"].forEach( (line,l) => {
-							// z.tools.logmsg("*** line color = " + color);
 							line.el.style["color"] = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
 							if(count%3===0) {
 								line.el.innerText = [...Array(z.tools.randominteger(3,88)).keys()].reduce( (text,t) => {
@@ -535,9 +552,45 @@ z.draw = z => {
 	})
 })(7);
 
+//circles0
+( dt => {
+	let nshapes = [2,4][v];
+	let width = window.innerWidth, height = window.innerHeight;
+	let colors = ["#163341", "#172F47", "#4477A8", "#2A4A69", "#52779B", "#000000", "#384B60", "#1F3350", "#153A69", "#153559", "#9D9990", "#9D9990", "#181E21", "#0C1D32", "#706959", "#D6D3CE", "#534E48", "#3E5766", "#222E34", "#BBB4A4", "#7C7D7F"]; //birdland
+	const elements = [...Array(nshapes).keys()].reduce( (acc, j) => {
+		let el = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+		el.setAttributeNS(null, "id", "circle0_"+ j);
+		el.setAttributeNS(null, "class", "shape circle");
+		el.setAttributeNS(null, "cy", height/2);
+		el.setAttributeNS(null, "cx", width/2);
+		z.elements["svg"].el.appendChild(el);
+		acc[j] = { el: el };
+	return acc;
+	}, []);
+
+	const drawings = [
+		e => {
+			try {
+				let count = e.clock.t/dt;
+				let r = z.tools.randominteger(e.dimensions.min/6, e.dimensions.min);
+				let color = colors[z.tools.randominteger(0, colors.length)];
+				Velocity({	
+					elements: elements[count%nshapes].el,
+					properties: { fillOpacity: count%2===0 ? 1.0 : 1.0, strokeOpacity: count%2===1 ? 0.0: 0.0, fill: color, stroke: color, strokeWidth: r/4, strokeDasharray: z.tools.randominteger(8, r), cx: e.dimensions.width/2, cy: e.dimensions.height/2, r: r },
+					options: { duration: z.tools.randominteger(1000*dt*nshapes/3,1000*dt*nshapes), delay: 0 },
+				});
+			} catch(err) { z.tools.logerror("circle animation 1 ::: " + err ) }
+		},
+		
+	];
+	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
+		drawings[0](e);
+	})
+})(2);
+
 //lines
 ( dt => {
-	let nshapes = [4,8][v];
+	let nshapes = [2,4][v];
 	let width = window.innerWidth, height = window.innerHeight;
 	const elements = [...Array(nshapes).keys()].reduce( (acc, j) => {
 		// z.tools.logmsg("create line element ::: " + id);
@@ -597,7 +650,7 @@ z.draw = z => {
 		e => {
 			try {
 				let count = e.clock.t/dt;
-				let r = z.tools.randominteger(e.dimensions.min/6, e.dimensions.min/1.4);
+				let r = z.tools.randominteger(e.dimensions.min/6, e.dimensions.min/2);
 				let color = colors[z.tools.randominteger(0, colors.length)];
 				Velocity({	
 					elements: elements[count%nshapes].el,
