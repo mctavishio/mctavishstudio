@@ -68,41 +68,43 @@
 <div id="subtextframe" class="frame zlowest"></div>
 <div id="svgframe" class="frame zlow"><svg xmlns="http://www.w3.org/2000/svg" id="svg" class="frame"></svg></div>
 <div id="wordframe" class="frame z0"></div>
-<!-- <div id="controlframe" class="frame zhighest"></div> -->
-<div id="contentframe" class="absolute zhighest" style="opacity:0">
-<nav id="controls">
-	<ul class="flex">
-		<li title="hide controls" id="hidelink"><a href="#" ><svg class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 470 470" ><g><path d="M231.147,160.373l67.2,67.2l0.32-3.52c0-35.307-28.693-64-64-64L231.147,160.373z"/><path d="M234.667,117.387c58.88,0,106.667,47.787,106.667,106.667c0,13.76-2.773,26.88-7.573,38.933l62.4,62.4 c32.213-26.88,57.6-61.653,73.28-101.333c-37.013-93.653-128-160-234.773-160c-29.867,0-58.453,5.333-85.013,14.933l46.08,45.973 C207.787,120.267,220.907,117.387,234.667,117.387z"/><path d="M21.333,59.253l48.64,48.64l9.707,9.707C44.48,145.12,16.64,181.707,0,224.053c36.907,93.653,128,160,234.667,160 c33.067,0,64.64-6.4,93.547-18.027l9.067,9.067l62.187,62.293l27.2-27.093L48.533,32.053L21.333,59.253z M139.307,177.12 l32.96,32.96c-0.96,4.587-1.6,9.173-1.6,13.973c0,35.307,28.693,64,64,64c4.8,0,9.387-0.64,13.867-1.6l32.96,32.96  c-14.187,7.04-29.973,11.307-46.827,11.307C175.787,330.72,128,282.933,128,224.053C128,207.2,132.267,191.413,139.307,177.12z" /></g></svg></a></li>
-		<li title="home" id="homelink"><a href="index.html" ><svg class="icon" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 510 510" ><polygon points="204,471.75 204,318.75 306,318.75 306,471.75 433.5,471.75 433.5,267.75 510,267.75 255,38.25 0,267.75 76.5,267.75 76.5,471.75"/></svg></a></li>
-		<li title="sound" id="soundlink"><a href="#" ><svg class="icon" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 459 459" ><path d="M0,153v153h102l127.5,127.5v-408L102,153H0z M344.25,229.5c0-45.9-25.5-84.15-63.75-102v204 C318.75,313.65,344.25,275.4,344.25,229.5z M280.5,5.1v53.55C354.45,81.6,408,147.899,408,229.5S354.45,377.4,280.5,400.35V453.9 C382.5,430.949,459,339.15,459,229.5C459,119.85,382.5,28.049,280.5,5.1z"/></svg></a></li>
-		<li class="title typewriter" title="telegraph" id="telegraph">(sound off)</li>
-		<li class="title  typewriter" title="clock" id="clock">here | now</li>
-	</ul>
-</nav>
-<nav title="menu" id="menulink" style="display:none" >
-	<ul class="flex">
-		<li ><a href="#" ><svg class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 459 459"><path d="M0,382.5h459v-51H0V382.5z M0,255h459v-51H0V255z M0,76.5v51h459v-51H0z"/></svg></a></li>
-	</ul>
-</nav>
+<div id="contentframe" class="absolute zhighest">
+
 <div id="mainflex">
-<main id="main" class="expand" data-state="expanded">	
+<main id="main" class="expand" data-state="expanded" style="background-color:rgba(25, 25, 24, 0.6)">	
 <header>
 	<h1>blue atlas</h1>
 	<h2>(- home -)</h2>
 </header>
+<ul data-role="narrator" class="info compress">
+<li class="title typewriter" title="telegraph" id="telegraph"></li>
+<li class="title  typewriter" title="clock" id="clock">here | now</li>
+</ul>
+
 <article class="poem">
+	<header>
+		<h1>book links</h1>
+	</header>
 	<div class="textContent">
-		<h5>book links</h5>
 		<ul data-role="narrator" class="info expand">
-		<li><a href="fieldnotes.html">field notes</a></li>
 		<li><a href="surface.html">surface displacement</a></li>
 		<li><a href="starfall.html">starfall</a></li>
 		<li><a href="nighttrainbluewindow.html">night train blue window</a></li>
-		<li><a href="epilogue.html">night train blue window ::: epilogue</a></li>
+		<li><a href="coda.html">coda</a></li>
+		<li><a href="fieldnotes.html">field notes</a></li>
 		<li><a href="planets.html">the planets</a></li>
 		<li><a href="green.html">photosynthesis</a></li>
+		<!-- <li><a href="vial.html">tiny vial</a></li>-->
+		<!-- <li><a href="migrations.html">migrations</a></li>-->
+		<!-- <li><a href="siren.html">siren</a></li> -->
 		</ul>
-		<h5>about</h5>
+	</div>
+</article>
+<article class="poem">
+	<header>
+		<h1>about</h1>
+	</header>
+	<div class="textContent">
 		<ul data-role="narrator" class="info">
 		<li>this is an absence diorama</li>
 		<li>a bird a map a web ...</li>
@@ -116,19 +118,27 @@
 		<li>diagrams equations texts codes</li>
 		<li>a telegram a spell</li>
 		</ul>
-		<h5>thanks</h5>
-		<p>This project was started during the summer of 2020 :: a time of isolation
+	</div>
+</article>
+<article class="poem">
+	<header>
+		<h1>thanks</h1>
+	</header>
+	<div class="textContent">
+		<ul data-role="narrator" class="info">
+		<li>This project was started during the summer of 2020 :: a time of isolation
 			upheaval grief resistance reflection. There were several partners that I
 			would have worked with this year on site, in person. I am grateful to their
 			inspiration, existence, support. I have thought of them ::: taken refuge in them :::
-			drawn sustenance and *energy* from them. I have been in their orbit as the tides shifted.
-		</p>
+			drawn sustenance and *energy* from them. I have been in their orbit.
+		</li>
+		<ul>
 		<ul data-role="narrator" class="info">
 		<li>bell museum</li>
 		<li>macrostie art center</li>
-		<li>the umd planetarium</li>
-		<li>the food farm ::: field trials project</li>
-		<li>jerome foundation</li>
+		<li>david beard & the umd planetarium</li>
+		<li>the food farm ::: field trials project (anne dugan curator & farmer)</li>
+		<li>the jerome foundation (artist fellowship)</li>
 		<li></li>
 		<li></li>
 		</ul>
@@ -221,7 +231,7 @@ z.elements = ( () => {
 			z.tools.logmsg("create frame element ::: " + id);
 			acc[id] = { el: document.querySelector("#"+id) };
 			return acc;
-		}, {}),
+		}, {})
 	}
 })()
 	
@@ -269,38 +279,10 @@ z.draw = z => {
 		acc[j] = [duration, 900-duration];
 	return acc;
 	}, []);
-	// const timings = [ [380,600], [400,580], [480,500], [500,480], [580,400], [600,380], [640,340], [680,300], [700,280], [740,240], [780,200], [800,180], [840,140], [880,100]];
-	// const timings = [ [180,800], [200,780], [280,700], [300,680], [380,600], [400,580], [480,500], [500,480], [580,400], [600,380], [640,340], [680,300], [700,280], [740,240], [780,200], [800,180], [840,140], [880,100]];
+
 	z.streams["clock"].onValue( e => {
 		z.elements["clock"].el.innerHTML = z.tools.datestr(new Date(e.t*1000));
 	});
-	//visibility controls
-	( () => { 
-		let main = document.querySelector("main");
-		let controls = document.querySelector("#controls");
-		let hidelink = document.querySelector("#hidelink");
-		let menulink = document.querySelector("#menulink");
-		//hidelink
-		Kefir.fromEvents(hidelink, "click").onValue( e => {
-			try {
-				z.tools.logmsg("hide content");
-				main.style.opacity=0;
-				controls.style.display='none';
-				menulink.style.display='block';
-			} catch(e) { z.tools.logerror("hidelink " + e) }
-		});
-		//menulink
-		Kefir.fromEvents(menulink, "click").onValue( e => {
-			try {
-				z.tools.logmsg("show content");
-				main.style.opacity=0.8;
-				// main.style.backgroundColor=0, 0, 0, 0.4;
-				menulink.style.display='none';
-				controls.style.display='block';
-			} catch(e) { z.tools.logerror("menulink " + e) }
-		});
-	})();
-
 	const playlist = [
 		["#fcfbe3", "#191918"], //"warmbw",
 		// ["#9a0000", "#fcfbe3", "#191918"], //"warmbwred",
@@ -468,29 +450,8 @@ z.draw = z => {
 			});
 		} catch(err) { z.tools.logerror("box animation ::: " + err ) }
 	})
-})(5);
+})(8);
 
-//main
-( dt => {
-	const element = document.querySelector("main");
-	const bgcolors = ["rgba(25, 25, 24, 0.4)", "rgba(25, 25, 24, 0.6)", "rgba(25, 25, 24, 0.9)", "rgba(252, 251, 227, 0.4)", "rgba(252, 251, 227, 0.9)", , "rgba(252, 251, 227, 0.6)"]
-	const warmblacktints = ["#191918", "#2f2f2f", "#464646", "#5e5e5d", "#757574", "#8c8c8b", "#a3a3a2", "#babab9", "#d1d1d0", "#e8e8e7", "#ffffff", "#fcfbe3", "#e2e1cc", "#c9c8b5", "#b0af9e", "#979688", "#7e7d71", "#64645a", "#4b4b44", "#32322d", "#191916", "#000000"];
-	// const warmblacktints = ["#191918", "#fcfbe3", "#000000"];
-
-	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
-		try {
-			let count = e.clock.t/dt;
-			// let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
-			let color = warmblacktints[z.tools.randominteger(0, warmblacktints.length)];
-			// z.tools.logmsg("in BOX " + color + " color =  " + color);
-			Velocity({	
-				elements: element, 
-				properties: { backgroundColor:  color, backgroundColorAlpha: z.tools.randominteger(0.1,6)/10},
-				options: { duration: 1200,  delay: 0, easing: "easeInOutQuad" },
-			});
-		} catch(err) { z.tools.logerror("box animation ::: " + err ) }
-	})
-})(9);
 
 //words
 ( dt => {
@@ -565,48 +526,6 @@ z.draw = z => {
 		drawings[Math.floor(e.clock.t/(dt*elements.length))%drawings.length](e);
 	})
 })(9);
-
-//poems
-( dt => {
-	const afterclassnames1 = ["after0", "after1", "after2", "after3", "after4", "after5", "after6", "after7", "after8", "after9", "after10", "after11", "after12", "after13"];
-	const afterclassnames2 = ["afterblackwhite", "afterwhiteblack"];
-	const warmblacktints = ["#191918", "#2f2f2f", "#464646", "#5e5e5d", "#757574", "#8c8c8b", "#a3a3a2", "#babab9", "#d1d1d0", "#e8e8e7", "#ffffff", "#fcfbe3", "#e2e1cc", "#c9c8b5", "#b0af9e", "#979688", "#7e7d71", "#64645a", "#4b4b44", "#32322d", "#191916", "#000000"];
-
-	const elements = ( () => {
-		return Array.from(document.querySelectorAll(".poem")).reduce( (acc,el,j)=> {
-			z.tools.logmsg("create poem element ::: " + j);
-			acc[j]={ el:el, id:"poem"+j, stanzas: Array.from(el.querySelectorAll(".stanza")).reduce( (acc,el,j)=> {
-				el.setAttribute("id", "stanza"+j);
-				el.className= "stanza " + afterclassnames1[j%afterclassnames1.length] + " " + afterclassnames2[0];
-
-				acc[j]={ el:el, lines:Array.from(el.querySelectorAll("li")).reduce( (acc,el,j)=> {
-					acc[j]={ el:el };
-					return acc;
-					}, []) }; 
-				return acc;
-			}, []) };
-			return acc;
-		}, []);
-	})();
-	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
-		try {
-			let count = e.clock.t/dt;
-			let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
-			elements.forEach((poem,p) => {
-				poem["stanzas"].forEach((stanza,s) => {
-					if(count%2===0) {
-						stanza.el.className= "stanza " + afterclassnames2[count/2%afterclassnames2.length] + " " + afterclassnames1[z.tools.randominteger(0,afterclassnames1.length)];
-					}
-					// else {
-					// 	stanza["lines"].forEach( (line,l) => {
-					// 		line.el.style["color"] = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
-					// 	})
-					// }
-				})
-			});
-		} catch(err) { z.tools.logerror("poem animation ::: " + err ) }
-	})
-})(18);
 
 
 const p = [
@@ -685,246 +604,11 @@ const p = [
 //
 
 };
-z.radio = ( () => { 
-	const soundcorepath = "../data/sound/";
-	const instruments = {
-		bagpipe1a: {clip: "bagpipe1a", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
-		bagpipe1ahigh: {clip: "bagpipe1a", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		bagpipe1e: {clip: "bagpipe1e", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		bagpipe1f: {clip: "bagpipe1f", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		bagpipe1g: {clip: "bagpipe1g", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		bagpipe1h: {clip: "bagpipe1h", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
-		bagpipe1: {clip: "bagpipe1", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomlowharmonic()/4 } },
-		bagpipe1high: {clip: "bagpipe1", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/4 } },
-		thunk: {clip: "thunk", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		thunkhighharmonic: {clip: "thunk", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomhighharmonic()/10 } },
-		birds5harmonic: {clip: "birds5",minvolume: 0.2, maxvolume: 0.5, playbackRate: () => { return z.tools.randomhighharmonic()/10 } },
-		knocking1: {clip: "knocking1", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randominteger(4,48)/10 } },
-		cmpb20200708_5harmonic: {clip: "cmpb20200708_5", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomhighharmonic()/10 } },//* voice
-		// cello_pitch1: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		// cello_pitch1harmonic: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		bird1harmonic: {clip: "bird1", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		birdcanyon: {clip: "birdcanyon", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		bagpipegeese: {clip: "bagpipegeese", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		celloknockcanyon: {clip: "celloknockcanyon", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		voxmct0: {clip: "voxmct0", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		stapler: {clip: "stapler", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		train1: {clip: "train1", minvolume: 0.4, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(6,18)/10 } },
-		weatherradio1: {clip: "weatherradio1", minvolume: 0.6, maxvolume: 1.0,  playbackRate: () => { return z.tools.randominteger(6,12)/10 } },
-		longbell: {clip: "longbell", minvolume: 0.4, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(9,18)/10 } },
-		// cellothunktelephone: {clip: "cellothunktelephone", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		// cellothunkradio: {clip: "cellothunkradio", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		t0: {clip: "t0", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		tornadosirenharmonic: {clip: "tornadosiren", minvolume: 0.1, maxvolume: 0.6, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },									
-	};
-	let clips = {};
-	Object.entries(instruments).forEach( instrument => {
-		clips[instrument[1].clip] = { url: soundcorepath + instrument[1].clip + ".mp3", loaded:false, duration:0, buffer:{} };
-	});
-	let radio = {
-		player: {}, loading: [], loaded: false,
-		soundplaying:false,
-		instruments: instruments, clips: clips,
-		clipduration: { min:0, max:0 },
-		nbuffersplaying: 0, maxbuffersplaying: [14,18][v],
-		intervals: {
-			lowi: function(basetone){ return Math.floor(basetone/4) },
-			i: function(basetone){ return Math.floor(basetone/2) },
-			I: function(basetone){ return Math.floor(basetone/1) },
-			II: function(basetone){ return Math.floor(basetone*9/8) },
-			III: function(basetone){ return Math.floor(basetone*5/4) },
-			iii: function(basetone){ return Math.floor(basetone*6/5) },
-			IV: function(basetone){ return Math.floor(basetone*4/3) },
-			V: function(basetone){ return Math.floor(basetone*3/2) },
-			VI: function(basetone){ return Math.floor(basetone*5/3) },
-			VII: function(basetone){ return Math.floor(basetone*15/8) },
-			vii: function(basetone){ return Math.floor(basetone*9/5) },
-			VIII: function(basetone){ return Math.floor(basetone*2) },
-		},
-		loadclips: z => {
-			Object.keys(z.radio.clips).forEach( key => {
-				let clip = z.radio.clips[key];
-				if(!z.radio.loading.includes(clip.url)) {
-					z.radio.loading.push(clip.url);
-					let request = new XMLHttpRequest();
-					//for localhost testing
-					// request.open("GET", window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url, true);
-					// z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/web/" + clip.url);
-					// for deploy
-					request.open("GET", window.location.protocol + "//" + window.location.hostname + "/" + clip.url, true);
-					// z.tools.logmsg("url = " + window.location.protocol + "//" + window.location.hostname + "/"  + clip.url);
-					request.responseType = "arraybuffer";
-					request.onload = () =>  {
-						z.tools.logmsg("loaded" + clip.url);
-						z.radio.player.context.decodeAudioData(request.response, buffer => {
-							clip.loaded = true;
-							clip.buffer = buffer;
-							clip.duration = clip.buffer.duration;
-							if( clip.duration > z.radio.clipduration.max) {z.radio.clipduration.max = clip.duration}
-							else if( clip.duration < z.radio.clipduration.min) {z.radio.clipduration.min  = clip.duration}
-							z.tools.logmsg("decoded" + clip.url);
-						}, e => {
-							z.tools.logerror("audio error! clip = " + clip.url + ", err = " + e);
-						});
-						
-					};
-					request.send();
-				}
-			});
-			z.radio.loaded = true;
-		},
-		start: z => {
-			/* set up player*/
-			window.AudioContext = window.AudioContext || window.webkitAudioContext;
-			z.radio.player.context = new AudioContext();
-			/* experimental parameters */
-			let parameters = [
-				{ gain: 0.4, threshold: -24, knee: 30, ratio: 12, attack: 0.003, release: 0.25 }, //default
-				{ gain: 0.3, threshold: -18, knee: 30, ratio: 18, attack: 0.0003, release: 0.28 },
-				{ gain: 0.5, threshold: -8, knee: 30, ratio: 18, attack: 0.003, release: 0.28 },
-				{ gain: 0.8, threshold: -8, knee: 30, ratio: 18, attack: 0.003, release: 0.28 },
-				];
-			let n = 0;
 
-			//with compressor
-			z.radio.player.compressor = z.radio.player.context.createDynamicsCompressor();
-			z.radio.player.compressor.threshold.value = parameters[n].threshold;
-			z.radio.player.compressor.knee.value = parameters[n].knee;
-			z.radio.player.compressor.ratio.value = parameters[n].ratio;
-			
-			z.radio.player.compressor.attack.value = parameters[n].attack;
-			z.radio.player.compressor.release.value = parameters[n].release;
-			z.radio.player.gain = z.radio.player.context.createGain();
-			z.radio.player.gain.value = parameters[n].gain;
-			z.radio.player.compressor.connect(z.radio.player.gain);
-			z.radio.player.gain.connect(z.radio.player.context.destination);
-			// //with no compressor
-			// z.radio.player.gain = z.radio.player.context.createGain();
-			// z.radio.player.gain.value = parameters[n].gain;
-			// z.radio.player.gain.connect(z.radio.player.context.destination);
-		},
-		playtone: ({ volume=0.8, delay=0, fadetime=0.1, duration=1.0, frequency=380 } = {}) => { 
-			let vco = z.radio.player.context.createOscillator();
-			vco.frequency.value = frequency;
-			vco.type = "sine";
-			let vca = z.radio.player.context.createGain();
-			
-			vco.connect(vca);
-			vca.connect(z.radio.player.gain);
-			let now = z.radio.player.context.currentTime;
-			//fade in
-			vca.gain.exponentialRampToValueAtTime(0.001, now + delay);
-			vca.gain.exponentialRampToValueAtTime(volume, now + fadetime + delay);
-			//fade out
-			vca.gain.exponentialRampToValueAtTime(volume, now + duration + delay - fadetime);
-			vca.gain.exponentialRampToValueAtTime(0.001, now + duration + delay);
-			vco.start(now + delay);
-			vco.stop(now + delay + duration + fadetime);
-			vco.onended = function() {
-			  	vco.disconnect(); vca.disconnect();
-			}
-		},
-		playbuffer: ( { volume=0.8, delay=0, fadetime=1, duration=2, instrument=z.radio.instruments["bagpipe1f"] } = {} ) =>  {
-			try {
-				// let instrument = z.radio.instruments[zinstrument];
-				let clip = z.radio.clips[instrument.clip];
-				z.tools.logmsg("***buffer requested = " + instrument.clip + " z.radio.nbuffersplaying = " + z.radio.nbuffersplaying);
-				if(clip.loaded && (z.radio.nbuffersplaying<z.radio.maxbuffersplaying-1 || z.radio.nbuffersplaying>z.radio.maxbuffersplaying+2)) {
-					let rate = instrument.playbackRate ? instrument.playbackRate() : 1.0;
-					try {
-						// z.tools.logmsg("rate = " + rate + " ::: duration = " + clip.duration*rate);
-						let vca = z.radio.player.context.createGain(); 
-						let source = z.radio.player.context.createBufferSource();
-						source.buffer = clip.buffer;
-						source["playbackRate"].value = rate;
-						source.connect(vca);
-						vca.connect(z.radio.player.gain);
-						source.loop = false;
-						source.onended = e =>  { 
-							z.radio.nbuffersplaying=z.radio.nbuffersplaying-1;
-						};
-						++z.radio.nbuffersplaying;
-						let now = z.radio.player.context.currentTime;
-						let dur = clip.duration < duration ? clip.duration/rate : rate*duration/rate;
-						let dt = Math.min(fadetime, dur*.25);
-						let offset = z.tools.randominteger(0, (dur-4*dt)*10)/10;
-						// source.start(now, offset, dt*4); //parameters (when,offset,duration)
-						vca.gain.setValueAtTime(0.001, now);
-						vca.gain.exponentialRampToValueAtTime(volume, now + dt);
-						vca.gain.setValueAtTime(volume, dur - 2*dt);
-						vca.gain.exponentialRampToValueAtTime(0.001, now + dur-dt*0.5 );
-						source.start(now, offset, dur); //parameters (when,offset,duration)
-						// z.tools.logmsg("playing = " + clip.url);
-					} catch(e) { z.tools.logerror("error applying params to audio buffer e::: " + e) }
-				}
-				else {	
-					z.tools.logmsg("NOT playing = " + clip.url);
-				}
-			}
-			catch(err) { z.tools.logerror("line playbuffer" + err) }
-		},
-		play: z => {
-			const defaultduration = (dt,n,graintdt,clip) => dt/(graindt*2);
-			const defaultfadetime = (dt,n,graintdt,clip) => dt/(graindt*20);
-			const defaultpart = (dt=4000, n=4, graindt=400, chance=0.8, duration=defaultduration, fadetime=defaultfadetime, instruments=["celloknockcanyon"]) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: duration(dt,n,graintdt), fadetime: fadetime(dt,n,graintdt), instruments: ["celloknockcanyon"] } };
-			const score = [
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["birdcanyon", "birds5harmonic", "voxmct0", "cmpb20200708_5harmonic", "longbell"] } })(14000,5,500),
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["train1", "tornadosirenharmonic",] } })(4000,6,500),
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["celloknockcanyon", "stapler", "t0", "cmpb20200708_5harmonic", "thunkhighharmonic"] } })(5000,3,500,0.6),
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["bagpipe1", "bagpipe1a", "tornadosirenharmonic", "tornadosirenharmonic"] } })(17000,6,400,0.8),
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["celloknockcanyon"] } })(5000,4,400,0.8),
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["bagpipe1e","bagpipe1f","bagpipe1g","bagpipe1h"] } })(3000,4,400,0.8),
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["cmpb20200708_5harmonic"] } })(9000,6,400,0.8),
-			];
-			score.forEach( (part,j) => {
-				z.streams["clock"].filter( e => e.t%Math.floor(part.dt/1000)===0 && z.tools.randominteger(0,10)<part.chance*10 && z.radio.soundplaying)
-					.onValue( e=> {
-						let clip = part.instruments[z.tools.randominteger(0,part.instruments.length)];
-						Kefir.sequentially(part.graindt, [...Array(part.n).keys()]).onValue( x => { 
-							z.radio.playbuffer({duration:part.duration, fadetime:part.fadetime, instrument:z.radio.instruments[clip], volume: z.tools.randominteger(z.radio.instruments[clip].minvolume*10, z.radio.instruments[clip].maxvolume*10)/10});
-						});
-					})
-			});
-		}
-	};
-	
-	let soundlink = document.querySelector("#soundlink");
-	let telegraph = document.querySelector("#telegraph");
-
-	Kefir.fromEvents(soundlink, "click").onValue( e => {
-		z.tools.logmsg("play sound !");
-		if(!radio.soundplaying) { 
-			try {
-				radio.player.context.resume().then(() => {
-					z.tools.logmsg("playback resumed");
-					telegraph.innerHTML =  "(sound on)";
-					radio.soundplaying = true;
-					soundlink.classList.add("active");
-				});
-			} catch(e) { z.tools.logerror("dashboard ::: resumeaudio " + e) } 
-		}
-		else { 
-			try {
-				radio.player.context.suspend().then(() => {
-					telegraph.innerHTML =  "(sound off)";
-					radio.soundplaying = false;
-					soundlink.classList.remove("active");
-				});
-			} catch(e) { z.tools.logerror("dashboard ::: suspendaudio " + e) }
-		}
-	});
-
-	return radio;
-})();
-//test
-z.radio.start(z);
-z.radio.loadclips(z);
-// z.radio.playtone();
 window.addEventListener('load', e => {
-  z.radio.play(z);
   z.draw(z);
   window.scroll(0,0);
-  window.setTimeout(() => { document.querySelector("#contentframe").style.opacity = 1.0 }, 3800);
+  // window.setTimeout(() => { document.querySelector("#contentframe").style.opacity = 1.0 }, 3800);
   // window.setTimeout(() => { document.querySelector("#controls").style.backgroundColor = "rgba(0,0,0,0.0)" }, 6800);
 });
 window.addEventListener('beforeunload', e => {

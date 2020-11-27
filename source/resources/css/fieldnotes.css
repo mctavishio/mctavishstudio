@@ -432,7 +432,6 @@ main {
   	/*margin-left: 8%;*/
   	width: 90%; max-width: 800px;
   	background-color:rgba(25, 25, 24, 0.4); /*warmblack*/
-  	background-color:rgba(252, 251, 227, 0.4); /*warmwhite*/
   	/*border: .5em var(--warmlightgray) dashed;
   	border-left: .5em var(--warmgray) dashed;
   	border-right: .5em var(--warmwhite) dashed;*/
@@ -467,7 +466,7 @@ h1 {
 	margin-bottom: .2em;
 	/*padding-left: 1em;
 	padding-right: 1em;*/
-	font-size: 2em;
+	font-size: 1.4em;
 	line-height: 1.4em;
 	letter-spacing: .1em;
 	color: #fcfbe3;
@@ -475,15 +474,8 @@ h1 {
 	font-family: 'American Typewriter', Didot, 'Times New Roman', serif;
 	font-family: var(--typewriter);
 }
-body > div > main > header > h1 {
-	font-size: 2em;
-	line-height: 1em;
-	margin-top: 0em;
-	color: #000000;
-	color: var(--warmblack);
-	font-weight: bolder;
-	font-family: 'American Typewriter', Didot, 'Times New Roman', serif;
-	font-family: var(--typewriter);
+body main > header > h1 {
+	font-size: 2.4em;
 }
 h2 {
 	margin: 0px;
@@ -492,7 +484,7 @@ h2 {
 	font-size: 1.1em;
 	line-height: 1.1em;
 }
-body > div > main > header > h2 {
+body main > header > h2 {
 	font-size: 1em;
 	line-height: 1.5em;
 	font-style: italic;
@@ -503,7 +495,7 @@ h3 {
 	font-size: 1em;
 	line-height: 1.1em;
 }
-body > div > main > header > h3 {
+body main > header > h3 {
 	font-size: 2em;
 	line-height: 1.2em;
 }
@@ -852,13 +844,21 @@ main a:before {
 main a:after {
 	content: " . ";
 }
+main a.corelink:before {
+	content: ">> ";
+}
+main a.corelink:after {
+	content: " <<";
+}
 a:hover {
 	z-index: 8888;
 	z-index: var(--zhighest);
 	text-decoration: underline;
 	color: #000000;
 	color: var(--warmblack);
-
+	color: #fcfbe3;
+	color: var(--warmwhite);
+	background-color: var(--warmblack);
 }
 svg.icon {
 	width: 50px;
