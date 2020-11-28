@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>photosynthesis</title>
+	<title>migrations</title>
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
 	<meta name="description" content="photosynthesis" />
@@ -42,12 +42,17 @@
 	</script>
 	<link rel="stylesheet" href="../css/fieldnotes.css"/>
 	<style>
-		ul.stanza {
-			margin-bottom: 1em;
+		html {
+			font-family: 'Trebuchet MS', Tahoma, Verdana, Helvetica, Arial, Tahoma, 'Trebuchet MS', sans-serif;
+			font-family: var(--sans);
+		}
+		article h1 {
+			font-family: Helvetica, Arial, Tahoma, 'Trebuchet MS', sans-serif;
+			font-family: var(--sans);
+			font-size: 1.4em;
 		}
 		main ul.stanza li {
-			font-weight: bold;
-			font-size: 2em;
+			font-weight: normal;
 		}
 		main article:nth-child(odd) a:before {
 			color: #fcfbe3;
@@ -59,36 +64,52 @@
 			color: var(--warmblack);
 			content: ": ";
 		}
-		/*a {
+		a {
 			text-decoration: none;
-		}*/
-		main article:nth-child(odd) a:after {
-			color: #000000;
-			color: var(--warmblack);
-			content: " :";
 		}
-		main article:nth-child(even) a:after {
+		a:hover {
+			background-color: #7B8DA6;
+		}
+		main a:before {
+			color: #fcfbe3;
+			color: var(--warmgray);
+			content: ". ";
+		}
+		main a:after {
 			color: #fcfbe3;
 			color: var(--warmwhite);
-			content: " :";
+			content: " .";
 		}
 		main {
 			max-width: 900px;
-			background-color:rgba(252, 251, 227, 0.0); /*warmwhite*/
+		}
+		video {
+			object-fit: cover;
+			width: 100vw;
+			height: 100vh;
+			position: fixed;
+			top: 0;
+			left: 0;
 		}
 
 	</style>
 </head>
 <body id="top" >
-
+<div id="videoframe" class="frame zlowest">
+	<video playsinline autoplay muted loop id="video1">
+	  <!-- <source src="https://storage.googleapis.com/www.blueboatfilms.com/film/walkingstark.mp4" type="video/mp4"> -->
+	  <source src="https://storage.cloud.google.com/www.blueboatfilms.com/film/bluewalking202011.mov" type="video/mp4">
+	</video>
+</div>
 <div id="svgframe" class="frame zlow"><svg xmlns="http://www.w3.org/2000/svg" id="svg" class="frame"></svg></div>
 <div id="wordframe" class="frame z0"></div>
 <div id="subtextframe" class="frame z0"></div>
 <div id="contentframe" class="absolute zhighest" style="opacity:0">
 <div id="mainflex">
-<main id="main" class="compress" data-state="compressed">	
+<main id="main" class="expand" data-state="expanded">	
 <header>
-	<h1>photosynthesis</h1>
+	<h1>migrations</h1>
+	<h2>text by sheila packa</h2>
 </header>
 <!-- <ul data-role="narrator" class="info compress">
 	<li class="title typewriter" title="telegraph" id="telegraph"></li>
@@ -99,42 +120,143 @@
 	<li><a href="index.html" id="homelink" class="corelink">return home</a></li>
 </ul>
 <article class="poem" >
+	<header>
+	<h1><a href="#top">^</a></h1><!--dream-->
+	</header>
 	<div class="textContent">
-		<ul data-role="rider" class="stanza">
-			<li>. </li>
-			<li>. . .</li>
-			<li>. . . .</li>
-			<li>. . . . .</li>
-			<li>. . . . . .</li>
-			<li>. . . . . . .</li>
-			<li>. . . . . .</li>
-			<li>. . . . .</li>
-			<li>. . . .</li>
-			<li>. . .</li>
-			<li>.</li>
+		<ul class="stanza">
+			<li>two wild swans</li>
+			<li>came in the dark hours</li>
+			<li>by star light far into the journey</li>
+			<li>to lend their wings</li>
+			</ul>
+			<ul class="stanza">
+			<li>traveled north over ten rivers</li>
+			<li>flew over moss riven</li>
+			<li>boulders broken from the mother stone</li>
+		</ul>
+		<ul class="stanza">
+			<li>over the fens</li>
+			<li>and spears of birch</li>
+			<li>through the wordless</li>
+			<li>winds and migrations</li>
+			<li>flew over graves</li>
+			<li>and lovers reaching blindly</li>
+			<li>through sheets of northern lights</li>
+		</ul>
+		<ul class="stanza">
+			<li>two swans with feathers of falling snow</li>
 		</ul>
 	</div>
 </article>
 <article class="poem" >
 	<header>
-	<h1><a href="#top">^top</a></h1>
+	<h1><a href="#top">^</a> </h1> <!--twelve tone geese-->
 	</header>
 	<div class="textContent">
-		<ul data-role="rider" class="stanza">
-			<li>. </li>
-			<li>. . .</li>
-			<li>. . . .</li>
-			<li>. . . . .</li>
-			<li>. . . . . .</li>
-			<li>. . . . . . .</li>
-			<li>. . . . . .</li>
-			<li>. . . . .</li>
-			<li>. . . .</li>
-			<li>. . .</li>
-			<li>.</li>
+		<ul class="stanza">
+			<li>in synchrony and angles</li>
+			<li>&nbsp;across forests</li>
+			<li>&nbsp;&nbsp;over rivers</li>
+			<li>&nbsp;&nbsp;&nbsp;below Venus or</li>
+			<li>&nbsp;&nbsp;&nbsp;&nbsp;clouds invisible borders</li>
+			<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;carrying nothing</li>
+			<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;besides star memories</li>
+			<li>&nbsp;&nbsp;&nbsp;&nbsp;along arteries of the body</li>
+			<li>&nbsp;&nbsp;&nbsp;into dark interiors</li>
+			<li>&nbsp;&nbsp;through the moon's phases</li>
+			<li>&nbsp;calling to each other</li>
+			<li>on lovers' endless roads</li>
 		</ul>
 	</div>
 </article>
+<article class="poem" >
+	<header>
+	<h1><a href="#top">^</a></h1> <!--north and south-->
+	</header>
+	<div class="textContent">
+		<ul class="stanza">
+			<li>if you answer</li>
+			<li>when you hear their call</li>
+		</ul>
+		<ul class="stanza">
+			<li>geese in loose and shifting lines</li>
+			<li>from land to sea to cloud</li>
+		</ul>
+		<ul class="stanza">
+			<li>cross the evening sun red</li>
+			<li>on clouds of plum</li>
+			<li>and rivers inlaid in gold and flowing</li>
+			<li>upon the slopes</li>
+		</ul>
+		<ul class="stanza">
+			<li>cross a border</li>
+			<li>if you need to leave</li>
+		</ul>
+		<ul class="stanza">
+			<li>in every country</li>
+			<li>we are born to the same body</li>
+		</ul>
+		<ul class="stanza">
+			<li>wind inimitable</li>
+			<li>invisible forces change us</li>
+			<li>beyond reach</li>
+		</ul>
+		<ul class="stanza">
+			<li>if you make the sky your home</li>
+		</ul>
+		<ul class="stanza">
+			<li>—it isn't easy, you can't bring</li>
+			<li>those things—</li>
+		</ul>
+		<ul class="stanza">
+			<li>wrap in those lines</li>
+			<li>cross with them</li>
+		</ul>
+	</div>
+</article>
+<article class="poem" >
+	<header>
+	<h1><a href="#top">^</a></h1><!--a journey yes-->
+	</header>
+	<div class="textContent">
+		<ul class="stanza">
+			<li>wind turns the body</li>
+			<li>and ground falls away</li>
+		</ul>
+		<ul class="stanza">
+			<li>geese unafraid of silence</li>
+			<li>or empty sky</li>
+			<li>must go must go must go</li>
+		</ul>
+		<ul class="stanza">
+			<li>reach into the wind</li>
+			<li>move as clouds rimmed with sunlight</li>
+			<li>or dark cloud of rain</li>
+		</ul>
+		<ul class="stanza">
+			<li>need to follow their flight</li>
+			<li>like ice in the spring</li>
+			<li>that once held the river</li>
+		</ul>
+		<ul class="stanza">
+			<li>light surges in the veins</li>
+			<li>searches for the beginning</li>
+			<li>of a journey yes</li>
+		</ul>
+		<ul class="stanza">
+			<li>music you haven't heard</li>
+			<li>didn't know you needed</li>
+			<li>opens deep</li>
+		</ul>
+	</div>
+</article>
+<audio loop=true id="audio1">
+  <!-- <source src="http://www.blueboatfilms.com/sound/starfallremix.mp3" type="audio/mpeg"> -->
+  <!-- <source src="https://storage.cloud.google.com/www.blueboatfilms.com/sound/starfallremix.mp3" type="audio/mpeg"> -->
+  <source src="https://storage.cloud.google.com/www.blueboatfilms.com/sound/nyx3.mp3" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>
 </main>
 </div>
 </div>
@@ -258,7 +380,7 @@ z.draw = z => {
 
 	const playlist = [
 		//primary colors
-		["#fcfbe3", "#191918"], //"warmbw",
+		// ["#fcfbe3", "#191918"], //"warmbw",
 		// ["#9a0000", "#fcfbe3", "#191918"], //"warmbwred",
 		// ["#fcfbe3", "#191918"], //"warmbw",
 		// ["#ffcc00", "#fcfbe3", "#191918"], //"warmbwyellow",
@@ -267,6 +389,8 @@ z.draw = z => {
 		// ["#006699", "#fcfbe3", "#191918", "#004488"], //"warmbwbluegray",
 		// ["#006699", "#fcfbe3", "#191918"], //"warmbwblue",
 		// ["#006699", "#006666", "#fcfbe3", "#191918"], //"warmbwbluegreen",
+		//walking film
+		["#262626", "#7B8DA6", "#4D688C", "#A4ADBF", "#D7D7D9", "#556C8B", "#828EA6", "#7A889D", "#B4B4BD", "#A8B0C1", "#405F83", "#BCC1D2", "#3E597E", "#080C11", "#1C1C1C", "#557299", "#D7D6DB", "#FDFCEB"], //blues
 		//lake superior
 		// ["#CCD8EA", "#CBD3DA", "#818794", "#5B5756", "#413A36", "#413B30"], //lake superior
 		// ["#BEC4D0", "#C9CDD8", "#7E808C", "#282730", "#54545F", "#A5ACBF", "#AAA9A5", "#FBFBFF", "#535763", "#211F2B"], //canada snow
@@ -299,21 +423,21 @@ z.draw = z => {
 		// ["#0D0F0E", "#767577", "#9AA6B4", "#A2AFB6", "#656863", "#3C3E3C", "#5F5B50", "#38301B", "#636E76", "#82949F", "#4C5A5C", "#302D26", "#A39E8E"], //outdoors fall (nice blues browns)
 		
 		// //greens
-		["#183C76", "#64665C", "#967B21", "#5084CB", "#34361D", "#503E2B", "#38370E"], //bright day blue sky yellow leaves
-		["#556D7F", "#444E33", "#4B5A37", "#50663E", "#6C7937", "#59613E", "#2A2D1E", "#545B38", "#788049", "#998800", "#324528", "#161B13", "#1B2519", "#343222"], //orchard
-		["#7F7655", "#7C7C58", "#4C4F3A", "#ADA590", "#969374", "#7B7458", "#7D815D", "#454425", "#948C7F", "#5F6E4C", "#474633", "#BEB7A5"], //grasses (green yellow)
-		["#6C6B6D", "#4B4B4D", "#373435", "#494C57", "#2E2B2E", "#242225", "#5F6264"], //rocks
-		["#D1E3EF", "#9DAB92", "#8F9675", "#7A7E64", "#727A53", "#535E39", "#576245", "#566163", "#686E60"], //tree
-		["#D7D6D8", "#8A8B84", "#5C6161", "#6B563F", "#272413", "#423930", "#1E260D", "#3D3A30", "#6D2E29", "#18190C", "#928C87"], //finland arteles
-		// ["#778BA8", "#5E6D86", "#686C76", "#4F463D", "#5A432F", "#44301D", "#37261A", "#3F231C", "#4D739F", "#5D1215", "#352B28", "#4A2A28"], //outdoors sumac
-		["#675944", "#2E2E27", "#927F56", "#A18462", "#4B4437", "#544A39", "#2C352D", "#BEA886"], //grass shadow
-		["#7A6C57", "#46382F", "#745F4F", "#928B88", "#977E6C", "#E2E3E7", "#3C3023", "#41491D", "#2C2521"], //muddy creek (greens browns)
-		// ["#A3958A", "#A49389", "#82706C", "#7C6D66", "#786662", "#746663"], //gravelroadcanada (all beige)
-		["#17180E", "#585743", "#A9A497", "#938A5E", "#676320", "#463922", "#A76F09", "#A76406", "#3E441F", "#47502D", "#6F7948", "#A1A294", "#272C12"], //lake summer woods (green orange)
-		["#45424A", "#393536", "#726558", "#B3A6A0", "#6C6060", "#818175", "#8C8E76", "#565C57"], //river rock (greens)
-		["#B5C1CF", "#79838F", "#988D82", "#5B5351", "#665B49", "#5A5A4C", "#575D4E", "#4B594A", "#8291A4"], //finland fields () 
-		["#484A2B", "#423F33", "#594E43", "#91827C", "#C9C7C6", "#44502A", "#5D6445"], //finnish forest (green brown)
-		["#45403C", "#4A3325", "#463A32", "#A99374", "#A4845C", "#BBA156", "#4F4026", "#3F3B21"], //finland fields (green brown yellow)
+		// ["#183C76", "#64665C", "#967B21", "#5084CB", "#34361D", "#503E2B", "#38370E"], //bright day blue sky yellow leaves
+		// ["#556D7F", "#444E33", "#4B5A37", "#50663E", "#6C7937", "#59613E", "#2A2D1E", "#545B38", "#788049", "#998800", "#324528", "#161B13", "#1B2519", "#343222"], //orchard
+		// ["#7F7655", "#7C7C58", "#4C4F3A", "#ADA590", "#969374", "#7B7458", "#7D815D", "#454425", "#948C7F", "#5F6E4C", "#474633", "#BEB7A5"], //grasses (green yellow)
+		// ["#6C6B6D", "#4B4B4D", "#373435", "#494C57", "#2E2B2E", "#242225", "#5F6264"], //rocks
+		// ["#D1E3EF", "#9DAB92", "#8F9675", "#7A7E64", "#727A53", "#535E39", "#576245", "#566163", "#686E60"], //tree
+		// ["#D7D6D8", "#8A8B84", "#5C6161", "#6B563F", "#272413", "#423930", "#1E260D", "#3D3A30", "#6D2E29", "#18190C", "#928C87"], //finland arteles
+		// // ["#778BA8", "#5E6D86", "#686C76", "#4F463D", "#5A432F", "#44301D", "#37261A", "#3F231C", "#4D739F", "#5D1215", "#352B28", "#4A2A28"], //outdoors sumac
+		// ["#675944", "#2E2E27", "#927F56", "#A18462", "#4B4437", "#544A39", "#2C352D", "#BEA886"], //grass shadow
+		// ["#7A6C57", "#46382F", "#745F4F", "#928B88", "#977E6C", "#E2E3E7", "#3C3023", "#41491D", "#2C2521"], //muddy creek (greens browns)
+		// // ["#A3958A", "#A49389", "#82706C", "#7C6D66", "#786662", "#746663"], //gravelroadcanada (all beige)
+		// ["#17180E", "#585743", "#A9A497", "#938A5E", "#676320", "#463922", "#A76F09", "#A76406", "#3E441F", "#47502D", "#6F7948", "#A1A294", "#272C12"], //lake summer woods (green orange)
+		// ["#45424A", "#393536", "#726558", "#B3A6A0", "#6C6060", "#818175", "#8C8E76", "#565C57"], //river rock (greens)
+		// ["#B5C1CF", "#79838F", "#988D82", "#5B5351", "#665B49", "#5A5A4C", "#575D4E", "#4B594A", "#8291A4"], //finland fields () 
+		// ["#484A2B", "#423F33", "#594E43", "#91827C", "#C9C7C6", "#44502A", "#5D6445"], //finnish forest (green brown)
+		// ["#45403C", "#4A3325", "#463A32", "#A99374", "#A4845C", "#BBA156", "#4F4026", "#3F3B21"], //finland fields (green brown yellow)
 		
 		//loom
 		// ["#EAF1F2", "#AFB4BB", "#A3998A", "#735F48", "#5B4F45", "#66513A", "#3D2A1D", "#050A0D", "#53463A"], //looom
@@ -406,23 +530,23 @@ z.draw = z => {
 	}, {clock:{t:0}, dt:1}  );
 
 //box
-( dt => {
-	const element = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-	element.setAttributeNS(null, "id", "box");
-	element.setAttributeNS(null, "class", "shape square");
-	z.elements["svg"].el.appendChild(element);
+// ( dt => {
+// 	const element = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+// 	element.setAttributeNS(null, "id", "box");
+// 	element.setAttributeNS(null, "class", "shape square");
+// 	z.elements["svg"].el.appendChild(element);
 		
-	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
-		try {
-			let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
-			Velocity({	
-				elements: element, 
-				properties: { fillOpacity: 1.0, strokeOpacity: 0.0, fill: color, width: e.dimensions.width, height: e.dimensions.height },
-				options: { duration: 2000,  delay: 0, easing: "easeInOutQuad" },
-			});
-		} catch(err) { z.tools.logerror("box animation ::: " + err ) }
-	})
-})(5);
+// 	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
+// 		try {
+// 			let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
+// 			Velocity({	
+// 				elements: element, 
+// 				properties: { fillOpacity: 1.0, strokeOpacity: 0.0, fill: color, width: e.dimensions.width, height: e.dimensions.height },
+// 				options: { duration: 2000,  delay: 0, easing: "easeInOutQuad" },
+// 			});
+// 		} catch(err) { z.tools.logerror("box animation ::: " + err ) }
+// 	})
+// })(5);
 
 //main
 ( dt => {
@@ -430,126 +554,22 @@ z.draw = z => {
 	const bgcolors = ["rgba(25, 25, 24, 0.4)", "rgba(25, 25, 24, 0.6)", "rgba(25, 25, 24, 0.9)", "rgba(252, 251, 227, 0.4)", "rgba(252, 251, 227, 0.9)", , "rgba(252, 251, 227, 0.6)"]
 	// const warmblacktints = ["#191918", "#2f2f2f", "#464646", "#5e5e5d", "#757574", "#8c8c8b", "#a3a3a2", "#babab9", "#d1d1d0", "#e8e8e7", "#ffffff", "#fcfbe3", "#e2e1cc", "#c9c8b5", "#b0af9e", "#979688", "#7e7d71", "#64645a", "#4b4b44", "#32322d", "#191916", "#000000"];
 	const warmblacktints = ["#191918", "#fcfbe3", "#000000"];
-
+	const blues = ["#262626", "#7B8DA6", "#4D688C", "#556C8B", "#828EA6", "#7A889D",  "#405F83", "#3E597E", "#080C11", "#1C1C1C", "#557299"];
 	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
 		try {
 			let count = e.clock.t/dt;
-			let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
+			// let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
 			// z.tools.logmsg("in BOX " + color + " color =  " + color);
+			let color = blues[z.tools.randominteger(0, blues.length)];
 			Velocity({	
 				elements: element, 
-				properties: { backgroundColor:  color, backgroundColorAlpha: z.tools.randominteger(0.1,6)/10},
+				properties: { backgroundColor:  color, backgroundColorAlpha: z.tools.randominteger(2,8)/10},
 				options: { duration: 1200,  delay: 0, easing: "easeInOutQuad" },
 			});
 		} catch(err) { z.tools.logerror("box animation ::: " + err ) }
 	})
 })(9);
 
-//poems
-( dt => {
-	const afterclassnames1 = ["after0", "after1", "after2", "after3", "after4", "after5", "after6", "after7", "after8", "after9", "after10", "after11", "after12", "after13"];
-	const afterclassnames2 = ["afterblackwhite", "afterwhiteblack"];
-	const symbols = "01101000_.._._+ / - .. _.._._+. < +=_.._._+ . < +=_.._._+ . < +=: :  . < > '. . . . . .& | { . . ::: x ø 0 ¥ ø Y H L ® Å Ö x x x ø 0 Ø x X x ø 0 Ø xº3 @@##+''+'+''' '@".split("");
-	const nsymbols = symbols.length;
-	const subtext = document.querySelector("#subtextframe");
-	subtext.innerText = [...Array([200,480][v]).keys()].reduce( (text,t) => {
-		text = text + symbols[z.tools.randominteger(0,nsymbols)];
-		return text;
-	}, "");
-	subtext.style["font-size"] = "10vh";
-	const elements = ( () => {
-		return Array.from(document.querySelectorAll(".poem")).reduce( (acc,el,j)=> {
-			z.tools.logmsg("create poem element ::: " + j);
-			acc[j]={ el:el, id:"poem"+j, stanzas: Array.from(el.querySelectorAll(".stanza")).reduce( (acc,el,j)=> {
-				el.setAttribute("id", "stanza"+j);
-				el.className= "stanza " + afterclassnames1[j%afterclassnames1.length] + " " + afterclassnames2[0];
-				acc[j]={ el:el, lines:Array.from(el.querySelectorAll("li")).reduce( (acc,el,j)=> {
-					el.innerText = [...Array(z.tools.randominteger(3,88)).keys()].reduce( (text,t) => {
-					text = text + symbols[z.tools.randominteger(0,nsymbols)];
-					return text;
-					}, ""); 
-				acc[j]={ el:el };
-				return acc;
-				}, []) };
-			return acc;
-			}, []) }
-		return acc;
-		}, [])
-	})();
-	z.tools.logmsg("stanza 0 line 0 = " + elements[0].stanzas[0].lines[0].el.innerText);
-	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
-		try {
-			let count = e.clock.t/dt;
-			let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
-			if(count%5===0) {
-				subtext.innerText = [...Array([200,480][v]).keys()].reduce( (text,t) => {
-					text = text + symbols[z.tools.randominteger(0,nsymbols)];
-					return text;
-				}, "");
-			}
-			Velocity({	
-				elements: subtext,
-				properties: { color: color, opacity:z.tools.randominteger(1,8)/10},
-				options: { duration: 2400, delay: 0 },
-			});
-			elements.forEach((poem,p) => {
-				poem["stanzas"].forEach((stanza,s) => {
-					if(count%2===0) {
-						stanza.el.className= "stanza " + afterclassnames2[count/2%afterclassnames2.length] + " " + afterclassnames1[z.tools.randominteger(0,afterclassnames1.length)];
-					}
-					else {
-						stanza["lines"].forEach( (line,l) => {
-							line.el.style["color"] = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
-							if(count%3===0) {
-								line.el.innerText = [...Array(z.tools.randominteger(3,88)).keys()].reduce( (text,t) => {
-								text = text + symbols[z.tools.randominteger(0,nsymbols)];
-								return text;
-								}, "");
-							}
-						})
-					}
-
-				})
-			});
-		} catch(err) { z.tools.logerror("poem animation ::: " + err ) }
-	})
-})(7);
-
-//circles0
-( dt => {
-	let nshapes = [2,4][v];
-	let width = window.innerWidth, height = window.innerHeight;
-	let colors = ["#163341", "#172F47", "#4477A8", "#2A4A69", "#52779B", "#000000", "#384B60", "#1F3350", "#153A69", "#153559", "#9D9990", "#9D9990", "#181E21", "#0C1D32", "#706959", "#D6D3CE", "#534E48", "#3E5766", "#222E34", "#BBB4A4", "#7C7D7F"]; //birdland
-	const elements = [...Array(nshapes).keys()].reduce( (acc, j) => {
-		let el = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-		el.setAttributeNS(null, "id", "circle0_"+ j);
-		el.setAttributeNS(null, "class", "shape circle");
-		el.setAttributeNS(null, "cy", height/2);
-		el.setAttributeNS(null, "cx", width/2);
-		z.elements["svg"].el.appendChild(el);
-		acc[j] = { el: el };
-	return acc;
-	}, []);
-
-	const drawings = [
-		e => {
-			try {
-				let count = e.clock.t/dt;
-				let r = z.tools.randominteger(e.dimensions.min/6, e.dimensions.min);
-				let color = colors[z.tools.randominteger(0, colors.length)];
-				Velocity({	
-					elements: elements[count%nshapes].el,
-					properties: { fillOpacity: count%2===0 ? 1.0 : 1.0, strokeOpacity: count%2===1 ? 0.0: 0.0, fill: color, stroke: color, strokeWidth: r/4, strokeDasharray: z.tools.randominteger(8, r), cx: e.dimensions.width/2, cy: e.dimensions.height/2, r: r },
-					options: { duration: z.tools.randominteger(1000*dt*nshapes/3,1000*dt*nshapes), delay: 0 },
-				});
-			} catch(err) { z.tools.logerror("circle animation 1 ::: " + err ) }
-		},
-		
-	];
-	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
-		drawings[0](e);
-	})
-})(2);
 
 //lines
 ( dt => {
@@ -581,7 +601,7 @@ z.draw = z => {
 				let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
 				Velocity({	
 					elements: elements[count%nshapes].el,
-					properties: { strokeOpacity: 1.0, stroke: color, strokeWidth: e.dimensions.width, strokeDasharray: z.tools.randominteger(8, e.dimensions.min/2), x1: e.dimensions.width/2, x2: e.dimensions.width/2, y1: 0, y2: e.dimensions.height },
+					properties: { strokeOpacity: z.tools.randominteger(1,8)/10, stroke: color, strokeWidth: z.tools.randominteger(0,e.dimensions.height*2), strokeDasharray: z.tools.randominteger(18, e.dimensions.min/2), x1: 0, x2: e.dimensions.width, y1: e.dimensions.height, y2: e.dimensions.height },
 					options: { duration: z.tools.randominteger(1000*dt*nshapes/3,1000*dt*nshapes), delay: 0 },
 				});
 			} catch(err) { z.tools.logerror("circle animation 1 ::: " + err ) }
@@ -593,16 +613,16 @@ z.draw = z => {
 	})
 })(1);
 
-//circles1
+//circles0
 ( dt => {
-	let nshapes = [4,8][v];
+	let nshapes = [2,4][v];
 	let width = window.innerWidth, height = window.innerHeight;
 	let colors = ["#163341", "#172F47", "#4477A8", "#2A4A69", "#52779B", "#000000", "#384B60", "#1F3350", "#153A69", "#153559", "#9D9990", "#9D9990", "#181E21", "#0C1D32", "#706959", "#D6D3CE", "#534E48", "#3E5766", "#222E34", "#BBB4A4", "#7C7D7F"]; //birdland
 	const elements = [...Array(nshapes).keys()].reduce( (acc, j) => {
 		let el = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-		el.setAttributeNS(null, "id", "circle1_"+ j);
+		el.setAttributeNS(null, "id", "circle0_"+ j);
 		el.setAttributeNS(null, "class", "shape circle");
-		el.setAttributeNS(null, "cy", height/2);
+		el.setAttributeNS(null, "cy", 0);
 		el.setAttributeNS(null, "cx", width/2);
 		z.elements["svg"].el.appendChild(el);
 		acc[j] = { el: el };
@@ -613,11 +633,11 @@ z.draw = z => {
 		e => {
 			try {
 				let count = e.clock.t/dt;
-				let r = z.tools.randominteger(e.dimensions.min/6, e.dimensions.min/2);
+				let r = z.tools.randominteger(e.dimensions.min/10, e.dimensions.min);
 				let color = colors[z.tools.randominteger(0, colors.length)];
 				Velocity({	
 					elements: elements[count%nshapes].el,
-					properties: { fillOpacity: count%2===0 ? 1.0 : 1.0, strokeOpacity: count%2===1 ? 0.0: 0.0, fill: color, stroke: color, strokeWidth: r/4, strokeDasharray: z.tools.randominteger(8, r), cx: e.dimensions.width/2, cy: e.dimensions.height/2, r: r },
+					properties: { fillOpacity: z.tools.randominteger(1,8)/10, strokeOpacity: 0.0, fill: color, stroke: color, strokeWidth: z.tools.randominteger(1,8)/10*r, strokeDasharray: z.tools.randominteger(8, r), cx: e.dimensions.width/2, cy: 0, r: r },
 					options: { duration: z.tools.randominteger(1000*dt*nshapes/3,1000*dt*nshapes), delay: 0 },
 				});
 			} catch(err) { z.tools.logerror("circle animation 1 ::: " + err ) }
@@ -629,59 +649,95 @@ z.draw = z => {
 	})
 })(2);
 
+//circles1
+// ( dt => {
+// 	let nshapes = [4,8][v];
+// 	let width = window.innerWidth, height = window.innerHeight;
+// 	let colors = ["#163341", "#172F47", "#4477A8", "#2A4A69", "#52779B", "#000000", "#384B60", "#1F3350", "#153A69", "#153559", "#9D9990", "#9D9990", "#181E21", "#0C1D32", "#706959", "#D6D3CE", "#534E48", "#3E5766", "#222E34", "#BBB4A4", "#7C7D7F"]; //birdland
+// 	const elements = [...Array(nshapes).keys()].reduce( (acc, j) => {
+// 		let el = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+// 		el.setAttributeNS(null, "id", "circle1_"+ j);
+// 		el.setAttributeNS(null, "class", "shape circle");
+// 		el.setAttributeNS(null, "cy", height/2);
+// 		el.setAttributeNS(null, "cx", width/2);
+// 		z.elements["svg"].el.appendChild(el);
+// 		acc[j] = { el: el };
+// 	return acc;
+// 	}, []);
+
+// 	const drawings = [
+// 		e => {
+// 			try {
+// 				let count = e.clock.t/dt;
+// 				let r = z.tools.randominteger(e.dimensions.min/6, e.dimensions.min);
+// 				let color = colors[z.tools.randominteger(0, colors.length)];
+// 				Velocity({	
+// 					elements: elements[count%nshapes].el,
+// 					properties: { fillOpacity: count%2===0 ? 1.0 : 1.0, strokeOpacity: count%2===1 ? 0.0: 0.0, fill: color, stroke: color, strokeWidth: r/4, strokeDasharray: z.tools.randominteger(8, r), cx: e.dimensions.width/2, cy: e.dimensions.height/2, r: r },
+// 					options: { duration: z.tools.randominteger(1000*dt*nshapes/3,1000*dt*nshapes), delay: 0 },
+// 				});
+// 			} catch(err) { z.tools.logerror("circle animation 1 ::: " + err ) }
+// 		},
+		
+// 	];
+// 	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
+// 		drawings[0](e);
+// 	})
+// })(2);
+
 
 //circles 2
-( dt => {
-	const nelements=[[...Array(4).keys()],[...Array(8).keys()]][v];
-	let width = window.innerWidth, height = window.innerHeight;
-	const elements = nelements.reduce( (acc, id) => {
-		z.tools.logmsg("create line element ::: " + id);
-		let el = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-		el.setAttributeNS(null, "id", "circle2_"+ id);
-		el.setAttributeNS(null, "class", "shape circle");
-		el.setAttributeNS(null, "stroke-opacity", "0.0");
-		el.setAttributeNS(null, "fill-opacity", "0.1");
-		el.setAttributeNS(null, "cy", height/2);
-		el.setAttributeNS(null, "cx", width/2);
-		// el.setAttributeNS(null, "r", height/6);
-		z.elements["svg"].el.appendChild(el);
-		acc[id] = { el: el };
-	return acc;
-	}, []);
-	// const cxs = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9];
-	const cxs = [0.2,0.5,0.8];
-	const cys = [0.2,0.5,0.8];
-	const n = elements.length;
-	const drawings = [
-		e => {
-			try {
-				let count = e.clock.t/dt;
-				let timing = timings[z.tools.randominteger(0,timings.length)];
-				let duration = dt*timing[0], delay = z.tools.randominteger(0, dt*timing[1]);
-				let element = elements[count%n];
-				let cy = e.dimensions.height*cys[count%cys.length];
-				// let cx = e.dimensions.width*cxs[z.tools.randominteger(0,cxs.length)];
-				let cx = e.dimensions.width*cxs[(count%n)%cxs.length];
-				let radius = z.tools.randominteger(14, e.dimensions.min/2);
-				let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
-				Velocity({	
-					elements: element.el,
-					properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: z.tools.randominteger(radius/2, radius/4), strokeDasharray: z.tools.randominteger(8, radius), fill: color, cx: cx, cy: cy, r: radius },
-					options: { duration: duration*n/2,  delay: delay },
-				});
-				Velocity({	
-					elements: element.el,
-					properties: { fillOpacity: 0.0, r: radius/4 },
-					options: { duration: duration*n/2,  delay: delay*n },
-				});
-			} catch(err) { z.tools.logerror("circle animation 1 ::: " + err ) }
-		},
+// ( dt => {
+// 	const nelements=[[...Array(4).keys()],[...Array(8).keys()]][v];
+// 	let width = window.innerWidth, height = window.innerHeight;
+// 	const elements = nelements.reduce( (acc, id) => {
+// 		z.tools.logmsg("create line element ::: " + id);
+// 		let el = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+// 		el.setAttributeNS(null, "id", "circle2_"+ id);
+// 		el.setAttributeNS(null, "class", "shape circle");
+// 		el.setAttributeNS(null, "stroke-opacity", "0.0");
+// 		el.setAttributeNS(null, "fill-opacity", "0.1");
+// 		el.setAttributeNS(null, "cy", height/2);
+// 		el.setAttributeNS(null, "cx", width/2);
+// 		// el.setAttributeNS(null, "r", height/6);
+// 		z.elements["svg"].el.appendChild(el);
+// 		acc[id] = { el: el };
+// 	return acc;
+// 	}, []);
+// 	// const cxs = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9];
+// 	const cxs = [0.2,0.5,0.8];
+// 	const cys = [0.2,0.5,0.8];
+// 	const n = elements.length;
+// 	const drawings = [
+// 		e => {
+// 			try {
+// 				let count = e.clock.t/dt;
+// 				let timing = timings[z.tools.randominteger(0,timings.length)];
+// 				let duration = dt*timing[0], delay = z.tools.randominteger(0, dt*timing[1]);
+// 				let element = elements[count%n];
+// 				let cy = e.dimensions.height*cys[count%cys.length];
+// 				// let cx = e.dimensions.width*cxs[z.tools.randominteger(0,cxs.length)];
+// 				let cx = e.dimensions.width*cxs[(count%n)%cxs.length];
+// 				let radius = z.tools.randominteger(14, e.dimensions.min/2);
+// 				let color = e.color.choices[z.tools.randominteger(0, e.color.choices.length)];
+// 				Velocity({	
+// 					elements: element.el,
+// 					properties: { fillOpacity: 1.0, strokeOpacity: 0.0, stroke: color, strokeWidth: z.tools.randominteger(radius/2, radius/4), strokeDasharray: z.tools.randominteger(8, radius), fill: color, cx: cx, cy: cy, r: radius },
+// 					options: { duration: duration*n/2,  delay: delay },
+// 				});
+// 				Velocity({	
+// 					elements: element.el,
+// 					properties: { fillOpacity: 0.0, r: radius/4 },
+// 					options: { duration: duration*n/2,  delay: delay*n },
+// 				});
+// 			} catch(err) { z.tools.logerror("circle animation 1 ::: " + err ) }
+// 		},
 		
-	];
-	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
-		drawings[Math.floor(e.clock.t/(dt*elements.length))%drawings.length](e);
-	})
-})(1);
+// 	];
+// 	z.streams["draw"].filter(e => e.clock.t%dt===0).onValue( e => {
+// 		drawings[Math.floor(e.clock.t/(dt*elements.length))%drawings.length](e);
+// 	})
+// })(1);
 
 
 
@@ -692,8 +748,8 @@ z.draw = z => {
 z.radio = ( () => { 
 	const soundcorepath = "data/sound/";
 	const instruments = {
-		bagpipe1a: {clip: "bagpipe1a", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
-		bagpipe1ahigh: {clip: "bagpipe1a", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		// bagpipe1a: {clip: "bagpipe1a", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },
+		// bagpipe1ahigh: {clip: "bagpipe1a", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 		bagpipe1e: {clip: "bagpipe1e", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 		bagpipe1f: {clip: "bagpipe1f", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 		bagpipe1g: {clip: "bagpipe1g", minvolume: 0.3, maxvolume: 0.9, playbackRate: () => { return z.tools.randomharmonic()/10 } },
@@ -707,18 +763,18 @@ z.radio = ( () => {
 		cmpb20200708_5harmonic: {clip: "cmpb20200708_5", minvolume: 0.4, maxvolume: 0.9, playbackRate: () => { return z.tools.randomhighharmonic()/10 } },//* voice
 		// cello_pitch1: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 		// cello_pitch1harmonic: {clip: "cello_pitch1", minvolume: 0.3, maxvolume: 0.8, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		bird1harmonic: {clip: "bird1", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		birdcanyon: {clip: "birdcanyon", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		bagpipegeese: {clip: "bagpipegeese", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		// bird1harmonic: {clip: "bird1", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		// birdcanyon: {clip: "birdcanyon", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		// bagpipegeese: {clip: "bagpipegeese", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 		celloknockcanyon: {clip: "celloknockcanyon", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		voxmct0: {clip: "voxmct0", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		stapler: {clip: "stapler", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		// voxmct0: {clip: "voxmct0", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		// stapler: {clip: "stapler", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 		train1: {clip: "train1", minvolume: 0.4, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(6,18)/10 } },
 		weatherradio1: {clip: "weatherradio1", minvolume: 0.6, maxvolume: 1.0,  playbackRate: () => { return z.tools.randominteger(6,12)/10 } },
-		longbell: {clip: "longbell", minvolume: 0.4, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(9,18)/10 } },
+		// longbell: {clip: "longbell", minvolume: 0.4, maxvolume: 0.8, playbackRate: () => { return z.tools.randominteger(9,18)/10 } },
 		// cellothunktelephone: {clip: "cellothunktelephone", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 		// cellothunkradio: {clip: "cellothunkradio", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
-		t0: {clip: "t0", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
+		// t0: {clip: "t0", minvolume: 0.8, maxvolume: 1.0, playbackRate: () => { return z.tools.randomharmonic()/10 } },
 		tornadosirenharmonic: {clip: "tornadosiren", minvolume: 0.1, maxvolume: 0.6, playbackRate: () => { return z.tools.randomlowharmonic()/10 } },									
 	};
 	let clips = {};
@@ -872,13 +928,13 @@ z.radio = ( () => {
 			const defaultfadetime = (dt,n,graintdt,clip) => dt/(graindt*20);
 			const defaultpart = (dt=4000, n=4, graindt=400, chance=0.8, duration=defaultduration, fadetime=defaultfadetime, instruments=["celloknockcanyon"]) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: duration(dt,n,graintdt), fadetime: fadetime(dt,n,graintdt), instruments: ["celloknockcanyon"] } };
 			const score = [
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["birdcanyon", "birds5harmonic", "voxmct0", "cmpb20200708_5harmonic", "longbell"] } })(14000,5,500),
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["train1", "tornadosirenharmonic",] } })(4000,6,500),
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["celloknockcanyon", "stapler", "t0", "cmpb20200708_5harmonic", "thunkhighharmonic"] } })(5000,3,500,0.6),
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["bagpipe1", "bagpipe1a", "tornadosirenharmonic", "tornadosirenharmonic"] } })(17000,6,400,0.8),
+				// ((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["birdcanyon", "birds5harmonic", "voxmct0", "cmpb20200708_5harmonic", "longbell"] } })(14000,5,500),
+				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["train1", "tornadosirenharmonic","weatherradio1"] } })(4000,5,600),
+				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["celloknockcanyon", "cmpb20200708_5harmonic", "thunkhighharmonic"] } })(5000,3,500,0.6),
+				// ((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["bagpipe1", "bagpipe1a", "tornadosirenharmonic", "tornadosirenharmonic"] } })(17000,6,400,0.8),
 				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["celloknockcanyon"] } })(5000,4,400,0.8),
 				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["bagpipe1e","bagpipe1f","bagpipe1g","bagpipe1h"] } })(3000,4,400,0.8),
-				((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["cmpb20200708_5harmonic"] } })(9000,6,400,0.8),
+				// ((dt=4000, n=4, graindt=400, chance=0.8) => { return {dt:dt, chance:chance, graindt: graindt, n: 5, duration: dt/(graindt*2), fadetime: dt/(graindt*20), instruments: ["cmpb20200708_5harmonic"] } })(9000,6,400,0.8),
 			];
 			score.forEach( (part,j) => {
 				z.streams["clock"].filter( e => e.t%Math.floor(part.dt/1000)===0 && z.tools.randominteger(0,10)<part.chance*10 && z.radio.soundplaying)
@@ -894,26 +950,32 @@ z.radio = ( () => {
 	
 	let soundlink = document.querySelector("#soundlink");
 	let telegraph = document.querySelector("#telegraph");
+	let audio1 = document.querySelector("#audio1");
+ 	let video=document.querySelector("video");
 
 	Kefir.fromEvents(soundlink, "click").onValue( e => {
 		z.tools.logmsg("play sound !");
+		// video.muted = !video.muted;
 		if(!radio.soundplaying) { 
 			try {
+				audio1.currentTime = z.tools.randominteger(0,120);
+				audio1.volume = 0.6;
+				audio1.playbackRate = z.tools.randominteger(4,40)/10;
+				audio1.play();
+
+
 				radio.player.context.resume().then(() => {
 					z.tools.logmsg("playback resumed");
-					// telegraph.innerHTML =  "(sound on)";
 					radio.soundplaying = true;
-					// soundlink.classList.add("active");
 					soundlink.innerText = "turn off sound";
 				});
 			} catch(e) { z.tools.logerror("dashboard ::: resumeaudio " + e) } 
 		}
 		else { 
 			try {
+				audio1.pause();
 				radio.player.context.suspend().then(() => {
-					// telegraph.innerHTML =  "(sound off)";
 					radio.soundplaying = false;
-					// soundlink.classList.remove("active");
 					soundlink.innerText = "turn on sound";
 				});
 			} catch(e) { z.tools.logerror("dashboard ::: suspendaudio " + e) }
@@ -925,6 +987,7 @@ z.radio = ( () => {
 //test
 z.radio.start(z);
 z.radio.loadclips(z);
+
 window.addEventListener('load', e => {
   z.radio.play(z);
   z.draw(z);

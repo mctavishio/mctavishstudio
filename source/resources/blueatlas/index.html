@@ -76,10 +76,10 @@
 	<h1>blue atlas</h1>
 	<h2>(- home -)</h2>
 </header>
-<ul data-role="narrator" class="info compress">
+<!-- <ul data-role="narrator" class="info compress">
 <li class="title typewriter" title="telegraph" id="telegraph"></li>
 <li class="title  typewriter" title="clock" id="clock">here | now</li>
-</ul>
+</ul> -->
 
 <article class="poem">
 	<header>
@@ -94,8 +94,8 @@
 		<li><a href="fieldnotes.html">field notes</a></li>
 		<li><a href="planets.html">the planets</a></li>
 		<li><a href="green.html">photosynthesis</a></li>
+		<li><a href="migration.html">migrations</a></li>
 		<!-- <li><a href="vial.html">tiny vial</a></li>-->
-		<!-- <li><a href="migrations.html">migrations</a></li>-->
 		<!-- <li><a href="siren.html">siren</a></li> -->
 		</ul>
 	</div>
@@ -224,8 +224,8 @@ z.elements = ( () => {
 	return {
 		body: { el: document.querySelector("body") },
 		main: { el: document.querySelector("main") },
-		clock: { el: document.querySelector("#clock") },
-		telegraph: { el: document.querySelector("#telegraph") },
+		// clock: { el: document.querySelector("#clock") },
+		// telegraph: { el: document.querySelector("#telegraph") },
 		svg:  { el: document.querySelector("#svg") },
 		frames: ["subtextframe", "svgframe", "wordframe", "contentframe"].reduce( (acc, id) => {
 			z.tools.logmsg("create frame element ::: " + id);
@@ -280,9 +280,9 @@ z.draw = z => {
 	return acc;
 	}, []);
 
-	z.streams["clock"].onValue( e => {
-		z.elements["clock"].el.innerHTML = z.tools.datestr(new Date(e.t*1000));
-	});
+	// z.streams["clock"].onValue( e => {
+	// 	z.elements["clock"].el.innerHTML = z.tools.datestr(new Date(e.t*1000));
+	// });
 	const playlist = [
 		["#fcfbe3", "#191918"], //"warmbw",
 		// ["#9a0000", "#fcfbe3", "#191918"], //"warmbwred",

@@ -93,10 +93,10 @@
 	<h1>starfall</h1>
 	<h2>text by sheila packa</h2>
 </header>
-<ul data-role="narrator" class="info compress">
+<!-- <ul data-role="narrator" class="info compress">
 	<li class="title typewriter" title="telegraph" id="telegraph"></li>
 	<li class="title  typewriter" title="clock" id="clock">here | now</li>
-</ul>
+</ul> -->
 <ul data-role="narrator" class="info expand">
 	<li><a href="#" id="soundlink" class="corelink">turn on sound</a></li>
 	<li><a href="index.html" id="homelink" class="corelink">return home</a></li>
@@ -428,8 +428,8 @@ z.elements = ( () => {
 	return {
 		body: { el: document.querySelector("body") },
 		main: { el: document.querySelector("main") },
-		clock: { el: document.querySelector("#clock") },
-		telegraph: { el: document.querySelector("#telegraph") },
+		// clock: { el: document.querySelector("#clock") },
+		// telegraph: { el: document.querySelector("#telegraph") },
 		svg:  { el: document.querySelector("#svg") },
 		frames: ["subtextframe", "svgframe", "wordframe", "contentframe"].reduce( (acc, id) => {
 			z.tools.logmsg("create frame element ::: " + id);
@@ -485,10 +485,10 @@ z.draw = z => {
 	}, []);
 	// const timings = [ [380,600], [400,580], [480,500], [500,480], [580,400], [600,380], [640,340], [680,300], [700,280], [740,240], [780,200], [800,180], [840,140], [880,100]];
 	// const timings = [ [180,800], [200,780], [280,700], [300,680], [380,600], [400,580], [480,500], [500,480], [580,400], [600,380], [640,340], [680,300], [700,280], [740,240], [780,200], [800,180], [840,140], [880,100]];
-	z.streams["clock"].onValue( e => {
-		z.elements["clock"].el.innerHTML = z.tools.datestr(new Date(e.t*1000));
-	});
-	//visibility controls
+	// z.streams["clock"].onValue( e => {
+	// 	z.elements["clock"].el.innerHTML = z.tools.datestr(new Date(e.t*1000));
+	// });
+	//controls
 	( () => { 
 		let soundlink = document.querySelector("#soundlink");
 		let telegraph = document.querySelector("#telegraph");
@@ -844,7 +844,7 @@ z.draw = z => {
 window.addEventListener('load', e => {
    z.draw(z);
   window.scroll(0,0);
-  window.setTimeout(() => { document.querySelector("#contentframe").style.opacity = 1.0 }, 3800);
+  window.setTimeout(() => { document.querySelector("#contentframe").style.opacity = 1.0 }, 1800);
   // window.setTimeout(() => { document.querySelector("#controls").style.backgroundColor = "rgba(0,0,0,0.0)" }, 6800);
 });
 window.addEventListener('beforeunload', e => {
