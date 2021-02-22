@@ -1,3 +1,4 @@
 # mctavishio
-comprehensive site ::: generative jamstack site
-test 2
+older generative jamstack site
+2020 :::
+see portfolio site for newest version of mctavish.io website
