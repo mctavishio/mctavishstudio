@@ -1,4 +1,8 @@
 .DS_Store
 node_modules
+data
+blueatlas
+**/*.mp3
 web
 data/largefiles
+buildfiles/source/resources/*
