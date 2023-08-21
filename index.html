@@ -45,20 +45,17 @@
 <main id="main" class="expand" data-state="expanded" style="background-color:rgba(25, 25, 24, 0.6)">	
 <header>
 	<h1>mctavish</h1>
-	<h2>home</h2>
+	<h2>links</h2>
 </header>
 <!-- <ul data-role="narrator" class="info compress">
 <li class="title typewriter" title="telegraph" id="telegraph"></li>
 <li class="title  typewriter" title="clock" id="clock">here | now</li>
 </ul> -->
-<ul>
-	<li><a href="#" id="soundlink" class="corelink">turn on sound</a> <span class="typewriter small" title="telegraph" id="telegraph"></span></li>
-	<!-- <li><a href="#" id="sounddrawings" class="corelink">access sound drawings</a></li> -->
-</ul>
 <hr/>
 <ul>
 	<li><a href="bio.html" id="biolink" class="corelink">bio</a></li>
 	<li><a href="https://mctavish.work/index.html" id="portfoliolink" class="corelink">portfolio</a></li>
+	<li><a href="data/text/notesUMDPanel2023.pdf" id="notesUMDPanel2023" class="corelink">notes: UMD AI/LLM/ChatGPT panel 2023 (pdf)</a></li>
 </ul>
 <hr/>
 <!--<article>
@@ -214,63 +211,6 @@ z.streams = {
 			}, state0) 
 	})( ),
 };
-	//controls
-	( () => { 
-		const soundlink = document.querySelector("#soundlink");
-		const telegraph = document.querySelector("#telegraph");
-		const audio1 = document.querySelector("#audio1");
-		const baseurl = "https://storage.googleapis.com/www.blueboatfilms.com/sound/";
-		const tracks = [
-			{title: "love meditations", url: "lovemeditationspodcast.mp3", duration: 3980 }, //1:06:24
-			{title: "river icarus", url: "rivericaruspodcast.mp3", duration: 2110}, //35:13
-			// {title: "monks from outer space", url: "monks.mp3", duration: 380}, //6:22
-			{title: "ocean | wind | grief", url: "oceanwindgriefpodcast.mp3", duration: 1870},//31:18
-			{title: "night train / blue window", url: "nighttrainbluewindow/nighttrainbluewindowpodcast.mp3", duration: 2280}, //38:06
-			{title: "origin of birds", url: "originofbirdssound20140330.mp3", duration: 1360},//22:50
-			{title: "ahab's dream", url: "ahabsdreampodcast.mp3", duration: 1220},//20:24
-			{title: "birdland", url: "birdlandpodcast.mp3", duration: 3780},//1:03:05
-			{title: "holy fool", url: "holyfoolpodcast.mp3", duration: 1720},//28:43
-			{title: "horse speaks to sky", url: "horsespeakssky.mp3", duration: 420},//7:08
-			// {title: "road to williston sound thread #1", url: "traffick20141208_all_v6.mp3", duration:1170}, //19:35
-			{title: "rain clouds", url: "dronespace7.mp3", duration:360}, //6:03
-			// {title: "the sound of everyday objects", url: "thesoundofeverydayobjectspodcast.mp3", duration: 2380},//39:42
-			// {title: "cello / cister (5)", url: "cistern20140630_5_cistern.mp3", duration: 1780},//29:51
-
-			// sophroniasoundscape
-			// {title: "graffiti tunnel", url: "graffititunnelpodcast.mp3", duration: 1720},//45:12
-			// {title: "graffiti 2 hands", url: "graffiti2handspodcast.mp3", duration: 3780},//1:03:13
-			// {title: "between2deserts / two - the swan", url: "theswanpodcast.mp3", duration: 2960},//49:33
-
-		];
-		let soundplaying = false;
-		Kefir.fromEvents(soundlink, "click").onValue( e => {
-			z.tools.logmsg("play sound !");
-			if(!soundplaying) { 
-				try {
-					let track = tracks[z.tools.randominteger(0,tracks.length)];
-					audio1.src = baseurl + track.url;
-					let starttime = z.tools.randominteger(0,track.duration);
-					audio1.currentTime = starttime;
-					z.tools.logmsg("start at " + starttime)
-					audio1.play();
-					z.tools.logmsg("playback resumed");
-					telegraph.innerHTML =  "<i>(currently playing ::: " + track.title + ")</i>";
-					soundplaying = true;
-					soundlink.innerText = "turn off sound";
-					soundlink.classList.add("active");
-				} catch(e) { z.tools.logerror("dashboard ::: resumeaudio " + e) } 
-			}
-			else { 
-				try {
-					document.querySelector("#audio1").pause();
-					telegraph.innerHTML =  " . . . >";
-					soundplaying = false;
-					soundlink.innerText = "turn on sound";
-					soundlink.classList.remove("active");
-				} catch(e) { z.tools.logerror("dashboard ::: suspendaudio " + e) }
-			}
-		});
-	})();
 
 z.draw = z => {
 	let ntimings = 32;
@@ -489,8 +429,5 @@ window.addEventListener('load', e => {
   // window.setTimeout(() => { document.querySelector("#contentframe").style.opacity = 1.0 }, 3800);
   // window.setTimeout(() => { document.querySelector("#controls").style.backgroundColor = "rgba(0,0,0,0.0)" }, 6800);
 });
-// window.addEventListener('beforeunload', e => {
-// 	window.scroll(0,0);
-// });
 </script>
 </html>
